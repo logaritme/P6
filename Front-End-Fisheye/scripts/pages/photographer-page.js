@@ -25,7 +25,7 @@ async function displayData(photographers, medias) {
   // Use array.sort to sort videos and images?
   photographers.forEach((photographer) => {
     const TemplatePhotographer = new photographerFactory(photographer);
-    // Implémentation sur un élément du DOM pour afficher ma card-header
+    // Implementation on a DOM element to display my card-header
     const photographersHeaderSection = document.querySelector(
       '.photographer-header'
     );
@@ -37,21 +37,21 @@ async function displayData(photographers, medias) {
   });
 
   medias.forEach((media) => {
-    // const allPhotographerNames = new photographerFactory(photographers);
+    // Plays the mediaFactory on each media encountered
     const TemplateMedia = new mediaFactory(media);
-    // Implémentation sur un élément du DOM pour afficher ma card-photos
-    const photosSection = document.querySelector('.photos-displaying');
     // HINT: let mediasToAdd = '';
-    photosSection.appendChild(TemplateMedia.getPhotosCardDOM());
-    return photosSection;
+    TemplateMedia.getPhotosCardDOM();
   });
 }
 async function init() {
-  // Récupère les datas des photographers et medias
+  // Retrieves photographers and medias data
   const photographers = await getPhotographers();
   const medias = await getMedia();
   displayData(photographers, medias);
 }
 
-// Fait démarrer la série de fonctions imbriquées
+// Starts the series of nested functions
 init();
+
+// Pour obtenir tous les photographes:
+// const allPhotographerNames = new photographerFactory(photographers);

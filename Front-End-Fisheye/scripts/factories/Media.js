@@ -16,20 +16,62 @@ export class mediaFactory {
   // Ma fonction ( sans utiliser get) d'affichage
   // du template-photos pour photographer-page.html
   getPhotosCardDOM() {
-    // How to display in the path the photgrapher's name dynamically?
-    // -> extends class and super? <- To do this is a mess!!
-    // -> create a var to store the name according to the photgrapher's id? <- Better idea! :-D
+    // If this._photographerId contains a video -> do not analyse this one
+    // If the document(string) has no date -> do not analyse this one
     const hasVideo = !!this._video;
-    const isThereAnyDate = !(this._date == null);
-    //  If this._photographerId contains a video do not analyse this one
+    const isThereAnyDate = !(this._date == undefined);
     let nameOfPhotographer;
-    function nameStoredInEachId(photographerId) {
+    function giveNameStoredInEachId(photographerId) {
       if (!hasVideo && isThereAnyDate) {
-        /*
-        nameOfPhotographer = photographerId === 243 ? 'Mimi' 
-        : photographerId === 930 ? 'Ellie'
-        : photographerId === 82 ? 'Tracy' : 'pouet';
+        nameOfPhotographer =
+          photographerId === 243
+            ? 'Mimi'
+            : photographerId === 930
+            ? 'Ellie'
+            : photographerId === 82
+            ? 'Tracy'
+            : photographerId === 527
+            ? 'Nabeel'
+            : photographerId === 925
+            ? 'Rhode'
+            : photographerId === 195
+            ? 'Marcel'
+            : 'ERROR PATH';
+      } else {
+        nameOfPhotographer = 'ERROR PATH';
+      }
+    }
+    giveNameStoredInEachId(this._photographerId);
+    function isReturningSection(
+      imageOfMedia,
+      titleOfMedia,
+      likesOfMedia,
+      hasImage
+    ) {
+      const photography = `./assets/fish-eye_photos/Sample\ Photos/${nameOfPhotographer}/${imageOfMedia}`;
+      const photosPlace = document.querySelector('.photos-displaying');
+      const section = document.createElement('section');
+      section.innerHTML = `
+      <a>
+      <img src="${photography}"></img>
+      <h2>${titleOfMedia}</h2>
+      <span class="likes">${likesOfMedia}❤️</span>
+      </a>`;
 
+      if (hasImage === true) {
+        console.log('photos affichées.');
+        photosPlace.appendChild(section);
+      } else console.log('vidéo(s) non affichées.');
+    }
+    const imageOfMedia = this._image;
+    const titleOfMedia = this._title;
+    const likesOfMedia = this._likes;
+    const hasImage = !!this._image;
+    isReturningSection(imageOfMedia, titleOfMedia, likesOfMedia, hasImage);
+  }
+}
+
+/* Using a switch
         switch(photographerId) {
             case 243:
               nameOfPhotographer = 'Mimi'
@@ -38,11 +80,12 @@ export class mediaFactory {
               nameOfPhotographer = 'Ellie'
               break
             default:
-              'pouet'
+              nameOfPhotographer = 'ERROR PATH'
         }
-*/
+      */
 
-        if (photographerId === 243) {
+/* Using a repeating else if
+      if (photographerId === 243) {
           nameOfPhotographer = 'Mimi';
         } else if (photographerId === 930) {
           nameOfPhotographer = 'Ellie';
@@ -58,21 +101,4 @@ export class mediaFactory {
           nameOfPhotographer = 'ERROR PATH';
           console.log(photographerId);
         }
-      }
-      
-    }
-    nameStoredInEachId(this._photographerId);
-    const photography = `./assets/fish-eye_photos/Sample\ Photos/${nameOfPhotographer}/${this._image}`;
-    const photosPlace = document.querySelector('.photos-displaying');
-    const section = document.createElement('section');
-    // Further in the progress of the project replace 'price' by 'likes'
-    section.innerHTML = `
-    <a>
-    <img src="${photography}"></img>
-    <h2>${this._title}</h2>
-    <span class="likes">${this._likes}<3</span>
-    </a>`;
-    photosPlace.appendChild(section);
-    return section;
-  }
-}
+      */
