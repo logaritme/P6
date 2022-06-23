@@ -1,12 +1,14 @@
 // Ma factory des photographe pour la page index.html
 // Il y a un seul photographer à chaque fis que je l'instancie -> pas de s
 export class photographerFactory {
-  constructor(photographers) {
-    this._name = photographers.name;
-    this._city = photographers.city;
-    this._tagline = photographers.tagline;
-    this._portrait = photographers.portrait;
-    this._price = photographers.price;
+  constructor(thePhotographers) {
+    this._name = thePhotographers.name;
+    this._id = thePhotographers.id;
+    this._city = thePhotographers.city;
+    this._country = thePhotographers.country;
+    this._tagline = thePhotographers.tagline;
+    this._price = thePhotographers.price;
+    this._portrait = thePhotographers.portrait;
   }
   // Ma fonction ( sans utiliser get) d'affichage du template pour index.html
   getUserCardDOM() {
@@ -16,7 +18,7 @@ export class photographerFactory {
     );
     const article = document.createElement('article');
     article.innerHTML = `
-    <a>
+    <a id="${this._id}" href="./photographer.html?id=${this._id}">
       <img src="${picture}"></img>
       <h2>${this._name}</h2>
     </a>
@@ -33,8 +35,11 @@ export class photographerFactory {
     );
     const div = document.createElement('div');
     div.innerHTML = `<section>
+    <article>
     <h1>${this._name}</h1>
-    <p>${this._city + this._tagline}</p>
+    <p>${this._city + ', ' + this._country}</p>
+    <p>${this._tagline}</p>
+    </article>
     <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
     <img src="${picture}"></img>
     </section>`;

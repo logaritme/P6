@@ -40,3 +40,7 @@ init();
 //       return photographersSection;
 //     });
 // }
+
+
+// Au cas où je veuille obtenir tous les photographes:
+// const allPhotographerNames = new photographerFactory(photographers);

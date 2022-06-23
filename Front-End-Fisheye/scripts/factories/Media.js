@@ -1,6 +1,5 @@
 // Ci-dessous mediaFactory Model
-// import {  photographerFactory } from '../factories/Photographer.js'
-// Modif nulle
+
 export class mediaFactory {
   constructor(medias) {
     // this._name = photographers.name;
