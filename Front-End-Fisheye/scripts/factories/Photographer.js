@@ -1,26 +1,29 @@
 // Ma factory des photographe pour la page index.html
 // Il y a un seul photographer à chaque fis que je l'instancie -> pas de s
 export class photographerFactory {
-  constructor(photographer) {
-    this._name = photographer.name;
-    this._city = photographer.city;
-    this._tagline = photographer.tagline;
-    this._portrait = photographer.portrait;
-    this._price = photographer.price;
+  constructor(photographers) {
+    this._name = photographers.name;
+    this._city = photographers.city;
+    this._tagline = photographers.tagline;
+    this._portrait = photographers.portrait;
+    this._price = photographers.price;
   }
   // Ma fonction ( sans utiliser get) d'affichage du template pour index.html
   getUserCardDOM() {
     const picture = `./assets/fish-eye_photos/Sample\ Photos/Photographers\ ID\ Photos/${this._portrait}`;
-    const article = `<article>
+    const photographersSectionPlace = document.querySelector(
+      '.photographer_section'
+    );
+    const article = document.createElement('article');
+    article.innerHTML = `
     <a>
       <img src="${picture}"></img>
       <h2>${this._name}</h2>
     </a>
     <h3>${this._city}</h3>
     <h4>${this._tagline}</h4>
-    <span>${this._price}\ €</span>
-    </article>`;
-    return article;
+    <price>${this._price}\ €</price>`;
+    photographersSectionPlace.appendChild(article);
   }
   // Ma fonction ( sans utiliser get) d'affichage du template pour photographer.html
   getPhotographerPageHeaderDOM() {
@@ -28,15 +31,14 @@ export class photographerFactory {
     const photographersHeaderPlace = document.querySelector(
       '.photographer-header'
     );
-    const section = document.createElement('div');
-    section.innerHTML = `<section>
+    const div = document.createElement('div');
+    div.innerHTML = `<section>
     <h1>${this._name}</h1>
     <p>${this._city + this._tagline}</p>
     <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
     <img src="${picture}"></img>
     </section>`;
-    photographersHeaderPlace.appendChild(section);
-    return section;
+    photographersHeaderPlace.appendChild(div);
   }
 }
 // get getUserCardDOM() {

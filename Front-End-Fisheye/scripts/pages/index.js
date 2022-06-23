@@ -12,14 +12,7 @@ async function getPhotographers() {
 async function displayData(photographers) {
   photographers.forEach((photographer) => {
     const TemplatePhotographer = new photographerFactory(photographer);
-    // Implémentation sur un élément du DOM pour afficher ma card
-    const photographersSection = document.querySelector(
-      '.photographer_section'
-    );
-    // console.table(TemplatePhotographer);
-    photographersSection.insertAdjacentHTML( 'beforeend' , TemplatePhotographer.getUserCardDOM());
-
-    return photographersSection;
+    TemplatePhotographer.getUserCardDOM();
   });
 }
 

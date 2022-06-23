@@ -57,7 +57,6 @@ export class mediaFactory {
       <h2>${titleOfMedia}</h2>
       <span class="likes">${likesOfMedia}❤️</span>
       </a>`;
-
       if (hasImage === true) {
         console.log('photos affichées.');
         photosPlace.appendChild(section);

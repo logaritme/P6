@@ -25,15 +25,7 @@ async function displayData(photographers, medias) {
   // Use array.sort to sort videos and images?
   photographers.forEach((photographer) => {
     const TemplatePhotographer = new photographerFactory(photographer);
-    // Implementation on a DOM element to display my card-header
-    const photographersHeaderSection = document.querySelector(
-      '.photographer-header'
-    );
-    // console.table(TemplatePhotographer);
-    photographersHeaderSection.appendChild(
-      TemplatePhotographer.getPhotographerPageHeaderDOM()
-    );
-    return photographersHeaderSection;
+    TemplatePhotographer.getPhotographerPageHeaderDOM();
   });
 
   medias.forEach((media) => {
