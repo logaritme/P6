@@ -1,3 +1,5 @@
+# VS Code
+.vscode/
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -11,6 +13,6 @@
 # Dependency directories (remove the comment below to include it)
 vendor/
 # Personal tests
-/trash-file.html
-/trash-file.js
-/assets/fish-eye_photos
+.Front-End-Fisheye/trash-file.html
+.Front-End-Fisheye/trash-file.js
+.Front-End-Fisheye/assets/fish-eye_photos
