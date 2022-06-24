@@ -1,3 +1,7 @@
+# Personal tests
+trash-file.html
+trash-file.js
+fish-eye_photos
 # VS Code
 .vscode/settings.json
 # Binaries for programs and plugins
@@ -12,7 +16,3 @@
 *.out
 # Dependency directories (remove the comment below to include it)
 vendor/
-# Personal tests
-trash-file.html
-trash-file.js
-fish-eye_photos
