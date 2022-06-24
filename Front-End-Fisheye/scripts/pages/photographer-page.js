@@ -29,7 +29,7 @@ async function getMedias() {
   return medias;
 }
 
-/* Retourner que le photographe correspondant à l'id affiché dans l'url */
+// Ne retourne que le photographe correspondant à l'id affiché dans l'url
 async function displayData(photographers, medias) {
   const id = parseInt(new URLSearchParams(location.search).get('id'));
   const photographer = photographers.find(
@@ -38,9 +38,16 @@ async function displayData(photographers, medias) {
   const TemplatePhotographer = new photographerFactory(photographer);
   TemplatePhotographer.getPhotographerPageHeaderDOM();
   // Use array.sort to sort videos and images?
-  medias.forEach((media) => {
+  // - WORK IN PROGRESS - Faire pareil ici, cela ne doit retourner
+  // que les medias du photographe ayant l'id affiché dans l'url
+  // N'instancier que les medias ayant id = id
+
+  // const medias = 'Object Media du JSON à filtrer';
+  const mediasFiltereds = medias.filter(media => media.photographerId === id);
+  // ce qui retournera la const = mediasFiltereds;
+  mediasFiltereds.forEach((mediasFiltered) => {
     // Plays the mediaFactory on each media encountered
-    const TemplateMedia = new mediaFactory(media);
+    const TemplateMedia = new mediaFactory(mediasFiltered);
     // HINT: let mediasToAdd = '';
     TemplateMedia.getPhotosCardDOM();
   });
@@ -55,4 +62,3 @@ async function init() {
 
 // Starts the series of nested functions
 init();
-

@@ -17,11 +17,12 @@ export class mediaFactory {
   getPhotosCardDOM() {
     // If this._photographerId contains a video -> do not analyse this one
     // If the document(string) has no date -> do not analyse this one
-    const hasVideo = !!this._video;
-    const isThereAnyDate = !(this._date == undefined);
+    const isNotVideo = !this._video;
+    console.log(isNotVideo);
+    const hasDate = !(this._date == undefined);
     let nameOfPhotographer;
     function giveNameStoredInEachId(photographerId) {
-      if (!hasVideo && isThereAnyDate) {
+      if (isNotVideo && hasDate) {
         nameOfPhotographer =
           photographerId === 243
             ? 'Mimi'
@@ -40,7 +41,8 @@ export class mediaFactory {
         nameOfPhotographer = 'ERROR PATH';
       }
     }
-    giveNameStoredInEachId(this._photographerId);
+    const idForMedia = this._photographerId;
+    giveNameStoredInEachId(idForMedia);
     function isReturningSection(
       imageOfMedia,
       titleOfMedia,
@@ -59,7 +61,7 @@ export class mediaFactory {
       if (hasImage === true) {
         console.log('photos affichées.');
         photosPlace.appendChild(section);
-      } else console.log('vidéo(s) non affichées.');
+      }
     }
     const imageOfMedia = this._image;
     const titleOfMedia = this._title;
