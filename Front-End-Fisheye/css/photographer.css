@@ -96,18 +96,49 @@ main div div section {
   flex-flow: row nowrap;
 }
 
-main div section a img {
-  width: 100%;
+main div div section a {
+  display: flex;
+}
+
+main div section a .dimensions-photos-grapher-page {
+  display: flex;
+  width: 350px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+main div section a figure img {
+  width: 451px;
   object-fit: cover;
   object-position: 50% 17%;
 }
 
-main div section a h2 {
-  color: #901c1c;
+main div section a .position-fig-grapher-page {
+  width: 350px;
+  height: 31px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-main div section a .likes {
+main div section a figcaption h2 {
+  width: 240px;
+  height: 31px;
   color: #901c1c;
+  display: flex;
+  justify-items: start;
+  align-items: center;
+}
+
+main div section a figcaption .likes {
+  width: 90px;
+  height: 31px;
+  color: #901c1c;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .photographer-header {
@@ -124,4 +155,5 @@ main div section a .likes {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   gap: 50px;
+  padding: 50px;
 }

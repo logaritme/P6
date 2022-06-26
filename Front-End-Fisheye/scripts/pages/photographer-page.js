@@ -38,20 +38,19 @@ async function displayData(photographers, medias) {
   const TemplatePhotographer = new photographerFactory(photographer);
   TemplatePhotographer.getPhotographerPageHeaderDOM();
   // Use array.sort to sort videos and images?
-  // - WORK IN PROGRESS - Faire pareil ici, cela ne doit retourner
-  // que les medias du photographe ayant l'id affiché dans l'url
-  // N'instancier que les medias ayant id = id
 
-  // const medias = 'Object Media du JSON à filtrer';
-  const mediasFiltereds = medias.filter(media => media.photographerId === id);
+  // Cela ne retourne que les medias du photographe ayant l'id affiché dans l'url
+  // Et n'instancie donc que les medias ayant id = id
+  const mediasFiltereds = medias.filter((media) => media.photographerId === id);
   // ce qui retournera la const = mediasFiltereds;
   mediasFiltereds.forEach((mediasFiltered) => {
-    // Plays the mediaFactory on each media encountered
+    // Plays the mediaFactory on each media filtered
     const TemplateMedia = new mediaFactory(mediasFiltered);
     // HINT: let mediasToAdd = '';
     TemplateMedia.getPhotosCardDOM();
   });
 }
+
 async function init() {
   // Retrieves photographers and medias data
   const photographers = await getPhotographers();

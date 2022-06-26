@@ -54,9 +54,14 @@ export class mediaFactory {
       const section = document.createElement('section');
       section.innerHTML = `
       <a>
+      <figure class="dimensions-photos-grapher-page">
       <img src="${photography}"></img>
-      <h2>${titleOfMedia}</h2>
+      </figure>
+      <figcaption class="position-fig-grapher-page">
+      <h2>${titleOfMedia}
+      </h2>
       <span class="likes">${likesOfMedia}❤️</span>
+      </figcaption>
       </a>`;
       if (hasImage === true) {
         console.log('photos affichées.');
