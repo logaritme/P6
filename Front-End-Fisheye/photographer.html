@@ -23,21 +23,51 @@
       <!-- Code will be injected by JS -->
     </div>
   </main>
+
   <div id="contact_modal" class="hidden" style="display: none;">
-    <div class="modal">
-      <header>
-        <h2>Contactez-moi</h2>
-        <img src="./assets/icons/close.svg" onclick="closeModal()" />
-      </header>
-      <form>
-        <div>
-          <label>Prénom</label>
-          <input />
-        </div>
-        <button class="contact_button">Envoyer</button>
-      </form>
+    <div class="content">
+      <!-- BUTTON CROSS TO CLICK -->
+      <!-- onclick sur cet élément déclenche la fermeture de la modale en JS -->
+
+      <div class="modal">
+        <header>
+          <h2>Contactez-moi</h2>
+          <!-- Here name of photographer will be injected by JS -->
+          <img src="./assets/icons/close.svg" class="close" onclick="closeModal()" />
+          <!-- Warning in JS code can be "closeCrossModal()" instead of "closeModal()"-->
+        </header>
+        <!-- FORM TO FILL -->
+        <form id="contact_form" name="contact">
+          <!-- FORM : FIELDS -->
+          <div class="formData firstName field">
+            <label for="firstName">Prénom</label><br>
+            <input class="text-control" type="text" id="firstName" name="firstName" /><br>
+            <div></div>
+          </div>
+          <div class="formData lastName field">
+            <label for="lastName">Nom</label><br>
+            <input class="text-control" type="text" id="lastName" name="lastName" /><br>
+            <div></div>
+          </div>
+          <div class="formData email field">
+            <label for="email">Email</label><br>
+            <input class="text-control" type="text" id="email" name="email" /><br>
+            <div></div>
+          </div>
+          <div class="formData messageUser field">
+            <label for="messageUser">Votre message</label><br>
+            <input class="text-control" type="text" id="messageUser" name="messageUser" /><br>
+            <div></div>
+          </div>
+          <!-- BUTTON SUBMIT TO CLICK -->
+          <!-- Onsubmit with a listener to submit datas and close (if valid) or not close the modal (if invalid) -->
+          <button class="submit-button btn-close button" id="firstModalBtnSubmit" type="submit" value="Envoyer">Envoyer</button>
+          <div id="output_box"></div>
+        </form>
+      </div>
     </div>
   </div>
+
   <script type="module" src="./scripts/pages/photographer-page.js"></script>
   <!-- <script src="./scripts/pages/index.js"></script> -->
   <script src="./scripts/utils/contactForm.js"></script>
