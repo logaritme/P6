@@ -1,12 +1,12 @@
 /*  */
 
 body {
-  width: max-content;
+  width: 1440px;
   margin: 0;
 }
 
 main {
-  width: max-content;
+  width: 1440px;
 }
 
 .photograph-header {
@@ -143,10 +143,6 @@ main div div section article {
 
 div section article h1 {
   position: relative;
-  /* left: 0%; */
-  /* right: 21.23%; */
-  /* top: 0%; */
-  /* bottom: 58.5%; */
   font-size: 64px;
   line-height: 83px;
   color: #d3573c;
@@ -154,10 +150,6 @@ div section article h1 {
 
 div section article p {
   position: relative;
-  /* left: 0%; */
-  /* right: 65.36%; */
-  /* top: 41.5%; */
-  /* bottom: 43%; */
   font-size: 24px;
   line-height: 31px;
   color: #901c1c;
@@ -165,10 +157,6 @@ div section article p {
 
 div section article .text-color {
   position: relative;
-  /* left: 0%; */
-  /* right: 2.79%; */
-  /* top: 66.5%; */
-  /* bottom: 22%; */
   font-size: 18px;
   line-height: 23px;
   color: #525252;
@@ -223,11 +211,10 @@ main div section a figcaption .likes {
 
 .photos-displaying {
   display: grid;
-  width: 100%;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
-  /* gap: 50px; */
-  padding: 50px;
+  gap: 95px;
+  padding: 100px;
 }
 
 /* MODAL */

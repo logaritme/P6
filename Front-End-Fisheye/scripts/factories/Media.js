@@ -49,14 +49,14 @@ export class mediaFactory {
       likesOfMedia,
       hasImage
     ) {
-      // This img fit in figure :       <img src="${photography}"></img>
+      // This img fit in figure :       
       const photography = `./assets/fish-eye_photos/Sample\ Photos/${nameOfPhotographer}/${imageOfMedia}`;
       const photosPlace = document.querySelector('.photos-displaying');
       const section = document.createElement('section');
       section.innerHTML = `
       <a>
       <figure class="dimensions-photos-grapher-page">
-
+      <img src="${photography}"></img>
       </figure>
       <figcaption class="position-fig-grapher-page">
       <h2>${titleOfMedia}
