@@ -1,4 +1,4 @@
-// 
+//
 // Ma factory des photographe pour la page index.html
 // Il y a un seul photographer à chaque fis que je l'instancie -> pas de s
 export class photographerFactory {
@@ -14,9 +14,7 @@ export class photographerFactory {
   // Ma fonction ( sans utiliser get) d'affichage du template pour index.html
   getUserCardDOM() {
     const picture = `./assets/fish-eye_photos/Sample\ Photos/Photographers\ ID\ Photos/${this._portrait}`;
-    const photographersSectionPlace = document.querySelector(
-      '.photographer_section'
-    );
+    const photographersSectionPlace = document.querySelector('.photographer_section');
     const article = document.createElement('article');
     article.innerHTML = `
     <a id="${this._id}" href="./photographer.html?id=${this._id}">
@@ -31,9 +29,7 @@ export class photographerFactory {
   // Ma fonction ( sans utiliser get) d'affichage du template pour photographer.html
   getPhotographerPageHeaderDOM() {
     const picture = `./assets/fish-eye_photos/Sample\ Photos/Photographers\ ID\ Photos/${this._portrait}`;
-    const photographersHeaderPlace = document.querySelector(
-      '.photographer-header'
-    );
+    const photographersHeaderPlace = document.querySelector('.photographer-header');
     const div = document.createElement('div');
     div.innerHTML = `<section>
     <article>
@@ -45,5 +41,15 @@ export class photographerFactory {
     <img src="${picture}"></img>
     </section>`;
     photographersHeaderPlace.appendChild(div);
+  }
+  getInsertPriceCardDOM() {
+    const insertPricePlace = document.querySelector('footer');
+    const divFooter = document.createElement('div');
+    divFooter.innerHTML = `<div>
+    <span>${this._price}</span>
+    <i>€</i>
+    <span>/ jour</span>
+    </div>`;
+    insertPricePlace.insertAdjacentElement('beforeend', divFooter);
   }
 }

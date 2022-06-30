@@ -12,6 +12,7 @@ export class mediaFactory {
     this._date = medias.date;
     this._price = medias.price;
   }
+
   // Ma fonction ( sans utiliser get) d'affichage
   // du template-photos pour photographer-page.html
   getPhotosCardDOM() {
@@ -43,13 +44,7 @@ export class mediaFactory {
     }
     const idForMedia = this._photographerId;
     giveNameStoredInEachId(idForMedia);
-    function isReturningSection(
-      imageOfMedia,
-      titleOfMedia,
-      likesOfMedia,
-      hasImage
-    ) {
-      // This img fit in figure :       
+    function isReturningSection(imageOfMedia, titleOfMedia, likesOfMedia, hasImage) {
       const photography = `./assets/fish-eye_photos/Sample\ Photos/${nameOfPhotographer}/${imageOfMedia}`;
       const photosPlace = document.querySelector('.photos-displaying');
       const section = document.createElement('section');
@@ -69,11 +64,21 @@ export class mediaFactory {
         photosPlace.appendChild(section);
       }
     }
+
     const imageOfMedia = this._image;
     const titleOfMedia = this._title;
     const likesOfMedia = this._likes;
     const hasImage = !!this._image;
     isReturningSection(imageOfMedia, titleOfMedia, likesOfMedia, hasImage);
+  }
+  getInsertLikesCardDOM() {
+    const insertLikesPlace = document.querySelector('footer');
+    const divFooter = document.createElement('div');
+    divFooter.innerHTML = `<div>
+    <span></span>
+    <i>❤️</i>
+    </div>`;
+    insertLikesPlace.insertAdjacentElement('afterbegin', divFooter);
   }
 }
 

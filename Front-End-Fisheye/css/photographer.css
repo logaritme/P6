@@ -193,6 +193,9 @@ main div section a .position-fig-grapher-page {
 
 main div section a figcaption h2 {
   width: 240px;
+  /* Retester la max-width quand le JS remarchera, 
+  ou au pire ellipsis/overflow hidden*/
+  max-width: 240px;
   height: 31px;
   color: #901c1c;
   display: flex;
@@ -262,6 +265,43 @@ main div section a figcaption .likes {
   transform: rotate(-45deg);
 }
 /* END : The closes and their befores/afters */
+footer {
+  display: flex;
+  flex-flow: row nowrap;
+  position: fixed;
+  /* right: 11.3%; */
+  left: 1028px;
+  bottom: 0;
+  color: black;
+  background-color: #DB8876;
+  border-radius: 6px 6px 0 0;
+}
+
+footer div {
+  width: 188px;
+  height: 90px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+
+/* Rectangle 2 */
+
+footer div div {
+  width: 188px;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+footer div div span,
+footer div div i {
+  font-weight: 700;
+  font-size: 24px;
+  color: #000000;
+}
 
 /* .submit-button {
   background: #fe142f;

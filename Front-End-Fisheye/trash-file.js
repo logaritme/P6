@@ -1,6 +1,49 @@
 // .gitignore ne veut pas faire son boulot!
-const blabla = 'blabla';
-let tr = 20;
+
+const RomanNumber = 'CXI';
+RomanNumber;
+let arrayRomanNumber = RomanNumber.split('');
+arrayRomanNumber;
+
+function changeLetterToNumber() {
+  const x = arrayRomanNumber.indexOf(arrayRomanNumber[0]);
+  x;
+  const y = arrayRomanNumber.indexOf(arrayRomanNumber[1]);
+  y;
+  const z = arrayRomanNumber.indexOf(arrayRomanNumber[2]);
+  z;
+  let VAR = z;
+  // Faire un forEach sur x, y, z avec cette VAR
+  if (arrayRomanNumber[VAR] === 'I') {
+    arrayRomanNumber.splice(VAR, 1, 1);
+  } else if (arrayRomanNumber[VAR] === 'V') {
+    arrayRomanNumber.splice(VAR, 1, 5);
+  } else if (arrayRomanNumber[VAR] === 'X') {
+    arrayRomanNumber.splice(VAR, 1, 10);
+  } else if (arrayRomanNumber[VAR] === 'L') {
+    arrayRomanNumber.splice(VAR, 1, 50);
+  } else if (arrayRomanNumber[VAR] === 'C') {
+    arrayRomanNumber.splice(VAR, 1, 100);
+  } else if (arrayRomanNumber[VAR] === 'D') {
+    arrayRomanNumber.splice(VAR, 1, 500);
+  } else if (arrayRomanNumber[VAR] === 'M') {
+    arrayRomanNumber.splice(VAR, 1, 1000);
+  } else arrayRomanNumber = 'Error';
+}
+changeLetterToNumber(arrayRomanNumber);
+arrayRomanNumber;
+arrayRomanNumber = arrayRomanNumber.toString();
+arrayRomanNumber;
+
+enlevesDeArrayRomanNumber = arrayRomanNumber.splice(0, 1, 1);
+enlevesDeArrayRomanNumber = arrayRomanNumber.splice(1, 1, 1);
+enlevesDeArrayRomanNumber = arrayRomanNumber.splice(2, 1, 1);
+arrayRomanNumber;
+arrayRomanNumber =
+  arrayRomanNumber[RomanNumber.length - RomanNumber.length] +
+  arrayRomanNumber[RomanNumber.length - (RomanNumber.length - 1)] +
+  arrayRomanNumber[RomanNumber.length - (RomanNumber.length - 2)];
+arrayRomanNumber;
 
 // Faut-il, en l'état actuel de mon code,
 // que je STRINGIFY mes photographers ou mes medias
@@ -14,11 +57,7 @@ let t = ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'];
 let d = ['a', 'a'];
 d = d.length;
 t = t.length;
-let consoleTotal =
-  Math.exp(t) / t -
-  (t * t * d + d * t * (d * t) + d * d * (t * t)) -
-  d * d * t +
-  d * d;
+let consoleTotal = Math.exp(t) / t - (t * t * d + d * t * (d * t) + d * d * (t * t)) - d * d * t + d * d;
 consoleTotal = Math.floor(consoleTotal);
 consoleTotal;
 
