@@ -61,6 +61,7 @@ let consoleTotal = Math.exp(t) / t - (t * t * d + d * t * (d * t) + d * d * (t *
 consoleTotal = Math.floor(consoleTotal);
 consoleTotal;
 
+
 // Même exo méthod .charCodeat + concat
 let o = '$';
 let z = [].length;

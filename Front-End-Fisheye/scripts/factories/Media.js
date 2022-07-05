@@ -18,12 +18,10 @@ export class mediaFactory {
   getPhotosCardDOM() {
     // If this._photographerId contains a video -> do not analyse this one
     // If the document(string) has no date -> do not analyse this one
-    const isNotVideo = !this._video;
-    console.log(isNotVideo);
     const hasDate = !(this._date == undefined);
     let nameOfPhotographer;
     function giveNameStoredInEachId(photographerId) {
-      if (isNotVideo && hasDate) {
+      if (hasDate) {
         nameOfPhotographer =
           photographerId === 243
             ? 'Mimi'
@@ -44,11 +42,17 @@ export class mediaFactory {
     }
     const idForMedia = this._photographerId;
     giveNameStoredInEachId(idForMedia);
-    function isReturningSection(imageOfMedia, titleOfMedia, likesOfMedia, hasImage) {
+    function isReturningSection(imageOfMedia, videoOfMedia, titleOfMedia, likesOfMedia, idOfMedia) {
       const photography = `./assets/fish-eye_photos/Sample\ Photos/${nameOfPhotographer}/${imageOfMedia}`;
+      const videography = `./assets/fish-eye_photos/Sample\ Photos/${nameOfPhotographer}/${videoOfMedia}`;
       const photosPlace = document.querySelector('.photos-displaying');
       const section = document.createElement('section');
-      section.innerHTML = `
+      // titleOfMedia = titleOfMedia;
+      // idOfMedia = idOfMedia;
+      // likesOfMedia = likesOfMedia;
+      // if else use <img src="${videography}"></img> in innerHTML
+      if (imageOfMedia !== null) {
+        section.innerHTML = `
       <a>
       <figure class="dimensions-photos-grapher-page">
       <img src="${photography}"></img>
@@ -56,27 +60,44 @@ export class mediaFactory {
       <figcaption class="position-fig-grapher-page">
       <h2>${titleOfMedia}
       </h2>
-      <span class="likes">${likesOfMedia}❤️</span>
+      <div>
+      <span class="likes" id="likes-${idOfMedia}">${likesOfMedia}</span>
+      <i class="fas fa-heart"></i>
+      </div>
       </figcaption>
       </a>`;
-      if (hasImage === true) {
-        console.log('photos affichées.');
+        photosPlace.appendChild(section);
+      } else {
+        section.innerHTML = `
+      <a>
+      <figure class="dimensions-photos-grapher-page">
+      <img src="${videography}"></img>
+      </figure>
+      <figcaption class="position-fig-grapher-page">
+      <h2>${titleOfMedia}
+      </h2>
+      <div>
+      <span class="likes" id="likes-${idOfMedia}">${likesOfMedia}</span>
+      <i class="fas fa-heart"></i>
+      </div>
+      </figcaption>
+      </a>`;
         photosPlace.appendChild(section);
       }
     }
-
     const imageOfMedia = this._image;
+    const videoOfMedia = this._video;
     const titleOfMedia = this._title;
     const likesOfMedia = this._likes;
-    const hasImage = !!this._image;
-    isReturningSection(imageOfMedia, titleOfMedia, likesOfMedia, hasImage);
+    const idOfMedia = this._id;
+    isReturningSection(imageOfMedia, videoOfMedia, titleOfMedia, likesOfMedia, idOfMedia);
   }
   getInsertLikesCardDOM() {
     const insertLikesPlace = document.querySelector('footer');
     const divFooter = document.createElement('div');
     divFooter.innerHTML = `<div>
     <span></span>
-    <i>❤️</i>
+    <i class="fas fa-heart"></i>
     </div>`;
     insertLikesPlace.insertAdjacentElement('afterbegin', divFooter);
   }

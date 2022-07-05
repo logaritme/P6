@@ -168,6 +168,10 @@ main div div section a {
 
 /* PHOTOS STACK */
 
+a {
+  color: unset;
+}
+
 main div section a .dimensions-photos-grapher-page {
   display: flex;
   width: 350px;
@@ -192,15 +196,53 @@ main div section a .position-fig-grapher-page {
 }
 
 main div section a figcaption h2 {
-  width: 240px;
-  /* Retester la max-width quand le JS remarchera, 
-  ou au pire ellipsis/overflow hidden*/
-  max-width: 240px;
+  width: 292px;
+  white-space: nowrap;
+  /* Au besoin pour le responsive utiliser ellipsis */
+  max-width: 292px;
   height: 31px;
   color: #901c1c;
   display: flex;
   justify-items: start;
   align-items: center;
+}
+
+main div section a figcaption {
+  margin: 0;
+  padding-left: 6px;
+  font-size: 20px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+main div section a figcaption div {
+  width: 60px;
+  margin: 0;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+a figcaption div .fas.fa-heart {
+  background: grey;
+  color: #901c1c;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+a figcaption div .fas.fa-heart {
+  transition: transform ease-in-out 0.3s;
+}
+
+a figcaption div .fas.fa-heart:hover {
+  transform: scale(1.2);
+}
+
+a figcaption div .fas.fa-heart:active {
+  color: green;
 }
 
 main div section a figcaption .likes {
@@ -234,6 +276,21 @@ main div section a figcaption .likes {
   background-color: rgba(26, 39, 156, 0.4);
 }
 
+/* When error messages are displayer via JS */
+.errorDiv {
+  margin: 0;
+  padding: 12px 0;
+  height: auto;
+  width: 100%;
+  font-size: 24px;
+  color: red;
+}
+
+.errorColor {
+  border: inset red 4px;
+}
+/* End : When error messages are displayer via JS */
+
 /* The closes and their befores/afters */
 .close {
   background-color: #f000;
@@ -265,6 +322,9 @@ main div section a figcaption .likes {
   transform: rotate(-45deg);
 }
 /* END : The closes and their befores/afters */
+
+/* INSERT */
+
 footer {
   display: flex;
   flex-flow: row nowrap;
@@ -273,7 +333,7 @@ footer {
   left: 1028px;
   bottom: 0;
   color: black;
-  background-color: #DB8876;
+  background-color: #db8876;
   border-radius: 6px 6px 0 0;
 }
 
@@ -286,7 +346,6 @@ footer div {
   align-items: center;
 }
 
-
 /* Rectangle 2 */
 
 footer div div {
@@ -296,12 +355,23 @@ footer div div {
   align-items: center;
 }
 
-footer div div span,
-footer div div i {
+footer div div span, footer div div i {
   font-weight: 700;
   font-size: 24px;
   color: #000000;
 }
+
+footer div div .fas.fa-heart {
+  background: #db8876;
+  color: #000000;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* .fas.fa-heart:hover {
+  color: orange;
+} */
 
 /* .submit-button {
   background: #fe142f;
