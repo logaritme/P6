@@ -180,7 +180,8 @@ main div section a .dimensions-photos-grapher-page {
   border-radius: 5px;
 }
 
-main div section a figure img {
+main div section a figure img,
+main div section a figure video {
   width: 451px;
   object-fit: cover;
   object-position: 50% 17%;
@@ -260,6 +261,10 @@ main div section a figcaption .likes {
   grid-template-rows: auto;
   gap: 95px;
   padding: 100px;
+}
+
+.liked {
+  color:  black !important;
 }
 
 /* MODAL */
@@ -355,7 +360,8 @@ footer div div {
   align-items: center;
 }
 
-footer div div span, footer div div i {
+footer div div span,
+footer div div i {
   font-weight: 700;
   font-size: 24px;
   color: #000000;

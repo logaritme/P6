@@ -71,6 +71,22 @@
   <footer>
     <!-- Code will be injected by JS -->
   </footer>
+  <script>// Function called by the listener
+    function addLike(id) {
+    console.log("id:",id)
+    // If already liked
+    if (document.querySelector('#likesHearts-' + id + ' i').classList.contains('liked')) {
+      document.querySelector('#likesHearts-' + id + ' i').classList.remove('liked');
+      document.querySelector('#likesHearts-' + id + ' span').innerHTML--;
+      document.querySelector('#totalLikes').innerHTML--;
+    }
+    // If not already liked
+    else{
+      document.querySelector('#likesHearts-' + id + ' i').classList.add('liked')
+      document.querySelector('#likesHearts-' + id + ' span').innerHTML++;
+      document.querySelector('#totalLikes').innerHTML++;
+    }
+    }</script>
   <script type="module" src="./scripts/pages/photographer-page.js"></script>
   <!-- <script src="./scripts/pages/index.js"></script> -->
   <script src="./scripts/utils/contactForm.js"></script>
