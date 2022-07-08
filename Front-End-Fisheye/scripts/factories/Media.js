@@ -31,7 +31,7 @@ export class mediaFactory {
           ? 'Rhode'
           : photographerId === 195
           ? 'Marcel'
-          : 'ERROR PATH';
+          : console.error('No name found');
     }
     const idForMedia = this._photographerId;
     giveNameStoredInEachId(idForMedia);

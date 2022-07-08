@@ -25,17 +25,13 @@
     </div>
   </main>
 
-  <div id="contact_modal" class="hidden" style="display: none;">
+  <div id="contact_modal" class="" style="display: none;">
     <div class="content">
-      <!-- BUTTON CROSS TO CLICK -->
-      <!-- onclick on this element close the modal form via JS -->
-      <!-- <span class="close btn-close fa-solid fa-xmark" onclick="closeCrossModal()"></span> -->
       <div class="modal">
         <header>
           <h2>Contactez-moi</h2>
           <!-- Here name of photographer will be injected by JS -->
           <img src="./assets/icons/close.svg" class="close" onclick="closeModal()" />
-          <!-- Warning in JS code can be "closeCrossModal()" instead of "closeModal()"-->
         </header>
         <!-- FORM TO FILL -->
         <form id="contact_form" name="contact">
@@ -68,25 +64,34 @@
       </div>
     </div>
   </div>
+  <div id="LightBox_modal" class="hidden" style="display: block;">
+    <!-- <div class="lightBox-content">
+      <div class="lightBox-modal"> -->
+    <!-- Code will be injected by JS -->
+    <!-- </div>
+    </div> -->
+  </div>
   <footer>
     <!-- Code will be injected by JS -->
   </footer>
-  <script>// Function called by the listener
-    function addLike(id) {
-    console.log("id:",id)
-    // If already liked
-    if (document.querySelector('#likesHearts-' + id + ' i').classList.contains('liked')) {
-      document.querySelector('#likesHearts-' + id + ' i').classList.remove('liked');
-      document.querySelector('#likesHearts-' + id + ' span').innerHTML--;
-      document.querySelector('#totalLikes').innerHTML--;
+  <script>// Function called by the onclick in HTML
+    function addLike(idOfMedia) {
+
+      console.log("id:", idOfMedia)
+      // If already liked
+      if (document.querySelector('#likesHearts-' + idOfMedia + ' i').classList.contains('liked')) {
+        document.querySelector('#likesHearts-' + idOfMedia + ' i').classList.remove('liked');
+        document.querySelector('#likesHearts-' + idOfMedia + ' span').innerHTML--;
+        document.querySelector('#totalLikes').innerHTML--;
+      }
+      // If not already liked
+      else {
+        document.querySelector('#likesHearts-' + idOfMedia + ' i').classList.add('liked')
+        document.querySelector('#likesHearts-' + idOfMedia + ' span').innerHTML++;
+        document.querySelector('#totalLikes').innerHTML++;
+      }
     }
-    // If not already liked
-    else{
-      document.querySelector('#likesHearts-' + id + ' i').classList.add('liked')
-      document.querySelector('#likesHearts-' + id + ' span').innerHTML++;
-      document.querySelector('#totalLikes').innerHTML++;
-    }
-    }</script>
+  </script>
   <script type="module" src="./scripts/pages/photographer-page.js"></script>
   <!-- <script src="./scripts/pages/index.js"></script> -->
   <script src="./scripts/utils/contactForm.js"></script>

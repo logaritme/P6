@@ -1,5 +1,6 @@
 import { photographerFactory } from '../factories/Photographer.js';
 import { mediaFactory } from '../factories/Media.js';
+import { LightBox } from '../factories/LightBox.js';
 // import { UserCardDOM } from '../templates/getUserCardDOM.js'
 // import { PhotographerPageHeaderDOM } from '../templates/getPhotographerPageHeaderDOM.js'
 
@@ -33,7 +34,7 @@ const medias = getMedias();
 // console.info("All the media(pic+vid):", medias);
 
 // Ne retourne que le photographe correspondant à l'id affiché dans l'url
-async function displayData(photographers, medias) {
+function displayData(photographers, medias) {
   const id = parseInt(new URLSearchParams(location.search).get('id'));
   const photographer = photographers.find((photographer) => photographer.id === id);
   const TemplatePhotographer = new photographerFactory(photographer);
@@ -43,28 +44,40 @@ async function displayData(photographers, medias) {
   // Retrieves only the medias's photographer who has the id displayed in the url
   // And instances so only the medias having id === id
   const mediasFiltereds = medias.filter((media) => media.photographerId === id);
+  // Initialization var to 0
   let totalLikes = 0;
-
+  // Add to totalLikes var each media.like corresponding to one photographer
   mediasFiltereds.forEach((mediasFiltered) => {
     totalLikes += mediasFiltered.likes;
   });
-  // Display the total numbersOfLikesInsert in the span
+  // Display the total numbersOfLikesInsert in a new var
   let numbersOfLikesInsert = totalLikes;
+  // Uses the mediaFactory to generate the insert's DOM
   const TemplateLikesInsert = new mediaFactory(photographer);
   TemplateLikesInsert.getInsertLikesCardDOM();
   // Node DOM to set on the total number of likes in the insert
   document.querySelector('footer>div>div>span').textContent = numbersOfLikesInsert;
 
   // This is returning the const = mediasFiltereds;
+  // fir each mediasFiltered create photo's DOM
   mediasFiltereds.forEach((mediasFiltered) => {
-    // QUESTION MENTOR: Why I can't inject this let oldValueLike using textContent in the span appropriated ?
-    // Next step-> Have to use classList contains/add/remove "liked" class to know what to do when user is clicking on the heart
-    // Plays the mediaFactory on each media filtered
     const TemplateMedia = new mediaFactory(mediasFiltered, medias);
     TemplateMedia.getPhotosCardDOM();
-    // Debug
-    // console.info('NodeListSpan(afterInjection):', spanNumber);
   });
+}
+
+  // Displays lightbox by instancing the right function dedenping on image or video
+function displayLightBox(medias) {
+  // if (isThereImage !== undefined)
+  // {
+    const TemplateLightBox = new LightBox(medias);
+    TemplateLightBox.getLightBoxImgDOM();
+
+  // }
+  // else {
+  //   const TemplateLightBox = new LightBox(medias);
+  //   TemplateLightBox.getLightBoxVideoDOM();
+  // }
 }
 
 async function init() {
@@ -73,13 +86,13 @@ async function init() {
   const medias = await getMedias();
   const allTheJSONDatas = await getAllTheJSONDatas();
   displayData(photographers, medias, allTheJSONDatas);
+  displayLightBox(medias);
 }
 
 // Starts the series of nested functions
 init();
 
-
-
+// Ancien listener pour les coeurs ( pas pratique -> voie abandonnée)
 // Listener on click on the heart plays function addLike
 // const iconeHeart = document.querySelectorAll('section>a>figcaption>div>i');
 // iconeHeart.forEach((clickHeart) => clickHeart.addEventListener('click', addLike));

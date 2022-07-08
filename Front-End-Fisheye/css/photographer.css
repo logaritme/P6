@@ -264,10 +264,10 @@ main div section a figcaption .likes {
 }
 
 .liked {
-  color:  black !important;
+  color: black !important;
 }
 
-/* MODAL */
+/* FORM MODAL */
 
 .hidden {
   display: none;
@@ -373,6 +373,44 @@ footer div div .fas.fa-heart {
   font-size: 24px;
   font-weight: 700;
   cursor: pointer;
+}
+
+/* LIGHTBOX MODAL */
+
+/* The close-lightboxes */
+.close-lightbox {
+  background-color: #f000;
+  display: inline;
+  /* position: absolute; */
+  right: 15px;
+  /* top: 15px; */
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  cursor: pointer;
+  transform: scale(0.7);
+  border: none;
+}
+/* Flèche à gauche de l'écran */
+.previous {
+  background-color: #fff;
+}
+.fas.fa-angle-left {
+  background-color: #fff;
+  color: #911c1c;
+  font-size: 48px;
+  /* transform: rotate(-90deg); */
+}
+
+/* Flèche à gauche de l'écran */
+.next {
+  background-color: #fff;
+}
+.fas.fa-angle-right {
+  background-color: #fff;
+  color: #911c1c;
+  font-size: 48px;
+  /* transform: rotate(-90deg); */
 }
 
 /* .fas.fa-heart:hover {
