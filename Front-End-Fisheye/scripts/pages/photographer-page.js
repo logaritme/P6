@@ -1,6 +1,10 @@
 import { photographerFactory } from '../factories/Photographer.js';
 import { mediaFactory } from '../factories/Media.js';
-import { LightBox } from '../factories/LightBox.js';
+import { lightBox } from '../factories/LightBox.js';
+import { openLightBox } from '../utils/lightBox.js';
+import { closeLightBox } from '../utils/lightBox.js';
+
+// import { closeLightBox } from '../utils/lightBox.js';
 // import { UserCardDOM } from '../templates/getUserCardDOM.js'
 // import { PhotographerPageHeaderDOM } from '../templates/getPhotographerPageHeaderDOM.js'
 
@@ -29,7 +33,7 @@ async function getMedias() {
   return JSON.parse(JSON.stringify(data.media));
 }
 
-const medias = getMedias();
+export const medias = getMedias();
 // Debug
 // console.info("All the media(pic+vid):", medias);
 
@@ -59,26 +63,38 @@ function displayData(photographers, medias) {
   document.querySelector('footer>div>div>span').textContent = numbersOfLikesInsert;
 
   // This is returning the const = mediasFiltereds;
-  // fir each mediasFiltered create photo's DOM
+  // for each mediasFiltered create photo's DOM
   mediasFiltereds.forEach((mediasFiltered) => {
     const TemplateMedia = new mediaFactory(mediasFiltered, medias);
     TemplateMedia.getPhotosCardDOM();
   });
+  // This is returning the const = mediasFiltereds;
+  // FOR EACH ( ce n'est pas ce qui est demandé, le pb viens de là?)
+  // mediasFiltered it creates a lightbox DOM
+  mediasFiltereds.forEach((mediasFiltered) => {
+    const TemplateMedia = new lightBox(mediasFiltered, medias);
+    TemplateMedia.getLightBoxImgDOM();
+    // I have to hidde previous photo(s)/video(s)
+    // and also I have to hidde the next photo(s)/video(s)
+    // on the visible part of the lightBox opened.
+    // How to do?
+  });
 }
 
-  // Displays lightbox by instancing the right function dedenping on image or video
-function displayLightBox(medias) {
-  // if (isThereImage !== undefined)
-  // {
-    const TemplateLightBox = new LightBox(medias);
-    TemplateLightBox.getLightBoxImgDOM();
+// Displays lightbox by instancing the right function dedenping on image or video
+// function displayLightBox(medias) {
+// if (isThereImage !== undefined)
+// {
+// const TemplateLightBox = new lightBox(medias);
+// TemplateLightBox.getLightBoxImgDOM();
+// }
+// else {
+//   const TemplateLightBox = new LightBox(medias);
+//   TemplateLightBox.getLightBoxVideoDOM();
+// }
+// }
 
-  // }
-  // else {
-  //   const TemplateLightBox = new LightBox(medias);
-  //   TemplateLightBox.getLightBoxVideoDOM();
-  // }
-}
+// function closeLightBox() {}
 
 async function init() {
   // Retrieves photographers and medias data
@@ -86,7 +102,8 @@ async function init() {
   const medias = await getMedias();
   const allTheJSONDatas = await getAllTheJSONDatas();
   displayData(photographers, medias, allTheJSONDatas);
-  displayLightBox(medias);
+  openLightBox(medias);
+  closeLightBox(medias);
 }
 
 // Starts the series of nested functions

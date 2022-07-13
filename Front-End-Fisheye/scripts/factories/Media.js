@@ -13,8 +13,8 @@ export class mediaFactory {
     this._price = medias.price;
   }
 
-  // Ma fonction ( sans utiliser get) d'affichage
-  // du template-photos pour photographer-page.html
+  // My fonction ( without use a get) displaying
+  // the template-photos for the photographer-page.html
   getPhotosCardDOM() {
     let nameOfPhotographer;
     function giveNameStoredInEachId(photographerId) {
@@ -36,13 +36,14 @@ export class mediaFactory {
     const idForMedia = this._photographerId;
     giveNameStoredInEachId(idForMedia);
     function isReturningSection(imageOfMedia, videoOfMedia, titleOfMedia, likesOfMedia, idOfMedia) {
-      const photography = `./assets/fish-eye_photos/Sample\ Photos/${nameOfPhotographer}/${imageOfMedia}`;
-      const videography = `./assets/fish-eye_photos/Sample\ Photos/${nameOfPhotographer}/${videoOfMedia}`;
+      const photography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${imageOfMedia}`;
+      const videography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${videoOfMedia}`;
       const photosPlace = document.querySelector('.photos-displaying');
       const section = document.createElement('section');
+      // Display the content of photo or video
       if (imageOfMedia !== undefined) {
         section.innerHTML = `
-            <a>
+            <a href="${photography}">
               <figure class="dimensions-photos-grapher-page">
                 <img src="${photography}"></img>
               </figure>
@@ -58,7 +59,7 @@ export class mediaFactory {
         photosPlace.appendChild(section);
       } else {
         section.innerHTML = `
-            <a>
+            <a href="${videography}">
               <figure class="dimensions-photos-grapher-page">
                 <video controls>
                 <source src="${videography}"
@@ -84,6 +85,7 @@ export class mediaFactory {
     const idOfMedia = this._id;
     isReturningSection(imageOfMedia, videoOfMedia, titleOfMedia, likesOfMedia, idOfMedia);
   }
+  // Display the total of Likes in the insert at the bottom-right of the page
   getInsertLikesCardDOM() {
     const insertLikesPlace = document.querySelector('footer');
     const divFooter = document.createElement('div');

@@ -29,13 +29,13 @@ let isMessageUserValid = false;
 // Opens modal form on "Contactez-moi"
 function displayModal() {
   const modalContent = document.getElementById('contact_modal');
-  modalContent.style.display = 'block';
+  modalContent.classList.remove('hidden');
 }
 
-// Closes modal form on "Envoyer" and on cross "X"
-function closeModal() {
+// Closes modal form on cross "X"
+function closeModalSimple() {
   const modalContent = document.getElementById('contact_modal');
-  modalContent.style.display = 'none';
+  modalContent.classList.add('hidden');
 }
 // Above code given by the source project
 
@@ -101,9 +101,9 @@ function closeModal() {
 
   allErrorsChecked();
   if (areAllBooleansValid()) {
-    modalContent.style.display = 'none';
+    modalContent.classList.add('hidden');
   } else {
-    modalContent.style.display = 'block';
+    modalContent.classList.remove('hidden');
   }
 }
 
@@ -149,7 +149,7 @@ const firstNameChecker = (value) => {
     errorDisplay('firstName', '', true);
     firstName = value;
     isFirstNameValid = true;
-    console.info("PRÉNOM:", value);
+    console.info('PRÉNOM:', value);
     areAllBooleansValid();
   }
 };
@@ -173,7 +173,7 @@ const lastNameChecker = (value) => {
     errorDisplay('lastName', '', true);
     lastName = value;
     isLastNameValid = true;
-    console.info("NOM:", value);
+    console.info('NOM:', value);
 
     areAllBooleansValid();
   }
@@ -198,7 +198,7 @@ const emailChecker = (value) => {
     errorDisplay('email', '', true);
     email = value;
     isEmailValid = true;
-    console.info("E-MAIL:", value);
+    console.info('E-MAIL:', value);
     areAllBooleansValid();
   }
 };
@@ -215,7 +215,7 @@ const messageUserChecker = (value) => {
     errorDisplay('messageUser', '', true);
     messageUser = value;
     isMessageUserValid = true;
-    console.info("MESSAGE:", value);
+    console.info('MESSAGE:', value);
     areAllBooleansValid();
   }
 };
@@ -236,6 +236,7 @@ const messageUserChecker = (value) => {
 modalBtn.forEach((clickBtnLaunch) => clickBtnLaunch.addEventListener('click', launchModal));
 
 // Listener to close modal form throught the button "Envoyer"
+// I forgot to add a preventDefault ( because of <input type="submit"> behavior)
 document.getElementById('firstModalBtnSubmit').addEventListener('click', closeModal);
 
 // 3 LISTENERS FOR ALL THE FIELDS OF THE FORM //

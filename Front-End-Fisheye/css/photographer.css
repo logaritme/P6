@@ -172,21 +172,27 @@ a {
   color: unset;
 }
 
+/* Have to use a class here because I have to recreate
+the correct DOM structure (figcaption included in figure) */
 main div section a .dimensions-photos-grapher-page {
   display: flex;
   width: 350px;
   height: 300px;
+  /* width: 100%; */
   overflow: hidden;
   border-radius: 5px;
 }
 
 main div section a figure img,
 main div section a figure video {
-  width: 451px;
-  object-fit: cover;
+  /* width: 451px; */
+  width: 10%;
+  /* object-fit: cover; */
   object-position: 50% 17%;
 }
 
+/* Have to use a class here because I have to recreate
+the correct DOM structure (figcaption included in figure) */
 main div section a .position-fig-grapher-page {
   width: 350px;
   height: 31px;
@@ -269,7 +275,7 @@ main div section a figcaption .likes {
 
 /* FORM MODAL */
 
-.hidden {
+body :nth-child(3).hidden {
   display: none;
   position: fixed;
   z-index: 2;
@@ -278,7 +284,6 @@ main div section a figcaption .likes {
   height: 100%;
   width: 100%;
   overflow: auto;
-  background-color: rgba(26, 39, 156, 0.4);
 }
 
 /* When error messages are displayer via JS */
@@ -328,58 +333,100 @@ main div section a figcaption .likes {
 }
 /* END : The closes and their befores/afters */
 
-/* INSERT */
-
-footer {
-  display: flex;
-  flex-flow: row nowrap;
-  position: fixed;
-  /* right: 11.3%; */
-  left: 1028px;
-  bottom: 0;
-  color: black;
-  background-color: #db8876;
-  border-radius: 6px 6px 0 0;
-}
-
-footer div {
-  width: 188px;
-  height: 90px;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-/* Rectangle 2 */
-
-footer div div {
-  width: 188px;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
-}
-
-footer div div span,
-footer div div i {
-  font-weight: 700;
-  font-size: 24px;
-  color: #000000;
-}
-
-footer div div .fas.fa-heart {
-  background: #db8876;
-  color: #000000;
-  font-size: 24px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
 /* LIGHTBOX MODAL */
+
+/* Displaying */
+.content-lightBox-modal {
+  /* display: flex; */
+  border-radius: 5px;
+  /* background-color: #db8876; */
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+}
+
+/* Picture */
+.position-lightBox-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-lightBox {
+  width: 100%;
+  margin: auto;
+  max-width: 1050px;
+  max-height: 900px;
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  background: rgba(26, 39, 156, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+.content-lightBox.show {
+  display: block;
+}
+
+.content-lightBox.hidden {
+  display: none;
+}
+
+.position-lightBox-modal.show {
+  display: block;
+}
+.position-lightBox-modal.hidden {
+  display: none;
+}
+
+.flex-lightBox {
+  width: 1000px;
+  height: 400px;
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-center {
+ width: 1000px;
+ height: 400px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ padding-top: 4rem;
+}
+
+div div div figure div img,
+div div div figure div video source {
+  /* width: 1050px;
+  height: 900px; */
+  /* width: 800px;
+  height: 720px; */
+  width: 200%;
+  background-color: #c4c4c4;
+  border-radius: 5px;
+  position: relative;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* The close-lightboxes */
 .close-lightbox {
   background-color: #f000;
+  color: #911C1C;
   display: inline;
   /* position: absolute; */
   right: 15px;
@@ -428,3 +475,64 @@ footer div div .fas.fa-heart {
   cursor: pointer;
   border: 0;
 } */
+
+
+/* TESTS GALLERY */
+
+body :nth-child(4) a img {
+  width: 50%
+}
+body :nth-child(4) a video {
+  width: 50%
+}
+/* .photos-displaying a img {
+  width: 40%
+}
+.photos-displaying a video {
+  width: 40%
+} */
+
+/* INSERT */
+
+footer {
+  display: flex;
+  flex-flow: row nowrap;
+  position: fixed;
+  /* right: 11.3%; */
+  left: 1028px;
+  bottom: 0;
+  color: black;
+  background-color: #db8876;
+  border-radius: 6px 6px 0 0;
+}
+
+footer div {
+  width: 188px;
+  height: 90px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+footer div div {
+  width: 188px;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+footer div div span,
+footer div div i {
+  font-weight: 700;
+  font-size: 24px;
+  color: #000000;
+}
+
+footer div div .fas.fa-heart {
+  background: #db8876;
+  color: #000000;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+}

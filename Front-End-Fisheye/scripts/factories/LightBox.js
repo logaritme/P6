@@ -1,6 +1,6 @@
 // Ci-dessous LightBoxFactory Model
-
-export class LightBox {
+// Rename everywhere ligthBoxFactory instead of lightBox
+export class lightBox {
   constructor(medias) {
     this._id = medias.id;
     this._photographerId = medias.photographerId;
@@ -12,10 +12,10 @@ export class LightBox {
     this._price = medias.price;
   }
 
-  // Ma fonction ( sans utiliser get) d'affichage
-  // de la LightBox pour photographer-page.html
+  // My fonction ( without use a get) displaying
+  // the LightBox for the photographer-page.html
   getLightBoxImgDOM() {
-    // Function to get the right name of the phootgrapher
+    // Function to get the right name of the photographer
     let nameOfPhotographer;
     function giveNameStoredInEachId(photographerId) {
       nameOfPhotographer =
@@ -33,79 +33,51 @@ export class LightBox {
           ? 'Marcel'
           : console.error('No photographer name found!');
     }
-    const idForMedia = this._photographerId;
-    nameOfPhotographer = giveNameStoredInEachId(idForMedia);
-    console.info("Nom du photographe:", nameOfPhotographer);
-  function isReturningSection(imageOfMedia, titleOfMedia) {
-    const photography = `./assets/fish-eye_photos/Sample\ Photos/${nameOfPhotographer}/${imageOfMedia}`;
-    const LightBoxPlace = document.querySelector('#LightBox_modal');
-    const divLightBoxImgPlace = document.createElement('div');
-    divLightBoxImgPlace.innerHTML = `
-    <figure>
-      <div>
-        <img src="./assets/icons/close.svg" class="close-lightbox" onclick="closeLightBox()" />
-      </div>
-      <button class="previous"><span class="fas fa-angle-left"></span></button>
-      <button class="next"><span class="fas fa-angle-right"></span></button>
-      <div>
-        <img src="${photography}"></img>
-      </div>
-      <figcaption>
+    const IdPhotographer = this._photographerId;
+    giveNameStoredInEachId(IdPhotographer);
+    // Debug
+    // console.info("L'IdPhotographer:", IdPhotographer);
+    // console.info('Nom du photographe:', nameOfPhotographer);
+    function isReturningSection(imageOfMedia, videoOfMedia, titleOfMedia) {
+      // Debug
+      console.info('Titre:', titleOfMedia);
+      const photography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${imageOfMedia}`;
+      const videography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${videoOfMedia}`;
+      const LightBoxPlace = document.querySelector('.to-append-media');
+      const divLightBoxImgPlace = document.createElement('div');
+      const divLightBoxVideoPlace = document.createElement('div');
+      // Display the content of photo or video in the lightBox
+      // DOM Img
+      if (imageOfMedia !== undefined) {
+        divLightBoxImgPlace.innerHTML = `
+          <div class="dimensions-media-lightBox">
+            <img src="${photography}"></img>
+          </div>
+          <figcaption class="position-title-media-lightBox">
+          <h2>${titleOfMedia}</h2>
+          </figcaption>
+        `;
+        LightBoxPlace.appendChild(divLightBoxImgPlace);
+        // LightBoxPlace.insertAdjacentElement('afterbegin', divLightBoxImgPlace);
+      } else {
+        // DOM Video
+        divLightBoxVideoPlace.innerHTML = `
+        <div class="dimensions-media-lightBox">
+          <video controls>
+            <source src="${videography}" type="video/mp4">
+          </video>
+        </div>
+        <figcaption class="position-title-media-lightBox">
         <h2>${titleOfMedia}</h2>
-      </figcaption>
-    </figure>
-    `;
-    LightBoxPlace.appendChild(divLightBoxImgPlace);
-    // LightBoxPlace.insertAdjacentElement('afterbegin', divLightBoxImgPlace);
-  }
-  const imageOfMedia = this._image;
-  const titleOfMedia = this._title;
-  isReturningSection(imageOfMedia, titleOfMedia);
-}
-  getLightBoxVideoDOM() {
-    // Function to get the right name of the phootgrapher
-    let nameOfPhotographer;
-    function giveNameStoredInEachId(photographerId) {
-      nameOfPhotographer =
-        photographerId === 243
-          ? 'Mimi'
-          : photographerId === 930
-          ? 'Ellie'
-          : photographerId === 82
-          ? 'Tracy'
-          : photographerId === 527
-          ? 'Nabeel'
-          : photographerId === 925
-          ? 'Rhode'
-          : photographerId === 195
-          ? 'Marcel'
-          : console.error('No name found!');
+        </figcaption>
+      `;
+        LightBoxPlace.appendChild(divLightBoxVideoPlace);
+        // LightBoxPlace.insertAdjacentElement('afterbegin', divLightBoxVideoPlace);
+      }
     }
-    const idForMedia = this._photographerId;
-    giveNameStoredInEachId(idForMedia);
-
-    const videography = `./assets/fish-eye_photos/Sample\ Photos/${nameOfPhotographer}/${this._video}`;
-    const LightBoxPlace = document.querySelector('#LightBox_modal');
-    const divLightBoxVideoPlace = document.createElement('div');
-    divLightBoxVideoPlace.innerHTML = `
-    <figure>
-      <div>
-        <img src="./assets/icons/close.svg" class="close-lightbox" onclick="closeLightBox()" />
-      </div>
-        <button class="previous"><i class="fas fa-angle-left"></i></button>
-      <button class="next"><i class="fas fa-angle-right"></i></button>
-      <div>
-        <video controls>
-          <source src="${videography}" type="video/mp4">
-        </video>
-      </div>
-      <figcaption>
-        <h2>${this._title}</h2>
-      </figcaption>
-
-    </figure>
-    `;
-    LightBoxPlace.appendChild(divLightBoxVideoPlace);
-    // LightBoxPlace.insertAdjacentElement('afterbegin', divLightBoxVideoPlace);
+    const imageOfMedia = this._image;
+    const videoOfMedia = this._video;
+    const titleOfMedia = this._title;
+    isReturningSection(imageOfMedia, videoOfMedia, titleOfMedia);
   }
 }

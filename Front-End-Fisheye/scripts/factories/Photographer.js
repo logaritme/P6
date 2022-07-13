@@ -13,7 +13,7 @@ export class photographerFactory {
   }
   // Ma fonction ( sans utiliser get) d'affichage du template pour index.html
   getUserCardDOM() {
-    const picture = `./assets/fish-eye_photos/Sample\ Photos/Photographers\ ID\ Photos/${this._portrait}`;
+    const picture = `./assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
     const photographersSectionPlace = document.querySelector('.photographer_section');
     const article = document.createElement('article');
     article.innerHTML = `
@@ -28,7 +28,7 @@ export class photographerFactory {
   }
   // Ma fonction ( sans utiliser get) d'affichage du template pour photographer.html
   getPhotographerPageHeaderDOM() {
-    const picture = `./assets/fish-eye_photos/Sample\ Photos/Photographers\ ID\ Photos/${this._portrait}`;
+    const picture = `./assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
     const photographersHeaderPlace = document.querySelector('.photographer-header');
     const div = document.createElement('div');
     div.innerHTML = `<section>

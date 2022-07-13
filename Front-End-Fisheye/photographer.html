@@ -20,18 +20,16 @@
     <div class="photographer-header">
       <!-- Code will be injected by JS -->
     </div>
-    <div class="photos-displaying">
-      <!-- Code will be injected by JS -->
-    </div>
+
   </main>
 
-  <div id="contact_modal" class="" style="display: none;">
+  <div id="contact_modal" class="hidden">
     <div class="content">
       <div class="modal">
         <header>
           <h2>Contactez-moi</h2>
           <!-- Here name of photographer will be injected by JS -->
-          <img src="./assets/icons/close.svg" class="close" onclick="closeModal()" />
+          <img src="./assets/icons/close.svg" class="close" onclick="closeModalSimple()" /><!-- SVG Ccoss -->
         </header>
         <!-- FORM TO FILL -->
         <form id="contact_form" name="contact">
@@ -64,13 +62,40 @@
       </div>
     </div>
   </div>
-  <div id="LightBox_modal" class="hidden" style="display: block;">
-    <!-- <div class="lightBox-content">
-      <div class="lightBox-modal"> -->
+
+
+  <div class="photos-displaying gallery">
+    <!-- <a href="./assets/fish-eye_photos/Sample%20Photos/Mimi/Travel_Lonesome.jpg" onclick="openLightBox()">
+      <img style="width: 60%;" src="./assets/fish-eye_photos/Sample%20Photos/Mimi/Travel_Lonesome.jpg" alt="Img1">
+    </a>
+    <a href="./assets/fish-eye_photos/Sample%20Photos/Mimi/Travel_HillsideColor.jpg" onclick="openLightBox()">
+      <img style="width: 60%;" src="./assets/fish-eye_photos/Sample%20Photos/Mimi/Travel_HillsideColor.jpg" alt="Img2">
+    </a>
+    <a href="./assets/fish-eye_photos/Sample%20Photos/Mimi/Portrait_Wednesday.jpg" onclick="openLightBox()">
+      <img style="width: 60%;" src="./assets/fish-eye_photos/Sample%20Photos/Mimi/Portrait_Wednesday.jpg" alt="Img3">
+    </a> -->
+    
     <!-- Code will be injected by JS -->
-    <!-- </div>
-    </div> -->
   </div>
+  <div id="LightBox_modal" class="position-lightBox-modal hidden content-lightBox-modal">
+    <div class="content-lightBox">
+      <div class="lightBox-modal">
+        <figure class="to-append-media flex-lightBox">
+          <div class="flex-center">
+            <img src="" alt="">
+          </div>
+          <div>
+            <img src="./assets/icons/close.svg" class="close-lightbox" >
+          </div>
+
+          <button class="previous"><span class="fas fa-angle-left"></span></button>
+          <button class="next"><span class="fas fa-angle-right"></span></button>
+          <!-- Code will be injected by JS -->
+        </figure>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <!-- Code will be injected by JS -->
   </footer>
@@ -93,6 +118,7 @@
     }
   </script>
   <script type="module" src="./scripts/pages/photographer-page.js"></script>
+  <script type="module" src="./scripts/utils/lightBox.js"></script>
   <!-- <script src="./scripts/pages/index.js"></script> -->
   <script src="./scripts/utils/contactForm.js"></script>
 </body>
