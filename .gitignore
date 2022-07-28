@@ -1,21 +1,10 @@
 # Personal tests
-trash-file.html
-trash-file.js
 trash-file1.js
 trash-file1.html
 temporary-stock.js
-fish-eye_photos
+
+# Assets medias
+Front-End-Fisheye/assets/fish-eye_photos
+
 # VS Code
 .vscode
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-# Test binary, built with `go test -c`
-*.test
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
-# Dependency directories (remove the comment below to include it)
-vendor/
