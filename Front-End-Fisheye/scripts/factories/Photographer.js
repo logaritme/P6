@@ -1,7 +1,7 @@
 //
 // Ma factory des photographe pour la page index.html
 // Il y a un seul photographer à chaque fis que je l'instancie -> pas de s
-export class photographerFactory {
+export class PhotographerFactory {
   constructor(thePhotographers) {
     this._name = thePhotographers.name;
     this._id = thePhotographers.id;
@@ -11,8 +11,8 @@ export class photographerFactory {
     this._price = thePhotographers.price;
     this._portrait = thePhotographers.portrait;
   }
-  // Ma fonction ( sans utiliser get) d'affichage du template pour index.html
-  getUserCardDOM() {
+  // Ma fonction d'affichage du template pour index.html
+  setUserCardDOM() {
     const picture = `./assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
     const photographersSectionPlace = document.querySelector('.photographer_section');
     const article = document.createElement('article');
@@ -23,33 +23,38 @@ export class photographerFactory {
     </a>
     <h3>${this._city}</h3>
     <h4>${this._tagline}</h4>
-    <price>${this._price}\ €</price>`;
+    <price>${this._price}\ €</price>
+    `;
     photographersSectionPlace.appendChild(article);
   }
-  // Ma fonction ( sans utiliser get) d'affichage du template pour photographer.html
-  getPhotographerPageHeaderDOM() {
+  // Ma fonction d'affichage du template pour photographer.html
+  setPhotographerPageHeaderDOM() {
     const picture = `./assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
     const photographersHeaderPlace = document.querySelector('.photographer-header');
     const div = document.createElement('div');
-    div.innerHTML = `<section>
-    <article>
-    <h1>${this._name}</h1>
-    <p>${this._city + ', ' + this._country}</p>
-    <p class="text-color">${this._tagline}</p>
-    </article>
-    <button class="contact-button" onclick="displayModal()">Contactez-moi</button>
-    <img src="${picture}"></img>
-    </section>`;
+    div.innerHTML = `
+    <section>
+      <article>
+        <h1>${this._name}</h1>
+        <p>${this._city + ', ' + this._country}</p>
+        <p class="text-color">${this._tagline}</p>
+      </article>
+      <button class="contact-button" onclick="displayModal()">Contactez-moi</button>
+      <img src="${picture}"></img>
+    </section>
+    `;
     photographersHeaderPlace.appendChild(div);
   }
-  getInsertPriceCardDOM() {
+  setInsertPriceCardDOM() {
     const insertPricePlace = document.querySelector('footer');
     const divFooter = document.createElement('div');
-    divFooter.innerHTML = `<div>
-    <span>${this._price}</span>
-    <i>€</i>
-    <span>/ jour</span>
-    </div>`;
+    divFooter.innerHTML = `
+    <div>
+      <span>${this._price}</span>
+      <i>€</i>
+      <span>/ jour</span>
+    </div>
+    `;
     insertPricePlace.insertAdjacentElement('beforeend', divFooter);
   }
 }

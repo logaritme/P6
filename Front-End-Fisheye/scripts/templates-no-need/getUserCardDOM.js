@@ -35,7 +35,7 @@ export class UserCardDOM {
   constructor(photographers) {
     this.photographers = photographers;
   }
- getUserCardDOM() {
+ setUserCardDOM() {
   const picture = `./assets/fish-eye_photos/Sample\ Photos/Photographers\ ID\ Photos/${this._portrait}`;
   const photographersPart = document.querySelector('.photographer_section');
   const article = document.createElement('article');

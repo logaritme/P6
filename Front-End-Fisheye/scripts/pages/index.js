@@ -1,4 +1,4 @@
-import { photographerFactory } from '../factories/Photographer.js';
+import { PhotographerFactory } from '../factories/Photographer.js';
 
 async function getPhotographers() {
   // Stockera les données dans data dès leur arrivée suite au fetch
@@ -11,8 +11,8 @@ async function getPhotographers() {
 
 async function displayData(photographers) {
   photographers.forEach((photographer) => {
-    const TemplatePhotographer = new photographerFactory(photographer);
-    TemplatePhotographer.getUserCardDOM();
+    const TemplatePhotographer = new PhotographerFactory(photographer);
+    TemplatePhotographer.setUserCardDOM();
   });
 }
 
@@ -29,18 +29,18 @@ init();
 // Ancienne fonction displayData tenté avec map sans succès
 // async function displayData(photographers) {
 //   photographers
-//     .map((photographer) => new photographerFactory(photographer))
+//     .map((photographer) => new PhotographerFactory(photographer))
 //     .forEach((photographer) => {
 //       const TemplatePhotographer = new UserCardDOM(photographer);
 //       const photographersSection = document.querySelector(
 //         '.photographer_section'
 //       );
 //       console.table(TemplatePhotographer);
-//       photographersSection.appendChild(TemplatePhotographer.getUserCardDOM);
+//       photographersSection.appendChild(TemplatePhotographer.setUserCardDOM);
 //       return photographersSection;
 //     });
 // }
 
 
 // Au cas où je veuille obtenir tous les photographes:
-// const allPhotographerNames = new photographerFactory(photographers);
+// const allPhotographerNames = new PhotographerFactory(photographers);

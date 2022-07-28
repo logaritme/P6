@@ -2,7 +2,7 @@ export class PhotographerPageHeaderDOM {
   constructor(photographers) {
     this.photographers = photographers;
   }
-  getPhotographerPageHeaderDOM() {
+  setPhotographerPageHeaderDOM() {
     const picture = `./assets/fish-eye_photos/Sample\ Photos/Photographers\ ID\ Photos/${this._portrait}`;
     const section = document.createElement('div');
     section.innerHTML = `<section>

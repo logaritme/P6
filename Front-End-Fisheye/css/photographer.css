@@ -29,6 +29,8 @@ main {
   cursor: pointer;
 }
 
+/* MODAL & FORM */
+
 /* Modal */
 
 .modal {
@@ -166,7 +168,7 @@ main div div section a {
   display: flex;
 }
 
-/* PHOTOS STACK */
+/* PHOTOS STACK (setPhotosCardDOM */
 
 a {
   color: unset;
@@ -323,7 +325,7 @@ body :nth-child(3).hidden {
   content: '';
   height: 33px;
   width: 3px;
-  background-color: #fff;
+  background-color: #901c1c;
 }
 .close::before {
   transform: rotate(45deg);
@@ -333,19 +335,111 @@ body :nth-child(3).hidden {
 }
 /* END : The closes and their befores/afters */
 
-/* LIGHTBOX MODAL */
+/* DROP-DOWN / SORT SELECT */
 
-/* Displaying */
-.content-lightBox-modal {
-  /* display: flex; */
-  border-radius: 5px;
-  /* background-color: #db8876; */
-  width: 50%;
+.drop-down-container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 32px 32px 32px 90px;
+}
+
+.drop-down-title-do {
+  align-self: flex-start;
+  margin: 16px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.select-box {
   display: flex;
   flex-direction: column;
+  width: 170px;
+}
+
+.select-box .options-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #911c1c;
+  color: white;
+  border-radius: 0 0 5px 5px;
+  width: 100%;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.4s;
+  overflow: hidden;
+}
+
+.select-box .options-container.active {
+  max-height: 240px;
+  opacity: 1;
+}
+
+.select-box .option,
+.select-box .selected {
+  padding: 12px 24px;
+  cursor: pointer;
+  background-color: #911c1c;
+  color: white;
+}
+
+.icon-chevron-container {
+  align-items: center;
+  cursor: pointer;
+  background-color: #911c1c;
+  color: white;
+  border: none;
+}
+
+.select-box .selected:hover {
+  background-color: #414b57;
+}
+
+.select-box .option:hover {
+  background-color: #414b57;
+}
+
+.select-box .option .radio {
+  display: none;
+}
+
+.selected .selected-popularite .radio {
+  display: none;
+}
+
+.select-box .label-titre,
+.select-box .label-date,
+.select-box .selected {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: auto;
+  border-radius: 5px 5px 0 0;
+}
+.select-box .label-popularite {
+cursor: pointer;}
+
+.select-box .selected.border-radius {
+  border-radius: 5px;
+}
+
+.fas.fa-angle-down.reverse-chevron{
+  transform: rotate(180deg);
+}
+
+
+.select-box .option {
+  border-top: 1px solid white;
+}
+
+/* LIGHTBOX MODAL */
+
+.lightBox-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Picture */
@@ -360,17 +454,31 @@ body :nth-child(3).hidden {
   justify-content: center;
 }
 
+/* Displaying */
+.content-lightBox-modal {
+  /* display: flex; */
+  border-radius: 5px;
+  /* background-color: #db8876; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+}
+
 .content-lightBox {
   width: 100%;
+  height: 100vh;
   margin: auto;
-  max-width: 1050px;
-  max-height: 900px;
+  /* max-width: 1050px;
+  max-height: 900px; */
   /* position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); */
   background: rgba(26, 39, 156, 0.7);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(1px);
 }
 
 .content-lightBox.show {
@@ -378,6 +486,30 @@ body :nth-child(3).hidden {
 }
 
 .content-lightBox.hidden {
+  display: none;
+}
+
+.as-img.show {
+  display: block;
+}
+
+.as-img.hidden {
+  display: none;
+}
+
+.as-video.show {
+  display: block;
+}
+
+.as-video.hidden {
+  display: none;
+}
+
+.injected-content-lightBox.show {
+  display: block;
+}
+
+.injected-content-lightBox.hidden {
   display: none;
 }
 
@@ -390,18 +522,18 @@ body :nth-child(3).hidden {
 
 .flex-lightBox {
   width: 1000px;
-  height: 400px;
+  /* height: 400px; */
   display: flex;
   flex-direction: row;
 }
 
 .flex-center {
- width: 1000px;
- height: 400px;
- display: flex;
- align-items: center;
- justify-content: center;
- padding-top: 4rem;
+  width: 1000px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0;
 }
 
 div div div figure div img,
@@ -410,7 +542,7 @@ div div div figure div video source {
   height: 900px; */
   /* width: 800px;
   height: 720px; */
-  width: 200%;
+  width: 50%;
   background-color: #c4c4c4;
   border-radius: 5px;
   position: relative;
@@ -421,12 +553,14 @@ div div div figure div video source {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: auto;
+  cursor: pointer;
 }
 
 /* The close-lightboxes */
 .close-lightbox {
   background-color: #f000;
-  color: #911C1C;
+  color: #911c1c;
   display: inline;
   /* position: absolute; */
   right: 15px;
@@ -438,12 +572,36 @@ div div div figure div video source {
   transform: scale(0.7);
   border: none;
 }
+
+/* The closes-lightbox and their befores/afters */
+/*
+.close-lightbox::before,
+.close-lightbox::after {
+  position: absolute;
+  left: 15px;
+  top: 0px;
+  content: '';
+  height: 33px;
+  width: 3px;
+  background-color: #901c1c;
+  color: #901c1c;
+}
+.close-lightbox::before {
+  transform: rotate(45deg);
+}
+.close-lightbox::after {
+  transform: rotate(-45deg);
+}*/
+/* END : The closes-lightbox and their befores/afters */
+
 /* Flèche à gauche de l'écran */
 .previous {
-  background-color: #fff;
+  background: transparent;
+  border: none;
+  z-index: 50;
 }
 .fas.fa-angle-left {
-  background-color: #fff;
+  background: transparent;
   color: #911c1c;
   font-size: 48px;
   /* transform: rotate(-90deg); */
@@ -451,10 +609,12 @@ div div div figure div video source {
 
 /* Flèche à gauche de l'écran */
 .next {
-  background-color: #fff;
+  background: transparent;
+  border: none;
+  z-index: 50;
 }
 .fas.fa-angle-right {
-  background-color: #fff;
+  background: transparent;
   color: #911c1c;
   font-size: 48px;
   /* transform: rotate(-90deg); */
@@ -476,14 +636,13 @@ div div div figure div video source {
   border: 0;
 } */
 
-
 /* TESTS GALLERY */
 
-body :nth-child(4) a img {
-  width: 50%
+body :nth-child(5) a img {
+  width: 60%;
 }
-body :nth-child(4) a video {
-  width: 50%
+body :nth-child(5) a video {
+  width: 60%;
 }
 /* .photos-displaying a img {
   width: 40%

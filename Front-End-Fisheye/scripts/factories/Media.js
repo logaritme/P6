@@ -1,6 +1,6 @@
-// Ci-dessous mediaFactory Model
+// Ci-dessous MediaFactory Model
 
-export class mediaFactory {
+export class MediaFactory {
   constructor(medias) {
     // this._name = photographers.name;
     this._id = medias.id;
@@ -16,74 +16,63 @@ export class mediaFactory {
   // My fonction ( without use a get) displaying
   // the template-photos for the photographer-page.html
   getPhotosCardDOM() {
-    let nameOfPhotographer;
-    function giveNameStoredInEachId(photographerId) {
-      nameOfPhotographer =
-        photographerId === 243
-          ? 'Mimi'
-          : photographerId === 930
-          ? 'Ellie'
-          : photographerId === 82
-          ? 'Tracy'
-          : photographerId === 527
-          ? 'Nabeel'
-          : photographerId === 925
-          ? 'Rhode'
-          : photographerId === 195
-          ? 'Marcel'
-          : console.error('No name found');
+
+    const nameOfPhotographer = this._photographerId === 243
+    ? 'Mimi' : this._photographerId === 930
+    ? 'Ellie': this._photographerId === 82
+    ? 'Tracy': this._photographerId === 527
+    ? 'Nabeel': this._photographerId === 925
+    ? 'Rhode': this._photographerId === 195
+    ? 'Marcel' : null;
+
+    if (!nameOfPhotographer) {
+      console.error('No name found') 
+      return false
     }
-    const idForMedia = this._photographerId;
-    giveNameStoredInEachId(idForMedia);
-    function isReturningSection(imageOfMedia, videoOfMedia, titleOfMedia, likesOfMedia, idOfMedia) {
-      const photography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${imageOfMedia}`;
-      const videography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${videoOfMedia}`;
-      const photosPlace = document.querySelector('.photos-displaying');
-      const section = document.createElement('section');
-      // Display the content of photo or video
-      if (imageOfMedia !== undefined) {
-        section.innerHTML = `
-            <a href="${photography}">
-              <figure class="dimensions-photos-grapher-page">
-                <img src="${photography}"></img>
-              </figure>
-              <figcaption class="position-fig-grapher-page">
-                <h2>${titleOfMedia}
-                </h2>
-                <div id="likesHearts-${idOfMedia}">
-                  <span class="likes" id="likes-${idOfMedia}">${likesOfMedia}</span>
-                  <i class="fas fa-heart" onclick="addLike(${idOfMedia})" ></i>
-                </div>
-              </figcaption>
-            </a>`;
-        photosPlace.appendChild(section);
-      } else {
-        section.innerHTML = `
-            <a href="${videography}">
-              <figure class="dimensions-photos-grapher-page">
-                <video controls>
-                <source src="${videography}"
-                    type="video/mp4">
-                </video>
-              </figure>
-              <figcaption class="position-fig-grapher-page">
-                <h2>${titleOfMedia}
-                </h2>
-                <div id="likesHearts-${idOfMedia}">
-                  <span class="likes" id="likes-${idOfMedia}">${likesOfMedia}</span>
-                  <i class="fas fa-heart" onclick="addLike(${idOfMedia})" ></i>
+
+    const photography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${this._image}`;
+    const videography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${this._video}`;
+    const photosPlace = document.querySelector('.photos-displaying');
+    const section = document.createElement('section');
+    // Display the content of photo or video
+    if (this._image !== undefined) {
+      section.innerHTML = `
+          <a id="${this._id}" href="${photography}" alt="${this._title}">
+            <figure class="dimensions-photos-grapher-page">
+              <img src="${photography}" alt="${this._title}"></img>
+            </figure>
+            <figcaption class="position-fig-grapher-page">
+              <h2>${this._title}
+              </h2>
+              <div id="likesHearts-${this._id}">
+                <span class="likes" id="likes-${this._id}">${this._likes}</span>
+                <i class="fas fa-heart" onclick="addLike(${this._id})" ></i>
               </div>
-              </figcaption>
-            </a>`;
-        photosPlace.appendChild(section);
-      }
+            </figcaption>
+          </a>
+          `;
+      photosPlace.appendChild(section);
+    } else {
+      section.innerHTML = `
+          <a id="${this._id}" href="${videography}" alt="${this._title}">
+            <figure class="dimensions-photos-grapher-page">
+              <video src="${videography}" alt="${this._title}"
+                  type="video/mp4" controls>
+              </video>
+            </figure>
+            <figcaption class="position-fig-grapher-page">
+              <h2>${this._title}
+              </h2>
+              <div id="likesHearts-${this._id}">
+                <span class="likes" id="likes-${this._id}">${this._likes}</span>
+                <i class="fas fa-heart" onclick="addLike(${this._id})" ></i>
+            </div>
+            </figcaption>
+          </a>
+          `;
+      photosPlace.appendChild(section);
     }
-    const imageOfMedia = this._image;
-    const videoOfMedia = this._video;
-    const titleOfMedia = this._title;
-    const likesOfMedia = this._likes;
-    const idOfMedia = this._id;
-    isReturningSection(imageOfMedia, videoOfMedia, titleOfMedia, likesOfMedia, idOfMedia);
+
   }
   // Display the total of Likes in the insert at the bottom-right of the page
   getInsertLikesCardDOM() {
