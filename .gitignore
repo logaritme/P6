@@ -6,7 +6,7 @@ trash-file1.html
 temporary-stock.js
 fish-eye_photos
 # VS Code
-.vscode/settings.json
+.vscode
 # Binaries for programs and plugins
 *.exe
 *.exe~
