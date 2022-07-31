@@ -172,39 +172,44 @@ main div div section a {
 
 a {
   color: unset;
+  text-decoration: none;
 }
 
 /* Have to use a class here because I have to recreate
 the correct DOM structure (figcaption included in figure) */
-main div section a .dimensions-photos-grapher-page {
+.dimensions-photos-grapher-page {
   display: flex;
-  width: 350px;
+  width: 150px;
   height: 300px;
   /* width: 100%; */
   overflow: hidden;
   border-radius: 5px;
 }
 
-main div section a figure img,
-main div section a figure video {
+.img-video-photos-stack {
+  /* 100% or 451px for final result */
   /* width: 451px; */
-  width: 10%;
-  /* object-fit: cover; */
+  /* width: 100%; */
+  /* Temporary 10% to work with */
+  width: 30%;
+  object-fit: cover;
   object-position: 50% 17%;
 }
 
-/* Have to use a class here because I have to recreate
-the correct DOM structure (figcaption included in figure) */
-main div section a .position-fig-grapher-page {
+.position-fig-grapher-page {
   width: 350px;
   height: 31px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  align-content: center;
+  margin: 0;
+  padding-left: 6px;
+  font-size: 20px;
 }
 
-main div section a figcaption h2 {
+.h2-photos-stack {
   width: 292px;
   white-space: nowrap;
   /* Au besoin pour le responsive utiliser ellipsis */
@@ -216,16 +221,7 @@ main div section a figcaption h2 {
   align-items: center;
 }
 
-main div section a figcaption {
-  margin: 0;
-  padding-left: 6px;
-  font-size: 20px;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
-
-main div section a figcaption div {
+.center-likes-heart {
   width: 60px;
   margin: 0;
   padding-right: 10px;
@@ -254,7 +250,7 @@ a figcaption div .fas.fa-heart:active {
   color: green;
 }
 
-main div section a figcaption .likes {
+a figcaption .likes {
   width: 90px;
   height: 31px;
   color: #901c1c;
@@ -272,12 +268,12 @@ main div section a figcaption .likes {
 }
 
 .liked {
-  color: black !important;
+  color: black;
 }
 
 /* FORM MODAL */
 
-body :nth-child(3).hidden {
+.form-contact.hidden {
   display: none;
   position: fixed;
   z-index: 2;
@@ -392,11 +388,11 @@ body :nth-child(3).hidden {
 }
 
 .select-box .selected:hover {
-  background-color: #414b57;
+  background-color: #d3573c;
 }
 
 .select-box .option:hover {
-  background-color: #414b57;
+  background-color: #d3573c;
 }
 
 .select-box .option .radio {
@@ -419,16 +415,16 @@ body :nth-child(3).hidden {
   border-radius: 5px 5px 0 0;
 }
 .select-box .label-popularite {
-cursor: pointer;}
+  cursor: pointer;
+}
 
 .select-box .selected.border-radius {
   border-radius: 5px;
 }
 
-.fas.fa-angle-down.reverse-chevron{
+.fas.fa-angle-down.reverse-chevron {
   transform: rotate(180deg);
 }
-
 
 .select-box .option {
   border-top: 1px solid white;
@@ -604,7 +600,6 @@ div div div figure div video source {
   background: transparent;
   color: #911c1c;
   font-size: 48px;
-  /* transform: rotate(-90deg); */
 }
 
 /* Flèche à gauche de l'écran */
@@ -617,12 +612,7 @@ div div div figure div video source {
   background: transparent;
   color: #911c1c;
   font-size: 48px;
-  /* transform: rotate(-90deg); */
 }
-
-/* .fas.fa-heart:hover {
-  color: orange;
-} */
 
 /* .submit-button {
   background: #fe142f;
@@ -638,10 +628,10 @@ div div div figure div video source {
 
 /* TESTS GALLERY */
 
-body :nth-child(5) a img {
+body :nth-child(6) section a img {
   width: 60%;
 }
-body :nth-child(5) a video {
+body :nth-child(6) section a video {
   width: 60%;
 }
 /* .photos-displaying a img {

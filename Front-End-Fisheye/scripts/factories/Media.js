@@ -16,18 +16,24 @@ export class MediaFactory {
   // My fonction ( without use a get) displaying
   // the template-photos for the photographer-page.html
   getPhotosCardDOM() {
-
-    const nameOfPhotographer = this._photographerId === 243
-    ? 'Mimi' : this._photographerId === 930
-    ? 'Ellie': this._photographerId === 82
-    ? 'Tracy': this._photographerId === 527
-    ? 'Nabeel': this._photographerId === 925
-    ? 'Rhode': this._photographerId === 195
-    ? 'Marcel' : null;
+    const nameOfPhotographer =
+      this._photographerId === 243
+        ? 'Mimi'
+        : this._photographerId === 930
+        ? 'Ellie'
+        : this._photographerId === 82
+        ? 'Tracy'
+        : this._photographerId === 527
+        ? 'Nabeel'
+        : this._photographerId === 925
+        ? 'Rhode'
+        : this._photographerId === 195
+        ? 'Marcel'
+        : null;
 
     if (!nameOfPhotographer) {
-      console.error('No name found') 
-      return false
+      console.error('No name found');
+      return false;
     }
 
     const photography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${this._image}`;
@@ -39,12 +45,12 @@ export class MediaFactory {
       section.innerHTML = `
           <a id="${this._id}" href="${photography}" alt="${this._title}">
             <figure class="dimensions-photos-grapher-page">
-              <img src="${photography}" alt="${this._title}"></img>
+              <img class="img-video-photos-stack" src="${photography}" alt="${this._title}"></img>
             </figure>
             <figcaption class="position-fig-grapher-page">
-              <h2>${this._title}
+              <h2 class="h2-photos-stack">${this._title}
               </h2>
-              <div id="likesHearts-${this._id}">
+              <div class="center-likes-heart" id="likesHearts-${this._id}">
                 <span class="likes" id="likes-${this._id}">${this._likes}</span>
                 <i class="fas fa-heart" onclick="addLike(${this._id})" ></i>
               </div>
@@ -56,14 +62,14 @@ export class MediaFactory {
       section.innerHTML = `
           <a id="${this._id}" href="${videography}" alt="${this._title}">
             <figure class="dimensions-photos-grapher-page">
-              <video src="${videography}" alt="${this._title}"
+              <video class="img-video-photos-stack" src="${videography}" alt="${this._title}"
                   type="video/mp4" controls>
               </video>
             </figure>
             <figcaption class="position-fig-grapher-page">
-              <h2>${this._title}
+              <h2 class="h2-photos-stack" >${this._title}
               </h2>
-              <div id="likesHearts-${this._id}">
+              <div class="center-likes-heart" id="likesHearts-${this._id}">
                 <span class="likes" id="likes-${this._id}">${this._likes}</span>
                 <i class="fas fa-heart" onclick="addLike(${this._id})" ></i>
             </div>
@@ -72,7 +78,6 @@ export class MediaFactory {
           `;
       photosPlace.appendChild(section);
     }
-
   }
   // Display the total of Likes in the insert at the bottom-right of the page
   getInsertLikesCardDOM() {

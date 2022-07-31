@@ -40,6 +40,8 @@ export const medias = getMedias();
 // Debug
 // console.info("All the media(pic+vid):", medias);
 
+let mediasFiltereds;
+
 // DROP-DOWN //
 ///////////////
 
@@ -56,6 +58,32 @@ const iconeSort = document.querySelector('.fas.fa-angle-down');
 const labelPopularite = document.querySelector('.label-popularite');
 const optionPopulariteId = document.getElementsByClassName('label-popularite');
 
+// DROP-DOWN // ==> 3 SORTING: functions declared to be call by (2) listeners
+///////////////
+let mediasSortedLikes;
+let mediasSortedDate;
+let mediasSortedTitle;
+
+function sortedLike() {
+  mediasSortedLikes = mediasFiltereds.sort(function (a, b) {
+    return b.likes - a.likes;
+  });
+  console.log(mediasSortedLikes);
+}
+
+function sortedDate() {
+  mediasSortedDate = mediasFiltereds.sort(function (a, b) {
+    return new Date(b.date) - new Date(a.date);
+  });
+  console.log(mediasSortedDate);
+}
+
+function sortedAZ() {
+  mediasSortedTitle = mediasFiltereds.sort((a, b) => a.title.localeCompare(b.title, 'fr', { ignorePunctuation: true }));
+  console.log(mediasSortedTitle);
+}
+
+// Think about the option of close it clicking anywhere
 // Opens/Closes the dropdown and reverse the chevron
 chevronContainer.addEventListener('click', function buttonUpdated(evt) {
   evt.preventDefault();
@@ -106,13 +134,13 @@ labelPopularite.addEventListener('click', function (evt) {
   console.log(popValue);
   if (popValue === 'Popularité') {
     console.log('sortedLike()');
-    console.log('Doit trier un array du plus liké au moins liké');
+    sortedLike();
   } else if (popValue === 'Date') {
     console.log('sortedDate()');
-    console.log('Doit trier un array de la date la plus récente à la plus ancienne');
+    sortedDate();
   } else if (popValue === 'Titre') {
     console.log('sortedAZ()');
-    console.log('Doit trier un array donnant des titres de A à Z');
+    sortedAZ();
   } else console.error('Text inserted: Error');
 });
 
@@ -122,19 +150,17 @@ optionsList.forEach((obj) => {
     console.log(popValue);
     if (popValue === 'Popularité') {
       console.log('sortedLike()');
-      console.log('Doit trier un array du plus liké au moins liké');
+      sortedLike();
     } else if (popValue === 'Date') {
       console.log('sortedDate()');
-      console.log('Doit trier un array de la date la plus récente à la plus ancienne');
+      sortedDate();
     } else if (popValue === 'Titre') {
       console.log('sortedAZ()');
-      console.log('Doit trier un array donnant des titres de A à Z');
+      sortedAZ();
     } else console.error('Text inserted: Error');
   });
 });
 
-let mediasFiltereds;
-let arrayOfLikes = [];
 // Ne retourne que le photographe correspondant à l'id affiché dans l'url
 export function displayData(photographers, medias) {
   const id = parseInt(new URLSearchParams(location.search).get('id'));
@@ -173,50 +199,9 @@ export function displayData(photographers, medias) {
     const TemplateMedia = new LightBoxFactory(mediasFiltered, medias);
     TemplateMedia.getLightBoxImgDOM();
   });
-
-  // DROP-DOWN // ==> 3 SORTING
-  ///////////////
-
-  // Coder le tri par :
-  // "Popularite"
-  // "Date"
-  // "Titre"
-  // for (let i = 0; i < mediasFiltereds.length; i++) {
-  //   arrayOfLikes.push(`"likes": `+ mediasFiltereds[i].likes);
-  // }
-
-  function sortedLike() {
-    let mediasSortedLikes;
-    mediasSortedLikes = mediasFiltereds.sort(function (a, b) {
-      return b.likes - a.likes;
-    });
-    console.log(mediasSortedLikes);
-  }
-  sortedLike();
-
-  function sortedDate() {
-    let mediasSortedDate;
-    mediasSortedDate = mediasFiltereds.sort(function (a, b) {
-      return a.date - b.date; // <== Improve it
-    });
-    console.log(mediasSortedDate);
-  }
-  sortedDate();
-
-  function sortedAZ() {
-    let mediasSortedTitle;
-    mediasSortedTitle = mediasFiltereds.sort(function (a, b) {
-      return a.title.toLowercase - b.title.toLowercase; // <== Improve it
-      // toLowercase inutile si l'on prend la première lettre
-      // de chaque titre qui est toujours une majuscule
-    });
-    console.log(mediasSortedTitle);
-  }
-  sortedAZ();
-
   return mediasFiltereds;
 }
-console.log('Environ 25% du code parcourut!');
+console.log('Environ 25% du code parcouru!');
 
 // const functionResult = displayData(photographers, medias);
 // console.log(functionResult);
@@ -294,7 +279,7 @@ function openLightBox() {
         console.log('index selon le click sur image:', theIndex);
       });
     }
-    console.log('Environ 50% du code parcourut!');
+    console.log('Environ 50% du code parcouru!');
 
     // let allIdMediasFiltereds = [];
     // for (let i = 0; i < mediasFiltereds.length; i++) {
@@ -466,7 +451,7 @@ function openLightBox() {
             console.log('Id ("First"):', newIdMediaShownInLightBox);
           });
         }
-        console.log('Environ 75% du code parcourut!');
+        console.log('Environ 75% du code parcouru!');
       }
       injectionFirstMediaLightBox();
     }
@@ -566,7 +551,7 @@ async function init() {
   displayData(photographers, medias, allTheJSONDatas);
   openLightBox();
   closeLightBox(medias);
-  console.log('Là 100% du code est parcourut!');
+  console.log('Là 100% du code est parcouru!');
 }
 
 // Starts the series of nested functions      z
