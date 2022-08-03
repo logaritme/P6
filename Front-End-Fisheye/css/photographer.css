@@ -622,11 +622,11 @@ div div div figure div video source {
 
 /* TESTS GALLERY */
 
-body :nth-child(6) section a img {
-  width: 60%;
+body :nth-child(5) section a img {
+  width: 25%;
 }
-body :nth-child(6) section a video {
-  width: 60%;
+body :nth-child(5) section a video {
+  width: 25%;
 }
 /* .photos-displaying a img {
   width: 40%

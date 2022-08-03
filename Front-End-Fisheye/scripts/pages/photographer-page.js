@@ -227,234 +227,208 @@ const parentvideoInLightBox = document.querySelector('.flex-center.as-video');
 const imgInLightBox = document.querySelector('.as-img.injected-content-lightBox');
 const videoInLightBox = document.querySelector('.as-video.injected-content-lightBox');
 
-// function openTheFirstImgOrVideoLightBox(mediaLinks) {
-//   for (let mediaLink of mediaLinks) {
-//   mediaLink.addEventListener('click', function(evt) {
-//     evt.preventDefault();
-//     evt.stopPropagation();
-//   console.log('Photo cliquée qui ouvre la lightBox!');
-//   // mediaLink.href = '';
-//   const modalLightBox = document.querySelector('#LightBox_modal');
-//   // Visibility of the #LightBox_modal
-//   modalLightBox.classList.remove('hidden');
-//   modalLightBox.classList.add('show');
-//   console.log('Ça ouvre la lightBox!!!');
-// });
-// };
-// };
-// openTheFirstImgOrVideoLightBox(mediaLinks);
 console.log('Environ 50% du code parcouru!');
-// Opens the LightBox and activate all the others functions related to the lightBox
-// export
+
+// Opens the LightBox and activates all the others functions related to the lightBox
 function openLightBox() {
-  // Close the modal by clicking on the cross
-  // closemodalLightBox.addEventListener('click', function () {
-  //   modalLightBox.classList.add('hidden');
-  // });
+  // Create an array empty that will take the value of:
+  // - medias not sorted (original display on the landing page of a photographer)
+  // - or medias sorted ( sorted by the "select")
+  // The let mediasInLightBoxes will be so an array of all the ids of medias matching to a photographer
+  let mediasInLightBoxes = []; /* or let mediasInLightBoxes; */
+  if (mediasFiltereds.length > 0) {
+    /* <-Change here to mediasSorteds when the "select" will be done*/
 
-  // Handles all functions related to displaying lightbox content
-  function displayLightBox(mediasFiltereds) {
-    // Create an array empty that will take the value of:
-    // - medias not sorted (original display on the landing page of a photographer)
-    // - or medias sorted ( sorted by the "select")
-    // The let mediasInLightBoxes will be so an array of all the ids of medias matching to a photographer
-    let mediasInLightBoxes = []; /* or let mediasInLightBoxes; */
-    if (mediasFiltereds.length > 0) {
-      /* <-Change here to mediasSorteds when the "select" will be done*/
-
-      mediasInLightBoxes = mediasFiltereds; /* <-Change here to mediasSorteds when the "select" will be done */
-    } else {
-      mediasInLightBoxes = mediasFiltereds;
-    }
-    // Array only with Ids of the medias
-    let justMediasIdInLightBox = [];
-    // justMediasIdInLightBox = Array.from(justMediasIdInLightBox);
-    for (let i = 0; i < mediasInLightBoxes.length; i++) {
-      justMediasIdInLightBox.push(mediasInLightBoxes[i].id);
-    }
-    // Récupère l'image qui à été cliquée en retriant "justMediasIdInLightBox" par l'id de l'image
-    // medias.id = this._id;
-
-    const currentMediaShownInLightBoxs = document.querySelectorAll('body :nth-child(6) a');
-    let idInLightBox;
-    let theIndex;
-    for (let currentMediaShownInLightBox of currentMediaShownInLightBoxs) {
-      currentMediaShownInLightBox.addEventListener('click', (element) => {
-        idInLightBox = element.path[2].id;
-        theIndex = justMediasIdInLightBox.findIndex((element) => element == idInLightBox); /*<-pb ici*/
-        console.log(justMediasIdInLightBox);
-        console.log('Id récupérée:', idInLightBox);
-        console.log('index selon le click sur image:', theIndex);
-      });
-    }
-    // let allIdMediasFiltereds = [];
-    // for (let i = 0; i < mediasFiltereds.length; i++) {
-    //   allIdMediasFiltereds = [allIdMediasFiltereds + mediasFiltereds[i].id + ', '];
-    //   console.log(allIdMediasFiltereds);
-    // }
-
-    // Retrieves button's click prev & next of the function: listener()
-    // & it browse on the indexes
-
-    // Retrieves the index of previous media to the left
-
-    let newIdMediaShownInLightBox;
-
-    function previous() {
-      if (theIndex === -1) {
-        console.log('error');
-      } else if (theIndex === 0) {
-        theIndex = mediasInLightBoxes.length - 1;
-        newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
-        nextPrevDisplayMedia();
-        console.log('Lis la ligne else if du previous:', theIndex);
-        console.log('Id ("Previous"):', newIdMediaShownInLightBox);
-      } else {
-        theIndex--;
-        newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
-        nextPrevDisplayMedia();
-        // const TemplateMedia = new LightBoxFactory(newIdMediaShownInLightBox);
-        // TemplateMedia.getLightBoxPrevNextDOM();
-        console.log('Lis la ligne else du previous:', theIndex);
-        console.log('Id ("Previous"):', newIdMediaShownInLightBox);
-      }
-      displayMedia();
-    }
-    // Retrieves the index of next media to the right
-    function next() {
-      if (theIndex === -1) {
-        console.log('error');
-      } else if (theIndex === mediasInLightBoxes.length - 1) {
-        theIndex = 0;
-        newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
-        nextPrevDisplayMedia();
-        console.log('Lis la ligne else if du next:', theIndex);
-        console.log('Id ("Next"):', newIdMediaShownInLightBox);
-      } else {
-        theIndex++;
-        console.log('Array:', justMediasIdInLightBox);
-        newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
-        nextPrevDisplayMedia();
-        console.log('Lis la ligne else du next:', theIndex);
-        console.log('Id ("Next"):', newIdMediaShownInLightBox);
-      }
-      displayMedia();
-    }
-
-    function displayMedia() {
-      // Integrates the media into the HTML via .src .alt .id to be displayed in the lightBox (.injectedLightBoxCont)
-      // GOT IT BY IMPORT : import { injectionFirstMediaLightBox } from '../utils/injectionFirstMediaLightBox.js';
-      injectionFirstMediaLightBox();
-    }
-    displayMedia();
-
-    function nextPrevDisplayMedia() {
-      console.log(newIdMediaShownInLightBox);
-      const titleCurrentMediaInLightBox = mediasFiltereds.find((x) => x.id === newIdMediaShownInLightBox).title;
-      const imageCurrentMediaInLightBox = mediasFiltereds.find((x) => x.id === newIdMediaShownInLightBox).image;
-      const videoCurrentMediaInLightBox = mediasFiltereds.find((x) => x.id === newIdMediaShownInLightBox).video;
-      const photographerIDCurrentMediaInLightBox = mediasFiltereds.find(
-        (x) => x.id === newIdMediaShownInLightBox
-      ).photographerId;
-
-      const nameOfPhotographer =
-        photographerIDCurrentMediaInLightBox === 243
-          ? 'Mimi'
-          : photographerIDCurrentMediaInLightBox === 930
-          ? 'Ellie'
-          : photographerIDCurrentMediaInLightBox === 82
-          ? 'Tracy'
-          : photographerIDCurrentMediaInLightBox === 527
-          ? 'Nabeel'
-          : photographerIDCurrentMediaInLightBox === 925
-          ? 'Rhode'
-          : photographerIDCurrentMediaInLightBox === 195
-          ? 'Marcel'
-          : null;
-
-      if (!nameOfPhotographer) {
-        console.error('No name found');
-        return false;
-      }
-      const imgInLightBox = document.querySelector('.as-img.injected-content-lightBox');
-      const videoInLightBox = document.querySelector('.as-video.injected-content-lightBox');
-      // Adds the img of the clicked mediaLink
-      const photoShown = modalLightBox.querySelector('.content-lightBox div figure div img');
-      const videoShown = modalLightBox.querySelector('.content-lightBox div figure div video');
-      const photoVideoH2 = modalLightBox.querySelector('.content-lightBox div figure figcaption h2');
-      if (imageCurrentMediaInLightBox !== undefined) {
-        // Image of mediaLink clicked -> modal lightBox
-        photoShown.src = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${imageCurrentMediaInLightBox}`;
-        photoShown.alt = titleCurrentMediaInLightBox;
-        photoShown.id = newIdMediaShownInLightBox;
-        // Invisibility of video
-        parentvideoInLightBox.classList.add('hidden');
-        parentvideoInLightBox.classList.remove('show');
-        videoInLightBox.classList.add('hidden');
-        videoInLightBox.classList.remove('show');
-        // Visibility of image
-        parentimgInLightBox.classList.remove('hidden');
-        parentimgInLightBox.classList.add('show');
-        imgInLightBox.classList.remove('hidden');
-        imgInLightBox.classList.add('show');
-      } else if (videoCurrentMediaInLightBox !== undefined) {
-        // Video of mediaLink clicked -> modal lightBox
-        videoShown.src = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${videoCurrentMediaInLightBox}`;
-        videoShown.alt = titleCurrentMediaInLightBox;
-        videoShown.id = newIdMediaShownInLightBox;
-        // Invisibility of image
-        parentimgInLightBox.classList.add('hidden');
-        parentimgInLightBox.classList.remove('show');
-        imgInLightBox.classList.add('hidden');
-        imgInLightBox.classList.remove('show');
-        // Visibility of video
-        parentvideoInLightBox.classList.remove('hidden');
-        parentvideoInLightBox.classList.add('show');
-        videoInLightBox.classList.remove('hidden');
-        videoInLightBox.classList.add('show');
-      } else {
-        parentimgInLightBox.classList.add('hidden');
-        parentvideoInLightBox.classList.add('hidden');
-        imgInLightBox.classList.add('hidden');
-        videoInLightBox.classList.add('hidden');
-      }
-      // Title of image or video of mediaLinks clicked -> modal lightBox
-      photoVideoH2.style.fontSize = '32px';
-      photoVideoH2.style.color = 'orange';
-      photoVideoH2.textContent = titleCurrentMediaInLightBox;
-      // Visibility of the #LightBox_modal
-      modalLightBox.classList.remove('hidden');
-      modalLightBox.classList.add('show');
-    }
-
-    function listenPrevNextKeysUp() {
-      document.querySelector('.previous').addEventListener('click', () => {
-        previous();
-      });
-
-      document.querySelector('.next').addEventListener('click', () => {
-        next();
-      });
-      // Accessibility
-      // Switchs the 3 keysup the user can type on the keyboard
-      document.addEventListener('keyup', (e) => {
-        switch (e.key) {
-          case 'ArrowLeft':
-            previous();
-            break;
-          case 'ArrowRight':
-            next();
-            break;
-          case 'Escape':
-            closeLightBoxBis();
-            break;
-        }
-        console.log(e.key);
-      });
-    }
-    listenPrevNextKeysUp();
+    mediasInLightBoxes = mediasFiltereds; /* <-Change here to mediasSorteds when the "select" will be done */
+  } else {
+    mediasInLightBoxes = mediasFiltereds;
   }
-  displayLightBox(mediasFiltereds);
+  // Array only with Ids of the medias
+  let justMediasIdInLightBox = [];
+  // justMediasIdInLightBox = Array.from(justMediasIdInLightBox);
+  for (let i = 0; i < mediasInLightBoxes.length; i++) {
+    justMediasIdInLightBox.push(mediasInLightBoxes[i].id);
+  }
+
+  // Récupère l'image qui à été cliquée en retriant "justMediasIdInLightBox" par l'id de l'image
+  // medias.id = this._id;
+
+  // const currentMediaShownInLightBoxs = document.querySelectorAll('body :nth-child(5) section a');
+  let idInLightBox;
+  let theIndex = 0;
+  for (let mediaLink of mediaLinks) {
+    mediaLink.addEventListener('click', (element) => {
+      console.log(element.path[2].id);
+      idInLightBox = element.path[2].id;
+      theIndex = justMediasIdInLightBox.findIndex((element) => element == idInLightBox); /*<-pb ici*/
+      console.log(justMediasIdInLightBox);
+      console.log('Id récupérée:', idInLightBox);
+      console.log('index selon le click sur image:', theIndex);
+    });
+  }
+  console.log(theIndex);
+  // let allIdMediasFiltereds = [];
+  // for (let i = 0; i < mediasFiltereds.length; i++) {
+  //   allIdMediasFiltereds = [allIdMediasFiltereds + mediasFiltereds[i].id + ', '];
+  //   console.log(allIdMediasFiltereds);
+  // }
+
+  // Retrieves button's click prev & next of the function: listener()
+  // & it browse on the indexes
+
+  // Retrieves the index of previous media to the left
+
+  let newIdMediaShownInLightBox;
+
+  function previous() {
+    if (theIndex === -1) {
+      console.log('error');
+      nextPrevDisplayMedia();
+    } else if (theIndex === 0) {
+      theIndex = mediasInLightBoxes.length - 1;
+      newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
+      nextPrevDisplayMedia();
+      console.log('Lis la ligne else if du previous:', theIndex);
+      console.log('Id ("Previous"):', newIdMediaShownInLightBox);
+    } else {
+      theIndex--;
+      newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
+      nextPrevDisplayMedia();
+      // const TemplateMedia = new LightBoxFactory(newIdMediaShownInLightBox);
+      // TemplateMedia.getLightBoxPrevNextDOM();
+      console.log('Lis la ligne else du previous:', theIndex);
+      console.log('Id ("Previous"):', newIdMediaShownInLightBox);
+    }
+    // Integrates the media into the HTML via .src .alt .id to be displayed in the lightBox (.injectedLightBoxCont)
+    // GOT IT BY IMPORT : import { injectionFirstMediaLightBox } from '../utils/injectionFirstMediaLightBox.js';
+    injectionFirstMediaLightBox();
+  }
+  // Retrieves the index of next media to the right
+  function next() {
+    if (theIndex === -1) {
+      console.log('error');
+      nextPrevDisplayMedia();
+    } else if (theIndex === mediasInLightBoxes.length - 1) {
+      theIndex = 0;
+      newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
+      nextPrevDisplayMedia();
+      console.log('Lis la ligne else if du next:', theIndex);
+      console.log('Id ("Next"):', newIdMediaShownInLightBox);
+    } else {
+      theIndex++;
+      console.log('Array:', justMediasIdInLightBox);
+      newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
+      console.log('Lis la ligne else du next:', theIndex);
+      console.log('Id ("Next"):', newIdMediaShownInLightBox);
+      nextPrevDisplayMedia();
+    }
+    injectionFirstMediaLightBox();
+  }
+  injectionFirstMediaLightBox();
+  
+  function nextPrevDisplayMedia() {
+    console.log(newIdMediaShownInLightBox);
+    const titleCurrentMediaInLightBox = mediasFiltereds.find((x) => x.id === newIdMediaShownInLightBox).title;
+    const imageCurrentMediaInLightBox = mediasFiltereds.find((x) => x.id === newIdMediaShownInLightBox).image;
+    const videoCurrentMediaInLightBox = mediasFiltereds.find((x) => x.id === newIdMediaShownInLightBox).video;
+    const photographerIDCurrentMediaInLightBox = mediasFiltereds.find(
+      (x) => x.id === newIdMediaShownInLightBox
+    ).photographerId;
+
+    const nameOfPhotographer =
+      photographerIDCurrentMediaInLightBox === 243
+        ? 'Mimi'
+        : photographerIDCurrentMediaInLightBox === 930
+        ? 'Ellie'
+        : photographerIDCurrentMediaInLightBox === 82
+        ? 'Tracy'
+        : photographerIDCurrentMediaInLightBox === 527
+        ? 'Nabeel'
+        : photographerIDCurrentMediaInLightBox === 925
+        ? 'Rhode'
+        : photographerIDCurrentMediaInLightBox === 195
+        ? 'Marcel'
+        : null;
+
+    if (!nameOfPhotographer) {
+      console.error('No name found');
+      return false;
+    }
+    const imgInLightBox = document.querySelector('.as-img.injected-content-lightBox');
+    const videoInLightBox = document.querySelector('.as-video.injected-content-lightBox');
+    // Adds the img of the clicked mediaLink
+    const photoShown = modalLightBox.querySelector('.content-lightBox div figure div img');
+    const videoShown = modalLightBox.querySelector('.content-lightBox div figure div video');
+    const photoVideoH2 = modalLightBox.querySelector('.content-lightBox div figure figcaption h2');
+    if (imageCurrentMediaInLightBox !== undefined) {
+      // Image of mediaLink clicked -> modal lightBox
+      photoShown.src = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${imageCurrentMediaInLightBox}`;
+      photoShown.alt = titleCurrentMediaInLightBox;
+      photoShown.id = newIdMediaShownInLightBox;
+      // Invisibility of video
+      parentvideoInLightBox.classList.add('hidden');
+      parentvideoInLightBox.classList.remove('show');
+      videoInLightBox.classList.add('hidden');
+      videoInLightBox.classList.remove('show');
+      // Visibility of image
+      parentimgInLightBox.classList.remove('hidden');
+      parentimgInLightBox.classList.add('show');
+      imgInLightBox.classList.remove('hidden');
+      imgInLightBox.classList.add('show');
+    } else if (videoCurrentMediaInLightBox !== undefined) {
+      // Video of mediaLink clicked -> modal lightBox
+      videoShown.src = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${videoCurrentMediaInLightBox}`;
+      videoShown.alt = titleCurrentMediaInLightBox;
+      videoShown.id = newIdMediaShownInLightBox;
+      // Invisibility of image
+      parentimgInLightBox.classList.add('hidden');
+      parentimgInLightBox.classList.remove('show');
+      imgInLightBox.classList.add('hidden');
+      imgInLightBox.classList.remove('show');
+      // Visibility of video
+      parentvideoInLightBox.classList.remove('hidden');
+      parentvideoInLightBox.classList.add('show');
+      videoInLightBox.classList.remove('hidden');
+      videoInLightBox.classList.add('show');
+    } else {
+      parentimgInLightBox.classList.add('hidden');
+      parentvideoInLightBox.classList.add('hidden');
+      imgInLightBox.classList.add('hidden');
+      videoInLightBox.classList.add('hidden');
+    }
+    // Title of image or video of mediaLinks clicked -> modal lightBox
+    photoVideoH2.style.fontSize = '32px';
+    photoVideoH2.style.color = 'orange';
+    photoVideoH2.textContent = titleCurrentMediaInLightBox;
+    // Visibility of the #LightBox_modal
+    modalLightBox.classList.remove('hidden');
+    modalLightBox.classList.add('show');
+  }
+
+  // Listeners for Prev & Next & KeysUp Accessibility
+  document.querySelector('.previous').addEventListener('click', () => {
+    previous();
+  });
+
+  document.querySelector('.next').addEventListener('click', () => {
+    next();
+  });
+  // Accessibility
+  // Switchs the 3 keysup the user can type on the keyboard
+  document.addEventListener('keyup', (e) => {
+    switch (e.key) {
+      case 'ArrowLeft':
+        previous();
+        break;
+      case 'ArrowRight':
+        next();
+        break;
+      case 'Escape':
+        closeLightBoxBis();
+        break;
+    }
+    console.log(e.key);
+  });
 }
 
 // Closes modal form on cross "X"
@@ -475,69 +449,7 @@ closeModalLightBox.addEventListener('click', function () {
 });
 
 // END: lightBox.js file exported here manually
-/*
-function injectionFirstMediaLightBox() {
-  console.log('Photo cliquée qui ouvre la lightBox!');
-  const modalLightBox = document.querySelector('#LightBox_modal');
-  const parentimgInLightBox = document.querySelector('.flex-center.as-img');
-  const parentvideoInLightBox = document.querySelector('.flex-center.as-video');
-  const imgInLightBox = document.querySelector('.as-img.injected-content-lightBox');
-  const videoInLightBox = document.querySelector('.as-video.injected-content-lightBox');
-  // Adds the img of the clicked mediaLink
-  const photoShown = modalLightBox.querySelector('.content-lightBox div figure div img');
-  const videoShown = modalLightBox.querySelector('.content-lightBox div figure div video');
-  const photoVideoH2 = modalLightBox.querySelector('.content-lightBox div figure figcaption h2');
-  // Using the old way to display the first media in the lightBox
 
-  if (photoShown !== undefined) {
-    // Image of mediaLink clicked -> modal lightBox
-    photoShown.src = this.src;
-    photoShown.alt = this.alt;
-    photoShown.id = this.id;
-    // Invisibility of video
-    parentvideoInLightBox.classList.add('hidden');
-    parentvideoInLightBox.classList.remove('show');
-    videoInLightBox.classList.add('hidden');
-    videoInLightBox.classList.remove('show');
-    // Visibility of image
-    parentimgInLightBox.classList.remove('hidden');
-    parentimgInLightBox.classList.add('show');
-    imgInLightBox.classList.remove('hidden');
-    imgInLightBox.classList.add('show');
-  } else {
-    // Video of mediaLink clicked -> modal lightBox
-    videoShown.src = this.src;
-    videoShown.alt = this.alt;
-    videoShown.id = this.id;
-    // Invisibility of image
-    parentimgInLightBox.classList.add('hidden');
-    parentimgInLightBox.classList.remove('show');
-    imgInLightBox.classList.add('hidden');
-    imgInLightBox.classList.remove('show');
-    // Visibility of video
-    parentvideoInLightBox.classList.remove('hidden');
-    parentvideoInLightBox.classList.add('show');
-    videoInLightBox.classList.remove('hidden');
-    videoInLightBox.classList.add('show');
-  }
-  // Title of image or video of mediaLinks clicked -> modal lightBox
-  photoVideoH2.style.fontSize = '32px';
-  photoVideoH2.style.color = 'orange';
-  photoVideoH2.textContent = this.alt;
-  // Visibility of the #LightBox_modal
-  modalLightBox.classList.remove('hidden');
-  modalLightBox.classList.add('show');
-  console.log('Ça ouvre la lightBox!!!');
-
-  // console.log('Photo cliquée qui ouvre la lightBox!');
-  // // mediaLink.href = '';
-  // const modalLightBox = document.querySelector('#LightBox_modal');
-  // // Visibility of the #LightBox_modal
-  // modalLightBox.classList.remove('hidden');
-  // modalLightBox.classList.add('show');
-  // console.log('Ça ouvre la lightBox!!!');
-}
-*/
 async function init() {
   // Retrieves photographers and medias data
   const photographers = await getPhotographers();
@@ -546,10 +458,6 @@ async function init() {
   displayData(photographers, medias, allTheJSONDatas);
   openLightBox();
 
-  // ADD-LIKE //
-  ///////////////
-
-  // addLike(idOfMedia);
   console.log('Là 100% du code est parcouru!');
 }
 

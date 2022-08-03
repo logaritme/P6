@@ -29,9 +29,7 @@ export function injectionFirstMediaLightBox() {
         videoInLightBox.classList.add('hidden');
         videoInLightBox.classList.remove('show');
         // Image of mediaLink clicked -> modal lightBox
-        console.log('mediaLinks:', mediaLinks);
         // console.log(mediaLinks[0].outerHTML);
-        console.log('Contexte this:', this);
         photoShown.src = mediaLink.getAttribute('src');
         photoShown.alt = mediaLink.getAttribute('alt');
         photoShown.id = mediaLink.getAttribute('id');
