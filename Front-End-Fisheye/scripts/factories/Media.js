@@ -43,10 +43,11 @@ export class MediaFactory {
     // Display the content of photo or video
     if (this._image !== undefined) {
       section.innerHTML = `
-          <a id="${this._id}" href="${photography}" alt="${this._title}">
-            <figure class="dimensions-photos-grapher-page">
+          <a id="${this._id}" class="media-links" onclick="injectionFirstMediaLightBox()" src="${photography}" alt="${this._title}">
+            <figure>
+            <div class="dimensions-photos-grapher-page">
               <img class="img-video-photos-stack" src="${photography}" alt="${this._title}"></img>
-            </figure>
+            </div>
             <figcaption class="position-fig-grapher-page">
               <h2 class="h2-photos-stack">${this._title}
               </h2>
@@ -55,17 +56,19 @@ export class MediaFactory {
                 <i class="fas fa-heart" onclick="addLike(${this._id})" ></i>
               </div>
             </figcaption>
+            </figure>
           </a>
           `;
       photosPlace.appendChild(section);
     } else {
       section.innerHTML = `
-          <a id="${this._id}" href="${videography}" alt="${this._title}">
-            <figure class="dimensions-photos-grapher-page">
+          <a id="${this._id}" class="media-links" onclick="injectionFirstMediaLightBox()" src="${videography}" alt="${this._title}">
+            <figure>
+            <div class="dimensions-photos-grapher-page">
               <video class="img-video-photos-stack" src="${videography}" alt="${this._title}"
                   type="video/mp4" controls>
               </video>
-            </figure>
+            </div>
             <figcaption class="position-fig-grapher-page">
               <h2 class="h2-photos-stack" >${this._title}
               </h2>
@@ -74,6 +77,7 @@ export class MediaFactory {
                 <i class="fas fa-heart" onclick="addLike(${this._id})" ></i>
             </div>
             </figcaption>
+            </figure>
           </a>
           `;
       photosPlace.appendChild(section);

@@ -124,8 +124,7 @@ export class LightBoxFactory {
         // DOM Video
         divLightBoxVideoPlace.innerHTML = `
         <div class="dimensions-media-lightBox">
-          <video controls>
-            <source src="${videography}" type="video/mp4">
+          <video src="${videography}" type="video/mp4" controls>
           </video>
         </div>
         <figcaption class="position-title-media-lightBox">

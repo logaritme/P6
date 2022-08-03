@@ -9,7 +9,7 @@
 
 // Opens the LightBox and activate all the others functions related to the lightBox
 // export
- function openLightBox(media) {
+function openLightBox(media) {
   console.log(mediasFiltereds);
   const realModalContent = document.getElementById('LightBox_modal');
   const modalContents = document.querySelectorAll('.photos-displaying section a');
@@ -23,21 +23,21 @@
     // TemplateLightBox.getLightBoxImgDOM();
   }
 
-  const modaleLightBox = document.querySelector('#LightBox_modal');
-  const closeModaleLightBox = document.querySelector('.close-lightbox');
+  const modalLightBox = document.querySelector('#LightBox_modal');
+  const closemodalLightBox = document.querySelector('.close-lightbox');
   const mediaLinks = document.querySelectorAll('.photos-displaying section a');
   console.info('9 à 11 liens:', mediaLinks);
 
   // Close the modal by clicking on the cross with a listener
-  closeModaleLightBox.addEventListener('click', function () {
-    modaleLightBox.classList.remove('show');
-    modaleLightBox.classList.add('hidden');
+  closemodalLightBox.addEventListener('click', function () {
+    modalLightBox.classList.remove('show');
+    modalLightBox.classList.add('hidden');
   });
   /*
   // NO ERASE IT: Close the modal by clicking anywhere
-  modaleLightBox.addEventListener('click', function () {
-    modaleLightBox.classList.remove('show');
-    modaleLightBox.classList.add('hidden');
+  modalLightBox.addEventListener('click', function () {
+    modalLightBox.classList.remove('show');
+    modalLightBox.classList.add('hidden');
   });
   */
 
@@ -51,8 +51,9 @@
     // - ou des medias triés ( triés par le "select")
     // La let mediasInLightBoxes sera donc un array de tous les id de media correspondant à un photographe
     let mediasInLightBoxes = [];
-    if (mediasFiltereds.length > 0) { /* <-Change here to mediasSorteds when the "select" will be done */
-      
+    if (mediasFiltereds.length > 0) {
+      /* <-Change here to mediasSorteds when the "select" will be done */
+
       mediasInLightBoxes = mediasFiltereds; /* <-Change here to mediasSorteds when the "select" will be done */
     } else {
       mediasInLightBoxes = mediasFiltereds;
@@ -73,22 +74,21 @@
       media.addEventListener('click', (element) => {
         toLogIt = element.target.id.value;
         console.log(toLogIt);
-      })
+      });
     });
     const mediaLinks = document.querySelectorAll('.photos-displaying section a');
     let idMediaInLightBox = function getIdMediaInLightBox() {
       for (let mediaLink of mediaLinks) {
-      mediaLink.addEventListener('click', function (e) {
-        // Disable default behavior
-        e.preventDefault();
-        idMediaInLightBox = mediaLink.getAttribute('id');
-        console.log(idMediaInLightBox);
-        })
+        mediaLink.addEventListener('click', function (e) {
+          // Disable default behavior
+          e.preventDefault();
+          idMediaInLightBox = mediaLink.getAttribute('id');
+          console.log(idMediaInLightBox);
+        });
       }
     };
-      
-    let currentMediaInLightBox = mediasInLightBoxes.find((media) => media.id === idMediaInLightBox);/*<-pb ici*/
 
+    let currentMediaInLightBox = mediasInLightBoxes.find((media) => media.id === idMediaInLightBox); /*<-pb ici*/
 
     // Info: Récupère en l'occurence un number situé entre 0 et 9 (voire jusqu'à 10 ou 11 )
     let theIndex = currentMediaInLightBox.index;
@@ -116,7 +116,7 @@
     }
 
     function displayMedia() {
-    /*  currentMediaInLightBox = mediasOfLightbox[theIndex];
+      /*  currentMediaInLightBox = mediasOfLightbox[theIndex];
 
       // Titre de l'image ou de la video
       let titre = currentMediaInLightBox.title;
@@ -137,14 +137,14 @@
       function injectionFirstMediaLightBox() {
         for (let mediaLink of mediaLinks) {
           mediaLink.addEventListener('click', function (e) {
-            const modaleLightBox = document.querySelector('#LightBox_modal');
+            const modalLightBox = document.querySelector('#LightBox_modal');
             // Disable default behavior
             e.preventDefault();
             // Adds the img of the clicked mediaLink
-            const photoShown = modaleLightBox.querySelector('.content-lightBox div figure div img');
+            const photoShown = modalLightBox.querySelector('.content-lightBox div figure div img');
             console.log(photoShown);
-            const videoShown = modaleLightBox.querySelector('.content-lightBox div figure div video');
-            const photoVideoH2 = modaleLightBox.querySelector('.content-lightBox div figure figcaption h2');
+            const videoShown = modalLightBox.querySelector('.content-lightBox div figure div video');
+            const photoVideoH2 = modalLightBox.querySelector('.content-lightBox div figure figcaption h2');
             if (photoShown !== undefined) {
               // Image of mediaLink clicked -> modal lightBox
               photoShown.src = this.href;
@@ -155,15 +155,14 @@
               videoShown.src = this.href;
               videoShown.alt = mediaLink.getAttribute('alt');
               videoShown.id = mediaLink.getAttribute('id');
-
             }
             // Title of image or video of mediaLinks clicked -> modal lightBox
             photoVideoH2.style.fontSize = '32px';
             photoVideoH2.style.color = 'orange';
             photoVideoH2.textContent = mediaLink.getAttribute('alt');
             // Visibility of the #LightBox_modal
-            modaleLightBox.classList.remove('hidden');
-            modaleLightBox.classList.add('show');
+            modalLightBox.classList.remove('hidden');
+            modalLightBox.classList.add('show');
           });
         }
       }
@@ -209,7 +208,7 @@
 }
 // Closes modal form on cross "X"
 // export
- function closeLightBox() {
+function closeLightBox() {
   const injectedLightBoxCont = document.querySelector('.injected-content-lightBox');
   const realModalContent = document.getElementById('LightBox_modal');
   const modalContent = document.querySelector('.close-lightbox');

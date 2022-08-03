@@ -1,6 +1,6 @@
 //
-// Ma factory des photographe pour la page index.html
-// Il y a un seul photographer à chaque fis que je l'instancie -> pas de s
+// My photographer factory for index.html
+// There is only one photographer each time I instance -> so no "s"
 export class PhotographerFactory {
   constructor(thePhotographers) {
     this._name = thePhotographers.name;
@@ -11,7 +11,7 @@ export class PhotographerFactory {
     this._price = thePhotographers.price;
     this._portrait = thePhotographers.portrait;
   }
-  // Ma fonction d'affichage du template pour index.html
+  // Function template display for index.html
   setUserCardDOM() {
     const picture = `./assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
     const photographersSectionPlace = document.querySelector('.photographer_section');
@@ -27,7 +27,7 @@ export class PhotographerFactory {
     `;
     photographersSectionPlace.appendChild(article);
   }
-  // Ma fonction d'affichage du template pour photographer.html
+  // Function template display for photographer.html
   setPhotographerPageHeaderDOM() {
     const picture = `./assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
     const photographersHeaderPlace = document.querySelector('.photographer-header');

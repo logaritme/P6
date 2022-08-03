@@ -64,6 +64,7 @@
   </div>
   <!-- 4th child of the body -->
   <div class="drop-down-container">
+
     <h2 class="drop-down-title-do">Trier par</h2>
 
     <div class="select-box">
@@ -94,12 +95,12 @@
       </div>
     </div>
   </div>
-  <!-- 4th div of body -->
+  <!-- 5th child of body -->
   <div class="photos-displaying">
     <!-- Code will be injected by JS -->
   </div>
-  <!-- 5th div of body -->
-  <div id="LightBox_modal" class="position-lightBox-modal hidden content-lightBox-modal">
+  <!-- 6th child of body -->
+  <div id="LightBox_modal" class="position-content-lightBox-modal hidden">
     <div class="content-lightBox">
       <div class="lightBox-modal">
         <figure class="to-append-media flex-lightBox">
@@ -125,32 +126,18 @@
       </div>
     </div>
   </div>
-
   <footer>
     <!-- Code will be injected by JS -->
   </footer>
-  <script>// Function called by the onclick in HTML
-    function addLike(idOfMedia) {
 
-      console.log("id:", idOfMedia)
-      // If already liked
-      if (document.querySelector('#likesHearts-' + idOfMedia + ' i').classList.contains('liked')) {
-        document.querySelector('#likesHearts-' + idOfMedia + ' i').classList.remove('liked');
-        document.querySelector('#likesHearts-' + idOfMedia + ' span').innerHTML--;
-        document.querySelector('#totalLikes').innerHTML--;
-      }
-      // If not already liked
-      else {
-        document.querySelector('#likesHearts-' + idOfMedia + ' i').classList.add('liked')
-        document.querySelector('#likesHearts-' + idOfMedia + ' span').innerHTML++;
-        document.querySelector('#totalLikes').innerHTML++;
-      }
-    }
-  </script>
+  <!-- Function called by the onclick in DOM injected by JS -->
+  <script src="./scripts/utils/addLike.js"></script>
   <script type="module" src="./scripts/pages/photographer-page.js"></script>
   <!-- <script type="module" src="./scripts/utils/lightBox.js"></script> -->
   <!-- <script src="./scripts/pages/index.js"></script> -->
   <script src="./scripts/utils/contactForm.js"></script>
+
+
 </body>
 
 </html>
