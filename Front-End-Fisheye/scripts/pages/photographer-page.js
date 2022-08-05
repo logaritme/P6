@@ -2,48 +2,37 @@ import { PhotographerFactory } from '../factories/Photographer.js';
 import { MediaFactory } from '../factories/Media.js';
 import { LightBoxFactory } from '../factories/LightBox.js';
 import { injectionFirstMediaLightBox } from '../utils/injectionFirstMediaLightBox.js';
-// import { addLike } from '../utils/addLike.js';
-// import { openLightBox } from '../utils/lightBox.js';
-// import { closeLightBox } from '../utils/lightBox.js';
-
-// import { UserCardDOM } from '../templates/setUserCardDOM.js'
-// import { PhotographerPageHeaderDOM } from '../templates/setPhotographerPageHeaderDOM.js'
+import { setTheIndex, theIndexBis } from '../utils/setTheIndex.js';
 
 // FETCHS //
 ////////////
 
 async function getAllTheJSONDatas() {
-  // Stockera les données dans data dès leur arrivée suite au fetch
+  // Stocking the datas in "data" just when they arrive from the fetch
   const data = await fetch('./data/photographers.json').then((response) => response.json());
   return JSON.parse(JSON.stringify(data));
 }
 
 const fullJSONContent = getAllTheJSONDatas();
-// Debug
-// console.info("All JSON's data:", fullJSONContent);
 
 async function getPhotographers() {
-  // Stockera les données dans data dès leur arrivée suite au fetch
   const data = await fetch('./data/photographers.json').then((response) => response.json());
   return JSON.parse(JSON.stringify(data.photographers));
 }
 
 const photographers = getPhotographers();
-// Debug
-// console.info("All the photographers:", photographers);
 
 async function getMedias() {
-  // Stockera les données dans data dès leur arrivée suite au fetch
   const data = await fetch('./data/photographers.json').then((response) => response.json());
   return JSON.parse(JSON.stringify(data.media));
 }
 
 export const medias = getMedias();
-// Debug
-// console.info("All the media(pic+vid):", medias);
 
 // This let MUST have to be available globally
 let mediasFiltereds;
+// This let MUST have to be available globally
+export let theIndex = 0;
 
 // DROP-DOWN //
 ///////////////
@@ -200,16 +189,7 @@ export function displayData(photographers, medias) {
   return mediasFiltereds;
 }
 
-// const functionResult = displayData(photographers, medias);
-// console.log(functionResult);
-
 // lightBox.js file exported here manually
-
-// import { mediasFiltereds } from '../pages/photographer-page.js';
-// import { displayData } from '../pages/photographer-page.js';
-// import { LightBoxFactory } from '../factories/LightBox.js';
-// import { medias } from '../pages/photographer-page.js';
-// import { MediaFactory } from '../factories/Media.js';
 
 // LIGHTBOX //
 //////////////
@@ -229,13 +209,18 @@ const videoInLightBox = document.querySelector('.as-video.injected-content-light
 
 console.log('Environ 50% du code parcouru!');
 
+// The let mediasInLightBoxes will be so an array of all the ids of medias matching to a photographer
+let mediasInLightBoxes = []; /* or let mediasInLightBoxes; */
+// Array only with Ids of the medias
+export let justMediasIdInLightBox = [];
+// export let idInLightBox;
+
 // Opens the LightBox and activates all the others functions related to the lightBox
 function openLightBox() {
   // Create an array empty that will take the value of:
   // - medias not sorted (original display on the landing page of a photographer)
   // - or medias sorted ( sorted by the "select")
-  // The let mediasInLightBoxes will be so an array of all the ids of medias matching to a photographer
-  let mediasInLightBoxes = []; /* or let mediasInLightBoxes; */
+
   if (mediasFiltereds.length > 0) {
     /* <-Change here to mediasSorteds when the "select" will be done*/
 
@@ -243,8 +228,7 @@ function openLightBox() {
   } else {
     mediasInLightBoxes = mediasFiltereds;
   }
-  // Array only with Ids of the medias
-  let justMediasIdInLightBox = [];
+
   // justMediasIdInLightBox = Array.from(justMediasIdInLightBox);
   for (let i = 0; i < mediasInLightBoxes.length; i++) {
     justMediasIdInLightBox.push(mediasInLightBoxes[i].id);
@@ -253,79 +237,93 @@ function openLightBox() {
   // Récupère l'image qui à été cliquée en retriant "justMediasIdInLightBox" par l'id de l'image
   // medias.id = this._id;
 
-  // const currentMediaShownInLightBoxs = document.querySelectorAll('body :nth-child(5) section a');
-  let idInLightBox;
-  let theIndex = 0;
-  for (let mediaLink of mediaLinks) {
-    mediaLink.addEventListener('click', (element) => {
-      console.log(element.path[2].id);
-      idInLightBox = element.path[2].id;
-      theIndex = justMediasIdInLightBox.findIndex((element) => element == idInLightBox); /*<-pb ici*/
-      console.log(justMediasIdInLightBox);
-      console.log('Id récupérée:', idInLightBox);
-      console.log('index selon le click sur image:', theIndex);
-    });
-  }
-  console.log(theIndex);
-  // let allIdMediasFiltereds = [];
-  // for (let i = 0; i < mediasFiltereds.length; i++) {
-  //   allIdMediasFiltereds = [allIdMediasFiltereds + mediasFiltereds[i].id + ', '];
-  //   console.log(allIdMediasFiltereds);
+  //   let theIndexBis= 0;
+  // function setTheIndex() {
+  //   const mediaLinks = document.querySelectorAll('.photos-displaying section a');
+  //   console.log('Entre dans le tout début de la fonction: setTheIndex()');
+  //   for (let mediaLink of mediaLinks) {
+  //     mediaLink.addEventListener('click', function (element) {
+  //       console.log('Est dans le listener de setTheIndex()');
+  //       console.log('theIndex just before the click:', theIndex);
+  //       console.log('justMediasIdInLightBox just before the click, findIndex:', justMediasIdInLightBox);
+  //       console.log(element.path[3].id);
+  //       // idInLightBox = element.path[3].id;
+  //       theIndexBis = justMediasIdInLightBox.findIndex((elt) => elt == element.path[3].id);
+  //       // <- theIndex has a pb here
+  //       // console.log('Current Id retrieved:', idInLightBox);
+  //       console.log('Index depends on the click on which image:', theIndexBis);
+  //       // nextPrevDisplayMedia()
+  //     });
+  //   }
   // }
 
+  function setTheIndex() {
+    for (let mediaLink of mediaLinks) {
+      mediaLink.addEventListener('click', (element) => {
+        console.log('theIndex just before the click:', theIndex);
+        console.log('justMediasIdInLightBox just before the click, findIndex:', justMediasIdInLightBox);
+        console.log(element.path[3].id);
+        theIndex = justMediasIdInLightBox.findIndex((element) => element == element.path[3].id);
+        // <- theIndex has a pb here
+        console.log('Current Id retrieved:', element.path[3].id);
+        console.log('Index depends on the click on which image:', theIndex);
+        // nextPrevDisplayMedia()
+      });
+    }
+  }
+  setTheIndex();
   // Retrieves button's click prev & next of the function: listener()
   // & it browse on the indexes
 
   // Retrieves the index of previous media to the left
-
   let newIdMediaShownInLightBox;
-
+  // How to set theIndex to the currrent index of injected first media???
   function previous() {
     if (theIndex === -1) {
       console.log('error');
-      nextPrevDisplayMedia();
     } else if (theIndex === 0) {
       theIndex = mediasInLightBoxes.length - 1;
       newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
       nextPrevDisplayMedia();
-      console.log('Lis la ligne else if du previous:', theIndex);
+
+      console.log('The index after click on previous:', theIndex);
       console.log('Id ("Previous"):', newIdMediaShownInLightBox);
     } else {
       theIndex--;
       newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
       nextPrevDisplayMedia();
+
+      console.log('The index after click on previous:', theIndex);
+      console.log('Id ("Previous"):', newIdMediaShownInLightBox);
       // const TemplateMedia = new LightBoxFactory(newIdMediaShownInLightBox);
       // TemplateMedia.getLightBoxPrevNextDOM();
-      console.log('Lis la ligne else du previous:', theIndex);
-      console.log('Id ("Previous"):', newIdMediaShownInLightBox);
     }
     // Integrates the media into the HTML via .src .alt .id to be displayed in the lightBox (.injectedLightBoxCont)
     // GOT IT BY IMPORT : import { injectionFirstMediaLightBox } from '../utils/injectionFirstMediaLightBox.js';
-    injectionFirstMediaLightBox();
+    // injectionFirstMediaLightBox(); // <- Not sure this is really useful
   }
   // Retrieves the index of next media to the right
   function next() {
     if (theIndex === -1) {
       console.log('error');
-      nextPrevDisplayMedia();
     } else if (theIndex === mediasInLightBoxes.length - 1) {
       theIndex = 0;
       newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
       nextPrevDisplayMedia();
-      console.log('Lis la ligne else if du next:', theIndex);
+      console.log('The index after click on next:', theIndex);
       console.log('Id ("Next"):', newIdMediaShownInLightBox);
     } else {
       theIndex++;
       console.log('Array:', justMediasIdInLightBox);
       newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
-      console.log('Lis la ligne else du next:', theIndex);
+      console.log('The index after click on next', theIndex);
       console.log('Id ("Next"):', newIdMediaShownInLightBox);
       nextPrevDisplayMedia();
     }
-    injectionFirstMediaLightBox();
+    // injectionFirstMediaLightBox(); // <- Not sure this is really useful
   }
-  injectionFirstMediaLightBox();
-  
+  injectionFirstMediaLightBox(); // <- Here it's USEFUL!
+
   function nextPrevDisplayMedia() {
     console.log(newIdMediaShownInLightBox);
     const titleCurrentMediaInLightBox = mediasFiltereds.find((x) => x.id === newIdMediaShownInLightBox).title;
@@ -432,9 +430,9 @@ function openLightBox() {
 }
 
 // Closes modal form on cross "X"
-// export
 closeModalLightBox.addEventListener('click', function () {
   // Clean lightBox content ( title && (image || video) )
+  theIndex = 0;
   injectedLightBoxCont.innerHTML = '';
   // Invisibility of video
   parentvideoInLightBox.classList.remove('show');

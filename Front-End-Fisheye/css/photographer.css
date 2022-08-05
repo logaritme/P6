@@ -1,8 +1,26 @@
-/*  */
 
-body {
+/* CAUTION : This file is exported to style.css */
+
+.div-center-whole-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.body-photographer-html {
   width: 1440px;
-  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.first-header {
+  width: 1240px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.logo-photographer {
+  height: 50px;
 }
 
 main {
@@ -110,14 +128,14 @@ form input {
   /* gap: 50px; */
 }
 
-main div div {
+.main-photographer-html div div {
   width: 94%;
   margin: 0 3%;
   display: flex;
   justify-content: space-around;
 }
 
-main div div section {
+.main-photographer-html div div section {
   width: 1240px;
   height: 313px;
   display: flex;
@@ -127,7 +145,7 @@ main div div section {
   /* width: max-content; */
 }
 
-main div div section img {
+.main-photographer-html div div section img {
   height: 200px;
   width: 200px;
   border-radius: 50%;
@@ -137,7 +155,7 @@ main div div section img {
   box-shadow: 0px 0px 4px 4px #f1eded;
 }
 
-main div div section article {
+.main-photographer-html div div section article {
   width: 515px;
   display: flex;
   flex-direction: column;
@@ -164,7 +182,7 @@ div section article .text-color {
   color: #525252;
 }
 
-main div div section a {
+.main-photographer-html div div section a {
   display: flex;
 }
 
@@ -261,6 +279,8 @@ a figcaption .likes {
 }
 
 .photos-displaying {
+  width: 1240px;
+  padding: 0 100px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
@@ -335,10 +355,11 @@ a figcaption .likes {
 /* DROP-DOWN / SORT SELECT */
 
 .drop-down-container {
+  width: 1240px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: left;
-  padding: 32px 32px 32px 90px;
+  padding: 32px 32px 32px 0px;
 }
 
 .drop-down-title-do {
@@ -434,6 +455,8 @@ a figcaption .likes {
 /* LIGHTBOX MODAL */
 
 .lightBox-modal {
+  width: 1000px;
+  height: 640px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -457,7 +480,6 @@ a figcaption .likes {
   justify-content: space-between;
   border-radius: 5px;
   /* background-color: #db8876; */
-
 }
 
 .content-lightBox {
@@ -485,14 +507,14 @@ a figcaption .likes {
   display: none;
 }
 .as-img.show {
-  display: block;
+  display: flex;
 }
 
 .as-video.hidden {
   display: none;
 }
 .as-video.show {
-  display: block;
+  display: flex;
 }
 
 .injected-content-lightBox.hidden {
@@ -508,7 +530,6 @@ a figcaption .likes {
 .position-content-lightBox-modal.show {
   display: flex;
 }
-
 
 .flex-lightBox {
   width: 1000px;
@@ -623,10 +644,12 @@ div div div figure div video source {
 /* TESTS GALLERY */
 
 body :nth-child(5) section a img {
-  width: 25%;
+  width: 100%;
+  /* object-position: center; */
 }
 body :nth-child(5) section a video {
-  width: 25%;
+  width: 100%;
+  /* object-position: center; */
 }
 /* .photos-displaying a img {
   width: 40%

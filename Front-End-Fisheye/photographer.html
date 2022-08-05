@@ -12,132 +12,155 @@
   <title>Fisheye - photographe </title>
 </head>
 
-<body style="background-color: grey;">
-  <header>
-    <img src="./assets/images/logo.png" class="logo" alt="Fisheye Home page" />
-  </header>
-  <main id="main">
-    <div class="photographer-header">
+<div class="div-center-whole-page">
+
+  <body .body-photographer-html style="background-color: grey;">
+    <header class="first-header">
+      <img src="./assets/images/logo.png" class="logo-photographer" alt="Fisheye Home page" />
+    </header>
+    <main class="main-photographer-html">
+      <div class="photographer-header">
+        <!-- Code will be injected by JS -->
+      </div>
+
+    </main>
+    <!-- 3th child of the body -->
+    <div id="contact_modal" class="form-contact hidden">
+      <div class="content">
+        <div class="modal">
+          <header>
+            <h2>Contactez-moi</h2>
+            <!-- Here name of photographer will be injected by JS -->
+            <img src="./assets/icons/close.svg" class="close" onclick="closeModalSimple()" /><!-- SVG Ccoss -->
+          </header>
+          <!-- FORM TO FILL -->
+          <form id="contact_form" name="contact">
+            <!-- FORM : FIELDS -->
+            <div class="formData firstName field">
+              <label for="firstName">Prénom</label><br>
+              <input class="text-control" type="text" id="firstName" name="firstName" /><br>
+              <div></div>
+            </div>
+            <div class="formData lastName field">
+              <label for="lastName">Nom</label><br>
+              <input class="text-control" type="text" id="lastName" name="lastName" /><br>
+              <div></div>
+            </div>
+            <div class="formData email field">
+              <label for="email">Email</label><br>
+              <input class="text-control" type="text" id="email" name="email" /><br>
+              <div></div>
+            </div>
+            <div class="formData messageUser field">
+              <label for="messageUser">Votre message</label><br>
+              <input class="text-control" type="text" id="messageUser" name="messageUser" /><br>
+              <div></div>
+            </div>
+            <!-- BUTTON SUBMIT TO CLICK -->
+            <!-- Onsubmit with a listener to submit datas and close (if valid) or not close the modal (if invalid) -->
+            <input class="submit-button btn-close button" id="firstModalBtnSubmit" type="submit" value="Envoyer" />
+            <div id="output_box"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- 4th child of the body -->
+    <div class="drop-down-container">
+
+      <h2 class="drop-down-title-do">Trier par</h2>
+
+      <div class="select-box">
+        <!-- Preselected option -->
+        <div class="selected border-radius">
+          <div class="selected-popularite" id="option-popularite">
+            <input type="radio" class="radio" id="popularite" name="category">
+            <label for="popularite" class="label-popularite">Popularité</label>
+          </div>
+          <button class="icon-chevron-container">
+            <span class="fas fa-angle-down"></span>
+          </button>
+        </div>
+        <!-- Container of two options-->
+        <div class="options-container">
+
+          <!-- First option -->
+          <div class="option" id="option-date">
+            <input type="radio" class="radio" id="date" name="category">
+            <label for="date" class="label-date">Date</label>
+          </div>
+          <!-- Second option -->
+          <div class="option" id="option-titre">
+            <input type="radio" class="radio" id="titre" name="category">
+            <label for="titre" class="label-titre">Titre</label>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- 5th child of body -->
+    <div class="photos-displaying">
       <!-- Code will be injected by JS -->
     </div>
-
-  </main>
-  <!-- 3th child of the body -->
-  <div id="contact_modal" class="form-contact hidden">
-    <div class="content">
-      <div class="modal">
-        <header>
-          <h2>Contactez-moi</h2>
-          <!-- Here name of photographer will be injected by JS -->
-          <img src="./assets/icons/close.svg" class="close" onclick="closeModalSimple()" /><!-- SVG Ccoss -->
-        </header>
-        <!-- FORM TO FILL -->
-        <form id="contact_form" name="contact">
-          <!-- FORM : FIELDS -->
-          <div class="formData firstName field">
-            <label for="firstName">Prénom</label><br>
-            <input class="text-control" type="text" id="firstName" name="firstName" /><br>
-            <div></div>
-          </div>
-          <div class="formData lastName field">
-            <label for="lastName">Nom</label><br>
-            <input class="text-control" type="text" id="lastName" name="lastName" /><br>
-            <div></div>
-          </div>
-          <div class="formData email field">
-            <label for="email">Email</label><br>
-            <input class="text-control" type="text" id="email" name="email" /><br>
-            <div></div>
-          </div>
-          <div class="formData messageUser field">
-            <label for="messageUser">Votre message</label><br>
-            <input class="text-control" type="text" id="messageUser" name="messageUser" /><br>
-            <div></div>
-          </div>
-          <!-- BUTTON SUBMIT TO CLICK -->
-          <!-- Onsubmit with a listener to submit datas and close (if valid) or not close the modal (if invalid) -->
-          <input class="submit-button btn-close button" id="firstModalBtnSubmit" type="submit" value="Envoyer" />
-          <div id="output_box"></div>
-        </form>
+    <!-- 6th child of body -->
+    <div id="LightBox_modal" class="position-content-lightBox-modal hidden">
+      <div class="content-lightBox">
+        <div class="lightBox-modal">
+          <figure class="to-append-media flex-lightBox">
+            <button class="previous"><span class="fas fa-angle-left"></span></button>
+            <div class="flex-center as-img hidden">
+              <!-- Set src and alt content by JS -->
+              <img class="as-img injected-content-lightBox hidden" src="" alt="" id="" type="jpg">
+            </div>
+            <div class="flex-center as-video hidden">
+              <!-- Set src and alt content by JS -->
+              <video class="as-video injected-content-lightBox hidden" src="" alt="" id="" type="video/mp4" controls>
+            </div>
+            <figcaption class="position-title-media-lightBox">
+              <!-- Set h2 content by JS -->
+              <h2 class="injected-content-lightBox"></h2>
+            </figcaption>
+            <div>
+              <img src="./assets/icons/close.svg" class="close-lightbox">
+            </div>
+            <button class="next"><span class="fas fa-angle-right"></span></button>
+            <!-- Code will be injected by JS -->
+          </figure>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- 4th child of the body -->
-  <div class="drop-down-container">
+    <footer>
+      <!-- Code will be injected by JS -->
+    </footer>
 
-    <h2 class="drop-down-title-do">Trier par</h2>
+    <!-- Function called by the onclick in DOM injected by JS -->
+    <script src="./scripts/utils/addLike.js"></script>
+    <script type="module" src="./scripts/pages/photographer-page.js"></script>
+    <!-- <script type="module" src="./scripts/utils/lightBox.js"></script> -->
+    <!-- <script src="./scripts/pages/index.js"></script> -->
+    <script src="./scripts/utils/contactForm.js"></script>
+    <script>
+      const mediaLinks = document.querySelectorAll('.photos-displaying section a');
+      function setTheIndex() {
+        console.log('Entre dans le tout début de la fonction: setTheIndex()');
+        for (let mediaLink of mediaLinks) {
+          mediaLink.addEventListener('click', (element) => {
+            console.log('theIndex just before the click:', theIndex);
+            console.log('justMediasIdInLightBox just before the click, findIndex:', justMediasIdInLightBox);
+            console.log(element.path[2].id);
+            idInLightBox = element.path[2].id;
+            theIndex = justMediasIdInLightBox.findIndex((element) => element == idInLightBox);
+            // <- theIndex has a pb here
+            console.log('Current Id retrieved:', idInLightBox);
+            console.log('Index depends on the click on which image:', theIndex);
 
-    <div class="select-box">
-      <!-- Preselected option -->
-      <div class="selected border-radius">
-        <div class="selected-popularite" id="option-popularite">
-          <input type="radio" class="radio" id="popularite" name="category">
-          <label for="popularite" class="label-popularite">Popularité</label>
-        </div>
-        <button class="icon-chevron-container">
-          <span class="fas fa-angle-down"></span>
-        </button>
-      </div>
-      <!-- Container of two options-->
-      <div class="options-container">
+            // nextPrevDisplayMedia()
+          });
+        };
+      };
+    </script>
 
-        <!-- First option -->
-        <div class="option" id="option-date">
-          <input type="radio" class="radio" id="date" name="category">
-          <label for="date" class="label-date">Date</label>
-        </div>
-        <!-- Second option -->
-        <div class="option" id="option-titre">
-          <input type="radio" class="radio" id="titre" name="category">
-          <label for="titre" class="label-titre">Titre</label>
-        </div>
+  </body>
 
-      </div>
-    </div>
-  </div>
-  <!-- 5th child of body -->
-  <div class="photos-displaying">
-    <!-- Code will be injected by JS -->
-  </div>
-  <!-- 6th child of body -->
-  <div id="LightBox_modal" class="position-content-lightBox-modal hidden">
-    <div class="content-lightBox">
-      <div class="lightBox-modal">
-        <figure class="to-append-media flex-lightBox">
-          <button class="previous"><span class="fas fa-angle-left"></span></button>
-          <div class="flex-center as-img hidden">
-            <!-- Set src and alt content by JS -->
-            <img class="as-img injected-content-lightBox hidden" src="" alt="" id="" type="jpg">
-          </div>
-          <div class="flex-center as-video hidden">
-            <!-- Set src and alt content by JS -->
-            <video class="as-video injected-content-lightBox hidden" src="" alt="" id="" type="video/mp4" controls>
-          </div>
-          <figcaption class="position-title-media-lightBox">
-            <!-- Set h2 content by JS -->
-            <h2 class="injected-content-lightBox"></h2>
-          </figcaption>
-          <div>
-            <img src="./assets/icons/close.svg" class="close-lightbox">
-          </div>
-          <button class="next"><span class="fas fa-angle-right"></span></button>
-          <!-- Code will be injected by JS -->
-        </figure>
-      </div>
-    </div>
-  </div>
-  <footer>
-    <!-- Code will be injected by JS -->
-  </footer>
-
-  <!-- Function called by the onclick in DOM injected by JS -->
-  <script src="./scripts/utils/addLike.js"></script>
-  <script type="module" src="./scripts/pages/photographer-page.js"></script>
-  <!-- <script type="module" src="./scripts/utils/lightBox.js"></script> -->
-  <!-- <script src="./scripts/pages/index.js"></script> -->
-  <script src="./scripts/utils/contactForm.js"></script>
-
-
-</body>
+</div>
 
 </html>

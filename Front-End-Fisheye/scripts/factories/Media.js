@@ -43,7 +43,7 @@ export class MediaFactory {
     // Display the content of photo or video
     if (this._image !== undefined) {
       section.innerHTML = `
-          <a id="${this._id}" class="media-links" onclick="injectionFirstMediaLightBox()" src="${photography}" alt="${this._title}">
+          <a id="${this._id}" class="media-links" src="${photography}" alt="${this._title}">
             <figure>
             <div class="dimensions-photos-grapher-page">
               <img class="img-video-photos-stack" src="${photography}" alt="${this._title}"></img>
@@ -62,7 +62,7 @@ export class MediaFactory {
       photosPlace.appendChild(section);
     } else {
       section.innerHTML = `
-          <a id="${this._id}" class="media-links" onclick="injectionFirstMediaLightBox()" src="${videography}" alt="${this._title}">
+          <a id="${this._id}" class="media-links" src="${videography}" alt="${this._title}">
             <figure>
             <div class="dimensions-photos-grapher-page">
               <video class="img-video-photos-stack" src="${videography}" alt="${this._title}"

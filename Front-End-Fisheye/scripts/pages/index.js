@@ -26,21 +26,4 @@ async function init() {
 // Fait démarrer la série de fonctions imbriquées
 init();
 
-// Ancienne fonction displayData tenté avec map sans succès
-// async function displayData(photographers) {
-//   photographers
-//     .map((photographer) => new PhotographerFactory(photographer))
-//     .forEach((photographer) => {
-//       const TemplatePhotographer = new UserCardDOM(photographer);
-//       const photographersSection = document.querySelector(
-//         '.photographer_section'
-//       );
-//       console.table(TemplatePhotographer);
-//       photographersSection.appendChild(TemplatePhotographer.setUserCardDOM);
-//       return photographersSection;
-//     });
-// }
 
-
-// Au cas où je veuille obtenir tous les photographes:
-// const allPhotographerNames = new PhotographerFactory(photographers);

@@ -4,9 +4,9 @@
 export function injectionFirstMediaLightBox() {
   const mediaLinks = document.querySelectorAll('.photos-displaying section a');
   for (let mediaLink of mediaLinks) {
-    mediaLink.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
+    mediaLink.addEventListener('click', (element) => {
+      element.preventDefault();
+      element.stopPropagation();
       console.log('Entre dans la fonction : injectionFirstMediaLightBox.js');
       const modalLightBox = document.querySelector('#LightBox_modal');
       const parentimgInLightBox = document.querySelector('.flex-center.as-img');
@@ -63,7 +63,6 @@ export function injectionFirstMediaLightBox() {
       // Visibility of the #LightBox_modal
       modalLightBox.classList.remove('hidden');
       modalLightBox.classList.add('show');
-      console.log('Ça ouvre la lightBox!!!');
     });
   }
 }
