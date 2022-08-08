@@ -75,7 +75,7 @@ export class MediaFactory {
               <div class="center-likes-heart" id="likesHearts-${this._id}">
                 <span class="likes" id="likes-${this._id}">${this._likes}</span>
                 <i class="fas fa-heart" onclick="addLike(${this._id})" ></i>
-            </div>
+              </div>
             </figcaption>
             </figure>
           </a>

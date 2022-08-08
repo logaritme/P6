@@ -396,7 +396,7 @@ function openLightBox() {
     }
     // Title of image or video of mediaLinks clicked -> modal lightBox
     photoVideoH2.style.fontSize = '32px';
-    photoVideoH2.style.color = 'orange';
+    photoVideoH2.style.color = '#901C1C';
     photoVideoH2.textContent = titleCurrentMediaInLightBox;
     // Visibility of the #LightBox_modal
     modalLightBox.classList.remove('hidden');
