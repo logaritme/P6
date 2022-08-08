@@ -22,11 +22,6 @@
   height: 50px;
 }
 
-body-photographer-html {
-  width: 1240px;
-  margin: 0 100px;
-}
-
 .photograph-header {
   background-color: #fafafa;
   height: 300px;
@@ -139,7 +134,7 @@ form input {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #e5e5e5;
+  background-color: #FAFAFA;
   /* width: max-content; */
 }
 
@@ -175,6 +170,7 @@ div section article p {
 
 div section article .text-color {
   position: relative;
+  margin-top: 19px;
   font-size: 18px;
   line-height: 23px;
   color: #525252;
@@ -640,11 +636,11 @@ div div div figure div video source {
 
 /* TESTS GALLERY */
 
-body :nth-child(5) section a img {
+.body-photographer-html :nth-child(5) section a img {
   width: 100%;
   /* object-position: center; */
 }
-body :nth-child(5) section a video {
+.body-photographer-html :nth-child(5) section a video {
   width: 100%;
   /* object-position: center; */
 }
@@ -661,8 +657,8 @@ footer {
   display: flex;
   flex-flow: row nowrap;
   position: fixed;
-  /* right: 11.3%; */
-  left: 1128px;
+  right: 11.3%;
+  /* left: 1128px; */
   bottom: 0;
   color: black;
   background-color: #db8876;

@@ -30,7 +30,7 @@ body {
 header {
   width: 1240px;
   height: 90px;
-  margin: 0 100px;
+  margin: 40px 100px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -39,14 +39,14 @@ header {
 
 h1 {
   font-size: 36px;
-  margin-right: 100px;
+  margin-right: 60px;
   color: #901c1c;
 
 }
 
 .logo {
   height: 50px;
-  padding-left: 100px;
+  padding-left: 60px;
 }
 
 .main-home-page {
@@ -59,7 +59,7 @@ h1 {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 0.17fr;
   gap: 70px;
-  margin-top: 100px;
+  margin: 100px 0 0 50px;
 }
 
 .photographer_section article {
