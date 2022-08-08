@@ -1,4 +1,3 @@
-
 /* CAUTION : This file is exported to style.css */
 
 .div-center-whole-page {
@@ -8,13 +7,13 @@
 }
 
 .body-photographer-html {
-  width: 1440px;
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .first-header {
-  width: 1240px;
+  /* width: 1240px; */
   display: flex;
   justify-content: flex-start;
 }
@@ -23,8 +22,9 @@
   height: 50px;
 }
 
-main {
-  width: 1440px;
+body-photographer-html {
+  width: 1240px;
+  margin: 0 100px;
 }
 
 .photograph-header {
@@ -129,8 +129,6 @@ form input {
 }
 
 .main-photographer-html div div {
-  width: 94%;
-  margin: 0 3%;
   display: flex;
   justify-content: space-around;
 }
@@ -251,7 +249,6 @@ the correct DOM structure (figcaption included in figure) */
 }
 
 a figcaption div .fas.fa-heart {
-  background: grey;
   color: #901c1c;
   font-size: 20px;
   cursor: pointer;
@@ -665,7 +662,7 @@ footer {
   flex-flow: row nowrap;
   position: fixed;
   /* right: 11.3%; */
-  left: 1028px;
+  left: 1128px;
   bottom: 0;
   color: black;
   background-color: #db8876;

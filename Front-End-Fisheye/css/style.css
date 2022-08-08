@@ -11,12 +11,15 @@ h6 {
   font-weight: 400;
 }
 
-/**
- * Anchor/Link/Address `underline' invisible.
- */
-
 a {
   color: transparent;
+}
+
+.div-center-whole-home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 90px 0 65px;
 }
 
 body {
@@ -25,21 +28,30 @@ body {
 }
 
 header {
+  width: 1240px;
+  height: 90px;
+  margin: 0 100px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 90px;
 }
 
 h1 {
-  color: #901c1c;
+  font-size: 36px;
   margin-right: 100px;
+  color: #901c1c;
+
 }
 
 .logo {
   height: 50px;
   padding-left: 100px;
+}
+
+.main-home-page {
+  width: 1285px;
+  margin: 0 90px 0 65px;
 }
 
 .photographer_section {
@@ -59,10 +71,10 @@ h1 {
 }
 
 .photographer_section article a h2 {
-  color: #d3573c;
+  margin: 0.18rem 0;
   font-size: 36px;
   font-weight: 500;
-  margin: 0.18rem 0;
+  color: #d3573c;
 }
 
 .photographer_section article h3 {
