@@ -45,7 +45,7 @@ export class MediaFactory {
       section.innerHTML = `
           <a id="${this._id}" class="media-links" src="${photography}" alt="${this._title}">
             <figure>
-            <div class="dimensions-photos-grapher-page">
+            <div id="${this._id}" src="${photography}" alt="${this._title}" class="dimensions-photos-grapher-page">
               <img class="img-video-photos-stack" src="${photography}" alt="${this._title}"></img>
             </div>
             <figcaption class="position-fig-grapher-page">
@@ -64,7 +64,7 @@ export class MediaFactory {
       section.innerHTML = `
           <a id="${this._id}" class="media-links" src="${videography}" alt="${this._title}">
             <figure>
-            <div class="dimensions-photos-grapher-page">
+            <div id="${this._id}" src="${videography}" alt="${this._title}" class="dimensions-photos-grapher-page">
               <video class="img-video-photos-stack" src="${videography}" alt="${this._title}"
                   type="video/mp4" controls>
               </video>

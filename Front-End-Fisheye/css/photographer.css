@@ -45,10 +45,10 @@
 
 /* Modal */
 
-.modal {
+.modal-form {
   border-radius: 5px;
   background-color: #db8876;
-  width: 50%;
+  width: 660px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,21 +57,21 @@
   margin: auto;
 }
 
-.modal header {
+.modal-form header {
   justify-content: space-between;
   width: 100%;
 }
 
-.modal header img {
+.modal-form header img {
   cursor: pointer;
 }
 
-.modal header h2 {
+.modal-form header h2 {
   font-size: 64px;
   font-weight: normal;
   text-align: center;
 }
-/* .modal header h2 {
+/* .modal-form header h2 {
   width: 670px;
   height: 900px;
   padding: 15px 8%;
@@ -258,7 +258,7 @@ a figcaption div .fas.fa-heart:hover {
 }
 
 a figcaption div .fas.fa-heart:active {
-  color: green;
+  color: #db8876;
 }
 
 a figcaption .likes {
@@ -313,7 +313,7 @@ a figcaption .likes {
 /* End : When error messages are displayer via JS */
 
 /* The closes and their befores/afters */
-.close {
+.close-modal-form {
   background-color: #f000;
   display: inline;
   /* position: absolute; */
@@ -321,28 +321,29 @@ a figcaption .likes {
   /* top: 15px; */
   width: 32px;
   height: 32px;
+  font-size: 16px;
   opacity: 1;
   cursor: pointer;
   transform: scale(0.7);
   border: none;
 }
-.close::before,
-.close::after {
+
+.close-modal-form::before,
+.close-modal-form::after {
   position: absolute;
   left: 15px;
   top: 0px;
   content: '';
   height: 33px;
-  width: 3px;
+  width: 5px;
   background-color: #901c1c;
 }
-.close::before {
+.close-modal-form::before {
   transform: rotate(45deg);
 }
-.close::after {
+.close-modal-form::after {
   transform: rotate(-45deg);
 }
-/* END : The closes and their befores/afters */
 
 /* DROP-DOWN / SORT SELECT */
 
@@ -396,7 +397,7 @@ a figcaption .likes {
 .icon-chevron-container {
   align-items: center;
   cursor: pointer;
-  background-color: #911c1c;
+  background-color: transparent;
   color: white;
   border: none;
 }
@@ -481,13 +482,8 @@ a figcaption .likes {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* max-width: 1050px;
-  max-height: 900px; */
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
-  background: rgba(145, 144, 144, 0.7);
+  background-color: rgba(145, 144, 144, 0.75);
+  backdrop-filter: blur(1px);
 }
 
 .content-lightBox.hidden {
@@ -512,8 +508,8 @@ a figcaption .likes {
 }
 
 .injected-content-lightBox {
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .injected-content-lightBox.hidden {
@@ -538,28 +534,26 @@ justify-content: center;
 }
 
 .media-name-column {
-display: flex;
-flex-direction: column;
-width: auto;
-height: auto;
-margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  margin: auto;
 }
 
 .flex-center {
-
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.75rem 0;
 }
 
-div div div figure div img,
-div div div figure div video source {
+div div div figure div div img,
+div div div figure div div video {
   /* width: 1050px;
   height: 900px; */
   /* width: 800px;
   height: 720px; */
-  width: 50%;
   background-color: #c4c4c4;
   border-radius: 5px;
   position: relative;
@@ -571,7 +565,15 @@ div div div figure div video source {
   align-items: center;
   justify-content: center;
   margin-top: auto;
+  box-shadow: 3px 0 #c4c4c4;
   cursor: pointer;
+}
+
+div div div figure div div img {
+  width: 50%;
+}
+div div div figure div div video {
+  width: 90%;
 }
 
 /* The close-lightboxes */
@@ -584,32 +586,30 @@ div div div figure div video source {
   /* top: 15px; */
   width: 32px;
   height: 32px;
+  font-size: 16px;
   opacity: 1;
   cursor: pointer;
   transform: scale(0.7);
   border: none;
 }
 
-/* The closes-lightbox and their befores/afters */
-/*
 .close-lightbox::before,
 .close-lightbox::after {
   position: absolute;
-  left: 15px;
-  top: 0px;
+  left: 1230px;
+  top: 50px;
   content: '';
   height: 33px;
-  width: 3px;
+  width: 5px;
   background-color: #901c1c;
-  color: #901c1c;
+  /* color: #901c1c; */
 }
 .close-lightbox::before {
   transform: rotate(45deg);
 }
 .close-lightbox::after {
   transform: rotate(-45deg);
-}*/
-/* END : The closes-lightbox and their befores/afters */
+}
 
 /* Flèche à gauche de l'écran */
 .previous {
@@ -635,18 +635,6 @@ div div div figure div video source {
   font-size: 48px;
 }
 
-/* .submit-button {
-  background: #fe142f;
-  display: block;
-  margin: 10% auto;
-  border-radius: 7px;
-  font-size: 1rem;
-  padding: 12px 82px;
-  color: #fff;
-  cursor: pointer;
-  border: 0;
-} */
-
 /* TESTS GALLERY */
 
 .body-photographer-html :nth-child(5) section a img {
@@ -657,12 +645,6 @@ div div div figure div video source {
   width: 100%;
   /* object-position: center; */
 }
-/* .photos-displaying a img {
-  width: 40%
-}
-.photos-displaying a video {
-  width: 40%
-} */
 
 /* INSERT */
 

@@ -2,7 +2,7 @@ import { theIndex, justMediasIdInLightBox } from '../pages/photographer-page.js'
 export let theIndexBis= 0;
 export function setTheIndex() {
 
-  const mediaLinks = document.querySelectorAll('.photos-displaying section a');
+  const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
   console.log('Entre dans le tout début de la fonction: setTheIndex()');
   for (let mediaLink of mediaLinks) {
     mediaLink.addEventListener('click', function (element) {

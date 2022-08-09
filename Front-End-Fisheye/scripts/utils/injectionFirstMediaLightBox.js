@@ -2,7 +2,7 @@
 // import { MediaFactory } from '../factories/Media.js';
 
 export function injectionFirstMediaLightBox() {
-  const mediaLinks = document.querySelectorAll('.photos-displaying section a');
+  const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
   for (let mediaLink of mediaLinks) {
     mediaLink.addEventListener('click', (element) => {
       element.preventDefault();
@@ -58,8 +58,8 @@ export function injectionFirstMediaLightBox() {
       }
       // Title of image or video of mediaLinks clicked -> modal lightBox
       photoVideoH2.style.fontSize = '32px';
-      photoVideoH2.style.color = 'orange';
-      photoVideoH2.textContent = mediaLink.alt;
+      photoVideoH2.style.color = '#901C1C';
+      photoVideoH2.textContent = mediaLink.getAttribute('alt');
       // Visibility of the #LightBox_modal
       modalLightBox.classList.remove('hidden');
       modalLightBox.classList.add('show');

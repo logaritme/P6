@@ -12,7 +12,7 @@
 function openLightBox(media) {
   console.log(mediasFiltereds);
   const realModalContent = document.getElementById('LightBox_modal');
-  const modalContents = document.querySelectorAll('.photos-displaying section a');
+  const modalContents = document.querySelectorAll('.dimensions-photos-grapher-page');
   for (let modalContent of modalContents) {
     modalContent.addEventListener('click', function (e) {
       e.preventDefault();
@@ -25,7 +25,7 @@ function openLightBox(media) {
 
   const modalLightBox = document.querySelector('#LightBox_modal');
   const closemodalLightBox = document.querySelector('.close-lightbox');
-  const mediaLinks = document.querySelectorAll('.photos-displaying section a');
+  const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
   console.info('9 à 11 liens:', mediaLinks);
 
   // Close the modal by clicking on the cross with a listener
@@ -76,7 +76,7 @@ function openLightBox(media) {
         console.log(toLogIt);
       });
     });
-    const mediaLinks = document.querySelectorAll('.photos-displaying section a');
+    const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
     let idMediaInLightBox = function getIdMediaInLightBox() {
       for (let mediaLink of mediaLinks) {
         mediaLink.addEventListener('click', function (e) {
@@ -131,7 +131,7 @@ function openLightBox(media) {
       let name = onePhotographer.name;
     */
       const injectedLightBoxCont = document.querySelector('.injected-content-lightBox');
-      const mediaLinks = document.querySelectorAll('.photos-displaying section a');
+      const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
       console.info('9 à 11 liens:', mediaLinks);
       // Creates the photographer's card to be displayed in the lightBox (.injectedLightBoxCont)
       function injectionFirstMediaLightBox() {
@@ -158,8 +158,9 @@ function openLightBox(media) {
             }
             // Title of image or video of mediaLinks clicked -> modal lightBox
             photoVideoH2.style.fontSize = '32px';
-            photoVideoH2.style.color = 'orange';
-            photoVideoH2.textContent = mediaLink.getAttribute('alt');
+            photoVideoH2.style.color = '#901C1C';
+            // photoVideoH2.innerText = mediaLink.getAttribute('alt');
+            photoVideoH2.innerText = 'blabla';
             // Visibility of the #LightBox_modal
             modalLightBox.classList.remove('hidden');
             modalLightBox.classList.add('show');

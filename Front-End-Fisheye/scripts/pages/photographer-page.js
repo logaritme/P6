@@ -198,7 +198,7 @@ export function displayData(photographers, medias) {
 
 // Opens & Closes
 const modalLightBox = document.querySelector('#LightBox_modal');
-const mediaLinks = document.querySelectorAll('.photos-displaying section a');
+const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
 const closeModalLightBox = document.querySelector('.close-lightbox');
 // Retrieves: The div containing parent of img/video of lightbox + Parent of img/video + The img/video itself;
 const injectedLightBoxCont = document.querySelector('.injected-content-lightBox');
@@ -239,7 +239,7 @@ function openLightBox() {
 
   //   let theIndexBis= 0;
   // function setTheIndex() {
-  //   const mediaLinks = document.querySelectorAll('.photos-displaying section a');
+  //   const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
   //   console.log('Entre dans le tout début de la fonction: setTheIndex()');
   //   for (let mediaLink of mediaLinks) {
   //     mediaLink.addEventListener('click', function (element) {
