@@ -4,4 +4,4 @@
 
 Nothing to install, you just have to open `index.html`.
 Or you can click on the link to launch the gh-page of the project:
-https://logaritme.github.io/... /\Sorry_work_in_progress/\
+https://logaritme.github.io/P6/Front-End-Fisheye/

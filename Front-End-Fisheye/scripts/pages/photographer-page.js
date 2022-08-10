@@ -62,6 +62,7 @@ function sortedLike() {
     return b.likes - a.likes;
   });
   console.log(mediasSortedLikes);
+  // Restart the new sort by the same way as to display it at the first time on the page
 }
 
 function sortedDate() {
@@ -69,11 +70,13 @@ function sortedDate() {
     return new Date(b.date) - new Date(a.date);
   });
   console.log(mediasSortedDate);
+    // Restart the new sort by the same way as to display it at the first time on the page
 }
 
 function sortedAZ() {
   mediasSortedTitle = mediasFiltereds.sort((a, b) => a.title.localeCompare(b.title, 'fr', { ignorePunctuation: true }));
   console.log(mediasSortedTitle);
+    // Restart the new sort by the same way as to display it at the first time on the page
 }
 
 // Think about the option of close it clicking anywhere
