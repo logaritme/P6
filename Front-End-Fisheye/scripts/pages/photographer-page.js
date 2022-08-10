@@ -57,26 +57,60 @@ let mediasSortedLikes;
 let mediasSortedDate;
 let mediasSortedTitle;
 
-function sortedLike() {
+function sortedLike(medias) {
   mediasSortedLikes = mediasFiltereds.sort(function (a, b) {
     return b.likes - a.likes;
   });
-  console.log(mediasSortedLikes);
-  // Restart the new sort by the same way as to display it at the first time on the page
+  // Empties the content first of all
+  document.querySelector('.photos-displaying').innerHTML = '';
+  // For each mediasFiltered create photo's DOM
+  mediasFiltereds.forEach((mediasFiltered) => {
+    const TemplateMedia = new MediaFactory(mediasFiltered, medias);
+    TemplateMedia.getPhotosCardDOM();
+  });
+  // For each mediasFiltered it creates a lightbox DOM
+  mediasFiltereds.forEach((mediasFiltered) => {
+    const TemplateMedia = new LightBoxFactory(mediasFiltered, medias);
+    TemplateMedia.getLightBoxImgDOM();
+  });
+  return mediasFiltereds;
 }
+// Restart the new sort by the same way as to display photos-displaying at the first time on the page
 
 function sortedDate() {
   mediasSortedDate = mediasFiltereds.sort(function (a, b) {
     return new Date(b.date) - new Date(a.date);
   });
-  console.log(mediasSortedDate);
-    // Restart the new sort by the same way as to display it at the first time on the page
+  // Empties the content first of all
+  document.querySelector('.photos-displaying').innerHTML = '';
+  // For each mediasFiltered create photo's DOM
+  mediasFiltereds.forEach((mediasFiltered) => {
+    const TemplateMedia = new MediaFactory(mediasFiltered, medias);
+    TemplateMedia.getPhotosCardDOM();
+  });
+  // For each mediasFiltered it creates a lightbox DOM
+  mediasFiltereds.forEach((mediasFiltered) => {
+    const TemplateMedia = new LightBoxFactory(mediasFiltered, medias);
+    TemplateMedia.getLightBoxImgDOM();
+  });
+  return mediasFiltereds;
 }
 
 function sortedAZ() {
   mediasSortedTitle = mediasFiltereds.sort((a, b) => a.title.localeCompare(b.title, 'fr', { ignorePunctuation: true }));
-  console.log(mediasSortedTitle);
-    // Restart the new sort by the same way as to display it at the first time on the page
+  // Empties the content first of all
+  document.querySelector('.photos-displaying').innerHTML = '';
+  // For each mediasFiltered create photo's DOM
+  mediasFiltereds.forEach((mediasFiltered) => {
+    const TemplateMedia = new MediaFactory(mediasFiltered, medias);
+    TemplateMedia.getPhotosCardDOM();
+  });
+  // For each mediasFiltered it creates a lightbox DOM
+  mediasFiltereds.forEach((mediasFiltered) => {
+    const TemplateMedia = new LightBoxFactory(mediasFiltered, medias);
+    TemplateMedia.getLightBoxImgDOM();
+  });
+  return mediasFiltereds;
 }
 
 // Think about the option of close it clicking anywhere
@@ -124,8 +158,8 @@ console.log('Environ 25% du code parcouru!');
 labelPopularite.addEventListener('click', function (evt) {
   evt.preventDefault();
   if (popValue === 'Popularité') {
-    console.log('sortedLike()');
     sortedLike();
+    console.log('sortedLike()');
   } else if (popValue === 'Date') {
     console.log('sortedDate()');
     sortedDate();
@@ -139,8 +173,8 @@ optionsList.forEach((obj) => {
   obj.addEventListener('click', function (evt) {
     evt.preventDefault();
     if (popValue === 'Popularité') {
-      console.log('sortedLike()');
       sortedLike();
+      console.log('sortedLike()');
     } else if (popValue === 'Date') {
       console.log('sortedDate()');
       sortedDate();
@@ -150,9 +184,9 @@ optionsList.forEach((obj) => {
     } else console.error('Text inserted: Error');
   });
 });
-
 // Returns only the photographer matching to the id displayed in the url
 export function displayData(photographers, medias) {
+  console.log('il rentre dans displayData');
   const id = parseInt(new URLSearchParams(location.search).get('id'));
   const photographer = photographers.find((photographer) => photographer.id === id);
   const TemplatePhotographer = new PhotographerFactory(photographer);
@@ -456,7 +490,7 @@ async function init() {
   const photographers = await getPhotographers();
   const medias = await getMedias();
   const allTheJSONDatas = await getAllTheJSONDatas();
-  displayData(photographers, medias, allTheJSONDatas);
+  displayData(photographers, medias);
   openLightBox();
 
   console.log('Là 100% du code est parcouru!');
