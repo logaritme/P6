@@ -1,4 +1,4 @@
-console.log('contactForm.js');
+
 //////////////////////////////////////////////
 // GLOBAL VARIABLES TO CATCH DOM'S ELEMENTS //
 

@@ -1,4 +1,4 @@
-import { theIndex, justMediasIdInLightBox } from '../pages/photographer-page.js';
+import { theIndex, openLightBox } from '../pages/photographer-page.js';
 export let theIndexBis= 0;
 export function setTheIndex() {
 
@@ -7,6 +7,7 @@ export function setTheIndex() {
   for (let mediaLink of mediaLinks) {
     mediaLink.addEventListener('click', function (element) {
       console.log('Est dans le listener de setTheIndex()');
+      openLightBox
       console.log('theIndex just before the click:', theIndex);
       console.log('justMediasIdInLightBox just before the click, findIndex:', justMediasIdInLightBox);
       console.log(element.path[3].id);

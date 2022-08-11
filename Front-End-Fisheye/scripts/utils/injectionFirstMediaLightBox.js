@@ -1,13 +1,27 @@
-// import { medias } from '../pages/photographer-page.js';
-// import { MediaFactory } from '../factories/Media.js';
 
+import { theIndex } from '../pages/photographer-page.js';
+import { justMediasIdInLightBox } from '../pages/photographer-page.js';
+
+
+let idInLightBox;
+export let theIndexBis = Number;
 export function injectionFirstMediaLightBox() {
   const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
   for (let mediaLink of mediaLinks) {
     mediaLink.addEventListener('click', (element) => {
       element.preventDefault();
       element.stopPropagation();
-      console.log('Entre dans la fonction : injectionFirstMediaLightBox.js');
+      // First pack of actions to define theIndex: PB HERE !!!
+
+      console.log('theIndexBis just before the click:', theIndexBis);
+      // console.log('justMediasIdInLightBox just before the click, findIndex:', justMediasIdInLightBox);
+      idInLightBox = element.path[1].id;
+      theIndexBis = justMediasIdInLightBox.findIndex((element) => element == idInLightBox);
+      console.log('IndexBis depends on the click on which image:', theIndexBis);
+      console.log('Current Id retrieved:', idInLightBox);
+
+      // Second pack of actions to display the first media into the lightBox
+
       const modalLightBox = document.querySelector('#LightBox_modal');
       const parentimgInLightBox = document.querySelector('.flex-center.as-img');
       const parentvideoInLightBox = document.querySelector('.flex-center.as-video');
@@ -63,6 +77,8 @@ export function injectionFirstMediaLightBox() {
       // Visibility of the #LightBox_modal
       modalLightBox.classList.remove('hidden');
       modalLightBox.classList.add('show');
+      
+      return theIndexBis;
     });
-  }
-}
+  };
+};

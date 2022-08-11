@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <link href="./css/reset.css" rel="stylesheet" type="text/css" />
   <link href="./css/style.css" rel="stylesheet" type="text/css" />
@@ -124,9 +125,9 @@
                 <h2 class="injected-content-lightBox"></h2>
               </figcaption>
             </div>
-            <div>
+            <div class="positionning-cross close-crossBgd">
               <!-- <img src="./assets/icons/close.svg" class="close-lightbox"> -->
-              <i class="close-lightbox"></i><!-- SVG Cross -->
+              <i class="close-lightbox close-crossBgd"></i><!-- SVG Cross -->
             </div>
             <button class="next"><span class="fas fa-angle-right"></span></button>
             <!-- Code will be injected by JS -->
@@ -146,11 +147,12 @@
     <script src="./scripts/utils/contactForm.js"></script>
     <script>
       const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
-      const photoVideoH2 = document.querySelectorAll('.h2-photos-stack');
-      console.log('Entre dans le tout début de la fonction: setTheIndex()');
+      // const photoVideoH2 = document.querySelectorAll('.h2-photos-stack');
+      // console.log('Entre dans le tout début de la fonction: setTheIndex()');
       for (let mediaLink of mediaLinks) {
         mediaLink.addEventListener('click', (element) => {
-          injectionFirstMediaLightBox()
+          element.preventDefault();
+          element.stopPropagation();
           console.log('theIndex just before the click:', theIndex);
           console.log('justMediasIdInLightBox just before the click, findIndex:', justMediasIdInLightBox);
           console.log(element.path[2].id);

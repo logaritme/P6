@@ -577,13 +577,22 @@ div div div figure div div video {
 }
 
 /* The close-lightboxes */
+
+.positionning-cross {
+  position: absolute;
+  top: 60px;
+  right: 380px;
+  width: 36px;
+  height: 36px;
+}
+
 .close-lightbox {
   background-color: #f000;
   color: #911c1c;
   display: inline;
-  /* position: absolute; */
-  right: 15px;
-  /* top: 15px; */
+  position: absolute;
+  right: 0px;
+  top: 0px;
   width: 32px;
   height: 32px;
   font-size: 16px;
@@ -596,8 +605,8 @@ div div div figure div div video {
 .close-lightbox::before,
 .close-lightbox::after {
   position: absolute;
-  left: 1230px;
-  top: 50px;
+  left: 10px;
+  top: 0px;
   content: '';
   height: 33px;
   width: 5px;
