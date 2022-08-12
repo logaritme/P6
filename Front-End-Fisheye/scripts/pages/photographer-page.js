@@ -26,7 +26,6 @@ async function getMedias() {
   const data = await fetch('./data/photographers.json').then((response) => response.json());
   return JSON.parse(JSON.stringify(data.media));
 }
-
 export const medias = getMedias();
 
 // This let MUST have to be available globally
@@ -53,63 +52,69 @@ const optionPopulariteId = document.getElementsByClassName('label-popularite');
 // DROP-DOWN // ==> 3 SORTING: functions declared to be call by (2) listeners
 ///////////////
 
+// Contains one of the 3 ways to sort the medias
+
+// Theses let declared are maybe useful to solve the pb:
+// The lightBox doesn't display pictures as the sorted pic pop/date/titre.
+// If not necessary ersae them and just use mediasfiltereds for all situations.
+let mediasSortedLikes;
+let mediasSortedDate;
+let mediasSortedTitle;
+
 function sortedLike(medias) {
-  const mediasSortedLikes = mediasFiltereds;
+  mediasSortedLikes = mediasFiltereds;
+  // mediasFiltereds = [];  // <- Normally it's unuseful.
   mediasSortedLikes.sort(function (a, b) {
     return b.likes - a.likes;
   });
   // Empties the content first of all
   document.querySelector('.photos-displaying').innerHTML = '';
   // For each mediasFiltered create photo's DOM
-  mediasSortedLikes.forEach((mediasFiltered) => {
-    const TemplateMedia = new MediaFactory(mediasFiltered, medias);
+  mediasSortedLikes.forEach((mediasSortedLike) => {
+    const TemplateMedia = new MediaFactory(mediasSortedLike, medias);
     TemplateMedia.getPhotosCardDOM();
   });
-  // For each mediasFiltered it creates a lightbox DOM
-  mediasSortedLikes.forEach((mediasFiltered) => {
-    const TemplateMedia = new LightBoxFactory(mediasFiltered, medias);
-    TemplateMedia.getLightBoxImgDOM();
-  });
-  return mediasSortedLikes; // I can't use my lightBox on each new sorting, HOW TO DO ?
+  justMediasIdInLightBox = [];
+  canModifyMediasFiltereds();
+  injectionFirstMediaLightBox();
+  console.log('Array Popularity:', mediasSortedLikes);
+  // The lightBox is operating with the old mediasFiltereds state not the new, HOW TO DO ?
 }
-// Restart the new sort by the same way as to display photos-displaying at the first time on the page
 
-function sortedDate() {
-  const mediasSortedDate = mediasFiltereds;
+function sortedDate(medias) {
+  mediasSortedDate = mediasFiltereds;
+  // mediasFiltereds = []; // <- Normally it's unuseful.
   mediasSortedDate.sort(function (a, b) {
     return new Date(b.date) - new Date(a.date);
   });
   // Empties the content first of all
   document.querySelector('.photos-displaying').innerHTML = '';
   // For each mediasFiltered create photo's DOM
-  mediasSortedDate.forEach((mediasFiltered) => {
-    const TemplateMedia = new MediaFactory(mediasFiltered, medias);
+  mediasSortedDate.forEach((mediasSortedDate) => {
+    const TemplateMedia = new MediaFactory(mediasSortedDate, medias);
     TemplateMedia.getPhotosCardDOM();
   });
-  // For each mediasFiltered it creates a lightbox DOM
-  mediasSortedDate.forEach((mediasFiltered) => {
-    const TemplateMedia = new LightBoxFactory(mediasFiltered, medias);
-    TemplateMedia.getLightBoxImgDOM();
-  });
-  return mediasSortedDate;
+  justMediasIdInLightBox = [];
+  canModifyMediasFiltereds();
+  injectionFirstMediaLightBox();
+  console.log('Array Date:', mediasSortedDate);
 }
 
-function sortedAZ() {
-  const mediasSortedTitle = mediasFiltereds;
+function sortedAZ(medias) {
+  mediasSortedTitle = mediasFiltereds;
+  // mediasFiltereds = [];  // <- Normally it's unuseful.
   mediasSortedTitle.sort((a, b) => a.title.localeCompare(b.title, 'fr', { ignorePunctuation: true }));
   // Empties the content first of all
   document.querySelector('.photos-displaying').innerHTML = '';
   // For each mediasFiltered create photo's DOM
-  mediasSortedTitle.forEach((mediasFiltered) => {
-    const TemplateMedia = new MediaFactory(mediasFiltered, medias);
+  mediasSortedTitle.forEach((mediasSortedTitle) => {
+    const TemplateMedia = new MediaFactory(mediasSortedTitle, medias);
     TemplateMedia.getPhotosCardDOM();
   });
-  // For each mediasFiltered it creates a lightbox DOM
-  mediasSortedTitle.forEach((mediasFiltered) => {
-    const TemplateMedia = new LightBoxFactory(mediasFiltered, medias);
-    TemplateMedia.getLightBoxImgDOM();
-  });
-  return mediasSortedTitle;
+  justMediasIdInLightBox = [];
+  canModifyMediasFiltereds();
+  injectionFirstMediaLightBox();
+  console.log('Array AZ:', mediasSortedTitle);
 }
 
 // Think about the option of close it clicking anywhere
@@ -222,6 +227,7 @@ export function displayData(photographers, medias) {
 
   return mediasFiltereds;
 }
+
 // lightBox.js file exported here manually
 
 // LIGHTBOX //
@@ -247,27 +253,62 @@ console.log('Environ 50% du code parcouru!');
 let mediasInLightBoxes = []; /* or let mediasInLightBoxes; */
 // Array only with Ids of the medias
 export let justMediasIdInLightBox = [];
-// export let idInLightBox;
 
+function canModifyMediasFiltereds() {
+  if (mediasSortedLikes !== undefined) {
+    mediasInLightBoxes = mediasSortedLikes;
+    console.log('if/else 1ère entrée:', mediasInLightBoxes);
+  } else if (mediasSortedDate !== undefined) {
+    mediasInLightBoxes = mediasSortedDate;
+    console.log('if/else 2ème entrée:', mediasInLightBoxes);
+  } else if (mediasSortedTitle !== undefined) {
+    mediasInLightBoxes = mediasSortedTitle;
+    console.log('if/else 3ème entrée:', mediasInLightBoxes);
+  } else if (mediasFiltereds.length > 0) {
+    mediasInLightBoxes = mediasFiltereds;
+    console.log('if/else 4ème entrée:', mediasInLightBoxes);
+  } else console.log('Error in the array of mediasFiltereds');
+  console.log(mediasInLightBoxes);
+  // justMediasIdInLightBox = Array.from(justMediasIdInLightBox);
+  for (let i = 0; i < mediasInLightBoxes.length; i++) {
+    justMediasIdInLightBox.push(mediasInLightBoxes[i].id);
+  }
+  console.log(justMediasIdInLightBox);
+};
 // Opens the LightBox and activates all the others functions related to the lightBox
 function openLightBox() {
   // Create an array empty that will take the value of:
   // - medias not sorted (original display on the landing page of a photographer)
   // - or medias sorted ( sorted by the "select")
-  // console.log('Another time mediasFiltereds:', mediasFiltereds);
-  if (mediasFiltereds.length > 0) {
-    /* <-Change here to mediasSorteds when the "select" will be done*/
-
-    mediasInLightBoxes = mediasFiltereds; /* <-Change here to mediasSorteds when the "select" will be done */
-  } else {
-    mediasInLightBoxes = mediasFiltereds;
+  canModifyMediasFiltereds();
+  /* Erase code below (27 lines)?
+  console.log('Another time mediasFiltereds:', mediasFiltereds);
+  console.log('Another time date:', mediasSortedDate);
+  function canModifyMediasFiltereds() {
+    if (mediasSortedLikes !== undefined) {
+      mediasInLightBoxes = mediasSortedLikes;
+      console.log('if/else 1ère entrée:', mediasInLightBoxes);
+    } else if (mediasSortedDate !== undefined) {
+      mediasInLightBoxes = mediasSortedDate;
+      console.log('if/else 2ème entrée:', mediasInLightBoxes);
+    } else if (mediasSortedTitle !== undefined) {
+      mediasInLightBoxes = mediasSortedTitle;
+      console.log('if/else 3ème entrée:', mediasInLightBoxes);
+    } else if (mediasFiltereds.length > 0) {
+      mediasInLightBoxes = mediasFiltereds;
+      console.log('if/else 4ème entrée:', mediasInLightBoxes);
+    } else console.log('Error in the array of mediasFiltereds');
   }
+  canModifyMediasFiltereds();
+  console.log('mediasFiltereds outside of if/else:', mediasInLightBoxes);
+
+  // PB: The lightBox doesn't display pictures as the sorted pic pop/date/titre, HOW TO DO ?
 
   // justMediasIdInLightBox = Array.from(justMediasIdInLightBox);
   for (let i = 0; i < mediasInLightBoxes.length; i++) {
     justMediasIdInLightBox.push(mediasInLightBoxes[i].id);
   }
-
+*/
   // Retrieves button's click prev & next of the function: listener()
   // & it browse on the indexes
 
@@ -290,14 +331,12 @@ function openLightBox() {
         theIndex--;
         newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
         nextPrevDisplayMedia();
-  
+
         console.log('theIndex after click ("Previous"):', theIndex);
         console.log('Id ("Previous"):', newIdMediaShownInLightBox);
         return theIndex;
       }
-    }
-
-    else {
+    } else {
       // Based on theIndexBis
       if (theIndexBis === -1) {
         console.log('error');
@@ -309,7 +348,7 @@ function openLightBox() {
         console.log('Id ("Previous"):', newIdMediaShownInLightBox);
         return theIndex;
       } else {
-        theIndex = theIndexBis + 1;
+        theIndex = theIndexBis - 1;
         newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
         nextPrevDisplayMedia();
         console.log('theIndex after click ("Previous"):', theIndex);
@@ -322,7 +361,7 @@ function openLightBox() {
   function next() {
     if (theIndex !== Number) {
       // Based on theIndex
-        if (theIndex === -1) {
+      if (theIndex === -1) {
         console.log('error');
       } else if (theIndex === mediasInLightBoxes.length - 1) {
         theIndex = 0;
@@ -339,11 +378,9 @@ function openLightBox() {
         nextPrevDisplayMedia();
         return theIndex;
       }
-    }
-    
-    else {
+    } else {
       // Based on theIndexBis
-        if (theIndexBis === -1) {
+      if (theIndexBis === -1) {
         console.log('error');
       } else if (theIndexBis === mediasInLightBoxes.length - 1) {
         theIndex = 0;
@@ -366,6 +403,23 @@ function openLightBox() {
 
   function nextPrevDisplayMedia() {
     // console.log(newIdMediaShownInLightBox);
+
+    if (mediasSortedLikes !== undefined) {
+      mediasFiltereds = mediasSortedLikes;
+      console.log('if/else 1ère entrée:', mediasFiltereds);
+    } else if (mediasSortedDate !== undefined) {
+      mediasFiltereds = mediasSortedDate;
+      console.log('if/else 2ème entrée:', mediasFiltereds);
+    } else if (mediasSortedTitle !== undefined) {
+      mediasFiltereds = mediasSortedTitle;
+      console.log('if/else 3ème entrée:', mediasFiltereds);
+    } else if (mediasFiltereds.length > 0) {
+      mediasFiltereds = mediasFiltereds;
+      console.log('if/else 4ème entrée:', mediasFiltereds);
+    } else console.log('Error in the array of mediasFiltereds in nextPrevFirstMediaLightBox()');
+
+    console.log('mediasFiltereds outside of if/else:', mediasFiltereds);
+
     const titleCurrentMediaInLightBox = mediasFiltereds.find((x) => x.id === newIdMediaShownInLightBox).title;
     const imageCurrentMediaInLightBox = mediasFiltereds.find((x) => x.id === newIdMediaShownInLightBox).image;
     const videoCurrentMediaInLightBox = mediasFiltereds.find((x) => x.id === newIdMediaShownInLightBox).video;
@@ -475,12 +529,10 @@ function openLightBox() {
         // Closes the lightbox a hidden class
         modalLightBox.classList.remove('show');
         modalLightBox.classList.add('hidden');
-        console.log('Ça ferme la lightBox!');
         break;
     }
     console.log(e.key);
   });
-
 }
 // Closes modal form on cross "X"
 closeModalLightBox.addEventListener('click', function () {
@@ -497,7 +549,6 @@ closeModalLightBox.addEventListener('click', function () {
   // Closes the lightbox a hidden class
   modalLightBox.classList.remove('show');
   modalLightBox.classList.add('hidden');
-  console.log('Ça ferme la lightBox!');
   // return theIndex, theIndexBis;
 });
 

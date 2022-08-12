@@ -1,5 +1,5 @@
 import { theIndex, openLightBox } from '../pages/photographer-page.js';
-export let theIndexBis= 0;
+export let theIndexBis = Number;
 export function setTheIndex() {
 
   const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');

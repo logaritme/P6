@@ -1,4 +1,3 @@
-
 //////////////////////////////////////////////
 // GLOBAL VARIABLES TO CATCH DOM'S ELEMENTS //
 
@@ -20,7 +19,7 @@ let isFirstNameValid = false;
 let isLastNameValid = false;
 let isEmailValid = false;
 let isMessageUserValid = false;
-// End of global variables //
+// END of global variables //
 /////////////////////////////
 
 ////////////////////////
@@ -56,7 +55,7 @@ const areAllBooleansValid = () => {
   );
 };
 
-// End of functions declared //
+// END of functions declared //
 ///////////////////////////////
 
 //////////////////////////////////////////////
@@ -125,11 +124,11 @@ const errorDisplay = (tag, messageErr, valid) => {
   }
 };
 
-// End of functions close modal and errors display //
+// END of functions close modal and errors display //
 /////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////
-// Functions for all the fields and checkboxes of the form //
+// FUNCTIONS FOR ALL THE FIELDS AND CHECKBOXES OF THE FORM //
 
 // First name : Filters the length and the validity of the first name typed
 const firstNameChecker = (value) => {
@@ -221,7 +220,7 @@ const messageUserChecker = (value) => {
   }
 };
 
-// End of functions for all the fields form //
+// END of functions for all the fields form //
 ////////////////////////////////////////////////////////////////////
 
 ///////////////
@@ -266,5 +265,5 @@ inputsInFields.forEach((input) => {
   });
 });
 
-// End of the listeners //
+// END of the listeners //
 //////////////////////////

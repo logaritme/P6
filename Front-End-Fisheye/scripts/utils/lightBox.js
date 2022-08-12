@@ -4,6 +4,10 @@
 // import { medias } from '../pages/photographer-page.js';
 // import { MediaFactory } from '../factories/Media.js';
 
+/////////////////////////////////////////////////////////////
+////////////////// CAUTION : OLD LIGHTBOX !!! ///////////////
+/////////////////////////////////////////////////////////////
+
 // Récupère la div qui va contenir l'image/la video de la lightbox
 // const injectedLightBoxCont = document.querySelector('.injected-content-lightBox');
 

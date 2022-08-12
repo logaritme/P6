@@ -78,6 +78,7 @@ export class LightBoxFactory {
     const titleOfMedia = this._title;
     isReturningSection(imageOfMedia, videoOfMedia, titleOfMedia);
   }
+  
   getLightBoxPrevNextDOM() {
     // Function to get the right name of the photographer
     let nameOfPhotographer;
