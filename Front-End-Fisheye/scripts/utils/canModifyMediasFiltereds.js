@@ -8,7 +8,7 @@
 //   justMediasIdInLightBox } from '../pages/photographer-page.js';
 
 // export
-function canModifyMediasFiltereds() {
+function canModifyOrderMediasFiltereds() {
   if (mediasSortedLikes !== undefined) {
     mediasInLightBoxes = mediasSortedLikes;
     // console.log('if/else 1ère entrée:', mediasInLightBoxes);

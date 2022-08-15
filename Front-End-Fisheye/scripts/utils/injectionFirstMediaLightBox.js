@@ -1,7 +1,9 @@
 
 import { justMediasIdInLightBox } from '../pages/photographer-page.js';
 
+// Defines theIndexBis has to be available globally
 export let theIndexBis = Number;
+
 export function injectionFirstMediaLightBox() {
   const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
   for (let mediaLink of mediaLinks) {
@@ -9,16 +11,10 @@ export function injectionFirstMediaLightBox() {
       element.preventDefault();
       element.stopPropagation();
 
-      // First pack of actions to define theIndex
-
-      // console.log('theIndexBis just before the click:', theIndexBis);
-      // console.log('justMediasIdInLightBox just before the click, findIndex:', justMediasIdInLightBox);
+      // Defines theIndex
       theIndexBis = justMediasIdInLightBox.findIndex((elt) => elt == element.path[1].id);
-      // console.log('IndexBis depends on the click on which image:', theIndexBis);
-      // console.log('Current Id retrieved:', element.path[1].id);
 
-      // Second pack of actions to display the first media into the lightBox
-
+      // Actions to display the first media into the lightBox
       const modalLightBox = document.querySelector('#LightBox_modal');
       const parentimgInLightBox = document.querySelector('.flex-center.as-img');
       const parentvideoInLightBox = document.querySelector('.flex-center.as-video');
@@ -30,20 +26,18 @@ export function injectionFirstMediaLightBox() {
       const photoVideoH2 = modalLightBox.querySelector('.content-lightBox div figure figcaption h2');
 
       const regex1 = /([\w-]+\.)+[\w-]{2}([4]){1}$/;
-      // Using the old way to display the first media in the lightBox
       const paragraphSrc = element.path[1].getAttribute('src');
       if (paragraphSrc.match(regex1) === null) {
-        // if (photoShown !== undefined) {
         // Invisibility of video
         parentvideoInLightBox.classList.add('hidden');
         parentvideoInLightBox.classList.remove('show');
         videoInLightBox.classList.add('hidden');
         videoInLightBox.classList.remove('show');
+
         // Image of mediaLink clicked -> modal lightBox
-        // console.log(mediaLinks[0].outerHTML);
         photoShown.src = element.path[1].getAttribute('src');
         photoShown.alt = element.path[1].getAttribute('alt');
-        photoShown.id = element.path[1].id;
+        photoShown.id = element.path[1].getAttribute('id');
 
         // Visibility of image
         parentimgInLightBox.classList.remove('hidden');
@@ -56,10 +50,11 @@ export function injectionFirstMediaLightBox() {
         parentimgInLightBox.classList.remove('show');
         imgInLightBox.classList.add('hidden');
         imgInLightBox.classList.remove('show');
+
         // Video of mediaLink clicked -> modal lightBox
         videoShown.src = element.path[1].getAttribute('src');
         videoShown.alt = element.path[1].getAttribute('alt');
-        videoShown.id = element.path[1].id;
+        videoShown.id = element.path[1].getAttribute('id');
 
         // Visibility of video
         parentvideoInLightBox.classList.remove('hidden');
@@ -71,6 +66,7 @@ export function injectionFirstMediaLightBox() {
       photoVideoH2.style.fontSize = '32px';
       photoVideoH2.style.color = '#901C1C';
       photoVideoH2.textContent = element.path[1].getAttribute('alt');
+
       // Visibility of the #LightBox_modal
       modalLightBox.classList.remove('hidden');
       modalLightBox.classList.add('show');

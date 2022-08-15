@@ -1,11 +1,10 @@
-
 import { PhotographerFactory } from '../factories/Photographer.js';
 import { MediaFactory } from '../factories/Media.js';
 import { LightBoxFactory } from '../factories/LightBox.js';
 import { injectionFirstMediaLightBox } from '../utils/injectionFirstMediaLightBox.js';
 import { theIndexBis } from '../utils/injectionFirstMediaLightBox.js';
 // import { theIndex }  from '../utils/setTheIndex.js';
-// import { canModifyMediasFiltereds } from '../utils/canModifyMediasFiltereds.js';
+// import { canModifyOrderMediasFiltereds } from '../utils/canModifyOrderMediasFiltereds.js';
 
 // FETCHS //
 ////////////
@@ -77,7 +76,7 @@ function sortedLike(medias) {
     TemplateMedia.getPhotosCardDOM();
   });
   justMediasIdInLightBox = [];
-  canModifyMediasFiltereds();
+  canModifyOrderMediasFiltereds();
   injectionFirstMediaLightBox();
   // console.log('Array Popularity:', mediasSortedLikes);
   // The lightBox is operating with the old mediasFiltereds state not the new, HOW TO DO ?
@@ -97,7 +96,7 @@ function sortedDate(medias) {
     TemplateMedia.getPhotosCardDOM();
   });
   justMediasIdInLightBox = [];
-  canModifyMediasFiltereds();
+  canModifyOrderMediasFiltereds();
   injectionFirstMediaLightBox();
   // console.log('Array Date:', mediasSortedDate);
 }
@@ -114,7 +113,7 @@ function sortedAZ(medias) {
     TemplateMedia.getPhotosCardDOM();
   });
   justMediasIdInLightBox = [];
-  canModifyMediasFiltereds();
+  canModifyOrderMediasFiltereds();
   injectionFirstMediaLightBox();
   // console.log('Array AZ:', mediasSortedTitle);
 }
@@ -181,7 +180,6 @@ optionsList.forEach((obj) => {
     } else if (popValue === 'Date') {
       sortedDate();
     } else if (popValue === 'Titre') {
-      console.log('sortedAZ()');
       sortedAZ();
     } else console.error('Text inserted: Error');
   });
@@ -252,11 +250,12 @@ const videoInLightBox = document.querySelector('.as-video.injected-content-light
 console.log('Environ 50% du code parcouru!');
 
 // The let mediasInLightBoxes will be so an array of all the ids of medias matching to a photographer
-export let mediasInLightBoxes = []; /* or let mediasInLightBoxes; */
+export let mediasInLightBoxes = [];
 // Array only with Ids of the medias
 export let justMediasIdInLightBox = [];
 
-function canModifyMediasFiltereds() {
+// Impossible to import this function as a module
+function canModifyOrderMediasFiltereds() {
   if (mediasSortedLikes !== undefined) {
     mediasInLightBoxes = mediasSortedLikes;
     // console.log('if/else 1ère entrée:', mediasInLightBoxes);
@@ -276,14 +275,11 @@ function canModifyMediasFiltereds() {
     justMediasIdInLightBox.push(mediasInLightBoxes[i].id);
   }
   // console.log(justMediasIdInLightBox);
-};
+}
 
 // Opens the LightBox and activates all the others functions related to the lightBox
 function openLightBox() {
-  // Create an array empty that will take the value of:
-  // - medias not sorted (original display on the landing page of a photographer)
-  // - or medias sorted ( sorted by the "select" pop/date/titre )
-  canModifyMediasFiltereds();
+  canModifyOrderMediasFiltereds();
 
   // Retrieves button's click prev & next of the function: listener()
   // & it browse on the indexes
