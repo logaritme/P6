@@ -28,7 +28,7 @@
     </main>
     <!-- 3th child of the body -->
     <div id="contact_modal" class="form-contact hidden">
-      <div class="content">
+      <div class="content-modal">
         <div class="modal-form">
           <header>
             <h2>Contactez-moi</h2>
@@ -41,23 +41,23 @@
           <form id="contact_form" name="contact">
             <!-- FORM : FIELDS -->
             <div class="formData firstName field">
-              <label for="firstName">Prénom</label><br>
-              <input class="text-control" type="text" id="firstName" name="firstName" /><br>
+              <label for="firstName">Prénom</label>
+              <input class="text-control" type="text" id="firstName" name="firstName" />
               <div></div>
             </div>
             <div class="formData lastName field">
-              <label for="lastName">Nom</label><br>
-              <input class="text-control" type="text" id="lastName" name="lastName" /><br>
+              <label for="lastName">Nom</label>
+              <input class="text-control" type="text" id="lastName" name="lastName" />
               <div></div>
             </div>
             <div class="formData email field">
-              <label for="email">Email</label><br>
-              <input class="text-control" type="text" id="email" name="email" /><br>
+              <label for="email">Email</label>
+              <input class="text-control" type="text" id="email" name="email" />
               <div></div>
             </div>
             <div class="formData messageUser field">
-              <label for="messageUser">Votre message</label><br>
-              <input class="text-control" type="text" id="messageUser" name="messageUser" /><br>
+              <label for="messageUser">Votre message</label>
+              <input class="text-control" type="text" id="messageUser" name="messageUser" />
               <div></div>
             </div>
             <!-- BUTTON SUBMIT TO CLICK -->
@@ -145,25 +145,6 @@
     <!-- <script type="module" src="./scripts/utils/lightBox.js"></script> -->
     <!-- <script src="./scripts/pages/index.js"></script> -->
     <script src="./scripts/utils/contactForm.js"></script>
-    <!-- <script>
-      const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
-      // const photoVideoH2 = document.querySelectorAll('.h2-photos-stack');
-      // console.log('Entre dans le tout début de la fonction: setTheIndex()');
-      for (let mediaLink of mediaLinks) {
-        mediaLink.addEventListener('click', (element) => {
-          element.preventDefault();
-          element.stopPropagation();
-          console.log('theIndex just before the click:', theIndex);
-          console.log('justMediasIdInLightBox just before the click, findIndex:', justMediasIdInLightBox);
-          console.log(element.path[2].id);
-          idInLightBox = element.path[2].id;
-          theIndex = justMediasIdInLightBox.findIndex((element) => element == idInLightBox);
-          // <- theIndex has a pb here
-          console.log('Current Id retrieved:', idInLightBox);
-          console.log('Index depends on the click on which image:', theIndex);
-        });
-      };
-    </script> -->
 
   </body>
 

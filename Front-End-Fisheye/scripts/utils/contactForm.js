@@ -226,7 +226,7 @@ const messageUserChecker = (value) => {
 ///////////////
 // LISTENERS //
 
-/* Listener on the DOM, on form id="form-subscribe-tournament",
+/* Listener on the DOM, on form id="contact_form",
    prevent when action is submitting the form */
 // document.getElementById('contact_form').addEventListener('submit', (event) => {
 //   event.preventDefault();
@@ -243,7 +243,7 @@ document.getElementById('firstModalBtnSubmit').addEventListener('click', closeMo
 
 /* Manages the values obtained for each field text typed by the user,
    getting the values of inputs ( text + text + email + text)
-   by switch on each id */
+   by switching on each id */
 inputsInFields.forEach((input) => {
   input.addEventListener('input', (element) => {
     switch (element.target.id) {

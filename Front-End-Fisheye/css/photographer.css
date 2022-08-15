@@ -40,8 +40,12 @@
   border-radius: 5px;
   cursor: pointer;
 }
+.submit-button {
+margin-top: 26px;
+}
 
 /* MODAL & FORM */
+/* //////////// */
 
 /* Modal */
 
@@ -55,6 +59,7 @@
   justify-content: space-between;
   padding: 35px;
   margin: auto;
+  box-shadow: -3px 10px 20px 10px rgba(145, 144, 144);
 }
 
 .modal-form header {
@@ -90,6 +95,7 @@ form {
 form label {
   color: #312e2e;
   font-size: 36px;
+  padding: 11px 0;
 }
 
 form div {
@@ -97,7 +103,6 @@ form div {
   flex-direction: column;
   width: 100%;
   align-items: self-start;
-  margin-bottom: 26px;
 }
 
 form input {
@@ -112,6 +117,7 @@ form input {
 }
 
 /* HEADER BAND */
+/* /////////// */
 /* Img Portrait */
 
 .photographer-header {
@@ -285,6 +291,18 @@ a figcaption .likes {
 }
 
 /* FORM MODAL */
+/* ////////// */
+
+.form-contact {
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: #E5E5E5;
+}
 
 .form-contact.hidden {
   display: none;
@@ -297,7 +315,13 @@ a figcaption .likes {
   overflow: auto;
 }
 
-/* When error messages are displayer via JS */
+.content-modal {
+  height: auto;
+  width: 100%;
+  margin: 5% 0;
+}
+
+/* Displays error messages via JS */
 .errorDiv {
   margin: 0;
   padding: 12px 0;
@@ -310,7 +334,7 @@ a figcaption .likes {
 .errorColor {
   border: inset red 4px;
 }
-/* End : When error messages are displayer via JS */
+/* END : Displays error messages via JS */
 
 /* The closes and their befores/afters */
 .close-modal-form {
@@ -346,6 +370,7 @@ a figcaption .likes {
 }
 
 /* DROP-DOWN / SORT SELECT */
+/* /////////////////////// */
 
 .drop-down-container {
   width: 1240px;
@@ -446,6 +471,7 @@ a figcaption .likes {
 }
 
 /* LIGHTBOX MODAL */
+/*////////////////*/
 
 .lightBox-modal {
   width: 1000px;
@@ -576,7 +602,7 @@ div div div figure div div video {
   width: 90%;
 }
 
-/* The close-lightboxes */
+/* THE CLOSES-LIGHTBOXE */
 
 .positionning-cross {
   position: absolute;
@@ -620,7 +646,9 @@ div div div figure div div video {
   transform: rotate(-45deg);
 }
 
-/* Flèche à gauche de l'écran */
+/* ARROWS */
+
+/* Arrow previous */
 .previous {
   background: transparent;
   border: none;
@@ -632,7 +660,7 @@ div div div figure div div video {
   font-size: 48px;
 }
 
-/* Flèche à gauche de l'écran */
+/* Arrow next */
 .next {
   background: transparent;
   border: none;
@@ -644,7 +672,7 @@ div div div figure div div video {
   font-size: 48px;
 }
 
-/* TESTS GALLERY */
+/* GALLERY */
 
 .body-photographer-html :nth-child(5) section a img {
   width: 100%;
