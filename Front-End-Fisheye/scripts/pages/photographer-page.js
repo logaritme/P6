@@ -3,6 +3,7 @@ import { MediaFactory } from '../factories/Media.js';
 import { LightBoxFactory } from '../factories/LightBox.js';
 import { injectionFirstMediaLightBox } from '../utils/injectionFirstMediaLightBox.js';
 import { theIndexBis } from '../utils/injectionFirstMediaLightBox.js';
+import { wholeContactForm } from '../utils/contactForm.js';
 // import { theIndex }  from '../utils/setTheIndex.js';
 // import { canModifyOrderMediasFiltereds } from '../utils/canModifyOrderMediasFiltereds.js';
 
@@ -29,7 +30,6 @@ async function getMedias() {
   return JSON.parse(JSON.stringify(data.media));
 }
 export const medias = getMedias();
-
 // Theses let MUST have to be available globally
 export let mediasFiltereds;
 export let theIndex = Number;
@@ -184,13 +184,18 @@ optionsList.forEach((obj) => {
     } else console.error('Text inserted: Error');
   });
 });
+
 // Returns only the photographer matching to the id displayed in the url
+export const id = parseInt(new URLSearchParams(location.search).get('id'));
+
+export let photographer;
 export function displayData(photographers, medias) {
-  // console.log('il rentre dans displayData');
-  const id = parseInt(new URLSearchParams(location.search).get('id'));
-  const photographer = photographers.find((photographer) => photographer.id === id);
+   const id = parseInt(new URLSearchParams(location.search).get('id'));
+  photographer = photographers.find((photographer) => photographer.id === id);
   const TemplatePhotographer = new PhotographerFactory(photographer);
   TemplatePhotographer.setPhotographerPageHeaderDOM();
+  // Import the contactForm here ?
+  wholeContactForm();
   TemplatePhotographer.setInsertPriceCardDOM();
 
   // Retrieves only the medias's photographer who has the id displayed in the url
@@ -225,8 +230,9 @@ export function displayData(photographers, medias) {
   });
   // console.log('First time mediasFiltereds:', mediasFiltereds);
 
-  return mediasFiltereds;
+  return mediasFiltereds; // This is useful or not?
 }
+
 
 // lightBox.js file exported here manually
 
@@ -276,7 +282,7 @@ function canModifyOrderMediasFiltereds() {
   }
   // console.log(justMediasIdInLightBox);
 }
-
+console.log('Là 60% du code est parcouru.');
 // Opens the LightBox and activates all the others functions related to the lightBox
 function openLightBox() {
   canModifyOrderMediasFiltereds();
@@ -372,7 +378,7 @@ function openLightBox() {
     }
   }
   injectionFirstMediaLightBox();
-
+console.log("Là 80% du code est parcouru.");
   function nextPrevDisplayMedia() {
     // console.log(newIdMediaShownInLightBox);
 
@@ -478,7 +484,7 @@ function openLightBox() {
     next();
   });
   // Accessibility
-  // Switchs the 3 keysup the user can type on the keyboard
+  // Switchs on the 3 keysup ( the user can type on the keyboard )
   document.addEventListener('keyup', (e) => {
     switch (e.key) {
       case 'ArrowLeft':

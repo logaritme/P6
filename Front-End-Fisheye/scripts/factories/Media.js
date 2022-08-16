@@ -1,4 +1,4 @@
-// Ci-dessous MediaFactory Model
+// Below MediaFactory Model
 
 export class MediaFactory {
   constructor(medias) {
@@ -32,7 +32,7 @@ export class MediaFactory {
         : null;
 
     if (!nameOfPhotographer) {
-      console.error('No name found');
+      console.error('No First name found');
       return false;
     }
 

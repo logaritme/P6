@@ -1,4 +1,5 @@
-// Ci-dessous LightBoxFactory Model
+// Below LightBoxFactory Model
+
 export class LightBoxFactory {
   constructor(medias) {
     this._id = medias.id;

@@ -65,6 +65,8 @@ margin-top: 26px;
 .modal-form header {
   justify-content: space-between;
   width: 100%;
+  margin-top: 0px;
+  margin-bottom: 84px;
 }
 
 .modal-form header img {
@@ -72,9 +74,21 @@ margin-top: 26px;
 }
 
 .modal-form header h2 {
+  width: 450px;
+  height: 84px;
   font-size: 64px;
   font-weight: normal;
-  text-align: center;
+  text-align: left;
+  color: black;
+}
+
+.modal-form header h2 p {
+  width: 450px;
+  height: 84px;
+  font-size: 64px;
+  font-weight: normal;
+  text-align: left;
+  color: black;
 }
 /* .modal-form header h2 {
   width: 670px;
@@ -294,6 +308,7 @@ a figcaption .likes {
 /* ////////// */
 
 .form-contact {
+  display: block;
   position: fixed;
   z-index: 2;
   left: 0;

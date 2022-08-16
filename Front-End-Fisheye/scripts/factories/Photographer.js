@@ -1,6 +1,6 @@
-//
-// My photographer factory for index.html
+// Photographer factory for index.html
 // There is only one photographer each time I instance -> so no "s"
+
 export class PhotographerFactory {
   constructor(thePhotographers) {
     this._name = thePhotographers.name;
@@ -39,7 +39,7 @@ export class PhotographerFactory {
         <p>${this._city + ', ' + this._country}</p>
         <p class="text-color">${this._tagline}</p>
       </article>
-      <button class="contact-button" onclick="displayModal()">Contactez-moi</button>
+      <button id="contactButtonOpen" class="contact-button">Contactez-moi</button>
       <img src="${picture}"></img>
     </section>
     `;
