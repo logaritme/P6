@@ -37,7 +37,7 @@ export function wholeContactForm() {
   // Below code given by the source project
   // Opens modal form on "Contactez-moi"
   function displayModal() {
-        // Displays the template-form-title for the photographer-page.html
+    // Displays the template-form-title for the photographer-page.html
     // This is displaying the appropriated photographer's name into a h2
     function setFormH2NamePhotographer() {
       const fullNameOfPhotographer =
@@ -68,6 +68,8 @@ export function wholeContactForm() {
     }
     setFormH2NamePhotographer();
     modalContent.classList.remove('hidden');
+    modalContent.classList.add('show');
+    document.getElementById('firstName').focus();
   }
 
   // Closes modal form on cross "X"
@@ -75,6 +77,7 @@ export function wholeContactForm() {
     baseH2.innerHTML = ``;
     const modalContentBis = document.querySelector('.form-contact');
     modalContentBis.classList.add('hidden');
+    modalContent.classList.remove('show');
   }
 
   // Closes the form subscribe modal on valid filled form
@@ -143,8 +146,10 @@ export function wholeContactForm() {
     allErrorsChecked();
     if (areAllBooleansValid()) {
       modalContent.classList.add('hidden');
+      modalContent.classList.remove('show');
     } else {
       modalContent.classList.remove('hidden');
+      modalContent.classList.add('show');
     }
   }
 
@@ -298,6 +303,29 @@ export function wholeContactForm() {
           return 'error';
       }
     });
+  });
+
+  // Accessibility
+  // Switchs on the 3 keysup ( the user can type on the keyboard )
+  document.addEventListener('keyup', (e) => {
+    const baseH2 = document.querySelector('.modal-form header h2');
+    const modalContentBis = document.querySelector('.form-contact');
+    switch (e.key) {
+      case 'ArrowDown':
+        tabIndex(currentTab + 1);
+        break;
+      case 'ArrowUp':
+        tabIndex(currentTab - 1);
+        break;
+      // Closes modal form using Escape key
+      case 'Escape':
+        baseH2.innerHTML = '';
+        // Invisibility of modal form
+        modalContentBis.classList.add('hidden');
+        modalContent.classList.remove('show');
+        break;
+    }
+    // console.log(e.key);
   });
 
   // END of the listeners //

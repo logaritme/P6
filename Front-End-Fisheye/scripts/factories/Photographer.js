@@ -17,8 +17,8 @@ export class PhotographerFactory {
     const photographersSectionPlace = document.querySelector('.photographer_section');
     const article = document.createElement('article');
     article.innerHTML = `
-    <a id="${this._id}" href="./photographer.html?id=${this._id}">
-      <img src="${picture}"></img>
+    <a id="${this._id}" href="./photographer.html?id=${this._id}" aria-label="${this._name}">
+      <img src="${picture}" alt="${this._name}"></img>
       <h2>${this._name}</h2>
     </a>
     <h3>${this._city}</h3>
@@ -40,7 +40,7 @@ export class PhotographerFactory {
         <p class="text-color">${this._tagline}</p>
       </article>
       <button id="contactButtonOpen" class="contact-button">Contactez-moi</button>
-      <img src="${picture}"></img>
+      <img src="${picture}" alt="${this._name}"></img>
     </section>
     `;
     photographersHeaderPlace.appendChild(div);
@@ -49,7 +49,7 @@ export class PhotographerFactory {
     const insertPricePlace = document.querySelector('footer');
     const divFooter = document.createElement('div');
     divFooter.innerHTML = `
-    <div>
+    <div aria-label="Tarif journalier">
       <span>${this._price}</span>
       <i>€</i>
       <span>/ jour</span>

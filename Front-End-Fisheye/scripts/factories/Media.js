@@ -43,7 +43,7 @@ export class MediaFactory {
     // Display the content of photo or video
     if (this._image !== undefined) {
       section.innerHTML = `
-          <a id="${this._id}" class="media-links" src="${photography}" alt="${this._title}">
+          <a id="${this._id}" class="media-links" src="${photography}" aria-label="${this._title}" alt="${this._title}">
             <figure>
             <div id="${this._id}" src="${photography}" alt="${this._title}" class="dimensions-photos-grapher-page">
               <img class="img-video-photos-stack" src="${photography}" alt="${this._title}"></img>
@@ -53,7 +53,7 @@ export class MediaFactory {
               </h2>
               <div class="center-likes-heart" id="likesHearts-${this._id}">
                 <span class="likes" id="likes-${this._id}">${this._likes}</span>
-                <i class="fas fa-heart" onclick="addLike(${this._id})" ></i>
+                <i class="fas fa-heart" aria-label="Coeur pour liker" onclick="addLike(${this._id})" ></i>
               </div>
             </figcaption>
             </figure>
@@ -62,7 +62,7 @@ export class MediaFactory {
       photosPlace.appendChild(section);
     } else {
       section.innerHTML = `
-          <a id="${this._id}" class="media-links" src="${videography}" alt="${this._title}">
+          <a id="${this._id}" class="media-links" src="${videography}" aria-label="${this._title}" alt="${this._title}">
             <figure>
             <div id="${this._id}" src="${videography}" alt="${this._title}" class="dimensions-photos-grapher-page">
               <video class="img-video-photos-stack" src="${videography}" alt="${this._title}"
@@ -74,7 +74,7 @@ export class MediaFactory {
               </h2>
               <div class="center-likes-heart" id="likesHearts-${this._id}">
                 <span class="likes" id="likes-${this._id}">${this._likes}</span>
-                <i class="fas fa-heart" onclick="addLike(${this._id})" ></i>
+                <i class="fas fa-heart" aria-label="Coeur pour liker" onclick="addLike(${this._id})" ></i>
               </div>
             </figcaption>
             </figure>

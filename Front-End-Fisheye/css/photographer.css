@@ -41,7 +41,7 @@
   cursor: pointer;
 }
 .submit-button {
-margin-top: 26px;
+  margin-top: 26px;
 }
 
 /* MODAL & FORM */
@@ -83,7 +83,7 @@ margin-top: 26px;
 }
 
 .modal-form header h2 p {
-  width: 450px;
+  width: 535px;
   height: 84px;
   font-size: 64px;
   font-weight: normal;
@@ -307,7 +307,7 @@ a figcaption .likes {
 /* FORM MODAL */
 /* ////////// */
 
-.form-contact {
+.form-contact.show {
   display: block;
   position: fixed;
   z-index: 2;
@@ -316,7 +316,7 @@ a figcaption .likes {
   height: 100%;
   width: 100%;
   overflow: auto;
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
 }
 
 .form-contact.hidden {
@@ -329,6 +329,8 @@ a figcaption .likes {
   width: 100%;
   overflow: auto;
 }
+
+
 
 .content-modal {
   height: auto;
@@ -356,9 +358,10 @@ a figcaption .likes {
   background-color: #f000;
   display: inline;
   position: relative;
-  top: -16px;
-  width: 32px;
-  height: 32px;
+  top: -10px;
+  left: 0px;
+  width: 80px;
+  height: 80px;
   font-size: 16px;
   opacity: 1;
   cursor: pointer;
@@ -369,12 +372,12 @@ a figcaption .likes {
 .close-modal-form::before,
 .close-modal-form::after {
   position: absolute;
-  left: 15px;
-  top: 0px;
+  left: 36px;
+  top: 4px;
   content: '';
   width: 8px;
   height: 72px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 .close-modal-form::before {
   transform: rotate(45deg);
