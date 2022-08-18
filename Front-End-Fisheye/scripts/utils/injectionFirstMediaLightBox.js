@@ -12,6 +12,7 @@ export function injectionFirstMediaLightBox() {
       element.stopPropagation();
 
       // Defines theIndex
+      // Caster en Number/l'égalité simple
       theIndexBis = justMediasIdInLightBox.findIndex((elt) => elt == element.path[1].id);
 
       // Actions to display the first media into the lightBox

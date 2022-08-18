@@ -58,9 +58,10 @@ const optionPopulariteId = document.getElementsByClassName('label-popularite');
 // Theses let declared are maybe useful to solve the pb:
 // The lightBox doesn't display pictures as the sorted pic pop/date/titre.
 // If not necessary erase them and just use mediasfiltereds for all situations.
-export let mediasSortedLikes;
-export let mediasSortedDate;
-export let mediasSortedTitle;
+let mediasSortedLikes;
+let mediasSortedDate;
+let mediasSortedTitle;
+let focusNum = 1;
 
 function sortedLike(medias) {
   mediasSortedLikes = mediasFiltereds;
@@ -74,6 +75,7 @@ function sortedLike(medias) {
   mediasSortedLikes.forEach((mediasSortedLike) => {
     const TemplateMedia = new MediaFactory(mediasSortedLike, medias);
     TemplateMedia.setPhotosCardDOM();
+    focusNum++;
   });
   justMediasIdInLightBox = [];
   canModifyOrderMediasFiltereds();
@@ -92,6 +94,7 @@ function sortedDate(medias) {
   mediasSortedDate.forEach((mediasSortedDate) => {
     const TemplateMedia = new MediaFactory(mediasSortedDate, medias);
     TemplateMedia.setPhotosCardDOM();
+    focusNum++;
   });
   justMediasIdInLightBox = [];
   canModifyOrderMediasFiltereds();
@@ -108,6 +111,7 @@ function sortedAZ(medias) {
   mediasSortedTitle.forEach((mediasSortedTitle) => {
     const TemplateMedia = new MediaFactory(mediasSortedTitle, medias);
     TemplateMedia.setPhotosCardDOM();
+    focusNum++;
   });
   justMediasIdInLightBox = [];
   canModifyOrderMediasFiltereds();
@@ -185,7 +189,7 @@ export const id = parseInt(new URLSearchParams(location.search).get('id'));
 
 export let photographer;
 export function displayData(photographers, medias) {
-   const id = parseInt(new URLSearchParams(location.search).get('id'));
+  const id = parseInt(new URLSearchParams(location.search).get('id'));
   photographer = photographers.find((photographer) => photographer.id === id);
   const TemplatePhotographer = new PhotographerFactory(photographer);
   TemplatePhotographer.setPhotographerPageHeaderDOM();
@@ -215,9 +219,9 @@ export function displayData(photographers, medias) {
   mediasFiltereds.forEach((mediasFiltered) => {
     const TemplateMedia = new MediaFactory(mediasFiltered, medias);
     TemplateMedia.setPhotosCardDOM();
+    focusNum++;
   });
   // This is returning the const = mediasFiltereds;
-  // FOR EACH ( ce n'est pas ce qui est demandé, le pb viens de là?)
   // mediasFiltered it creates a lightbox DOM
   mediasFiltereds.forEach((mediasFiltered) => {
     const TemplateMedia = new LightBoxFactory(mediasFiltered, medias);
@@ -226,7 +230,6 @@ export function displayData(photographers, medias) {
 
   return mediasFiltereds; // This is useful or not?
 }
-
 // lightBox.js file exported here manually
 
 // LIGHTBOX //
@@ -348,11 +351,8 @@ function openLightBox() {
   }
   injectionFirstMediaLightBox();
 
-
-
-console.log("Là 80% du code est parcouru.");
+  console.log('Là 80% du code est parcouru.');
   function nextPrevDisplayMedia() {
-
     if (mediasSortedLikes !== undefined) {
       mediasFiltereds = mediasSortedLikes;
     } else if (mediasSortedDate !== undefined) {
@@ -510,3 +510,6 @@ async function init() {
 
 // Starts the series of nested functions
 init();
+
+export { mediasSortedTitle, mediasSortedDate, mediasSortedLikes};
+export { focusNum };
