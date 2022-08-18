@@ -293,7 +293,6 @@ function wholeContactForm() {
         modalContent.classList.remove('show');
         break;
     }
-    // console.log(e.key);
   });
 
   /* Manages the values obtained for each field text typed by the user,
@@ -341,7 +340,6 @@ function wholeContactForm() {
         modalContent.classList.remove('show');
         break;
     }
-    // console.log(e.key);
   });
 
   // END of the listeners //

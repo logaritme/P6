@@ -5,8 +5,8 @@ import { injectionFirstMediaLightBox } from '../utils/injectionFirstMediaLightBo
 import { theIndexBis } from '../utils/injectionFirstMediaLightBox.js';
 import { wholeContactForm } from '../utils/contactForm.js';
 
-// FETCHS //
 ////////////
+// FETCHS //
 
 async function getAllTheJSONDatas() {
   // Stocking the datas in "data" just when they arrive from the fetch
@@ -32,8 +32,12 @@ const medias = getMedias();
 let mediasFiltereds;
 let theIndex = Number;
 
-// DROP-DOWN //
+// END: FETCHS //
+/////////////////
+
+
 ///////////////
+// DROP-DOWN //
 
 // Declares variables of DOM
 const selected = document.querySelector('.selected');
@@ -48,8 +52,8 @@ const iconeSort = document.querySelector('.fas.fa-angle-down');
 const labelPopularite = document.querySelector('.label-popularite');
 const optionPopulariteId = document.getElementsByClassName('label-popularite');
 
-// DROP-DOWN // ==> 3 SORTING: functions declared to be call by (2) listeners
-///////////////
+// DROP-DOWN ==> 3 SORTING: functions declared to be call by (2) listeners
+
 
 // Contains one of the 3 ways to sort the medias
 
@@ -63,7 +67,6 @@ let focusNum = 6;
 
 function sortedLike(medias) {
   mediasSortedLikes = mediasFiltereds;
-  // mediasFiltereds = [];  // <- Normally it's unuseful.
   mediasSortedLikes.sort(function (a, b) {
     return b.likes - a.likes;
   });
@@ -82,7 +85,6 @@ function sortedLike(medias) {
 
 function sortedDate(medias) {
   mediasSortedDate = mediasFiltereds;
-  // mediasFiltereds = []; // <- Normally it's unuseful.
   mediasSortedDate.sort(function (a, b) {
     return new Date(b.date) - new Date(a.date);
   });
@@ -101,7 +103,6 @@ function sortedDate(medias) {
 
 function sortedAZ(medias) {
   mediasSortedTitle = mediasFiltereds;
-  // mediasFiltereds = [];  // <- Normally it's unuseful.
   mediasSortedTitle.sort((a, b) => a.title.localeCompare(b.title, 'fr', { ignorePunctuation: true }));
   // Empties the content first of all
   document.querySelector('.photos-displaying').innerHTML = '';
@@ -164,7 +165,6 @@ labelPopularite.addEventListener('click', function (evt) {
   } else if (popValue === 'Date') {
     sortedDate();
   } else if (popValue === 'Titre') {
-    console.log('sortedAZ()');
     sortedAZ();
   } else console.error('Text inserted: Error');
 });
@@ -225,13 +225,13 @@ function displayData(photographers, medias) {
     const TemplateMedia = new LightBoxFactory(mediasFiltered, medias);
     TemplateMedia.getLightBoxImgDOM();
   });
-
-  return mediasFiltereds; // This is useful or not?
 }
-// lightBox.js file exported here manually
 
-// LIGHTBOX //
+// END: DROP-DOWN //
+////////////////////
+
 //////////////
+// LIGHTBOX //
 
 // Declares variables of DOM
 
@@ -279,7 +279,6 @@ function openLightBox() {
 
   // Retrieves the index of previous media to the left
   let newIdMediaShownInLightBox;
-  // How to set theIndex to the currrent index of injected first media???
   function previous() {
     if (theIndex !== Number) {
       // Based on theIndex
@@ -493,13 +492,13 @@ closeModalLightBox.addEventListener('click', function () {
   // return theIndex, theIndexBis;
 });
 
-// END: lightBox.js file exported here manually
+///// END: LIGHTBOX /////
+/////////////////////////
 
 async function init() {
   // Retrieves photographers and medias data
   const photographers = await getPhotographers();
   const medias = await getMedias();
-  // const allTheJSONDatas = await getAllTheJSONDatas(); // <-Not useful?
   displayData(photographers, medias);
   openLightBox();
 
