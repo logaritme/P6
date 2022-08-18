@@ -38,8 +38,6 @@ export class MediaFactory {
       return false;
     }
 
-    console.log(focusNum);
-
     const photography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${this._image}`;
     const videography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${this._video}`;
     const photosPlace = document.querySelector('.photos-displaying');

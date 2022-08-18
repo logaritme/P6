@@ -2,19 +2,19 @@
 import { justMediasIdInLightBox } from '../pages/photographer-page.js';
 
 // Defines theIndexBis has to be available globally
-export let theIndexBis = Number;
+let theIndexBis = Number;
 
-export function injectionFirstMediaLightBox() {
+function injectionFirstMediaLightBox() {
   const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
   for (let mediaLink of mediaLinks) {
     mediaLink.addEventListener('click', (element) => {
       element.preventDefault();
       element.stopPropagation();
 
+      const idCastedToNum = Number(element.path[1].id);
       // Defines theIndex
       // Caster en Number/l'égalité simple
-      theIndexBis = justMediasIdInLightBox.findIndex((elt) => elt == element.path[1].id);
-
+      theIndexBis = justMediasIdInLightBox.findIndex((elt) => elt === idCastedToNum);
       // Actions to display the first media into the lightBox
       const modalLightBox = document.querySelector('#LightBox_modal');
       const parentimgInLightBox = document.querySelector('.flex-center.as-img');
@@ -74,3 +74,7 @@ export function injectionFirstMediaLightBox() {
     });
   }
 }
+
+
+
+export { injectionFirstMediaLightBox, theIndexBis};

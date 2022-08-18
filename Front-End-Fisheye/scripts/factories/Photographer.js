@@ -1,5 +1,6 @@
+import { focusProfileNum } from '../pages/index.js';
+
 // Photographer factory for index.html
-// There is only one photographer each time I instance -> so no "s"
 
 export class PhotographerFactory {
   constructor(thePhotographers) {
@@ -17,7 +18,7 @@ export class PhotographerFactory {
     const photographersSectionPlace = document.querySelector('.photographer_section');
     const article = document.createElement('article');
     article.innerHTML = `
-    <a id="${this._id}" href="./photographer.html?id=${this._id}" aria-label="${this._name}">
+    <a id="${this._id}" href="./photographer.html?id=${this._id}" tabindex="${focusProfileNum}" aria-label="${this._name}">
       <img src="${picture}" alt="${this._name}"></img>
       <h2>${this._name}</h2>
     </a>
@@ -39,7 +40,7 @@ export class PhotographerFactory {
         <p>${this._city + ', ' + this._country}</p>
         <p class="text-color">${this._tagline}</p>
       </article>
-      <button id="contactButtonOpen" class="contact-button">Contactez-moi</button>
+      <button id="contactButtonOpen" class="contact-button" tabindex="1">Contactez-moi</button>
       <img src="${picture}" alt="${this._name}"></img>
     </section>
     `;

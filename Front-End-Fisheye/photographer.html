@@ -17,7 +17,7 @@
   <body class="body-photographer-html" style="background-color: lightgrey;">
     <header class="first-header">
       <a href="./index.html">
-        <img src="./assets/images/logo.png" class="logo-photographer" alt="Fisheye Home page" />
+        <img src="./assets/images/logo.png" class="logo-photographer" tabindex="1" alt="Fisheye Home page" />
       </a>
     </header>
     <main class="main-photographer-html">
@@ -71,14 +71,14 @@
 
       <h2 class="drop-down-title-do">Trier par</h2>
 
-      <div class="select-box">
+      <div class="select-box" tabindex="1">
         <!-- Preselected option -->
         <div class="selected border-radius">
           <div class="selected-popularite" id="option-popularite">
             <input type="radio" class="radio" id="popularite" name="category">
-            <label for="popularite" class="label-popularite">Popularité</label>
+            <label for="popularite" class="label-popularite" tabindex="5">Popularité</label>
           </div>
-          <button class="icon-chevron-container">
+          <button class="icon-chevron-container" tabindex="2">
             <span class="fas fa-angle-down"></span>
           </button>
         </div>
@@ -88,12 +88,12 @@
           <!-- First option -->
           <div class="option" id="option-date">
             <input type="radio" class="radio" id="date" name="category">
-            <label for="date" class="label-date">Date</label>
+            <label for="date" class="label-date" tabindex="3">Date</label>
           </div>
           <!-- Second option -->
           <div class="option" id="option-titre">
             <input type="radio" class="radio" id="titre" name="category">
-            <label for="titre" class="label-titre">Titre</label>
+            <label for="titre" class="label-titre" tabindex="4">Titre</label>
           </div>
 
         </div>

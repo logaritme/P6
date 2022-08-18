@@ -1,6 +1,6 @@
 import { id } from '../pages/photographer-page.js';
 
-export function wholeContactForm() {
+function wholeContactForm() {
   //////////////////////////////////////////////
   // GLOBAL VARIABLES TO CATCH DOM'S ELEMENTS //
 
@@ -347,3 +347,5 @@ export function wholeContactForm() {
   // END of the listeners //
   //////////////////////////
 }
+
+export { wholeContactForm };

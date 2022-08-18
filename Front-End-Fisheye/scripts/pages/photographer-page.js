@@ -4,8 +4,6 @@ import { LightBoxFactory } from '../factories/LightBox.js';
 import { injectionFirstMediaLightBox } from '../utils/injectionFirstMediaLightBox.js';
 import { theIndexBis } from '../utils/injectionFirstMediaLightBox.js';
 import { wholeContactForm } from '../utils/contactForm.js';
-// import { theIndex }  from '../utils/setTheIndex.js';
-// import { canModifyOrderMediasFiltereds } from '../utils/canModifyOrderMediasFiltereds.js';
 
 // FETCHS //
 ////////////
@@ -29,10 +27,10 @@ async function getMedias() {
   const data = await fetch('./data/photographers.json').then((response) => response.json());
   return JSON.parse(JSON.stringify(data.media));
 }
-export const medias = getMedias();
+const medias = getMedias();
 // Theses let MUST have to be available globally
-export let mediasFiltereds;
-export let theIndex = Number;
+let mediasFiltereds;
+let theIndex = Number;
 
 // DROP-DOWN //
 ///////////////
@@ -61,7 +59,7 @@ const optionPopulariteId = document.getElementsByClassName('label-popularite');
 let mediasSortedLikes;
 let mediasSortedDate;
 let mediasSortedTitle;
-let focusNum = 1;
+let focusNum = 6;
 
 function sortedLike(medias) {
   mediasSortedLikes = mediasFiltereds;
@@ -185,10 +183,10 @@ optionsList.forEach((obj) => {
 });
 
 // Returns only the photographer matching to the id displayed in the url
-export const id = parseInt(new URLSearchParams(location.search).get('id'));
+const id = parseInt(new URLSearchParams(location.search).get('id'));
 
-export let photographer;
-export function displayData(photographers, medias) {
+let photographer;
+function displayData(photographers, medias) {
   const id = parseInt(new URLSearchParams(location.search).get('id'));
   photographer = photographers.find((photographer) => photographer.id === id);
   const TemplatePhotographer = new PhotographerFactory(photographer);
@@ -240,7 +238,7 @@ export function displayData(photographers, medias) {
 // Opens & Closes
 const modalLightBox = document.querySelector('#LightBox_modal');
 // mediaLinks to click on the picture...
-export const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
+const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
 const closeModalLightBox = document.querySelector('.close-lightbox');
 // Retrieves: The div containing parent of img/video of lightbox + Parent of img/video + The img/video itself;
 const injectedLightBoxCont = document.querySelector('.injected-content-lightBox');
@@ -252,9 +250,9 @@ const videoInLightBox = document.querySelector('.as-video.injected-content-light
 console.log('Environ 50% du code parcouru!');
 
 // The let mediasInLightBoxes will be so an array of all the ids of medias matching to a photographer
-export let mediasInLightBoxes = [];
+let mediasInLightBoxes = [];
 // Array only with Ids of the medias
-export let justMediasIdInLightBox = [];
+let justMediasIdInLightBox = [];
 
 // Impossible to import this function as a module
 function canModifyOrderMediasFiltereds() {
@@ -511,5 +509,8 @@ async function init() {
 // Starts the series of nested functions
 init();
 
-export { mediasSortedTitle, mediasSortedDate, mediasSortedLikes};
-export { focusNum };
+export { mediasFiltereds, mediasInLightBoxes, justMediasIdInLightBox, mediasSortedTitle, 
+  mediasSortedDate, mediasSortedLikes, photographer, focusNum};
+export { medias, mediaLinks, id };
+export { theIndex };
+export { displayData };
