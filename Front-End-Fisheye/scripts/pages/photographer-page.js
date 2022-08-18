@@ -73,7 +73,7 @@ function sortedLike(medias) {
   // For each mediasFiltered create photo's DOM
   mediasSortedLikes.forEach((mediasSortedLike) => {
     const TemplateMedia = new MediaFactory(mediasSortedLike, medias);
-    TemplateMedia.getPhotosCardDOM();
+    TemplateMedia.setPhotosCardDOM();
   });
   justMediasIdInLightBox = [];
   canModifyOrderMediasFiltereds();
@@ -91,7 +91,7 @@ function sortedDate(medias) {
   // For each mediasFiltered create photo's DOM
   mediasSortedDate.forEach((mediasSortedDate) => {
     const TemplateMedia = new MediaFactory(mediasSortedDate, medias);
-    TemplateMedia.getPhotosCardDOM();
+    TemplateMedia.setPhotosCardDOM();
   });
   justMediasIdInLightBox = [];
   canModifyOrderMediasFiltereds();
@@ -107,7 +107,7 @@ function sortedAZ(medias) {
   // For each mediasFiltered create photo's DOM
   mediasSortedTitle.forEach((mediasSortedTitle) => {
     const TemplateMedia = new MediaFactory(mediasSortedTitle, medias);
-    TemplateMedia.getPhotosCardDOM();
+    TemplateMedia.setPhotosCardDOM();
   });
   justMediasIdInLightBox = [];
   canModifyOrderMediasFiltereds();
@@ -214,7 +214,7 @@ export function displayData(photographers, medias) {
   // for each mediasFiltered create photo's DOM
   mediasFiltereds.forEach((mediasFiltered) => {
     const TemplateMedia = new MediaFactory(mediasFiltered, medias);
-    TemplateMedia.getPhotosCardDOM();
+    TemplateMedia.setPhotosCardDOM();
   });
   // This is returning the const = mediasFiltereds;
   // FOR EACH ( ce n'est pas ce qui est demandé, le pb viens de là?)
@@ -347,6 +347,9 @@ function openLightBox() {
     }
   }
   injectionFirstMediaLightBox();
+
+
+
 console.log("Là 80% du code est parcouru.");
   function nextPrevDisplayMedia() {
 

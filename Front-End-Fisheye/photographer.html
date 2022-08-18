@@ -12,9 +12,9 @@
   <title>Fisheye - photographe </title>
 </head>
 
-<div class="div-center-whole-page">
+<div class="div-center-whole-page" tabindex="-1">
 
-  <body class="body-photographer-html" style="background-color: lightgrey;">
+  <body class="body-photographer-html">
     <header class="first-header">
       <a href="./index.html">
         <img src="./assets/images/logo.png" class="logo-photographer" alt="Fisheye Home page" />
@@ -33,7 +33,7 @@
           <header>
             <h2 class="positionning-h2" tabindex="10"></h2>
             <!-- Here name of photographer will be injected by JS -->
-            <i class="close-modal-form" tabindex="11"></i>
+            <i class="close-modal-form" alt="Croix: pour fermer appuyer sur entrée" tabindex="11"></i>
           </header>
           <!-- FORM TO FILL -->
           <form method="get" action="photographer.html" id="contact_form" name="contact">
@@ -60,7 +60,7 @@
             </div>
             <!-- BUTTON SUBMIT TO CLICK -->
             <!-- Onsubmit with a listener to submit datas and close (if valid) or not close the modal (if invalid) -->
-            <input class="submit-button btn-close button" id="firstModalBtnSubmit" type="submit" value="Envoyer" tabindex=""/>
+            <input class="submit-button btn-close button" id="firstModalBtnSubmit" type="submit" value="Envoyer" tabindex="16"/>
             <div id="output_box"></div>
           </form>
         </div>

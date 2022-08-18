@@ -280,6 +280,21 @@ export function wholeContactForm() {
 
   // Listener to close modal form throught the cross
   document.querySelector('.close-modal-form').addEventListener('click', closeModalSimple);
+  // Accessibilité
+  document.querySelector('.close-modal-form').addEventListener('keyup', (e) => {
+    const baseH2 = document.querySelector('.modal-form header h2');
+    const modalContentBis = document.querySelector('.form-contact');
+    switch (e.key) {
+      // Closes modal form using Enter key
+      case 'Enter':
+        baseH2.innerHTML = '';
+        // Invisibility of modal form
+        modalContentBis.classList.add('hidden');
+        modalContent.classList.remove('show');
+        break;
+    }
+    // console.log(e.key);
+  });
 
   /* Manages the values obtained for each field text typed by the user,
    getting the values of inputs ( text + text + email + text)
@@ -307,6 +322,7 @@ export function wholeContactForm() {
 
   // Accessibility
   // Switchs on the 3 keysup ( the user can type on the keyboard )
+  // Not necessary ??
   document.addEventListener('keyup', (e) => {
     const baseH2 = document.querySelector('.modal-form header h2');
     const modalContentBis = document.querySelector('.form-contact');

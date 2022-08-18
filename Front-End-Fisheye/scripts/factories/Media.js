@@ -1,3 +1,5 @@
+import { justMediasIdInLightBox } from '../pages/photographer-page.js';
+
 // Below MediaFactory Model
 
 export class MediaFactory {
@@ -15,7 +17,7 @@ export class MediaFactory {
 
   // My fonction ( without use a get) displaying
   // the template-photos for the photographer-page.html
-  getPhotosCardDOM() {
+  setPhotosCardDOM() {
     const nameOfPhotographer =
       this._photographerId === 243
         ? 'Mimi'
@@ -36,10 +38,19 @@ export class MediaFactory {
       return false;
     }
 
+    // Test: Trying to set teh number in tabindex(i) from 1 to 10 or 11 or 12 medias
+    let focusNum = 0;
+    for (focusNum = 0; focusNum < justMediasIdInLightBox.length; focusNum++);
+    let setFocusMedias = `tabindex="${focusNum}"`;
+    // For each setFocusMedias set everyone in the <a> of the media displayed
+    // in the photosStack(mediasStack) from ./factories/Media.js ??
+    console.log(setFocusMedias);
+
     const photography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${this._image}`;
     const videography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${this._video}`;
     const photosPlace = document.querySelector('.photos-displaying');
     const section = document.createElement('section');
+
     // Display the content of photo or video
     if (this._image !== undefined) {
       section.innerHTML = `
@@ -48,7 +59,7 @@ export class MediaFactory {
             <div id="${this._id}" src="${photography}" alt="${this._title}" class="dimensions-photos-grapher-page">
               <img class="img-video-photos-stack" src="${photography}" alt="${this._title}"></img>
             </div>
-            <figcaption class="position-fig-grapher-page">
+            <figcaption class="position-fig-grapher-page" ${setFocusMedias}>
               <h2 class="h2-photos-stack">${this._title}
               </h2>
               <div class="center-likes-heart" id="likesHearts-${this._id}">
@@ -69,8 +80,8 @@ export class MediaFactory {
                   type="video/mp4" controls>
               </video>
             </div>
-            <figcaption class="position-fig-grapher-page">
-              <h2 class="h2-photos-stack" >${this._title}
+            <figcaption class="position-fig-grapher-page" ${setFocusMedias}>
+              <h2 class="h2-photos-stack">${this._title}
               </h2>
               <div class="center-likes-heart" id="likesHearts-${this._id}">
                 <span class="likes" id="likes-${this._id}">${this._likes}</span>
