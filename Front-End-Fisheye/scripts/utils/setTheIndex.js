@@ -5,7 +5,7 @@ function setTheIndex() {
   for (let mediaLink of mediaLinks) {
     mediaLink.addEventListener('click', function (element) {
       const idInLightBoxCastedToNumber = Number(element.path[3].id);
-      theIndexBis = justMediasIdInLightBox.findIndex((elt) => elt === idInLightBoxCastedToNumber);
+      theIndexBis = mediasIdInLightBox.findIndex((elt) => elt === idInLightBoxCastedToNumber);
     });
   }
 }

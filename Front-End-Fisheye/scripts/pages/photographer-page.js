@@ -78,7 +78,7 @@ function sortedLike(medias) {
     TemplateMedia.setPhotosCardDOM();
     focusNum++;
   });
-  justMediasIdInLightBox = [];
+  mediasIdInLightBox = [];
   canModifyOrderMediasFiltereds();
   injectionFirstMediaLightBox();
 }
@@ -96,7 +96,7 @@ function sortedDate(medias) {
     TemplateMedia.setPhotosCardDOM();
     focusNum++;
   });
-  justMediasIdInLightBox = [];
+  mediasIdInLightBox = [];
   canModifyOrderMediasFiltereds();
   injectionFirstMediaLightBox();
 }
@@ -112,7 +112,7 @@ function sortedAZ(medias) {
     TemplateMedia.setPhotosCardDOM();
     focusNum++;
   });
-  justMediasIdInLightBox = [];
+  mediasIdInLightBox = [];
   canModifyOrderMediasFiltereds();
   injectionFirstMediaLightBox();
 }
@@ -252,7 +252,7 @@ console.log('Environ 50% du code parcouru!');
 // The let mediasInLightBoxes will be so an array of all the ids of medias matching to a photographer
 let mediasInLightBoxes = [];
 // Array only with Ids of the medias
-let justMediasIdInLightBox = [];
+let mediasIdInLightBox = [];
 
 // Impossible to import this function as a module
 function canModifyOrderMediasFiltereds() {
@@ -266,7 +266,7 @@ function canModifyOrderMediasFiltereds() {
     mediasInLightBoxes = mediasFiltereds;
   } else console.log('Error in the array of mediasFiltereds');
   for (let i = 0; i < mediasInLightBoxes.length; i++) {
-    justMediasIdInLightBox.push(mediasInLightBoxes[i].id);
+    mediasIdInLightBox.push(mediasInLightBoxes[i].id);
   }
 }
 console.log('Là 60% du code est parcouru.');
@@ -286,12 +286,12 @@ function openLightBox() {
         console.log('Error in previous()');
       } else if (theIndex === 0) {
         theIndex = mediasInLightBoxes.length - 1;
-        newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
+        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
         nextPrevDisplayMedia();
         return theIndex;
       } else {
         theIndex--;
-        newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
+        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
         nextPrevDisplayMedia();
         return theIndex;
       }
@@ -301,12 +301,12 @@ function openLightBox() {
         console.log('Error in previous()');
       } else if (theIndexBis === 0) {
         theIndex = mediasInLightBoxes.length - 1;
-        newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
+        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
         nextPrevDisplayMedia();
         return theIndex;
       } else {
         theIndex = theIndexBis - 1;
-        newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
+        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
         nextPrevDisplayMedia();
         return theIndex;
       }
@@ -320,12 +320,12 @@ function openLightBox() {
         console.log('Error in next()');
       } else if (theIndex === mediasInLightBoxes.length - 1) {
         theIndex = 0;
-        newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
+        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
         nextPrevDisplayMedia();
         return theIndex;
       } else {
         theIndex++;
-        newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
+        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
         nextPrevDisplayMedia();
         return theIndex;
       }
@@ -335,12 +335,12 @@ function openLightBox() {
         console.log('Error in next()');
       } else if (theIndexBis === mediasInLightBoxes.length - 1) {
         theIndex = 0;
-        newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
+        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
         nextPrevDisplayMedia();
         return theIndex;
       } else {
         theIndex = theIndexBis + 1;
-        newIdMediaShownInLightBox = justMediasIdInLightBox[theIndex];
+        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
         nextPrevDisplayMedia();
         return theIndex;
       }
@@ -508,7 +508,7 @@ async function init() {
 // Starts the series of nested functions
 init();
 
-export { mediasFiltereds, mediasInLightBoxes, justMediasIdInLightBox, mediasSortedTitle, 
+export { mediasFiltereds, mediasInLightBoxes, mediasIdInLightBox, mediasSortedTitle, 
   mediasSortedDate, mediasSortedLikes, photographer, focusNum};
 export { medias, mediaLinks, id };
 export { theIndex };

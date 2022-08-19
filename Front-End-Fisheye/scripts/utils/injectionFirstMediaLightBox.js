@@ -1,5 +1,5 @@
 
-import { justMediasIdInLightBox } from '../pages/photographer-page.js';
+import { mediasIdInLightBox } from '../pages/photographer-page.js';
 
 // Defines theIndexBis has to be available globally
 let theIndexBis = Number;
@@ -14,7 +14,7 @@ function injectionFirstMediaLightBox() {
       const idCastedToNum = Number(element.path[1].id);
       // Defines theIndex
       // Caster en Number/l'égalité simple
-      theIndexBis = justMediasIdInLightBox.findIndex((elt) => elt === idCastedToNum);
+      theIndexBis = mediasIdInLightBox.findIndex((elt) => elt === idCastedToNum);
       // Actions to display the first media into the lightBox
       const modalLightBox = document.querySelector('#LightBox_modal');
       const parentimgInLightBox = document.querySelector('.flex-center.as-img');
