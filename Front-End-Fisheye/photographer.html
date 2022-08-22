@@ -13,6 +13,7 @@
 </head>
 
 <div class="div-center-whole-page" tabindex="-1">
+  <!-- Set the aria-label & alt & role -->
 
   <body class="body-photographer-html" style="background-color: lightgrey;">
     <header class="first-header">
@@ -33,34 +34,35 @@
           <header>
             <h2 class="positionning-h2" tabindex="10"></h2>
             <!-- Here name of photographer will be injected by JS -->
-            <i class="close-modal-form" alt="Croix: pour fermer appuyer sur entrée" tabindex="11"></i>
+            <i class="close-modal-form" alt="Croix: pour fermer appuyer sur entrée" tabindex="0"></i>
           </header>
           <!-- FORM TO FILL -->
           <form method="get" action="photographer.html" id="contact_form" name="contact">
             <!-- FORM : FIELDS -->
             <div class="formData firstName field">
-              <label for="firstName">Prénom</label>
-              <input class="text-control" type="text" id="firstName" name="firstName" tabindex="12"/>
-              <div></div>
+              <label for="firstName" tabindex="-1">Prénom</label>
+              <input class="text-control" type="text" id="firstName" name="firstName" tabindex="0" />
+              <div tabindex="-1"></div>
             </div>
             <div class="formData lastName field">
-              <label for="lastName">Nom</label>
-              <input class="text-control" type="text" id="lastName" name="lastName" tabindex="13"/>
-              <div></div>
+              <label for="lastName" tabindex="-1">Nom</label>
+              <input class="text-control" type="text" id="lastName" name="lastName" tabindex="0" />
+              <div tabindex="-1"></div>
             </div>
             <div class="formData email field">
-              <label for="email">Email</label>
-              <input class="text-control" type="text" id="email" name="email" tabindex="13"/>
-              <div></div>
+              <label for="email" tabindex="-1">Email</label>
+              <input class="text-control" type="text" id="email" name="email" tabindex="0" />
+              <div tabindex="-1"></div>
             </div>
             <div class="formData messageUser field">
-              <label for="messageUser">Votre message</label>
-              <input class="text-control" type="text" id="messageUser" name="messageUser" tabindex="15"/>
-              <div></div>
+              <label for="messageUser" tabindex="-1">Votre message</label>
+              <input class="text-control" type="text" id="messageUser" name="messageUser" tabindex="0" />
+              <div tabindex="-1"></div>
             </div>
             <!-- BUTTON SUBMIT TO CLICK -->
             <!-- Onsubmit with a listener to submit datas and close (if valid) or not close the modal (if invalid) -->
-            <input class="submit-button btn-close button" id="firstModalBtnSubmit" type="submit" value="Envoyer" tabindex="16"/>
+            <input class="submit-button btn-close button" id="firstModalBtnSubmit" type="submit" value="Envoyer"
+              tabindex="0" />
             <div id="output_box"></div>
           </form>
         </div>
@@ -104,6 +106,7 @@
       <!-- Code will be injected by JS -->
     </div>
     <!-- 6th child of the body -->
+    <!-- Set the aria-label & role -->
     <div id="LightBox_modal" class="position-content-lightBox-modal hidden">
       <div class="content-lightBox">
         <div class="lightBox-modal">

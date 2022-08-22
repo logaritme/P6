@@ -1,3 +1,5 @@
+import { nameOfPhotographer } from "../utils/nameOfPhotographer.js";
+
 // Below LightBoxFactory Model
 
 export class LightBoxFactory {
@@ -16,28 +18,12 @@ export class LightBoxFactory {
   // the LightBox for the photographer-page.html
   getLightBoxImgDOM() {
     // Function to get the right name of the photographer
-    let nameOfPhotographer;
-    function giveNameStoredInEachId(photographerId) {
-      nameOfPhotographer =
-        photographerId === 243
-          ? 'Mimi'
-          : photographerId === 930
-          ? 'Ellie'
-          : photographerId === 82
-          ? 'Tracy'
-          : photographerId === 527
-          ? 'Nabeel'
-          : photographerId === 925
-          ? 'Rhode'
-          : photographerId === 195
-          ? 'Marcel'
-          : console.error('No photographer name found!');
-    }
+    nameOfPhotographer();
+
     const IdPhotographer = this._photographerId;
     giveNameStoredInEachId(IdPhotographer);
+
     function isReturningSection(imageOfMedia, videoOfMedia, titleOfMedia) {
-      // Debug
-      // console.info('Titre:', titleOfMedia);
       const photography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${imageOfMedia}`;
       const videography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${videoOfMedia}`;
       const LightBoxPlace = document.querySelector('.to-append-media');
@@ -140,3 +126,5 @@ export class LightBoxFactory {
     isReturningSection();
   }
 }
+
+export { nameOfPhotographer } from "../utils/nameOfPhotographer.js";

@@ -5,6 +5,11 @@ import { injectionFirstMediaLightBox } from '../utils/injectionFirstMediaLightBo
 import { theIndexBis } from '../utils/injectionFirstMediaLightBox.js';
 import { wholeContactForm } from '../utils/contactForm.js';
 
+import { nameOfPhotographer } from "../utils/nameOfPhotographer.js";
+
+// NOTE: Manage focus via this kind of code :
+// setTimeout("gFocusItemAsGlobalVariable.focus();",0);
+
 ////////////
 // FETCHS //
 
@@ -35,7 +40,6 @@ let theIndex = Number;
 // END: FETCHS //
 /////////////////
 
-
 ///////////////
 // DROP-DOWN //
 
@@ -53,7 +57,6 @@ const labelPopularite = document.querySelector('.label-popularite');
 const optionPopulariteId = document.getElementsByClassName('label-popularite');
 
 // DROP-DOWN ==> 3 SORTING: functions declared to be call by (2) listeners
-
 
 // Contains one of the 3 ways to sort the medias
 
@@ -272,6 +275,8 @@ function canModifyOrderMediasFiltereds() {
 console.log('Là 60% du code est parcouru.');
 // Opens the LightBox and activates all the others functions related to the lightBox
 function openLightBox() {
+  // When open the LightBox set the focus on the current media ( or only video ? )
+  // And also when display previous/next function ?
   canModifyOrderMediasFiltereds();
 
   // Retrieves button's click prev & next of the function: listener()
@@ -508,8 +513,16 @@ async function init() {
 // Starts the series of nested functions
 init();
 
-export { mediasFiltereds, mediasInLightBoxes, mediasIdInLightBox, mediasSortedTitle, 
-  mediasSortedDate, mediasSortedLikes, photographer, focusNum};
+export {
+  mediasFiltereds,
+  mediasInLightBoxes,
+  mediasIdInLightBox,
+  mediasSortedTitle,
+  mediasSortedDate,
+  mediasSortedLikes,
+  photographer,
+  focusNum,
+};
 export { medias, mediaLinks, id };
 export { theIndex };
 export { displayData };
