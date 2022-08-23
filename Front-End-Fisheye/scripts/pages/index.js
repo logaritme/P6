@@ -15,6 +15,7 @@ async function displayData(photographers) {
     TemplatePhotographer.setUserCardDOM();
     focusProfileNum++;
   });
+
 }
 
 async function init() {

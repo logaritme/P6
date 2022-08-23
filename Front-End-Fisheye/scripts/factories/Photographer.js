@@ -15,16 +15,16 @@ export class PhotographerFactory {
   // Function template display for index.html
   setUserCardDOM() {
     const picture = `./assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
-    const photographersSectionPlace = document.querySelector('.photographer_section');
+    const photographersSectionPlace = document.querySelector('.photographer-section');
     const article = document.createElement('article');
     article.innerHTML = `
-    <a id="${this._id}" href="./photographer.html?id=${this._id}" tabindex="${focusProfileNum}" aria-label="${this._name}">
-      <img src="${picture}" alt="${this._name}"></img>
+    <a id="${this._id}" href="./photographer.html?id=${this._id}" tabindex="0" aria-label="${this._name}">
+      <img src="${picture}" alt="Photo de ${this._name}"></img>
       <h2>${this._name}</h2>
     </a>
-    <h3>${this._city}</h3>
-    <h4>${this._tagline}</h4>
-    <price>${this._price}\ €</price>
+    <h3 tabindex="0">${this._city}</h3>
+    <h4 tabindex="0">${this._tagline}</h4>
+    <price tabindex="0">${this._price}\ €</price>
     `;
     photographersSectionPlace.appendChild(article);
   }
@@ -40,8 +40,8 @@ export class PhotographerFactory {
         <p>${this._city + ', ' + this._country}</p>
         <p class="text-color">${this._tagline}</p>
       </article>
-      <button id="contactButtonOpen" class="contact-button" tabindex="1">Contactez-moi</button>
-      <img src="${picture}" alt="${this._name}"></img>
+      <button id="contactButtonOpen" class="contact-button" tabindex="0">Contactez-moi<span class="acc-invisible">Taper entrée pour ouvrir le formulaire de contact</span></button>
+      <img src="${picture}" alt="Photo de ${this._name}"></img>
     </section>
     `;
     photographersHeaderPlace.appendChild(div);

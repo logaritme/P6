@@ -1,4 +1,4 @@
-import { focusNum } from '../pages/photographer-page.js';
+import { focusPhotosStackNum } from '../pages/photographer-page.js';
 
 // Below MediaFactory Model
 
@@ -46,7 +46,7 @@ export class MediaFactory {
     // Display the content of photo or video
     if (this._image !== undefined) {
       section.innerHTML = `
-          <a id="${this._id}" class="media-links" tabindex="${focusNum}" src="${photography}" aria-label="${this._title}" alt="${this._title}">
+          <a id="${this._id}" class="media-links" tabindex="0" src="${photography}" aria-label="${this._title}" alt="${this._title}">
             <figure>
             <div id="${this._id}" src="${photography}" alt="${this._title}" class="dimensions-photos-grapher-page">
               <img class="img-video-photos-stack" src="${photography}" alt="${this._title}"></img>
@@ -65,7 +65,7 @@ export class MediaFactory {
       photosPlace.appendChild(section);
     } else {
       section.innerHTML = `
-          <a id="${this._id}" class="media-links" tabindex="${focusNum}" src="${videography}" aria-label="${this._title}" alt="${this._title}">
+          <a id="${this._id}" class="media-links" tabindex="0" src="${videography}" aria-label="${this._title}" alt="${this._title}">
             <figure>
             <div id="${this._id}" src="${videography}" alt="${this._title}" class="dimensions-photos-grapher-page">
               <video class="img-video-photos-stack" src="${videography}" alt="${this._title}"

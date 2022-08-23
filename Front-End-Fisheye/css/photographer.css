@@ -330,8 +330,6 @@ a figcaption .likes {
   overflow: auto;
 }
 
-
-
 .content-modal {
   height: auto;
   width: 100%;
@@ -442,6 +440,7 @@ a figcaption .likes {
   background-color: transparent;
   color: white;
   border: none;
+  font-size: 0;
 }
 
 .select-box .selected:hover {
@@ -477,6 +476,10 @@ a figcaption .likes {
 
 .select-box .selected.border-radius {
   border-radius: 5px;
+}
+
+.fas.fa-angle-down {
+  font-size: 24px;
 }
 
 .fas.fa-angle-down.reverse-chevron {
@@ -735,12 +738,20 @@ footer div div i {
   font-weight: 700;
   font-size: 24px;
   color: #000000;
-}
+}   
 
 footer div div .fas.fa-heart {
+  padding-left: 6px;
   background: #db8876;
   color: #000000;
   font-size: 24px;
   font-weight: 700;
   cursor: pointer;
+}
+
+/* ACCESSIBILITE INVISIBLE */
+.acc-invisible {
+  width: 0;
+  height: 0;
+  font-size: 0    ;
 }

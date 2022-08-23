@@ -1,4 +1,4 @@
-let theIndexBis = Number;
+let theIndexBis = null;
 
 function setTheIndex() {
   const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');

@@ -5,8 +5,6 @@ import { injectionFirstMediaLightBox } from '../utils/injectionFirstMediaLightBo
 import { theIndexBis } from '../utils/injectionFirstMediaLightBox.js';
 import { wholeContactForm } from '../utils/contactForm.js';
 
-import { nameOfPhotographer } from "../utils/nameOfPhotographer.js";
-
 // NOTE: Manage focus via this kind of code :
 // setTimeout("gFocusItemAsGlobalVariable.focus();",0);
 
@@ -35,7 +33,7 @@ async function getMedias() {
 const medias = getMedias();
 // Theses let MUST have to be available globally
 let mediasFiltereds;
-let theIndex = Number;
+let theIndex = null;
 
 // END: FETCHS //
 /////////////////
@@ -60,13 +58,11 @@ const optionPopulariteId = document.getElementsByClassName('label-popularite');
 
 // Contains one of the 3 ways to sort the medias
 
-// Theses let declared are maybe useful to solve the pb:
-// The lightBox doesn't display pictures as the sorted pic pop/date/titre.
-// If not necessary erase them and just use mediasfiltereds for all situations.
+// Theses let declared are declared globally
 let mediasSortedLikes;
 let mediasSortedDate;
 let mediasSortedTitle;
-let focusNum = 6;
+let focusPhotosStackNum = 6;
 
 function sortedLike(medias) {
   mediasSortedLikes = mediasFiltereds;
@@ -79,7 +75,7 @@ function sortedLike(medias) {
   mediasSortedLikes.forEach((mediasSortedLike) => {
     const TemplateMedia = new MediaFactory(mediasSortedLike, medias);
     TemplateMedia.setPhotosCardDOM();
-    focusNum++;
+    focusPhotosStackNum++;
   });
   mediasIdInLightBox = [];
   canModifyOrderMediasFiltereds();
@@ -97,7 +93,7 @@ function sortedDate(medias) {
   mediasSortedDate.forEach((mediasSortedDate) => {
     const TemplateMedia = new MediaFactory(mediasSortedDate, medias);
     TemplateMedia.setPhotosCardDOM();
-    focusNum++;
+    focusPhotosStackNum++;
   });
   mediasIdInLightBox = [];
   canModifyOrderMediasFiltereds();
@@ -113,7 +109,7 @@ function sortedAZ(medias) {
   mediasSortedTitle.forEach((mediasSortedTitle) => {
     const TemplateMedia = new MediaFactory(mediasSortedTitle, medias);
     TemplateMedia.setPhotosCardDOM();
-    focusNum++;
+    focusPhotosStackNum++;
   });
   mediasIdInLightBox = [];
   canModifyOrderMediasFiltereds();
@@ -208,7 +204,7 @@ function displayData(photographers, medias) {
     totalLikes += mediasFiltered.likes;
   });
   // Display the total numbersOfLikesInsert in a new var
-  let numbersOfLikesInsert = totalLikes;
+  let numbersOfLikesInsert = `${totalLikes}`;
   // Uses the MediaFactory to generate the insert's DOM
   const TemplateLikesInsert = new MediaFactory(photographer);
   TemplateLikesInsert.getInsertLikesCardDOM();
@@ -220,7 +216,7 @@ function displayData(photographers, medias) {
   mediasFiltereds.forEach((mediasFiltered) => {
     const TemplateMedia = new MediaFactory(mediasFiltered, medias);
     TemplateMedia.setPhotosCardDOM();
-    focusNum++;
+    focusPhotosStackNum++;
   });
   // This is returning the const = mediasFiltereds;
   // mediasFiltered it creates a lightbox DOM
@@ -240,7 +236,7 @@ function displayData(photographers, medias) {
 
 // Opens & Closes
 const modalLightBox = document.querySelector('#LightBox_modal');
-// mediaLinks to click on the picture...
+// MediaLinks to click on the picture...
 const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
 const closeModalLightBox = document.querySelector('.close-lightbox');
 // Retrieves: The div containing parent of img/video of lightbox + Parent of img/video + The img/video itself;
@@ -272,8 +268,8 @@ function canModifyOrderMediasFiltereds() {
     mediasIdInLightBox.push(mediasInLightBoxes[i].id);
   }
 }
-console.log('Là 60% du code est parcouru.');
 // Opens the LightBox and activates all the others functions related to the lightBox
+
 function openLightBox() {
   // When open the LightBox set the focus on the current media ( or only video ? )
   // And also when display previous/next function ?
@@ -283,9 +279,10 @@ function openLightBox() {
   // & it browse on the indexes
 
   // Retrieves the index of previous media to the left
+  // Sortir cette déclaration de fonction de là
   let newIdMediaShownInLightBox;
   function previous() {
-    if (theIndex !== Number) {
+    if (theIndex !== null) {
       // Based on theIndex
       if (theIndex === -1) {
         console.log('Error in previous()');
@@ -319,7 +316,7 @@ function openLightBox() {
   }
   // Retrieves the index of next media to the right
   function next() {
-    if (theIndex !== Number) {
+    if (theIndex !== null) {
       // Based on theIndex
       if (theIndex === -1) {
         console.log('Error in next()');
@@ -450,7 +447,11 @@ function openLightBox() {
   document.querySelector('.next').addEventListener('click', () => {
     next();
   });
-  // Accessibility
+
+  // /\ WORK IN PROGRESS /\
+  // PB: NodeList empty -> Resolved ( cause pb location ( of const catchs DOM ?) in the code/file)
+  // Iterate for accessibility -> openLightBox whenever that element is focused && key 'Enter' released
+  // Accessibility 1st part
   // Switchs on the 3 keysup ( the user can type on the keyboard )
   document.addEventListener('keyup', (e) => {
     switch (e.key) {
@@ -462,7 +463,7 @@ function openLightBox() {
         break;
       // Closes modal form using Escape key
       case 'Escape':
-        theIndex = Number;
+        theIndex = null;
         theIndexBis;
         injectedLightBoxCont.innerHTML = '';
         // Invisibility of video
@@ -475,6 +476,37 @@ function openLightBox() {
         modalLightBox.classList.remove('show');
         modalLightBox.classList.add('hidden');
         break;
+      case 'Enter':
+        // Rename everywhere tryTests to -> (no idea!)
+        const tryTests = document.querySelectorAll('.media-links');
+        const keyOnLabelPop = document.getElementById('option-popularite');
+        const keyOnLabelDate = document.getElementById('option-date');
+        const keyOnLabelTitre = document.getElementById('option-titre');
+        // Do it also for .label-date, .label-titre
+        for (const tryTest of tryTests) {
+          if (document.activeElement === tryTest) {
+            console.log('One tryTest is focused');
+            // openLightBox ne veut pas s'ouvrir et aucun message dans la console ???!!
+            openLightBox();
+            console.log('Yes !! Enter is functionning on Medias !!');
+          }
+        }
+        if (document.activeElement === keyOnLabelPop) {
+          console.log('keyOnLabelPop is focused');
+          sortedLike(medias);
+          console.log('Yes !! Enter is functionning on Label Pop !!');
+        };
+        if (document.activeElement === keyOnLabelDate) {
+          console.log('keyOnLabelDate is focused');
+          sortedDate(medias);
+          console.log('Yes !! Enter is functionning on Label Date !!');
+        };
+        if (document.activeElement === keyOnLabelTitre) {
+          console.log('keyOnLabelTitre is focused');
+          sortedAZ(medias);
+          console.log('Yes !! Enter is functionning on Label  !!');
+        };
+        break;
     }
   });
 }
@@ -482,7 +514,7 @@ function openLightBox() {
 // Closes modal form on cross "X"
 closeModalLightBox.addEventListener('click', function () {
   // Clean lightBox content ( title && (image || video) )
-  theIndex = Number;
+  theIndex = null;
   theIndexBis;
   injectedLightBoxCont.innerHTML = '';
   // Invisibility of video
@@ -521,7 +553,7 @@ export {
   mediasSortedDate,
   mediasSortedLikes,
   photographer,
-  focusNum,
+  focusPhotosStackNum,
 };
 export { medias, mediaLinks, id };
 export { theIndex };

@@ -18,11 +18,25 @@ export class LightBoxFactory {
   // the LightBox for the photographer-page.html
   getLightBoxImgDOM() {
     // Function to get the right name of the photographer
-    nameOfPhotographer();
+    const nameOfPhotographer =
+    this._photographerId === 243
+      ? 'Mimi'
+      : this._photographerId === 930
+      ? 'Ellie'
+      : this._photographerId === 82
+      ? 'Tracy'
+      : this._photographerId === 527
+      ? 'Nabeel'
+      : this._photographerId === 925
+      ? 'Rhode'
+      : this._photographerId === 195
+      ? 'Marcel'
+      : null;
 
-    const IdPhotographer = this._photographerId;
-    giveNameStoredInEachId(IdPhotographer);
-
+  if (!nameOfPhotographer) {
+    console.error('No First name found');
+    return false;
+  }
     function isReturningSection(imageOfMedia, videoOfMedia, titleOfMedia) {
       const photography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${imageOfMedia}`;
       const videography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${videoOfMedia}`;
@@ -68,28 +82,26 @@ export class LightBoxFactory {
   
   getLightBoxPrevNextDOM() {
     // Function to get the right name of the photographer
-    let nameOfPhotographer;
-    function giveNameStoredInEachId(photographerId) {
-      nameOfPhotographer =
-        photographerId === 243
-          ? 'Mimi'
-          : photographerId === 930
-          ? 'Ellie'
-          : photographerId === 82
-          ? 'Tracy'
-          : photographerId === 527
-          ? 'Nabeel'
-          : photographerId === 925
-          ? 'Rhode'
-          : photographerId === 195
-          ? 'Marcel'
-          : console.error('No photographer name found!');
+      const nameOfPhotographer =
+      this._photographerId === 243
+        ? 'Mimi'
+        : this._photographerId === 930
+        ? 'Ellie'
+        : this._photographerId === 82
+        ? 'Tracy'
+        : this._photographerId === 527
+        ? 'Nabeel'
+        : this._photographerId === 925
+        ? 'Rhode'
+        : this._photographerId === 195
+        ? 'Marcel'
+        : null;
+  
+    if (!nameOfPhotographer) {
+      console.error('No First name found');
+      return false;
     }
-    const IdPhotographer = this._photographerId;
-    giveNameStoredInEachId(IdPhotographer);
     function isReturningSection() {
-      // Debug
-      // console.info('Titre:', titleOfMedia);
       const photography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${this._image}`;
       const videography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${this._video}`;
       const LightBoxPlace = document.querySelector('.to-append-media');
@@ -127,4 +139,4 @@ export class LightBoxFactory {
   }
 }
 
-export { nameOfPhotographer } from "../utils/nameOfPhotographer.js";
+export { nameOfPhotographer };
