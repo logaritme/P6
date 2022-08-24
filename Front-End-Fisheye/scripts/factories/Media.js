@@ -56,7 +56,8 @@ export class MediaFactory {
               </h2>
               <div class="center-likes-heart" id="likesHearts-${this._id}">
                 <span class="likes" id="likes-${this._id}">${this._likes}</span>
-                <i class="fas fa-heart" aria-label="Coeur pour liker" onclick="addLike(${this._id})" ></i>
+                <span class="acc-invisible">likes</span>
+                <i class="fas fa-heart" aria-role="img" alt="Coeur pour liker" aria-label="Coeur pour liker" onclick="addLike(${this._id})" ></i>
               </div>
             </figcaption>
             </figure>
@@ -77,7 +78,8 @@ export class MediaFactory {
               </h2>
               <div class="center-likes-heart" id="likesHearts-${this._id}">
                 <span class="likes" id="likes-${this._id}">${this._likes}</span>
-                <i class="fas fa-heart" aria-label="Coeur pour liker" onclick="addLike(${this._id})" ></i>
+                <span class="acc-invisible">likes</span>
+                <i class="fas fa-heart" aria-role="img" alt="Coeur pour liker" aria-label="Coeur pour liker" onclick="addLike(${this._id})" ></i>
               </div>
             </figcaption>
             </figure>
