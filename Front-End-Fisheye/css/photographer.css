@@ -90,12 +90,6 @@
   text-align: left;
   color: black;
 }
-/* .modal-form header h2 {
-  width: 670px;
-  height: 900px;
-  padding: 15px 8%;
-  margin: 62px auto;
-} */
 
 /* Form */
 
@@ -132,14 +126,11 @@ form input {
 
 /* HEADER BAND */
 /* /////////// */
+
 /* Img Portrait */
 
 .photographer-header {
-  /* display: grid; */
   width: 100%;
-  /* grid-template-columns: repeat(3, 1fr); */
-  /* grid-template-rows: auto; */
-  /* gap: 50px; */
 }
 
 .main-photographer-html div div {
@@ -154,7 +145,6 @@ form input {
   align-items: center;
   justify-content: center;
   background-color: #fafafa;
-  /* width: max-content; */
 }
 
 .main-photographer-html div div section img {
@@ -199,7 +189,7 @@ div section article .text-color {
   display: flex;
 }
 
-/* PHOTOS STACK (setPhotosCardDOM */
+/* MEDIAS STACK (generated via setPhotosCardDOM) */
 
 a {
   color: unset;
@@ -207,8 +197,6 @@ a {
   cursor: pointer;
 }
 
-/* Have to use a class here because I have to recreate
-the correct DOM structure (figcaption included in figure) */
 .dimensions-photos-grapher-page {
   display: flex;
   /* width: 150px; */
@@ -517,7 +505,7 @@ a figcaption .likes {
   flex-direction: column;
   justify-content: space-between;
   border-radius: 5px;
-  /* background-color: #db8876; */
+  /* background-color: #db8876; For final content*/
 }
 
 .content-lightBox {
@@ -573,7 +561,6 @@ a figcaption .likes {
 
 .flex-lightBox {
   width: 1000px;
-  /* height: 400px; */
   display: flex;
   flex-direction: row;
 }
@@ -597,8 +584,6 @@ div div div figure div div img,
 div div div figure div div video {
   /* width: 1050px;
   height: 900px; */
-  /* width: 800px;
-  height: 720px; */
   background-color: #c4c4c4;
   border-radius: 5px;
   position: relative;
@@ -709,7 +694,7 @@ footer {
   flex-flow: row nowrap;
   position: fixed;
   right: 11.3%;
-  /* left: 1128px; */
+  /* left: 1128px; Test to do*/
   bottom: 0;
   color: black;
   background-color: #db8876;
@@ -748,7 +733,7 @@ footer div div .fas.fa-heart {
   cursor: pointer;
 }
 
-/* ACCESSIBILITE INVISIBLE */
+/* ACCESSIBILITY INVISIBLE */
 .acc-invisible {
   width: 0;
   height: 0;
