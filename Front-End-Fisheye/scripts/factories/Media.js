@@ -1,6 +1,6 @@
 import { focusPhotosStackNum } from '../pages/photographer-page.js';
 
-// Below MediaFactory Model
+// MediaFactory Model
 
 export class MediaFactory {
   constructor(medias) {
@@ -15,8 +15,7 @@ export class MediaFactory {
     this._price = medias.price;
   }
 
-  // My fonction ( without use a get) displaying
-  // the template-photos for the photographer-page.html
+  // Template-photos for the photographer-page.html
   setPhotosCardDOM() {
     const nameOfPhotographer =
       this._photographerId === 243

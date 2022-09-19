@@ -342,8 +342,8 @@ function wholeContactForm() {
     }
   });
 
-  // END of the listeners //
-  //////////////////////////
+  // END: LISTENERS //
+  ////////////////////
 }
 
 export { wholeContactForm };

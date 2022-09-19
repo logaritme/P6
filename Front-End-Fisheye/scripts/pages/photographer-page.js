@@ -1,8 +1,10 @@
+/////////////////
+// ALL IMPORTS //
+// Import: factories
 import { PhotographerFactory } from '../factories/Photographer.js';
 import { MediaFactory } from '../factories/Media.js';
-import { LightBoxFactory } from '../factories/LightBox.js';
-import { injectionFirstMediaLightBox } from '../utils/injectionFirstMediaLightBox.js';
-import { theIndexBis } from '../utils/injectionFirstMediaLightBox.js';
+
+// Import: utils
 import { wholeContactForm } from '../utils/contactForm.js';
 
 // NOTE: Manage focus via this kind of code :
@@ -11,13 +13,14 @@ import { wholeContactForm } from '../utils/contactForm.js';
 ////////////
 // FETCHS //
 
+/*
 async function getAllTheJSONDatas() {
   // Stocking the datas in "data" just when they arrive from the fetch
   const data = await fetch('./data/photographers.json').then((response) => response.json());
   return JSON.parse(JSON.stringify(data));
 }
-
 const fullJSONContent = getAllTheJSONDatas();
+*/
 
 async function getPhotographers() {
   const data = await fetch('./data/photographers.json').then((response) => response.json());
@@ -31,17 +34,44 @@ async function getMedias() {
   return JSON.parse(JSON.stringify(data.media));
 }
 const medias = getMedias();
-// Theses let MUST have to be available globally
-let mediasFiltereds;
-let theIndex = null;
 
 // END: FETCHS //
 /////////////////
 
+////////////////
+// VAR GLOBAL //
+
+// Theses let MUST have to be available globally
+let mediasFiltereds; // Good behaviour to be an array when declared here undefined
+let theIndex = null; // To be a number
+let theIndexBis = null; // To be a number
+// and transiting through the setTheIndex.js file
+
+// The let mediasInLightBoxes will be so an array of all the ids of medias matching to a photographer
+let mediasInLightBoxes = [];
+// Array only with Ids of the medias
+let mediasIdInLightBox = [];
+// This variable has to be global
+let newIdMediaShownInLightBox = null;
+
+// Contains one of the 3 ways to sort the medias + Access
+
+// Theses let declared are declared globally
+let mediasSortedLikes; // To be an array
+let mediasSortedDate; // To be an array
+let mediasSortedTitle; // To be an array
+let focusPhotosStackNum = 6;
+
+// Variable globale déclarée mais isolée en l 102 : Pourquoi pas ici avec les autres???
+let photographer;
+
+// END: VAR GLOBAL //
+/////////////////////
+
 ///////////////
 // DROP-DOWN //
 
-// Declares variables of DOM
+// Declares variables of DOM for: Drop-Down + Arrow Next/Prev
 const selected = document.querySelector('.selected');
 const optionsContainer = document.querySelector('.options-container');
 const optionsList = document.querySelectorAll('.option');
@@ -54,23 +84,79 @@ const iconeSort = document.querySelector('.fas.fa-angle-down');
 const labelPopularite = document.querySelector('.label-popularite');
 const optionPopulariteId = document.getElementsByClassName('label-popularite');
 
+const previousBtn = document.querySelector('.previous');
+const nextBtn = document.querySelector('.next');
+
+// Set two variables to get the current value text in the DOM to get date, titre and popularité
+
+// Declare variable to get text just after his DOM's catching
+let popValue = optionPopulariteId[0].innerText;
+
+// Returns only the photographer matching to the id displayed in the url
+const id = parseInt(new URLSearchParams(location.search).get('id'));
+
+// First of all, function to display the medias on the webpage to use them after
+// ( I don't see any objection to modularize function displayData )
+function displayData(photographers, medias) {
+  photographer = photographers.find((photographer) => photographer.id === id);
+  const TemplatePhotographer = new PhotographerFactory(photographer);
+  TemplatePhotographer.setPhotographerPageHeaderDOM();
+  document.getElementById('contactButtonOpen').focus();
+  wholeContactForm();
+  TemplatePhotographer.setInsertPriceCardDOM();
+
+  // Retrieves only the medias's photographer who has the id displayed in the url
+  // and instances so only the medias having id === id
+  mediasFiltereds = medias.filter((media) => media.photographerId === id);
+
+  // Initialization var to 0
+  let totalLikes = 0;
+
+  // Add to totalLikes var each media.like corresponding to one photographer
+  mediasFiltereds.forEach((mediasFiltered) => {
+    totalLikes += mediasFiltered.likes;
+  });
+
+  // Display the total numbersOfLikesInsert in a new var
+  let numbersOfLikesInsert = `${totalLikes}`;
+
+  // Uses the MediaFactory to generate the insert's DOM
+  const TemplateLikesInsert = new MediaFactory(photographer);
+  TemplateLikesInsert.getInsertLikesCardDOM();
+
+  // Node DOM to set on the total number of likes in the insert
+  document.querySelector('footer>div>div>span').textContent = numbersOfLikesInsert;
+
+  // For each mediasFiltered create photo's DOM
+  mediasFiltereds.forEach((mediasFiltered) => {
+    const TemplateMedia = new MediaFactory(mediasFiltered, medias);
+    TemplateMedia.setPhotosCardDOM();
+    focusPhotosStackNum++;
+  });
+
+  /* // Unuseful
+  // MediasFiltered creates a lightbox DOM
+  mediasFiltereds.forEach((mediasFiltered) => {
+    const TemplateMedia = new LightBoxFactory(mediasFiltered, medias);
+    TemplateMedia.getLightBoxImgDOM();
+  });
+  */
+
+  canModifyOrderMediasFiltereds();
+  return mediasFiltereds;
+}
+
 // DROP-DOWN ==> 3 SORTING: functions declared to be call by (2) listeners
-
-// Contains one of the 3 ways to sort the medias
-
-// Theses let declared are declared globally
-let mediasSortedLikes;
-let mediasSortedDate;
-let mediasSortedTitle;
-let focusPhotosStackNum = 6;
-
+// Sort the medias and redisplay them
 function sortedLike(medias) {
   mediasSortedLikes = mediasFiltereds;
   mediasSortedLikes.sort(function (a, b) {
     return b.likes - a.likes;
   });
+
   // Empties the content first of all
   document.querySelector('.photos-displaying').innerHTML = '';
+
   // For each mediasFiltered create photo's DOM
   mediasSortedLikes.forEach((mediasSortedLike) => {
     const TemplateMedia = new MediaFactory(mediasSortedLike, medias);
@@ -78,33 +164,15 @@ function sortedLike(medias) {
     focusPhotosStackNum++;
   });
   mediasIdInLightBox = [];
-  canModifyOrderMediasFiltereds();
-  injectionFirstMediaLightBox();
-}
-
-function sortedDate(medias) {
-  mediasSortedDate = mediasFiltereds;
-  mediasSortedDate.sort(function (a, b) {
-    return new Date(b.date) - new Date(a.date);
-  });
-  // Empties the content first of all
-  document.querySelector('.photos-displaying').innerHTML = '';
-  // For each mediasFiltered create photo's DOM
-  mediasSortedDate.forEach((mediasSortedDate) => {
-    const TemplateMedia = new MediaFactory(mediasSortedDate, medias);
-    TemplateMedia.setPhotosCardDOM();
-    focusPhotosStackNum++;
-  });
-  mediasIdInLightBox = [];
-  canModifyOrderMediasFiltereds();
-  injectionFirstMediaLightBox();
 }
 
 function sortedAZ(medias) {
   mediasSortedTitle = mediasFiltereds;
   mediasSortedTitle.sort((a, b) => a.title.localeCompare(b.title, 'fr', { ignorePunctuation: true }));
+
   // Empties the content first of all
   document.querySelector('.photos-displaying').innerHTML = '';
+
   // For each mediasFiltered create photo's DOM
   mediasSortedTitle.forEach((mediasSortedTitle) => {
     const TemplateMedia = new MediaFactory(mediasSortedTitle, medias);
@@ -112,21 +180,59 @@ function sortedAZ(medias) {
     focusPhotosStackNum++;
   });
   mediasIdInLightBox = [];
-  canModifyOrderMediasFiltereds();
-  injectionFirstMediaLightBox();
 }
 
-// Think about the option of close it clicking anywhere
-// Opens/Closes the dropdown and reverse the chevron
+function sortedDate(medias) {
+  mediasSortedDate = mediasFiltereds;
+  mediasSortedDate.sort(function (a, b) {
+    return new Date(b.date) - new Date(a.date);
+  });
+
+  // Empties the content first of all
+  document.querySelector('.photos-displaying').innerHTML = '';
+
+  // For each mediasFiltered create photo's DOM
+  mediasSortedDate.forEach((mediasSortedDate) => {
+    const TemplateMedia = new MediaFactory(mediasSortedDate, medias);
+    TemplateMedia.setPhotosCardDOM();
+    focusPhotosStackNum++;
+  });
+  mediasIdInLightBox = [];
+}
+
+// Modifies mediasInLightBoxes and refining to get ids
+function canModifyOrderMediasFiltereds() {
+  if (mediasSortedLikes !== undefined) {
+    mediasInLightBoxes = mediasSortedLikes;
+    return mediasInLightBoxes;
+  } else if (mediasSortedDate !== undefined) {
+    mediasInLightBoxes = mediasSortedDate;
+    return mediasInLightBoxes;
+  } else if (mediasSortedTitle !== undefined) {
+    mediasInLightBoxes = mediasSortedTitle;
+    return mediasInLightBoxes;
+  } else if (mediasFiltereds) {
+    mediasInLightBoxes = mediasFiltereds;
+    return mediasInLightBoxes;
+  } else {
+    console.log('Error in the array of medias Sorted or mediasInLightBoxes');
+  }
+
+  // Refines to retrieve only the ids in the array
+  for (let i = 0; i < mediasInLightBoxes.length; i++) {
+    let mediasIdInLightBox = [];
+    mediasIdInLightBox.push(mediasInLightBoxes[i].id);
+  }
+}
+
+// ( Think about the option of close it clicking anywhere )
+// Opens/Closes the dropdown and reverse the chevron ( Dynamic DOM )
 chevronContainer.addEventListener('click', function buttonUpdated(evt) {
   evt.preventDefault();
   optionsContainer.classList.toggle('active');
   iconeSort.classList.toggle('reverse-chevron');
   selected.classList.toggle('border-radius');
 });
-
-// Set variables to get the current value text in the DOM
-let popValue = optionPopulariteId[0].innerText;
 
 optionDate.addEventListener('click', function (evt) {
   evt.preventDefault();
@@ -155,76 +261,40 @@ labelPopularite.addEventListener('click', function (evt) {
   selected.classList.toggle('border-radius');
 });
 
-console.log('Environ 25% du code parcouru!');
-
 labelPopularite.addEventListener('click', function (evt) {
   evt.preventDefault();
   if (popValue === 'Popularité') {
-    sortedLike();
+    sortedLike(medias);
+    console.log(mediasSortedLikes);
   } else if (popValue === 'Date') {
-    sortedDate();
+    sortedDate(medias);
+    console.log(mediasSortedDate);
   } else if (popValue === 'Titre') {
-    sortedAZ();
+    sortedAZ(medias);
+    console.log(mediasSortedTitle);
   } else console.error('Text inserted: Error');
+  canModifyOrderMediasFiltereds();
+  openLightBox(evt);
+  console.log('Index after injection:', theIndex);
 });
 
 optionsList.forEach((obj) => {
   obj.addEventListener('click', function (evt) {
     evt.preventDefault();
     if (popValue === 'Popularité') {
-      sortedLike();
+      sortedLike(medias);
+      console.log(mediasSortedLikes);
     } else if (popValue === 'Date') {
-      sortedDate();
+      sortedDate(medias);
+      console.log(mediasSortedDate);
     } else if (popValue === 'Titre') {
-      sortedAZ();
+      sortedAZ(medias);
+      console.log(mediasSortedTitle);
     } else console.error('Text inserted: Error');
+    canModifyOrderMediasFiltereds();
+    openLightBox(evt);
   });
 });
-
-// Returns only the photographer matching to the id displayed in the url
-const id = parseInt(new URLSearchParams(location.search).get('id'));
-
-let photographer;
-function displayData(photographers, medias) {
-  const id = parseInt(new URLSearchParams(location.search).get('id'));
-  photographer = photographers.find((photographer) => photographer.id === id);
-  const TemplatePhotographer = new PhotographerFactory(photographer);
-  TemplatePhotographer.setPhotographerPageHeaderDOM();
-  document.getElementById('contactButtonOpen').focus();
-  wholeContactForm();
-  TemplatePhotographer.setInsertPriceCardDOM();
-
-  // Retrieves only the medias's photographer who has the id displayed in the url
-  // and instances so only the medias having id === id
-  mediasFiltereds = medias.filter((media) => media.photographerId === id);
-  // Initialization var to 0
-  let totalLikes = 0;
-  // Add to totalLikes var each media.like corresponding to one photographer
-  mediasFiltereds.forEach((mediasFiltered) => {
-    totalLikes += mediasFiltered.likes;
-  });
-  // Display the total numbersOfLikesInsert in a new var
-  let numbersOfLikesInsert = `${totalLikes}`;
-  // Uses the MediaFactory to generate the insert's DOM
-  const TemplateLikesInsert = new MediaFactory(photographer);
-  TemplateLikesInsert.getInsertLikesCardDOM();
-  // Node DOM to set on the total number of likes in the insert
-  document.querySelector('footer>div>div>span').textContent = numbersOfLikesInsert;
-
-  // This is returning the const = mediasFiltereds;
-  // for each mediasFiltered create photo's DOM
-  mediasFiltereds.forEach((mediasFiltered) => {
-    const TemplateMedia = new MediaFactory(mediasFiltered, medias);
-    TemplateMedia.setPhotosCardDOM();
-    focusPhotosStackNum++;
-  });
-  // This is returning the const = mediasFiltereds;
-  // mediasFiltered it creates a lightbox DOM
-  mediasFiltereds.forEach((mediasFiltered) => {
-    const TemplateMedia = new LightBoxFactory(mediasFiltered, medias);
-    TemplateMedia.getLightBoxImgDOM();
-  });
-}
 
 // END: DROP-DOWN //
 ////////////////////
@@ -236,7 +306,7 @@ function displayData(photographers, medias) {
 
 // Opens & Closes
 const modalLightBox = document.querySelector('#LightBox_modal');
-// MediaLinks to click on the picture...
+// MediaLinks to click on a picture...
 const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
 const closeModalLightBox = document.querySelector('.close-lightbox');
 // Retrieves: The div containing parent of img/video of lightbox + Parent of img/video + The img/video itself;
@@ -246,276 +316,367 @@ const parentvideoInLightBox = document.querySelector('.flex-center.as-video');
 const imgInLightBox = document.querySelector('.as-img.injected-content-lightBox');
 const videoInLightBox = document.querySelector('.as-video.injected-content-lightBox');
 
-console.log('Environ 50% du code parcouru!');
+// When open the LightBox set the focus on the current media ( or only video ? )
+// And also when display previous/next function ???
 
-// The let mediasInLightBoxes will be so an array of all the ids of medias matching to a photographer
-let mediasInLightBoxes = [];
-// Array only with Ids of the medias
-let mediasIdInLightBox = [];
-
-// Impossible to import this function as a module
-function canModifyOrderMediasFiltereds() {
-  if (mediasSortedLikes !== undefined) {
-    mediasInLightBoxes = mediasSortedLikes;
-  } else if (mediasSortedDate !== undefined) {
-    mediasInLightBoxes = mediasSortedDate;
-  } else if (mediasSortedTitle !== undefined) {
-    mediasInLightBoxes = mediasSortedTitle;
-  } else if (mediasFiltereds.length > 0) {
-    mediasInLightBoxes = mediasFiltereds;
-  } else console.log('Error in the array of mediasFiltereds');
-  for (let i = 0; i < mediasInLightBoxes.length; i++) {
-    mediasIdInLightBox.push(mediasInLightBoxes[i].id);
+function previous() {
+  if (theIndex !== null) {
+    // Based on theIndex
+    if (theIndex === -1) {
+      console.log('Error in previous() based on theIndex');
+    } else if (theIndex === 0) {
+      theIndex = mediasInLightBoxes.length - 1;
+      newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
+    } else {
+      theIndex--;
+      newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
+    }
+  } else {
+    // Based on theIndexBis
+    if (theIndexBis === -1) {
+      console.log('Error in previous() based on theIndexBis');
+    } else if (theIndexBis === 0) {
+      theIndex = mediasInLightBoxes.length - 1;
+      newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
+    } else {
+      theIndex = theIndexBis - 1;
+      newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
+    }
   }
 }
-// Opens the LightBox and activates all the others functions related to the lightBox
-
-function openLightBox() {
-  // When open the LightBox set the focus on the current media ( or only video ? )
-  // And also when display previous/next function ?
-  canModifyOrderMediasFiltereds();
-
-  // Retrieves button's click prev & next of the function: listener()
-  // & it browse on the indexes
-
-  // Retrieves the index of previous media to the left
-  // Sortir cette déclaration de fonction de là
-  let newIdMediaShownInLightBox;
-  function previous() {
-    if (theIndex !== null) {
-      // Based on theIndex
-      if (theIndex === -1) {
-        console.log('Error in previous()');
-      } else if (theIndex === 0) {
-        theIndex = mediasInLightBoxes.length - 1;
-        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
-        nextPrevDisplayMedia();
-        return theIndex;
-      } else {
-        theIndex--;
-        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
-        nextPrevDisplayMedia();
-        return theIndex;
-      }
+function next() {
+  if (theIndex !== null) {
+    // Based on theIndex
+    if (theIndex === -1) {
+      console.log('Error in next() based on theIndex');
+    } else if (theIndex === mediasInLightBoxes.length - 1) {
+      theIndex = 0;
+      newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
     } else {
-      // Based on theIndexBis
-      if (theIndexBis === -1) {
-        console.log('Error in previous()');
-      } else if (theIndexBis === 0) {
-        theIndex = mediasInLightBoxes.length - 1;
-        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
-        nextPrevDisplayMedia();
-        return theIndex;
-      } else {
-        theIndex = theIndexBis - 1;
-        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
-        nextPrevDisplayMedia();
-        return theIndex;
-      }
+      theIndex++;
+      newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
+    }
+  } else {
+    // Based on theIndexBis
+    if (theIndexBis === -1) {
+      console.log('Error in next() based on theIndexBis');
+    } else if (theIndexBis === mediasInLightBoxes.length - 1) {
+      theIndex = 0;
+      newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
+    } else {
+      theIndex = theIndexBis + 1;
+      newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
     }
   }
-  // Retrieves the index of next media to the right
-  function next() {
-    if (theIndex !== null) {
-      // Based on theIndex
-      if (theIndex === -1) {
-        console.log('Error in next()');
-      } else if (theIndex === mediasInLightBoxes.length - 1) {
-        theIndex = 0;
-        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
-        nextPrevDisplayMedia();
-        return theIndex;
-      } else {
-        theIndex++;
-        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
-        nextPrevDisplayMedia();
-        return theIndex;
-      }
-    } else {
-      // Based on theIndexBis
-      if (theIndexBis === -1) {
-        console.log('Error in next()');
-      } else if (theIndexBis === mediasInLightBoxes.length - 1) {
-        theIndex = 0;
-        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
-        nextPrevDisplayMedia();
-        return theIndex;
-      } else {
-        theIndex = theIndexBis + 1;
-        newIdMediaShownInLightBox = mediasIdInLightBox[theIndex];
-        nextPrevDisplayMedia();
-        return theIndex;
-      }
-    }
+}
+
+// nextPrevDisplayMedia renvoi le bon array de medias pour obtenir un newIdMediaShownInLightBox
+function nextPrevDisplayMedia() {
+  let mediasFiltModified;
+
+  // In case of sorting by pop date or title the original mediasFiltereds is modified
+  if (mediasSortedLikes !== undefined) {
+    // Assigns the value of mediasSortedLikes to mediasFiltereds
+    mediasFiltModified = mediasSortedLikes;
+    console.log(mediasSortedLikes);
+    console.log(mediasFiltModified);
+    // return mediasFiltereds;
+  } else if (mediasSortedDate !== undefined) {
+    mediasFiltModified = mediasSortedDate;
+    // return mediasFiltereds;
+  } else if (mediasSortedTitle !== undefined) {
+    mediasFiltModified = mediasSortedTitle;
+    // return mediasFiltereds;
+
+    // Le else if suivant ne sert à rien non ???
+  } else if (mediasFiltereds.length > 0) {
+    mediasFiltModified = mediasFiltereds;
+    // return mediasFiltereds;
+  } else console.log('Error in the array of mediasFiltereds in nextPrevFirstMediaLightBox()');
+
+  const titleCurrentMediaInLightBox = mediasFiltModified.find((x) => x.id === newIdMediaShownInLightBox).title;
+  const imageCurrentMediaInLightBox = mediasFiltModified.find((x) => x.id === newIdMediaShownInLightBox).image;
+  const videoCurrentMediaInLightBox = mediasFiltModified.find((x) => x.id === newIdMediaShownInLightBox).video;
+  const photographerIDCurrentMediaInLightBox = mediasFiltModified.find(
+    (x) => x.id === newIdMediaShownInLightBox
+  ).photographerId;
+
+  console.log(titleCurrentMediaInLightBox);
+
+  // Set again undefined this var
+  mediasFiltModified = undefined;
+
+  const nameOfPhotographer =
+    photographerIDCurrentMediaInLightBox === 243
+      ? 'Mimi'
+      : photographerIDCurrentMediaInLightBox === 930
+      ? 'Ellie'
+      : photographerIDCurrentMediaInLightBox === 82
+      ? 'Tracy'
+      : photographerIDCurrentMediaInLightBox === 527
+      ? 'Nabeel'
+      : photographerIDCurrentMediaInLightBox === 925
+      ? 'Rhode'
+      : photographerIDCurrentMediaInLightBox === 195
+      ? 'Marcel'
+      : null;
+
+  if (!nameOfPhotographer) {
+    console.error('No name found');
+    return false;
   }
-  injectionFirstMediaLightBox();
+  const imgInLightBox = document.querySelector('.as-img.injected-content-lightBox');
+  const videoInLightBox = document.querySelector('.as-video.injected-content-lightBox');
+  // Adds the img of the clicked mediaLink
+  const photoShown = modalLightBox.querySelector('.content-lightBox div figure div img');
+  const videoShown = modalLightBox.querySelector('.content-lightBox div figure div video');
+  const photoVideoH2 = modalLightBox.querySelector('.content-lightBox div figure figcaption h2');
+  if (imageCurrentMediaInLightBox !== undefined) {
+    // Image of mediaLink clicked -> modal lightBox
+    photoShown.src = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${imageCurrentMediaInLightBox}`;
+    photoShown.alt = titleCurrentMediaInLightBox;
+    photoShown.id = newIdMediaShownInLightBox;
+    // Invisibility of video
+    parentvideoInLightBox.classList.add('hidden');
+    parentvideoInLightBox.classList.remove('show');
+    videoInLightBox.classList.add('hidden');
+    videoInLightBox.classList.remove('show');
+    // Visibility of image
+    parentimgInLightBox.classList.remove('hidden');
+    parentimgInLightBox.classList.add('show');
+    imgInLightBox.classList.remove('hidden');
+    imgInLightBox.classList.add('show');
+  } else if (videoCurrentMediaInLightBox !== undefined) {
+    // Video of mediaLink clicked -> modal lightBox
+    videoShown.src = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${videoCurrentMediaInLightBox}`;
+    videoShown.alt = titleCurrentMediaInLightBox;
+    videoShown.id = newIdMediaShownInLightBox;
+    // Invisibility of image
+    parentimgInLightBox.classList.add('hidden');
+    parentimgInLightBox.classList.remove('show');
+    imgInLightBox.classList.add('hidden');
+    imgInLightBox.classList.remove('show');
+    // Visibility of video
+    parentvideoInLightBox.classList.remove('hidden');
+    parentvideoInLightBox.classList.add('show');
+    videoInLightBox.classList.remove('hidden');
+    videoInLightBox.classList.add('show');
+  } else {
+    parentimgInLightBox.classList.add('hidden');
+    parentvideoInLightBox.classList.add('hidden');
+    imgInLightBox.classList.add('hidden');
+    videoInLightBox.classList.add('hidden');
+  }
+  // Title of image or video of mediaLinks clicked -> modal lightBox
+  photoVideoH2.style.fontSize = '32px';
+  photoVideoH2.style.color = '#901C1C';
+  photoVideoH2.textContent = titleCurrentMediaInLightBox;
+  // Visibility of the #LightBox_modal
+  modalLightBox.classList.remove('hidden');
+  modalLightBox.classList.add('show');
+}
 
-  console.log('Là 80% du code est parcouru.');
-  function nextPrevDisplayMedia() {
-    if (mediasSortedLikes !== undefined) {
-      mediasFiltereds = mediasSortedLikes;
-    } else if (mediasSortedDate !== undefined) {
-      mediasFiltereds = mediasSortedDate;
-    } else if (mediasSortedTitle !== undefined) {
-      mediasFiltereds = mediasSortedTitle;
-    } else if (mediasFiltereds.length > 0) {
-      mediasFiltereds = mediasFiltereds;
-    } else console.log('Error in the array of mediasFiltereds in nextPrevFirstMediaLightBox()');
-
-    const titleCurrentMediaInLightBox = mediasFiltereds.find((x) => x.id === newIdMediaShownInLightBox).title;
-    const imageCurrentMediaInLightBox = mediasFiltereds.find((x) => x.id === newIdMediaShownInLightBox).image;
-    const videoCurrentMediaInLightBox = mediasFiltereds.find((x) => x.id === newIdMediaShownInLightBox).video;
-    const photographerIDCurrentMediaInLightBox = mediasFiltereds.find(
-      (x) => x.id === newIdMediaShownInLightBox
-    ).photographerId;
-
-    const nameOfPhotographer =
-      photographerIDCurrentMediaInLightBox === 243
-        ? 'Mimi'
-        : photographerIDCurrentMediaInLightBox === 930
-        ? 'Ellie'
-        : photographerIDCurrentMediaInLightBox === 82
-        ? 'Tracy'
-        : photographerIDCurrentMediaInLightBox === 527
-        ? 'Nabeel'
-        : photographerIDCurrentMediaInLightBox === 925
-        ? 'Rhode'
-        : photographerIDCurrentMediaInLightBox === 195
-        ? 'Marcel'
-        : null;
-
-    if (!nameOfPhotographer) {
-      console.error('No name found');
-      return false;
+// MAIN FUNCTION played by a click
+//    Declares openLightBox:
+function openLightBox(elementClicked) {
+  // Declares 4 functions
+  function setMediasIdInLightBox() {
+    // console.log(mediasFilteredsInside);
+    // We refine to retrieve only the ids in the array
+    const medCopyMediasFiltereds = Object.assign([{}], mediasFiltereds);
+    let mediasIdInLightBox = [];
+    for (const medCopyMediasFiltered in medCopyMediasFiltereds) {
+      mediasIdInLightBox.push(medCopyMediasFiltereds[medCopyMediasFiltered].id);
     }
+    // console.log(mediasIdInLightBox);
+    return mediasIdInLightBox;
+  }
+
+  function setCurrentIndexInLightBox(elementClicked) {
+    console.log(elementClicked);
+    // Defines theIndexBis( id is casted to Number)
+    const medCopyMediasFiltereds = Object.assign([{}], mediasFiltereds);
+    theIndex = setMediasIdInLightBox(medCopyMediasFiltereds).findIndex(
+      (elt) => elt === Number(elementClicked.path[1].id)
+    );
+    return theIndex;
+  }
+
+  // Doesn't contain any return
+  function displayTheFirstMediaInLightBox(elementClicked) {
+    // Actions to display the first media into the lightBox
+    const modalLightBox = document.querySelector('#LightBox_modal');
+    const parentimgInLightBox = document.querySelector('.flex-center.as-img');
+    const parentvideoInLightBox = document.querySelector('.flex-center.as-video');
     const imgInLightBox = document.querySelector('.as-img.injected-content-lightBox');
     const videoInLightBox = document.querySelector('.as-video.injected-content-lightBox');
     // Adds the img of the clicked mediaLink
     const photoShown = modalLightBox.querySelector('.content-lightBox div figure div img');
     const videoShown = modalLightBox.querySelector('.content-lightBox div figure div video');
     const photoVideoH2 = modalLightBox.querySelector('.content-lightBox div figure figcaption h2');
-    if (imageCurrentMediaInLightBox !== undefined) {
-      // Image of mediaLink clicked -> modal lightBox
-      photoShown.src = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${imageCurrentMediaInLightBox}`;
-      photoShown.alt = titleCurrentMediaInLightBox;
-      photoShown.id = newIdMediaShownInLightBox;
+
+    const regex1 = /([\w-]+\.)+[\w-]{2}([4]){1}$/;
+    // elementClicked.path ne peut être accessible pour les keysup ???
+    const paragraphSrc = elementClicked.path[1].getAttribute('src');
+    if (paragraphSrc.match(regex1) === null) {
       // Invisibility of video
       parentvideoInLightBox.classList.add('hidden');
       parentvideoInLightBox.classList.remove('show');
       videoInLightBox.classList.add('hidden');
       videoInLightBox.classList.remove('show');
+
+      // Image of mediaLink clicked -> modal lightBox
+      photoShown.src = elementClicked.path[1].getAttribute('src');
+      photoShown.alt = elementClicked.path[1].getAttribute('alt');
+      photoShown.id = elementClicked.path[1].getAttribute('id');
+
       // Visibility of image
       parentimgInLightBox.classList.remove('hidden');
       parentimgInLightBox.classList.add('show');
       imgInLightBox.classList.remove('hidden');
       imgInLightBox.classList.add('show');
-    } else if (videoCurrentMediaInLightBox !== undefined) {
-      // Video of mediaLink clicked -> modal lightBox
-      videoShown.src = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${videoCurrentMediaInLightBox}`;
-      videoShown.alt = titleCurrentMediaInLightBox;
-      videoShown.id = newIdMediaShownInLightBox;
+    } else {
       // Invisibility of image
       parentimgInLightBox.classList.add('hidden');
       parentimgInLightBox.classList.remove('show');
       imgInLightBox.classList.add('hidden');
       imgInLightBox.classList.remove('show');
+
+      // Video of mediaLink clicked -> modal lightBox
+      videoShown.src = elementClicked.path[1].getAttribute('src');
+      videoShown.alt = elementClicked.path[1].getAttribute('alt');
+      videoShown.id = elementClicked.path[1].getAttribute('id');
+
       // Visibility of video
       parentvideoInLightBox.classList.remove('hidden');
       parentvideoInLightBox.classList.add('show');
       videoInLightBox.classList.remove('hidden');
       videoInLightBox.classList.add('show');
-    } else {
-      parentimgInLightBox.classList.add('hidden');
-      parentvideoInLightBox.classList.add('hidden');
-      imgInLightBox.classList.add('hidden');
-      videoInLightBox.classList.add('hidden');
     }
     // Title of image or video of mediaLinks clicked -> modal lightBox
     photoVideoH2.style.fontSize = '32px';
     photoVideoH2.style.color = '#901C1C';
-    photoVideoH2.textContent = titleCurrentMediaInLightBox;
+    photoVideoH2.textContent = elementClicked.path[1].getAttribute('alt');
+
     // Visibility of the #LightBox_modal
     modalLightBox.classList.remove('hidden');
     modalLightBox.classList.add('show');
   }
 
-  // Listeners for Prev & Next & KeysUp Accessibility
-  document.querySelector('.previous').addEventListener('click', () => {
-    previous();
-  });
+  function setTheIndexBis(elementClicked) {
+    const medCopyMediasFiltereds = Object.assign([{}], mediasFiltereds);
+    theIndexBis = setMediasIdInLightBox(medCopyMediasFiltereds).findIndex(
+      (elt) => elt === Number(elementClicked.path[3].id)
+    );
+    return theIndexBis;
+  }
 
-  document.querySelector('.next').addEventListener('click', () => {
-    next();
-  });
-
-  // /\ WORK IN PROGRESS /\
-  // PB: NodeList empty -> Resolved ( cause pb location ( of const catchs DOM ?) in the code/file)
-  // Iterate for accessibility -> openLightBox whenever that element is focused && key 'Enter' released
-  // Accessibility 1st part
-  // Switchs on the 3 keysup ( the user can type on the keyboard )
-  document.addEventListener('keyup', (e) => {
-    switch (e.key) {
-      case 'ArrowLeft':
-        previous();
-        break;
-      case 'ArrowRight':
-        next();
-        break;
-      // Closes modal form using Escape key
-      case 'Escape':
-        theIndex = null;
-        theIndexBis;
-        injectedLightBoxCont.innerHTML = '';
-        // Invisibility of video
-        parentvideoInLightBox.classList.remove('show');
-        videoInLightBox.classList.add('hidden');
-        // Invisibility of image
-        parentimgInLightBox.classList.remove('show');
-        imgInLightBox.classList.add('hidden');
-        // Closes the lightbox a hidden class
-        modalLightBox.classList.remove('show');
-        modalLightBox.classList.add('hidden');
-        break;
-      case 'Enter':
-        // Rename everywhere tryTests to -> (no idea!)
-        const tryTests = document.querySelectorAll('.media-links');
-        const keyOnLabelPop = document.getElementById('option-popularite');
-        const keyOnLabelDate = document.getElementById('option-date');
-        const keyOnLabelTitre = document.getElementById('option-titre');
-        // Do it also for .label-date, .label-titre
-        for (const tryTest of tryTests) {
-          if (document.activeElement === tryTest) {
-            console.log('One tryTest is focused');
-            // openLightBox ne veut pas s'ouvrir et aucun message dans la console ???!!
-            openLightBox();
-            console.log('Yes !! Enter is functionning on Medias !!');
-          }
-        }
-        if (document.activeElement === keyOnLabelPop) {
-          console.log('keyOnLabelPop is focused');
-          sortedLike(medias);
-          console.log('Yes !! Enter is functionning on Label Pop !!');
-        };
-        if (document.activeElement === keyOnLabelDate) {
-          console.log('keyOnLabelDate is focused');
-          sortedDate(medias);
-          console.log('Yes !! Enter is functionning on Label Date !!');
-        };
-        if (document.activeElement === keyOnLabelTitre) {
-          console.log('keyOnLabelTitre is focused');
-          sortedAZ(medias);
-          console.log('Yes !! Enter is functionning on Label  !!');
-        };
-        break;
-    }
-  });
+  // 4 functions executed here
+  mediasIdInLightBox = setMediasIdInLightBox();
+  theIndex = setCurrentIndexInLightBox(elementClicked);
+  displayTheFirstMediaInLightBox(elementClicked);
+  theIndexBis = setTheIndexBis(elementClicked);
 }
 
-// Closes modal form on cross "X"
-closeModalLightBox.addEventListener('click', function () {
+///// END: MAIN FUNCTION /////
+//////////////////////////////
+
+//////////////////////
+///// LISTENERS //////
+// ???
+// Listener opens function openLightBox()
+window.addEventListener('click', () => {
+  document.querySelectorAll('.media-links').forEach((openMediaLink) => {
+    openMediaLink.addEventListener('click', (elementClicked) => {
+      canModifyOrderMediasFiltereds();
+      openLightBox(elementClicked);
+    });
+  });
+});
+
+// Listeners for Prev & Next & KeysUp Accessibility
+// Retrieves button's click prev & next of the function: listener()
+// & it browse on the indexes
+previousBtn.addEventListener('click', () => {
+  previous();
+  nextPrevDisplayMedia();
+});
+
+nextBtn.addEventListener('click', () => {
+  next();
+  nextPrevDisplayMedia();
+});
+
+// Iterate for accessibility -> prepareopenLightBox whenever that element is focused && key 'Enter' released
+// Accessibility
+// Switchs on the 3 keysup ( the user can type on the keyboard )
+document.addEventListener('keyup', (evt) => {
+  switch (evt.key) {
+    case 'ArrowLeft':
+      previous();
+      break;
+    case 'ArrowRight':
+      next();
+      break;
+    // Closes modal form using Escape key
+    case 'Escape':
+      // Reset the variables and close the lightBox
+      theIndex = 100; // <- Change this value to 0 or undefined according to the code
+      theIndexBis;
+      injectedLightBoxCont.innerHTML = '';
+      // Invisibility of video
+      parentvideoInLightBox.classList.remove('show');
+      videoInLightBox.classList.add('hidden');
+      // Invisibility of image
+      parentimgInLightBox.classList.remove('show');
+      imgInLightBox.classList.add('hidden');
+      // Closes the lightbox a hidden class
+      modalLightBox.classList.remove('show');
+      modalLightBox.classList.add('hidden');
+      break;
+    // Pourquoi j'ai mis le Enter là, dans ce listener ???
+    case 'Enter':
+      const mediaLinkAccess = document.querySelectorAll('.media-links'); // Use .dimensions-photos-grapher-page if doesn't work
+      const keyOnLabelPop = document.getElementById('option-popularite');
+      const keyOnLabelDate = document.getElementById('option-date');
+      const keyOnLabelTitre = document.getElementById('option-titre');
+      // Do it also for .label-date, .label-titre
+      for (const eltEntered of mediaLinkAccess) {
+        if (document.activeElement === eltEntered) {
+          console.log('One elt of mediaLinkAccess is focused');
+          console.log(eltEntered);
+          console.log(eltEntered.path);
+          console.log('Yes !! Enter is functionning on Medias !!');
+          openLightBox(eltEntered);
+        }
+      }
+      if (document.activeElement === keyOnLabelPop) {
+        console.log('keyOnLabelPop is focused');
+        sortedLike(medias);
+        console.log('Yes !! Enter is functionning on Label Pop !!');
+        canModifyOrderMediasFiltereds();
+      }
+      if (document.activeElement === keyOnLabelDate) {
+        console.log('keyOnLabelDate is focused');
+        sortedDate(medias);
+        console.log('Yes !! Enter is functionning on Label Date !!');
+        canModifyOrderMediasFiltereds();
+      }
+      if (document.activeElement === keyOnLabelTitre) {
+        console.log('keyOnLabelTitre is focused');
+        sortedAZ(medias);
+        console.log('Yes !! Enter is functionning on Label  !!');
+        canModifyOrderMediasFiltereds();
+      }
+      // canModifyOrderMediasFiltereds();
+      // openLightBox(evt);
+      break;
+  }
+});
+
+// Closes modal lightBox on cross "X"
+closeModalLightBox.addEventListener('click', () => {
   // Clean lightBox content ( title && (image || video) )
-  theIndex = null;
-  theIndexBis;
   injectedLightBoxCont.innerHTML = '';
   // Invisibility of video
   parentvideoInLightBox.classList.remove('show');
@@ -526,20 +687,18 @@ closeModalLightBox.addEventListener('click', function () {
   // Closes the lightbox a hidden class
   modalLightBox.classList.remove('show');
   modalLightBox.classList.add('hidden');
-  // return theIndex, theIndexBis;
+  // ici utiliser une fonction qui renvoi le bon nombre, 100 par exemple
+  // changeToUndefinedOrNullNumber();
+  theIndex = 100; // <- Change this value to 0 or undefined according to the code
 });
-
-///// END: LIGHTBOX /////
-/////////////////////////
+///// END: LISTENERS /////
+//////////////////////////
 
 async function init() {
   // Retrieves photographers and medias data
   const photographers = await getPhotographers();
-  const medias = await getMedias();
-  displayData(photographers, medias);
-  openLightBox();
-
-  console.log('Là 100% du code est parcouru!');
+  let medias = await getMedias();
+  mediasFiltereds = await displayData(photographers, medias);
 }
 
 // Starts the series of nested functions
@@ -554,7 +713,9 @@ export {
   mediasSortedLikes,
   photographer,
   focusPhotosStackNum,
+  newIdMediaShownInLightBox,
 };
+
 export { medias, mediaLinks, id };
-export { theIndex };
-export { displayData };
+export { theIndex, theIndexBis };
+export { displayData, nextPrevDisplayMedia, canModifyOrderMediasFiltereds };
