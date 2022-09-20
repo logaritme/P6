@@ -22,15 +22,18 @@ async function getAllTheJSONDatas() {
 const fullJSONContent = getAllTheJSONDatas();
 */
 
+
 async function getPhotographers() {
-  const data = await fetch('./data/photographers.json').then((response) => response.json());
+  const data = await fetch('./data/photographers.json').then((response) => response.json())
+  .catch(err => console.log(err, ': Temporary failed to fetch data'));
   return JSON.parse(JSON.stringify(data.photographers));
 }
 
 const photographers = getPhotographers();
 
 async function getMedias() {
-  const data = await fetch('./data/photographers.json').then((response) => response.json());
+  const data = await fetch('./data/photographers.json').then((response) => response.json())
+  .catch(err => console.log(err, ': Temporary failed to fetch data'));
   return JSON.parse(JSON.stringify(data.media));
 }
 const medias = getMedias();
@@ -101,9 +104,11 @@ function displayData(photographers, medias) {
   photographer = photographers.find((photographer) => photographer.id === id);
   const TemplatePhotographer = new PhotographerFactory(photographer);
   TemplatePhotographer.setPhotographerPageHeaderDOM();
+  TemplatePhotographer.setInsertPriceCardDOM();
+
+  // Accessibility: Setting the focus on the button
   document.getElementById('contactButtonOpen').focus();
   wholeContactForm();
-  TemplatePhotographer.setInsertPriceCardDOM();
 
   // Retrieves only the medias's photographer who has the id displayed in the url
   // and instances so only the medias having id === id
@@ -493,12 +498,16 @@ function openLightBox(elementClicked) {
   }
 
   function setCurrentIndexInLightBox(elementClicked) {
-    console.log(elementClicked);
     // Defines theIndexBis( id is casted to Number)
     const medCopyMediasFiltereds = Object.assign([{}], mediasFiltereds);
-    theIndex = setMediasIdInLightBox(medCopyMediasFiltereds).findIndex(
-      (elt) => elt === Number(elementClicked.path[1].id)
-    );
+    if (elementClicked.path !== undefined) {
+      theIndex = setMediasIdInLightBox(medCopyMediasFiltereds).findIndex(
+        (elt) => elt === Number(elementClicked.path[1].id)
+      );
+    } else {
+      theIndex = setMediasIdInLightBox(medCopyMediasFiltereds).findIndex((elt) => elt === Number(elementClicked.id));
+      console.log(theIndex);
+    }
     return theIndex;
   }
 
@@ -516,8 +525,24 @@ function openLightBox(elementClicked) {
     const photoVideoH2 = modalLightBox.querySelector('.content-lightBox div figure figcaption h2');
 
     const regex1 = /([\w-]+\.)+[\w-]{2}([4]){1}$/;
-    // elementClicked.path ne peut être accessible pour les keysup ???
-    const paragraphSrc = elementClicked.path[1].getAttribute('src');
+
+    let paragraphSrc;
+    let altPhotoShown;
+    let idPhotoShown;
+
+    const getSrcAltIdMedia = (elementClicked) => {
+      if (elementClicked.path !== undefined) {
+        paragraphSrc = elementClicked.path[1].getAttribute('src');
+        altPhotoShown = elementClicked.path[1].getAttribute('alt');
+        idPhotoShown = elementClicked.path[1].getAttribute('id');
+      } else {
+        paragraphSrc = elementClicked.getAttribute('src');
+        altPhotoShown = elementClicked.getAttribute('alt');
+        idPhotoShown = elementClicked.getAttribute('id');
+      }
+    };
+    getSrcAltIdMedia(elementClicked);
+
     if (paragraphSrc.match(regex1) === null) {
       // Invisibility of video
       parentvideoInLightBox.classList.add('hidden');
@@ -526,9 +551,10 @@ function openLightBox(elementClicked) {
       videoInLightBox.classList.remove('show');
 
       // Image of mediaLink clicked -> modal lightBox
-      photoShown.src = elementClicked.path[1].getAttribute('src');
-      photoShown.alt = elementClicked.path[1].getAttribute('alt');
-      photoShown.id = elementClicked.path[1].getAttribute('id');
+
+      photoShown.src = paragraphSrc;
+      photoShown.alt = altPhotoShown;
+      photoShown.id = idPhotoShown;
 
       // Visibility of image
       parentimgInLightBox.classList.remove('hidden');
@@ -543,9 +569,9 @@ function openLightBox(elementClicked) {
       imgInLightBox.classList.remove('show');
 
       // Video of mediaLink clicked -> modal lightBox
-      videoShown.src = elementClicked.path[1].getAttribute('src');
-      videoShown.alt = elementClicked.path[1].getAttribute('alt');
-      videoShown.id = elementClicked.path[1].getAttribute('id');
+      videoShown.src = paragraphSrc;
+      videoShown.alt = altPhotoShown;
+      videoShown.id = idPhotoShown;
 
       // Visibility of video
       parentvideoInLightBox.classList.remove('hidden');
@@ -556,7 +582,7 @@ function openLightBox(elementClicked) {
     // Title of image or video of mediaLinks clicked -> modal lightBox
     photoVideoH2.style.fontSize = '32px';
     photoVideoH2.style.color = '#901C1C';
-    photoVideoH2.textContent = elementClicked.path[1].getAttribute('alt');
+    photoVideoH2.textContent = altPhotoShown;
 
     // Visibility of the #LightBox_modal
     modalLightBox.classList.remove('hidden');
@@ -565,9 +591,15 @@ function openLightBox(elementClicked) {
 
   function setTheIndexBis(elementClicked) {
     const medCopyMediasFiltereds = Object.assign([{}], mediasFiltereds);
-    theIndexBis = setMediasIdInLightBox(medCopyMediasFiltereds).findIndex(
-      (elt) => elt === Number(elementClicked.path[3].id)
-    );
+
+    if (elementClicked.path !== undefined) {
+      theIndexBis = setMediasIdInLightBox(medCopyMediasFiltereds).findIndex(
+        (elt) => elt === Number(elementClicked.path[1].id)
+      );
+    } else {
+      theIndexBis = setMediasIdInLightBox(medCopyMediasFiltereds).findIndex((elt) => elt === Number(elementClicked.id));
+      console.log(theIndexBis);
+    }
     return theIndexBis;
   }
 
@@ -600,11 +632,13 @@ window.addEventListener('click', () => {
 previousBtn.addEventListener('click', () => {
   previous();
   nextPrevDisplayMedia();
+  document.querySelector('.previous').focus();
 });
 
 nextBtn.addEventListener('click', () => {
   next();
   nextPrevDisplayMedia();
+  document.querySelector('.next').focus();
 });
 
 // Iterate for accessibility -> prepareopenLightBox whenever that element is focused && key 'Enter' released
@@ -614,14 +648,16 @@ document.addEventListener('keyup', (evt) => {
   switch (evt.key) {
     case 'ArrowLeft':
       previous();
+      document.querySelector('.previous').focus();
       break;
     case 'ArrowRight':
       next();
+      document.querySelector('.next').focus();
       break;
     // Closes modal form using Escape key
     case 'Escape':
       // Reset the variables and close the lightBox
-      theIndex = 100; // <- Change this value to 0 or undefined according to the code
+      theIndex = null;
       theIndexBis;
       injectedLightBoxCont.innerHTML = '';
       // Invisibility of video
@@ -634,7 +670,8 @@ document.addEventListener('keyup', (evt) => {
       modalLightBox.classList.remove('show');
       modalLightBox.classList.add('hidden');
       break;
-    // Pourquoi j'ai mis le Enter là, dans ce listener ???
+    // Why not be more selectful than document for example div.photo-displaying for 'Enter???
+    // Pourquoi j'ai mis le Enter là, dans ce listener ??? -> Car il enregistre les keyup on document
     case 'Enter':
       const mediaLinkAccess = document.querySelectorAll('.media-links'); // Use .dimensions-photos-grapher-page if doesn't work
       const keyOnLabelPop = document.getElementById('option-popularite');
@@ -644,12 +681,13 @@ document.addEventListener('keyup', (evt) => {
       for (const eltEntered of mediaLinkAccess) {
         if (document.activeElement === eltEntered) {
           console.log('One elt of mediaLinkAccess is focused');
-          console.log(eltEntered);
-          console.log(eltEntered.path);
+          // console.log(eltEntered);
+          // console.log(eltEntered.id);
           console.log('Yes !! Enter is functionning on Medias !!');
           openLightBox(eltEntered);
         }
       }
+      // Apparently theses three " if " are unuseful
       if (document.activeElement === keyOnLabelPop) {
         console.log('keyOnLabelPop is focused');
         sortedLike(medias);
@@ -668,14 +706,18 @@ document.addEventListener('keyup', (evt) => {
         console.log('Yes !! Enter is functionning on Label  !!');
         canModifyOrderMediasFiltereds();
       }
-      // canModifyOrderMediasFiltereds();
-      // openLightBox(evt);
+      // document.querySelector('.previous').focus();
       break;
   }
 });
 
 // Closes modal lightBox on cross "X"
 closeModalLightBox.addEventListener('click', () => {
+  // Reset theIndex and theIndexBis
+  // Ici utiliser une fonction qui renvoi la bonne valeur, null par exemple
+  // changeToUndefinedOrNullNumber(); ???
+  theIndex = null;
+  theIndexBis;
   // Clean lightBox content ( title && (image || video) )
   injectedLightBoxCont.innerHTML = '';
   // Invisibility of video
@@ -687,9 +729,6 @@ closeModalLightBox.addEventListener('click', () => {
   // Closes the lightbox a hidden class
   modalLightBox.classList.remove('show');
   modalLightBox.classList.add('hidden');
-  // ici utiliser une fonction qui renvoi le bon nombre, 100 par exemple
-  // changeToUndefinedOrNullNumber();
-  theIndex = 100; // <- Change this value to 0 or undefined according to the code
 });
 ///// END: LISTENERS /////
 //////////////////////////
@@ -697,7 +736,7 @@ closeModalLightBox.addEventListener('click', () => {
 async function init() {
   // Retrieves photographers and medias data
   const photographers = await getPhotographers();
-  let medias = await getMedias();
+  const medias = await getMedias();
   mediasFiltereds = await displayData(photographers, medias);
 }
 

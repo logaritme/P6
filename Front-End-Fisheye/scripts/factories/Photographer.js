@@ -1,34 +1,17 @@
-import { focusProfileNum } from '../pages/index.js';
-
-// Photographer factory for index.html
+// Photographer factory for photographer.html
 
 export class PhotographerFactory {
   constructor(thePhotographers) {
     this._name = thePhotographers.name;
     this._id = thePhotographers.id;
     this._city = thePhotographers.city;
-    this._country = thePhotographers.country; 
+    this._country = thePhotographers.country;
     this._tagline = thePhotographers.tagline;
     this._price = thePhotographers.price;
     this._portrait = thePhotographers.portrait;
   }
-  // Function template display for index.html
-  setUserCardDOM() {
-    const picture = `./assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
-    const photographersSectionPlace = document.querySelector('.photographer-section'); // Pb ici
-    const article = document.createElement('article');
-    article.innerHTML = `
-    <a id="${this._id}" href="./photographer.html?id=${this._id}" tabindex="0" aria-label="${this._name}">
-      <img src="${picture}" alt="Photo de ${this._name}"></img>
-      <h2>${this._name}</h2>
-    </a>
-    <h3 tabindex="0">${this._city}</h3>
-    <h4 tabindex="0">${this._tagline}</h4>
-    <price tabindex="0">${this._price}\ €</price>
-    `;
-    photographersSectionPlace.appendChild(article);
-  }
-  // Function template display for photographer.html
+
+  // Function template display header for photographer.html
   setPhotographerPageHeaderDOM() {
     const picture = `./assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
     const photographersHeaderPlace = document.querySelector('.photographer-header');
@@ -36,23 +19,24 @@ export class PhotographerFactory {
     div.innerHTML = `
     <section>
       <article>
-        <h1>${this._name}</h1>
-        <p>${this._city + ', ' + this._country}</p>
-        <p class="text-color">${this._tagline}</p>
+        <h1 aria-label="prénom et nom">${this._name}</h1>
+        <p aria-label="ville et pays">${this._city + ', ' + this._country}</p>
+        <p class="text-color" aria-label="punchline">${this._tagline}</p>
       </article>
-      <button id="contactButtonOpen" class="contact-button" tabindex="0">Contactez-moi<span class="acc-invisible">Taper entrée pour ouvrir le formulaire de contact</span></button>
+      <button id="contactButtonOpen" class="contact-button" tabindex="0"  aria-label="Contacter le photographe">Contactez-moi<span class="acc-invisible">Taper entrée pour ouvrir le formulaire de contact</span></button>
       <img src="${picture}" alt="Photo de ${this._name}"></img>
     </section>
     `;
     photographersHeaderPlace.appendChild(div);
   }
+  // Function template display price for photographer.html
   setInsertPriceCardDOM() {
     const insertPricePlace = document.querySelector('footer');
     const divFooter = document.createElement('div');
     divFooter.innerHTML = `
     <div aria-label="Tarif journalier">
-      <span>${this._price}</span>
-      <i>€</i>
+      <span aria-label="prix">${this._price}</span>
+      <i role="currency" aria-label="euro"
       <span>/ jour</span>
     </div>
     `;

@@ -36,35 +36,36 @@
           <header>
             <h2 class="positionning-h2" tabindex="10"></h2>
             <!-- Here name of photographer will be injected by JS -->
-            <i class="close-modal-form" role="img" alt="Croix: pour fermer appuyer sur entrée" tabindex="0"></i>
+            <i class="close-modal-form" role="img" alt="Croix: pour fermer appuyer sur entrée" tabindex="9"></i>
           </header>
           <!-- FORM TO FILL -->
-          <form method="get" action="photographer.html" id="contact_form" name="contact">
+          <form method="get" action="photographer.html" id="contact_form" name="contact"
+            aria-label="Formulaire de contact">
             <!-- FORM : FIELDS -->
             <div class="formData firstName field">
-              <label for="firstName" tabindex="0">Prénom</label>
-              <input class="text-control" type="text" id="firstName" name="firstName" tabindex="0" />
+              <label for="firstName" tabindex="11">Prénom</label>
+              <input class="text-control" type="text" id="firstName" name="firstName" tabindex="1" />
               <div tabindex="-1"></div>
             </div>
             <div class="formData lastName field">
-              <label for="lastName" tabindex="0">Nom</label>
-              <input class="text-control" type="text" id="lastName" name="lastName" tabindex="0" />
+              <label for="lastName" tabindex="2">Nom</label>
+              <input class="text-control" type="text" id="lastName" name="lastName" tabindex="3" />
               <div tabindex="-1"></div>
             </div>
             <div class="formData email field">
-              <label for="email" tabindex="0">Email</label>
-              <input class="text-control" type="text" id="email" name="email" tabindex="0" />
+              <label for="email" tabindex="4">Email</label>
+              <input class="text-control" type="text" id="email" name="email" tabindex="5" />
               <div tabindex="-1"></div>
             </div>
             <div class="formData messageUser field">
-              <label for="messageUser" tabindex="0">Votre message</label>
-              <input class="text-control" type="text" id="messageUser" name="messageUser" tabindex="0" />
+              <label for="messageUser" tabindex="6">Votre message</label>
+              <input class="text-control" type="text" id="messageUser" name="messageUser" tabindex="7" />
               <div tabindex="-1"></div>
             </div>
             <!-- BUTTON SUBMIT TO CLICK -->
             <!-- Onsubmit with a listener to submit datas and close (if valid) or not close the modal (if invalid) -->
             <input class="submit-button btn-close button" id="firstModalBtnSubmit" type="submit" value="Envoyer"
-              tabindex="0" />
+              tabindex="8" />
             <div id="output_box"></div>
           </form>
         </div>
@@ -76,10 +77,10 @@
       <h2 class="drop-down-title-do" tabindex="0">Trier par<span class="acc-invisible"> : Popularité, Date ou
           Titre</span></h2>
 
-      <div class="select-box" tabindex="0">
+      <div class="select-box" tabindex="0" role="button">
         <!-- Preselected option -->
         <div class="selected border-radius">
-          <div class="selected-popularite" id="option-popularite" tabindex="0" aria-label="Popularité">
+          <div class="selected-popularite" id="option-popularite" tabindex="0" role="select" aria-label="Popularité">
             <input type="radio" class="radio" id="popularite" name="category">
             <label for="popularite" class="label-popularite">Popularité</label>
           </div>
@@ -88,15 +89,15 @@
           </button>
         </div>
         <!-- Container of two options-->
-        <div class="options-container">
+        <div class="options-container" role=listbox>
 
           <!-- First option -->
-          <div class="option" id="option-date" tabindex="0" aria-label="Date">
+          <div class="option" id="option-date" tabindex="0" role="option" aria-label="Date">
             <input type="radio" class="radio" id="date" name="category">
             <label for="date" class="label-date">Date</label>
           </div>
           <!-- Second option -->
-          <div class="option" id="option-titre" tabindex="0" aria-label="Titre">
+          <div class="option" id="option-titre" tabindex="0" role="option" aria-label="Titre">
             <input type="radio" class="radio" id="titre" name="category">
             <label for="titre" class="label-titre">Titre</label>
           </div>
@@ -119,12 +120,13 @@
               <!-- Set img in <a> instead of <div> ? -->
               <div class="flex-center as-img hidden">
                 <!-- Set src and alt content by JS -->
-                <img class="as-img injected-content-lightBox hidden" src="" alt="" id="" type="jpg">
+                <img class="as-img injected-content-lightBox hidden" src="" alt="" id="" tabindex="0" type="jpg">
               </div>
               <!-- Set video in <a> instead of <div> ? -->
               <div class="flex-center as-video hidden">
                 <!-- Set src and alt content by JS -->
-                <video class="as-video injected-content-lightBox hidden" src="" alt="" id="" type="video/mp4" controls>
+                <video class="as-video injected-content-lightBox hidden" src="" alt="" id="" tabindex="0"
+                  type="video/mp4" controls>
               </div>
               <figcaption class="position-title-media-lightBox">
                 <!-- Set h2 content by JS -->

@@ -322,16 +322,22 @@ function wholeContactForm() {
   // Accessibility
   // Switchs on the 3 keysup ( the user can type on the keyboard )
   // Not necessary ??
-  document.addEventListener('keyup', (e) => {
-    const baseH2 = document.querySelector('.modal-form header h2');
+
+  document.addEventListener('keyup', (evt) => {
     const modalContentBis = document.querySelector('.form-contact');
+    const baseH2 = document.querySelector('.modal-form header h2');
+    if (evt.key === 'Escape') {
+      baseH2.innerHTML = '';
+      // Invisibility of modal form
+      modalContentBis.classList.add('hidden');
+      modalContent.classList.remove('show');
+    }
+  });
+  /*
+  document.addEventListener('keyup', (e) => {
+    const modalContentBis = document.querySelector('.form-contact');
+    const baseH2 = document.querySelector('.modal-form header h2');
     switch (e.key) {
-      case 'ArrowDown':
-        tabIndex(currentTab + 1);
-        break;
-      case 'ArrowUp':
-        tabIndex(currentTab - 1);
-        break;
       // Closes modal form using Escape key
       case 'Escape':
         baseH2.innerHTML = '';
@@ -341,7 +347,7 @@ function wholeContactForm() {
         break;
     }
   });
-
+*/
   // END: LISTENERS //
   ////////////////////
 }
