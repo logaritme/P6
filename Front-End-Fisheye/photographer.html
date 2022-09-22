@@ -9,21 +9,21 @@
   <link rel="icon" type="image/png" href="./assets/images/favicon.png">
   <script src="https://kit.fontawesome.com/467f0c1e9b.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-  <title>Fisheye - photographe </title>
+  <title>Fisheye - Photographes - page 2</title>
 </head>
 
-<div class="div-center-whole-page" tabindex="-1">
+<div id="noneFocusPhot" class="div-center-whole-page" tabindex="-1">
   <!-- Set the aria-label & alt & role -->
 
-  <body class="body-photographer-html" style="background-color: lightgrey;">
-    <header class="first-header">
+  <body class="body-photographer-html" style="background-color: grey;">
+    <header class="first-header" role="banner">
       <a href="./index.html" tabindex="0" aria-label="Logo Fisheye - Tapez entrée pour revenir à la homepage">
         <img src="./assets/images/logo.png" class="logo-photographer"
           alt="Logo Fisheye représentant le texte Fisheye avec un appareil photo à la place du premier e"
           tabindex="-1" />
       </a>
     </header>
-    <main class="main-photographer-html">
+    <main class="main-photographer-html" role="main">
       <div class="photographer-header">
         <!-- Code will be injected by JS -->
       </div>
@@ -34,38 +34,44 @@
       <div class="content-modal">
         <div class="modal-form">
           <header>
-            <h2 class="positionning-h2" tabindex="10"></h2>
+            <h2 class="positionning-h2" tabindex="7"></h2>
             <!-- Here name of photographer will be injected by JS -->
-            <i class="close-modal-form" role="img" alt="Croix: pour fermer appuyer sur entrée" tabindex="9"></i>
+            <i class="close-modal-form" role="img" alt="Croix: pour fermer le formulaire de contact appuyer sur entrée"
+              tabindex="6" aria-label="Fermer le formulaire de contact"></i>
           </header>
           <!-- FORM TO FILL -->
           <form method="get" action="photographer.html" id="contact_form" name="contact"
             aria-label="Formulaire de contact">
             <!-- FORM : FIELDS -->
             <div class="formData firstName field">
-              <label for="firstName" tabindex="11">Prénom</label>
-              <input class="text-control" type="text" id="firstName" name="firstName" tabindex="1" />
-              <div tabindex="-1"></div>
+              <label for="firstName" tabindex="-1">Prénom</label>
+              <input class="text-control" type="text" id="firstName" name="firstName" tabindex="1" aria-describedby=""/>
+              <div id="messageErrorFName" tabindex="-1"
+                aria-label="Message d'erreur: Le prénom doit faire entre 2 et 33 caractères et ne doit contenir ni caractères spéciaux ni chiffres.">
+              </div>
             </div>
             <div class="formData lastName field">
-              <label for="lastName" tabindex="2">Nom</label>
-              <input class="text-control" type="text" id="lastName" name="lastName" tabindex="3" />
-              <div tabindex="-1"></div>
+              <label for="lastName" tabindex="-1">Nom</label>
+              <input class="text-control" type="text" id="lastName" name="lastName" tabindex="2" aria-describedby=""/>
+              <div id="messageErrorLName" tabindex="-1"
+                aria-label="Message d'erreur: Le nom doit faire entre 2 et 33 caractères et ne doit contenir ni caractères spéciaux ni chiffres.">
+              </div>
             </div>
             <div class="formData email field">
-              <label for="email" tabindex="4">Email</label>
-              <input class="text-control" type="text" id="email" name="email" tabindex="5" />
-              <div tabindex="-1"></div>
+              <label for="email" tabindex="-1">Email</label>
+              <input class="text-control" type="text" id="email" name="email" tabindex="3" aria-describedby=""/>
+              <div id="messageErrorEmail" tabindex="-1" aria-label="Ce champ doit être valide au format email."></div>
             </div>
             <div class="formData messageUser field">
-              <label for="messageUser" tabindex="6">Votre message</label>
-              <input class="text-control" type="text" id="messageUser" name="messageUser" tabindex="7" />
-              <div tabindex="-1"></div>
+              <label for="messageUser" tabindex="-1">Votre message</label>
+              <input class="text-control" type="text" id="messageUser" name="messageUser" tabindex="4" aria-describedby=""/>
+              <div id="messageErrorMessageUser" tabindex="-1" aria-label="Le message doit faire 2 caractères minimum et 260 caractères maximum.">
+              </div>
             </div>
             <!-- BUTTON SUBMIT TO CLICK -->
             <!-- Onsubmit with a listener to submit datas and close (if valid) or not close the modal (if invalid) -->
             <input class="submit-button btn-close button" id="firstModalBtnSubmit" type="submit" value="Envoyer"
-              tabindex="8" />
+              tabindex="5" />
             <div id="output_box"></div>
           </form>
         </div>
@@ -74,13 +80,18 @@
     <!-- 4th child of the body -->
     <div class="drop-down-container">
 
-      <h2 class="drop-down-title-do" tabindex="0">Trier par<span class="acc-invisible"> : Popularité, Date ou
+      <h2 id="trierPar" class="drop-down-title-do" tabindex="0">Trier par<span class="acc-invisible"> : Popularité, Date
+          ou
           Titre</span></h2>
 
       <div class="select-box" tabindex="0" role="button">
         <!-- Preselected option -->
         <div class="selected border-radius">
-          <div class="selected-popularite" id="option-popularite" tabindex="0" role="select" aria-label="Popularité">
+          <!-- Last test to test 21/09/2022 all the ' aria-something ' -->
+          <!-- Set aria-expanded="false" to "true" dynamically -->
+          <!-- Set aria-descendant="nameSortSelected" dynamically -->
+          <div class="selected-popularite" id="option-popularite" tabindex="0" role="button" aria-haspopup="listbox"
+            aria-expanded="false" aria-label="Popularité" aria-labelledby="trierPar" aria-controls="twoOptions">
             <input type="radio" class="radio" id="popularite" name="category">
             <label for="popularite" class="label-popularite">Popularité</label>
           </div>
@@ -89,15 +100,16 @@
           </button>
         </div>
         <!-- Container of two options-->
-        <div class="options-container" role=listbox>
+        <!-- Set aria-expanded="false" to "true" dynamically -->
+        <div id="twoOptions" class="options-container" role="listbox" aria-labelledby="trierPar" aria-expanded="false">
 
           <!-- First option -->
-          <div class="option" id="option-date" tabindex="0" role="option" aria-label="Date">
+          <div class="option" id="option-date" tabindex="0" role="option" aria-label="Date" aria-selected="false">
             <input type="radio" class="radio" id="date" name="category">
             <label for="date" class="label-date">Date</label>
           </div>
           <!-- Second option -->
-          <div class="option" id="option-titre" tabindex="0" role="option" aria-label="Titre">
+          <div class="option" id="option-titre" tabindex="0" role="option" aria-label="Titre" aria-selected="false">
             <input type="radio" class="radio" id="titre" name="category">
             <label for="titre" class="label-titre">Titre</label>
           </div>
@@ -115,7 +127,8 @@
       <div class="content-lightBox">
         <div class="lightBox-modal">
           <figure class="to-append-media flex-lightBox">
-            <button class="previous"><span class="fas fa-angle-left"></span></button>
+            <button class="previous" aria-label="Média précédent: Appuyer sur entrée"><span
+                class="fas fa-angle-left"></span></button>
             <div class="media-name-column">
               <!-- Set img in <a> instead of <div> ? -->
               <div class="flex-center as-img hidden">
@@ -133,16 +146,17 @@
                 <h2 class="injected-content-lightBox"></h2>
               </figcaption>
             </div>
-            <div class="positionning-cross close-crossBgd">
+            <div class="positionning-cross close-crossBgd" aria-label="Croix: Fermer la galerie">
               <i class="close-lightbox close-crossBgd"></i>
             </div>
-            <button class="next"><span class="fas fa-angle-right"></span></button>
+            <button class="next" aria-label="Média suivant: Appuyer sur entrée"><span
+                class="fas fa-angle-right"></span></button>
             <!-- Code will be injected by JS -->
           </figure>
         </div>
       </div>
     </div>
-    <footer>
+    <footer role="contentinfo">
       <!-- Code will be injected by JS -->
     </footer>
 

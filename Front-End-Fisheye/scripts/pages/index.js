@@ -1,6 +1,6 @@
 import { PhotographersFactory } from '../factories/Photographers.js';
 
-let focusProfileNum = 1;
+document.querySelector('img[class="logo"]').focus();
 
 async function getPhotographers() {
   // Will store the datas in data just when they are retrieved from the fetch
@@ -14,7 +14,6 @@ async function displayData(photographers) {
   photographers.forEach((photographer) => {
     const TemplatePhotographer = new PhotographersFactory(photographer);
     TemplatePhotographer.setUserCardDOM();
-    focusProfileNum++;
   });
 
 }
@@ -28,5 +27,3 @@ async function init() {
 
 // Starts the series of nested functions
 init();
-
-export { focusProfileNum };

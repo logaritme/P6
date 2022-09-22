@@ -1,5 +1,11 @@
 /* CAUTION : This file is exported to style.css */
 
+#noneFocusPhot:focus {
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
 .div-center-whole-page {
   display: flex;
   flex-direction: column;
@@ -596,7 +602,6 @@ div div div figure div div video {
   justify-content: center;
   margin-top: auto;
   box-shadow: 2px 0 #c4c4c4;
-  cursor: pointer;
 }
 
 div div div figure div div img {

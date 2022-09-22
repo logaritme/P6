@@ -22,18 +22,19 @@ async function getAllTheJSONDatas() {
 const fullJSONContent = getAllTheJSONDatas();
 */
 
-
 async function getPhotographers() {
-  const data = await fetch('./data/photographers.json').then((response) => response.json())
-  .catch(err => console.log(err, ': Temporary failed to fetch data'));
+  const data = await fetch('./data/photographers.json')
+    .then((response) => response.json())
+    .catch((err) => console.log(err, ': Temporary failed to fetch data'));
   return JSON.parse(JSON.stringify(data.photographers));
 }
 
 const photographers = getPhotographers();
 
 async function getMedias() {
-  const data = await fetch('./data/photographers.json').then((response) => response.json())
-  .catch(err => console.log(err, ': Temporary failed to fetch data'));
+  const data = await fetch('./data/photographers.json')
+    .then((response) => response.json())
+    .catch((err) => console.log(err, ': Temporary failed to fetch data'));
   return JSON.parse(JSON.stringify(data.media));
 }
 const medias = getMedias();
@@ -647,10 +648,12 @@ nextBtn.addEventListener('click', () => {
 document.addEventListener('keyup', (evt) => {
   switch (evt.key) {
     case 'ArrowLeft':
+      evt.preventDefault;
       previous();
       document.querySelector('.previous').focus();
       break;
     case 'ArrowRight':
+      evt.preventDefault;
       next();
       document.querySelector('.next').focus();
       break;
@@ -680,30 +683,28 @@ document.addEventListener('keyup', (evt) => {
       // Do it also for .label-date, .label-titre
       for (const eltEntered of mediaLinkAccess) {
         if (document.activeElement === eltEntered) {
-          console.log('One elt of mediaLinkAccess is focused');
-          // console.log(eltEntered);
-          // console.log(eltEntered.id);
-          console.log('Yes !! Enter is functionning on Medias !!');
+          // console.log('One elt of mediaLinkAccess is focused');
+          // console.log('Yes !! Enter is functionning on Medias !!');
           openLightBox(eltEntered);
         }
       }
       // Apparently theses three " if " are unuseful
       if (document.activeElement === keyOnLabelPop) {
-        console.log('keyOnLabelPop is focused');
+        // console.log('keyOnLabelPop is focused');
         sortedLike(medias);
-        console.log('Yes !! Enter is functionning on Label Pop !!');
+        // console.log('Yes !! Enter is functionning on Label Pop !!');
         canModifyOrderMediasFiltereds();
       }
       if (document.activeElement === keyOnLabelDate) {
-        console.log('keyOnLabelDate is focused');
+        // console.log('keyOnLabelDate is focused');
         sortedDate(medias);
-        console.log('Yes !! Enter is functionning on Label Date !!');
+        // console.log('Yes !! Enter is functionning on Label Date !!');
         canModifyOrderMediasFiltereds();
       }
       if (document.activeElement === keyOnLabelTitre) {
-        console.log('keyOnLabelTitre is focused');
+        // console.log('keyOnLabelTitre is focused');
         sortedAZ(medias);
-        console.log('Yes !! Enter is functionning on Label  !!');
+        // console.log('Yes !! Enter is functionning on Label  !!');
         canModifyOrderMediasFiltereds();
       }
       // document.querySelector('.previous').focus();

@@ -159,13 +159,40 @@ function wholeContactForm() {
     const textContainer = document.querySelector(`.${tag}`);
     const textInput = document.querySelector(`.${tag} > input`);
     const errorDisplayDiv = document.querySelector(`.${tag} > div`);
+    let attrTab = errorDisplayDiv.getAttribute('tabindex');
     if (!valid) {
       textContainer.classList.add('errorDiv');
       textInput.classList.add('errorColor');
+      // Modifier les autres numéros tabindex pour que sa corresponde
+      // et replacer le focus() à chaque message d'erreur
+      if (textInput.getAttribute('name') === "firstName") {
+        console.log("I am here 1");
+        textInput.setAttribute('aria-describedby', 'messageErrorFName');
+      }
+      if (textInput.getAttribute('name') === "lastName") {
+        console.log("I am here 2");
+        textInput.setAttribute('aria-describedby', 'messageErrorLName');
+      }
+      if (textInput.getAttribute('name') === "email") {
+        console.log("I am here 3");
+        textInput.setAttribute('aria-describedby', 'messageErrorEmail');
+      }
+      if (textInput.getAttribute('name') === "messageUser") {
+        console.log("I am here 4");
+        textInput.setAttribute('aria-describedby', 'messageErrorMessageUser');
+      }
+      errorDisplayDiv.setAttribute('tabindex', '0');
+      // attrTab = errorDisplayDiv.getAttribute('tabindex');
+      // console.log(attrTab);
       errorDisplayDiv.textContent = messageErr;
     } else {
       textContainer.classList.remove('errorDiv');
       textInput.classList.remove('errorColor');
+
+      errorDisplayDiv.setAttribute('tabindex', '-1');
+      textInput.setAttribute('aria-describedby', '');
+      // attrTab = errorDisplayDiv.getAttribute('tabindex');
+      // console.log(attrTab);
       errorDisplayDiv.textContent = messageErr;
     }
   };
@@ -323,6 +350,7 @@ function wholeContactForm() {
   // Switchs on the 3 keysup ( the user can type on the keyboard )
   // Not necessary ??
 
+  /*
   document.addEventListener('keyup', (evt) => {
     const modalContentBis = document.querySelector('.form-contact');
     const baseH2 = document.querySelector('.modal-form header h2');
@@ -333,11 +361,38 @@ function wholeContactForm() {
       modalContent.classList.remove('show');
     }
   });
-  /*
-  document.addEventListener('keyup', (e) => {
+*/
+
+  let currentTab = 1;
+
+  document.addEventListener('keydown', (e) => {
     const modalContentBis = document.querySelector('.form-contact');
     const baseH2 = document.querySelector('.modal-form header h2');
     switch (e.key) {
+      case 'Tab':
+        if (document.querySelector(`[tabindex="11"]:focus`)) {
+          e.preventDefault();
+          document.querySelector(`[tabindex="1"]`).focus();
+        }
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        e.stopPropagation();
+        currentTab = currentTab + 1;
+        if (currentTab === 6) {
+          currentTab = 1;
+        }
+        document.querySelector(`input[tabindex="${currentTab}"]`).focus();
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        e.stopPropagation();
+        if (currentTab === 1) {
+          currentTab = 6;
+        }
+        currentTab = currentTab - 1;
+        document.querySelector(`input[tabindex="${currentTab}"]`).focus();
+        break;
       // Closes modal form using Escape key
       case 'Escape':
         baseH2.innerHTML = '';
@@ -347,7 +402,6 @@ function wholeContactForm() {
         break;
     }
   });
-*/
   // END: LISTENERS //
   ////////////////////
 }

@@ -15,6 +15,12 @@ a {
   color: transparent;
 }
 
+#noneFocusPhot:focus {
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
 .div-center-whole-home-page {
   display: flex;
   flex-direction: column;
