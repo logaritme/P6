@@ -159,31 +159,29 @@ function wholeContactForm() {
     const textContainer = document.querySelector(`.${tag}`);
     const textInput = document.querySelector(`.${tag} > input`);
     const errorDisplayDiv = document.querySelector(`.${tag} > div`);
-    let attrTab = errorDisplayDiv.getAttribute('tabindex');
     if (!valid) {
       textContainer.classList.add('errorDiv');
       textInput.classList.add('errorColor');
       // Modifier les autres numéros tabindex pour que sa corresponde
       // et replacer le focus() à chaque message d'erreur
-      if (textInput.getAttribute('name') === "firstName") {
-        console.log("I am here 1");
+      if (textInput.getAttribute('name') === 'firstName') {
         textInput.setAttribute('aria-describedby', 'messageErrorFName');
+        errorDisplayDiv.setAttribute('role', 'alert');
+        errorDisplayDiv.classList
       }
-      if (textInput.getAttribute('name') === "lastName") {
-        console.log("I am here 2");
+      if (textInput.getAttribute('name') === 'lastName') {
         textInput.setAttribute('aria-describedby', 'messageErrorLName');
+        errorDisplayDiv.setAttribute('role', 'alert');
       }
-      if (textInput.getAttribute('name') === "email") {
-        console.log("I am here 3");
+      if (textInput.getAttribute('name') === 'email') {
         textInput.setAttribute('aria-describedby', 'messageErrorEmail');
+        errorDisplayDiv.setAttribute('role', 'alert');
       }
-      if (textInput.getAttribute('name') === "messageUser") {
-        console.log("I am here 4");
+      if (textInput.getAttribute('name') === 'messageUser') {
         textInput.setAttribute('aria-describedby', 'messageErrorMessageUser');
       }
       errorDisplayDiv.setAttribute('tabindex', '0');
-      // attrTab = errorDisplayDiv.getAttribute('tabindex');
-      // console.log(attrTab);
+      errorDisplayDiv.setAttribute('role', 'alert');
       errorDisplayDiv.textContent = messageErr;
     } else {
       textContainer.classList.remove('errorDiv');
@@ -263,7 +261,7 @@ function wholeContactForm() {
     }
     // If caracters are not valid
     else if (value.length > 0 && !value.match(/^[\w-\.\+]+@([\w-]+\.)+[\w-]{2,4}$/)) {
-      errorDisplay('email', 'Ce champ doit être valide au format email.', false);
+      errorDisplay('email', 'Email: Ce champ doit être valide au format email.', false);
       email = null;
       isEmailValid = false;
       areAllBooleansValid();

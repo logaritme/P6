@@ -77,6 +77,11 @@ let photographer;
 
 // Declares variables of DOM for: Drop-Down + Arrow Next/Prev
 const selected = document.querySelector('.selected');
+const selectFullBox = document.querySelector('#selectFullBox'); // Accessibility
+const selectBox = document.querySelector('.select-box'); // Accessibility
+const labelPopulariteAccess = document.querySelector('#option-popularite'); // Accessibility
+const optionTitreAccess = document.querySelector('#option-titre'); // Accessibility
+const optionDateAccess = document.querySelector('#option-date'); // Accessibility
 const optionsContainer = document.querySelector('.options-container');
 const optionsList = document.querySelectorAll('.option');
 const optionDate = document.querySelector('.label-date');
@@ -139,14 +144,6 @@ function displayData(photographers, medias) {
     TemplateMedia.setPhotosCardDOM();
     focusPhotosStackNum++;
   });
-
-  /* // Unuseful
-  // MediasFiltered creates a lightbox DOM
-  mediasFiltereds.forEach((mediasFiltered) => {
-    const TemplateMedia = new LightBoxFactory(mediasFiltered, medias);
-    TemplateMedia.getLightBoxImgDOM();
-  });
-  */
 
   canModifyOrderMediasFiltereds();
   return mediasFiltereds;
@@ -233,13 +230,41 @@ function canModifyOrderMediasFiltereds() {
 
 // ( Think about the option of close it clicking anywhere )
 // Opens/Closes the dropdown and reverse the chevron ( Dynamic DOM )
-chevronContainer.addEventListener('click', function buttonUpdated(evt) {
+
+// Accessibility: Enter&Escape to toggle (+ TODO: toggle expanded) and reverse chevron
+// ( A transformer en switch les deux commencçant par selectBox. )
+selectFullBox.addEventListener('keyup', (evt) => {
+  if (evt.key === 'Enter') {
+    evt.preventDefault();
+    optionsContainer.classList('active');
+    iconeSort.classList.toggle('reverse-chevron');
+    selected.classList.toggle('border-radius');
+    twoOptions.setAttribute('aria-expanded', 'true');
+    selectFullBox.setAttribute('aria-expanded', 'true');
+  }
+});
+selectFullBox.addEventListener('keyup', (evt) => {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    optionsContainer.classList.remove('active');
+    iconeSort.classList.remove('reverse-chevron');
+    selected.classList.remove('border-radius');
+    twoOptions.setAttribute('aria-expanded', 'false');
+    labelPopularite.setAttribute('aria-expanded', 'false');
+    selectFullBox.focus();
+  }
+});
+
+// Another way to open/close dropDown by click on the chevron
+chevronContainer.addEventListener('click', (evt) => {
   evt.preventDefault();
   optionsContainer.classList.toggle('active');
   iconeSort.classList.toggle('reverse-chevron');
   selected.classList.toggle('border-radius');
+  selectFullBox.focus();
 });
 
+// Open/close dropDown Date
 optionDate.addEventListener('click', function (evt) {
   evt.preventDefault();
   optionsContainer.classList.toggle('active');
@@ -248,8 +273,24 @@ optionDate.addEventListener('click', function (evt) {
   labelPopularite.innerHTML = optionDateId[0].innerText;
   optionDate.innerHTML = popValue;
   popValue = optionPopulariteId[0].innerText;
+  selectFullBox.focus();
 });
 
+// Accessibility version of open/close dropDown Date
+optionDateAccess.addEventListener('keyup', function (evt) {
+  if (evt.key === 'Enter') {
+    evt.preventDefault();
+    optionsContainer.classList.remove('active');
+    iconeSort.classList.remove('reverse-chevron');
+    selected.classList.remove('border-radius');
+    labelPopularite.innerHTML = optionDateId[0].innerText;
+    optionDate.innerHTML = popValue;
+    popValue = optionPopulariteId[0].innerText;
+    selectFullBox.focus();
+  }
+});
+
+// Open/close dropDown
 optionTitre.addEventListener('click', function (evt) {
   evt.preventDefault();
   optionsContainer.classList.toggle('active');
@@ -258,16 +299,47 @@ optionTitre.addEventListener('click', function (evt) {
   labelPopularite.innerHTML = optionTitreId[0].innerText;
   optionTitre.innerHTML = popValue;
   popValue = optionPopulariteId[0].innerText;
+  selectFullBox.focus();
 });
 
+// Accessibility version of open/close dropDown Titre
+optionTitreAccess.addEventListener('keyup', function (evt) {
+  if (evt.key === 'Enter') {
+    evt.preventDefault();
+    optionsContainer.classList.remove('active');
+    iconeSort.classList.remove('reverse-chevron');
+    selected.classList.remove('border-radius');
+    labelPopularite.innerHTML = optionTitreId[0].innerText;
+    optionTitre.innerHTML = popValue;
+    popValue = optionPopulariteId[0].innerText;
+    selectFullBox.focus();
+  }
+});
+
+// Open/close dropDown
 labelPopularite.addEventListener('click', function (evt) {
   evt.preventDefault();
   optionsContainer.classList.toggle('active');
   iconeSort.classList.toggle('reverse-chevron');
   selected.classList.toggle('border-radius');
+  selectFullBox.focus();
 });
 
-labelPopularite.addEventListener('click', function (evt) {
+// Accessibility version of open/close dropDown Popularite
+selectFullBox.addEventListener('keyup', (evt) => {
+  if (evt.key === 'Enter') {
+    evt.preventDefault();
+    optionsContainer.classList.toggle('active');
+    iconeSort.classList.toggle('reverse-chevron');
+    selected.classList.toggle('border-radius');
+    twoOptions.setAttribute('aria-expanded', 'true');
+    selectFullBox.setAttribute('aria-expanded', 'true');
+    selectFullBox.focus();
+  }
+});
+
+// Sort medias
+labelPopularite.addEventListener('click', (evt) => {
   evt.preventDefault();
   if (popValue === 'Popularité') {
     sortedLike(medias);
@@ -282,8 +354,10 @@ labelPopularite.addEventListener('click', function (evt) {
   canModifyOrderMediasFiltereds();
   openLightBox(evt);
   console.log('Index after injection:', theIndex);
+  selectFullBox.focus();
 });
 
+// Sort the medias by the appropriated selection
 optionsList.forEach((obj) => {
   obj.addEventListener('click', function (evt) {
     evt.preventDefault();
@@ -299,7 +373,45 @@ optionsList.forEach((obj) => {
     } else console.error('Text inserted: Error');
     canModifyOrderMediasFiltereds();
     openLightBox(evt);
+    selectFullBox.focus();
   });
+});
+// Accessibility (2)versionsnecessary of sort the medias...
+optionTitreAccess.addEventListener('keyup', function (evt) {
+  if (evt.key === 'Enter') {
+    evt.preventDefault();
+    if (popValue === 'Popularité') {
+      sortedLike(medias);
+      console.log(mediasSortedLikes);
+    } else if (popValue === 'Date') {
+      sortedDate(medias);
+      console.log(mediasSortedDate);
+    } else if (popValue === 'Titre') {
+      sortedAZ(medias);
+      console.log(mediasSortedTitle);
+    } else console.error('Text inserted: Error');
+    canModifyOrderMediasFiltereds();
+    openLightBox(evt);
+    selectFullBox.focus();
+  }
+});
+optionDateAccess.addEventListener('keyup', function (evt) {
+  if (evt.key === 'Enter') {
+    evt.preventDefault();
+    if (popValue === 'Popularité') {
+      sortedLike(medias);
+      console.log(mediasSortedLikes);
+    } else if (popValue === 'Date') {
+      sortedDate(medias);
+      console.log(mediasSortedDate);
+    } else if (popValue === 'Titre') {
+      sortedAZ(medias);
+      console.log(mediasSortedTitle);
+    } else console.error('Text inserted: Error');
+    canModifyOrderMediasFiltereds();
+    openLightBox(evt);
+    selectFullBox.focus();
+  }
 });
 
 // END: DROP-DOWN //

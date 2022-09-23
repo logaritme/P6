@@ -87,11 +87,11 @@ export class MediaFactory {
       photosPlace.appendChild(section);
     }
   }
-  // Display the total of Likes in the insert at the bottom-right of the page
+  // Display the widget "Total of Likes" in the insert at the bottom-right of the page
   getInsertLikesCardDOM() {
     const insertLikesPlace = document.querySelector('footer');
     const divFooter = document.createElement('div');
-    divFooter.innerHTML = `<div>
+    divFooter.innerHTML = `<div role="widget">
     <span id="totalLikes"></span>
     <i class="fas fa-heart"></i>
     </div>`;
