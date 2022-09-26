@@ -231,16 +231,18 @@ function canModifyOrderMediasFiltereds() {
 // ( Think about the option of close it clicking anywhere )
 // Opens/Closes the dropdown and reverse the chevron ( Dynamic DOM )
 
-// Accessibility: Enter&Escape to toggle (+ TODO: toggle expanded) and reverse chevron
-// ( A transformer en switch les deux commencçant par selectBox. )
+// Accessibility: Enter&Escape to toggle and reverse chevron
+// ( A transformer en switch les deux commençant par selectFullBox. )
+
 selectFullBox.addEventListener('keyup', (evt) => {
   if (evt.key === 'Enter') {
     evt.preventDefault();
-    optionsContainer.classList('active');
+    optionsContainer.classList.toggle('active');
     iconeSort.classList.toggle('reverse-chevron');
-    selected.classList.toggle('border-radius');
+    selected.classList.remove('border-radius');
     twoOptions.setAttribute('aria-expanded', 'true');
     selectFullBox.setAttribute('aria-expanded', 'true');
+    selectFullBox.focus();
   }
 });
 selectFullBox.addEventListener('keyup', (evt) => {
@@ -248,12 +250,36 @@ selectFullBox.addEventListener('keyup', (evt) => {
     evt.preventDefault();
     optionsContainer.classList.remove('active');
     iconeSort.classList.remove('reverse-chevron');
-    selected.classList.remove('border-radius');
+    selected.classList.add('border-radius');
     twoOptions.setAttribute('aria-expanded', 'false');
     labelPopularite.setAttribute('aria-expanded', 'false');
     selectFullBox.focus();
   }
 });
+
+/* Nouveau switch à tester
+selectFullBox.addEventListener('keyup', (evt) => {
+  switch (evt.key) {
+    case 'Enter':
+      evt.preventDefault();
+      optionsContainer.classList('active');
+      iconeSort.classList.toggle('reverse-chevron');
+      selected.classList.toggle('border-radius');
+      twoOptions.setAttribute('aria-expanded', 'true');
+      selectFullBox.setAttribute('aria-expanded', 'true');
+    break;
+    case 'Escape':
+      evt.preventDefault();
+      optionsContainer.classList.remove('active');
+      iconeSort.classList.remove('reverse-chevron');
+      selected.classList.remove('border-radius');
+      twoOptions.setAttribute('aria-expanded', 'false');
+      labelPopularite.setAttribute('aria-expanded', 'false');
+      selectFullBox.focus();
+      break;
+  }
+})
+*/
 
 // Another way to open/close dropDown by click on the chevron
 chevronContainer.addEventListener('click', (evt) => {
@@ -282,7 +308,7 @@ optionDateAccess.addEventListener('keyup', function (evt) {
     evt.preventDefault();
     optionsContainer.classList.remove('active');
     iconeSort.classList.remove('reverse-chevron');
-    selected.classList.remove('border-radius');
+    // selected.classList.toggle('border-radius');
     labelPopularite.innerHTML = optionDateId[0].innerText;
     optionDate.innerHTML = popValue;
     popValue = optionPopulariteId[0].innerText;
@@ -306,9 +332,11 @@ optionTitre.addEventListener('click', function (evt) {
 optionTitreAccess.addEventListener('keyup', function (evt) {
   if (evt.key === 'Enter') {
     evt.preventDefault();
+
+    console.log("Hi!");
     optionsContainer.classList.remove('active');
     iconeSort.classList.remove('reverse-chevron');
-    selected.classList.remove('border-radius');
+    // selected.classList.toggle('border-radius');
     labelPopularite.innerHTML = optionTitreId[0].innerText;
     optionTitre.innerHTML = popValue;
     popValue = optionPopulariteId[0].innerText;
@@ -316,27 +344,32 @@ optionTitreAccess.addEventListener('keyup', function (evt) {
   }
 });
 
+
+// Accessibility to remove border-radius properly
+labelPopularite.addEventListener('keyup', (evt) => {
+  if (evt.key === 'Enter') {
+    evt.preventDefault();
+    console.log("Hello");
+    optionsContainer.classList.add('active');
+    iconeSort.classList.toggle('reverse-chevron');
+    selected.classList.add('border-radius');
+    console.log(selected);
+    selectFullBox.focus();
+};
+});
+
 // Open/close dropDown
-labelPopularite.addEventListener('click', function (evt) {
+labelPopularite.addEventListener('click', (evt) => {
   evt.preventDefault();
   optionsContainer.classList.toggle('active');
   iconeSort.classList.toggle('reverse-chevron');
   selected.classList.toggle('border-radius');
+  console.log("Hi!");
   selectFullBox.focus();
 });
 
-// Accessibility version of open/close dropDown Popularite
-selectFullBox.addEventListener('keyup', (evt) => {
-  if (evt.key === 'Enter') {
-    evt.preventDefault();
-    optionsContainer.classList.toggle('active');
-    iconeSort.classList.toggle('reverse-chevron');
-    selected.classList.toggle('border-radius');
-    twoOptions.setAttribute('aria-expanded', 'true');
-    selectFullBox.setAttribute('aria-expanded', 'true');
-    selectFullBox.focus();
-  }
-});
+
+
 
 // Sort medias
 labelPopularite.addEventListener('click', (evt) => {
@@ -376,19 +409,16 @@ optionsList.forEach((obj) => {
     selectFullBox.focus();
   });
 });
-// Accessibility (2)versionsnecessary of sort the medias...
+// Accessibility (2)versionsnecessary of sort the mediasSorted...
 optionTitreAccess.addEventListener('keyup', function (evt) {
   if (evt.key === 'Enter') {
     evt.preventDefault();
     if (popValue === 'Popularité') {
       sortedLike(medias);
-      console.log(mediasSortedLikes);
     } else if (popValue === 'Date') {
       sortedDate(medias);
-      console.log(mediasSortedDate);
     } else if (popValue === 'Titre') {
       sortedAZ(medias);
-      console.log(mediasSortedTitle);
     } else console.error('Text inserted: Error');
     canModifyOrderMediasFiltereds();
     openLightBox(evt);
@@ -400,13 +430,10 @@ optionDateAccess.addEventListener('keyup', function (evt) {
     evt.preventDefault();
     if (popValue === 'Popularité') {
       sortedLike(medias);
-      console.log(mediasSortedLikes);
     } else if (popValue === 'Date') {
       sortedDate(medias);
-      console.log(mediasSortedDate);
     } else if (popValue === 'Titre') {
       sortedAZ(medias);
-      console.log(mediasSortedTitle);
     } else console.error('Text inserted: Error');
     canModifyOrderMediasFiltereds();
     openLightBox(evt);

@@ -28,6 +28,7 @@ function wholeContactForm() {
   let isLastNameValid = false;
   let isEmailValid = false;
   let isMessageUserValid = false;
+
   // END of global variables //
   /////////////////////////////
 
@@ -167,7 +168,7 @@ function wholeContactForm() {
       if (textInput.getAttribute('name') === 'firstName') {
         textInput.setAttribute('aria-describedby', 'messageErrorFName');
         errorDisplayDiv.setAttribute('role', 'alert');
-        errorDisplayDiv.classList
+        errorDisplayDiv.classList;
       }
       if (textInput.getAttribute('name') === 'lastName') {
         textInput.setAttribute('aria-describedby', 'messageErrorLName');
@@ -220,7 +221,7 @@ function wholeContactForm() {
       errorDisplay('firstName', '', true);
       firstName = value;
       isFirstNameValid = true;
-      console.info('PRÉNOM:', value);
+      // console.info('PRÉNOM:', value);
       areAllBooleansValid();
     }
   };
@@ -244,7 +245,7 @@ function wholeContactForm() {
       errorDisplay('lastName', '', true);
       lastName = value;
       isLastNameValid = true;
-      console.info('NOM:', value);
+      // console.info('NOM:', value);
 
       areAllBooleansValid();
     }
@@ -269,7 +270,7 @@ function wholeContactForm() {
       errorDisplay('email', '', true);
       email = value;
       isEmailValid = true;
-      console.info('E-MAIL:', value);
+      // console.info('E-MAIL:', value);
       areAllBooleansValid();
     }
   };
@@ -286,7 +287,7 @@ function wholeContactForm() {
       errorDisplay('messageUser', '', true);
       messageUser = value;
       isMessageUserValid = true;
-      console.info('MESSAGE:', value);
+      // console.info('MESSAGE:', value);
       areAllBooleansValid();
     }
   };
@@ -297,6 +298,12 @@ function wholeContactForm() {
   ///////////////
   // LISTENERS //
 
+  // Cancel automatic form submit
+  contactForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    validate();
+  });
+
   // Listener to open/Launch modal form
   contactButton.addEventListener('click', displayModal);
 
@@ -306,10 +313,10 @@ function wholeContactForm() {
   // Listener to close modal form throught the cross
   document.querySelector('.close-modal-form').addEventListener('click', closeModalSimple);
   // Accessibilité
-  document.querySelector('.close-modal-form').addEventListener('keyup', (e) => {
+  document.querySelector('.close-modal-form').addEventListener('keyup', (evt) => {
     const baseH2 = document.querySelector('.modal-form header h2');
     const modalContentBis = document.querySelector('.form-contact');
-    switch (e.key) {
+    switch (evt.key) {
       // Closes modal form using Enter key
       case 'Enter':
         baseH2.innerHTML = '';
@@ -344,6 +351,28 @@ function wholeContactForm() {
     });
   });
 
+  // Logs the text fields when each field loses the focus
+  inputsInFields.forEach((input) => {
+    input.addEventListener('change', (element) => {
+      switch (element.target.id) {
+        case 'firstName':
+          console.info('PRENOM', element.target.value);
+          break;
+        case 'lastName':
+          console.info('NOM', element.target.value);
+          break;
+        case 'email':
+          console.info('EMAIL', element.target.value);
+          break;
+        case 'messageUser':
+          console.info('MESSAGE', element.target.value);
+          break;
+        default:
+          return 'error';
+      }
+    });
+  });
+
   // Accessibility
   // Switchs on the 3 keysup ( the user can type on the keyboard )
   // Not necessary ??
@@ -363,19 +392,26 @@ function wholeContactForm() {
 
   let currentTab = 1;
 
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', (evt) => {
     const modalContentBis = document.querySelector('.form-contact');
     const baseH2 = document.querySelector('.modal-form header h2');
-    switch (e.key) {
+    switch (evt.key) {
       case 'Tab':
-        if (document.querySelector(`[tabindex="11"]:focus`)) {
-          e.preventDefault();
+        if (document.querySelector(`[tabindex="7"]:focus`)) {
+          evt.preventDefault();
           document.querySelector(`[tabindex="1"]`).focus();
         }
         break;
+      case 'Shift' && 'Tab':
+        evt.preventDefault();
+        if (document.querySelector(`[tabindex="1"]:focus`)) {
+          evt.preventDefault();
+          document.querySelector(`[tabindex="7"]`).focus();
+        }
+        break;
       case 'ArrowDown':
-        e.preventDefault();
-        e.stopPropagation();
+        evt.preventDefault();
+        evt.stopPropagation();
         currentTab = currentTab + 1;
         if (currentTab === 6) {
           currentTab = 1;
@@ -383,8 +419,8 @@ function wholeContactForm() {
         document.querySelector(`input[tabindex="${currentTab}"]`).focus();
         break;
       case 'ArrowUp':
-        e.preventDefault();
-        e.stopPropagation();
+        evt.preventDefault();
+        evt.stopPropagation();
         if (currentTab === 1) {
           currentTab = 6;
         }

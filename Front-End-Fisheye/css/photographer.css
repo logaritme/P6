@@ -336,7 +336,7 @@ a figcaption .likes {
   height: auto;
   width: 100%;
   font-size: 24px;
-  color: red;
+  color: firebrick;
 }
 
 .errorColor {
@@ -468,7 +468,7 @@ a figcaption .likes {
 }
 
 .select-box .selected.border-radius {
-  border-radius: 5px;
+  border-radius: 5px 5px 5px 5px;
 }
 
 .fas.fa-angle-down {
