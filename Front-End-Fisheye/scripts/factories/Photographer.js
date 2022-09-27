@@ -26,7 +26,7 @@ export class PhotographerFactory {
       <button id="contactButtonOpen" class="contact-button" tabindex="0"  aria-label="Contacter le ou la photographe ${
         this._name
       }">Contactez-moi<span class="acc-invisible">Taper entrée pour ouvrir le formulaire de contact</span></button>
-      <img src="${picture}" alt="Photo de ${this._name}"></img>
+      <img src="${picture}" title="Photo de ${this._name}" alt="Photo de ${this._name}"></img>
     </section>
     `;
     photographersHeaderPlace.appendChild(div);

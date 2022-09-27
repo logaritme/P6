@@ -46,7 +46,7 @@ button:focus {
 video:focus, img:focus, 
 h1:focus, h2:focus, 
 h3:focus, h4:focus, 
-div:focus, label:focus {
+div:focus, label:focus, dialog:focus {
   box-shadow: 10px 10px 10px 10px rebeccapurple;
   border: 5px solid seagreen;
 }

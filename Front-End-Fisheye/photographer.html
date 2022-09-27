@@ -14,28 +14,30 @@
 
 <div id="noneFocusPhot" class="div-center-whole-page" tabindex="-1">
 
-  <body class="body-photographer-html">
+  <body class="body-photographer-html" style="background-color: grey;">
+    <!-- BANNER -->
     <header class="first-header" role="banner">
-      <a href="./index.html" tabindex="0" aria-label="Logo Fisheye - Tapez entrée pour revenir à la homepage">
+      <a href="./index.html" tabindex="0" title="Cliquez pour revenir à la page d'acceuil" aria-label="Logo Fisheye - Tapez entrée pour revenir à la homepage">
         <img src="./assets/images/logo.png" class="logo-photographer"
           alt="Logo Fisheye représentant le texte Fisheye avec un appareil photo à la place du premier e"
           tabindex="-1" />
       </a>
     </header>
+    <!-- PHOTOGRAPHER PRESENTATION -->
     <main class="main-photographer-html" role="main">
       <div class="photographer-header">
-        <!-- Code will be injected by JS -->
+        <!-- Code injected by JS -->
       </div>
 
     </main>
-    <!-- 3th child of the body -->
-    <div id="contact_modal" class="form-contact hidden" role="dialog" aria-labelledby="formTitle">
+    <!-- MODAL: CONTACT FORM -->
+    <dialog open="false" id="contact_modal" class="form-contact hidden" aria-labelledby="formTitle">
       <div class="content-modal">
         <div class="modal-form">
           <header>
             <h2 id="formTitle" class="positionning-h2" tabindex="7"></h2>
             <!-- Here name of photographer will be injected by JS -->
-            <i class="close-modal-form" role="img" alt="Croix: pour fermer le formulaire de contact appuyer sur entrée"
+            <i class="close-modal-form" role="img" title="Fermer" alt="Croix: pour fermer le formulaire de contact appuyer sur entrée"
               tabindex="6" aria-label="Fermer le formulaire de contact"></i>
           </header>
           <!-- FORM TO FILL -->
@@ -77,8 +79,8 @@
           </form>
         </div>
       </div>
-    </div>
-    <!-- 4th child of the body -->
+    </dialog>
+    <!-- DROPDOWN SORTINGS -->
     <div class="drop-down-container">
 
       <h2 id="trierPar" class="drop-down-title-do" tabindex="0">Trier par
@@ -89,8 +91,6 @@
         aria-haspopup="listbox" aria-expanded="false" aria-controls="twoOptions">
         <!-- Preselected option -->
         <div class="selected border-radius">
-          <!-- Last test to test 21/09/2022 all the ' aria-something ' -->
-          <!-- Set aria-descendant="nameSortSelected" dynamically -->
           <div class="selected-popularite" id="option-popularite" tabindex="0" aria-label="Popularité: non-sélectionné">
             <input type="radio" class="radio" id="popularite" name="category">
             <label for="popularite" class="label-popularite">Popularité</label>
@@ -117,55 +117,49 @@
         </div>
       </div>
     </div>
-    <!-- 5th child of the body -->
+    <!-- MEDIAS DISPLAYED -->
     <div class="photos-displaying">
-      <!-- Code will be injected by JS -->
+      <!-- Code injected by JS -->
     </div>
-    <!-- 6th child of the body -->
-    <!-- Set the aria-label & role -->
-    <div id="LightBox_modal" class="position-content-lightBox-modal hidden">
+    <!-- MODAL: LIGHTBOX -->
+    <dialog open="false" id="LightBox_modal" class="position-content-lightBox-modal hidden">
       <div class="content-lightBox">
         <div class="lightBox-modal">
           <figure class="to-append-media flex-lightBox">
-            <button class="previous" aria-label="Média précédent: Appuyer sur entrée"><span
+            <button class="previous" tabindex="9" title="Précédent" aria-label="Média précédent: Appuyer sur entrée"><span
                 class="fas fa-angle-left"></span></button>
             <div class="media-name-column">
-              <!-- Set img in <a> instead of <div> ? -->
               <div class="flex-center as-img hidden">
-                <!-- Set src and alt content by JS -->
-                <img class="as-img injected-content-lightBox hidden" src="" alt="" id="" tabindex="0" type="jpg">
+                <!-- Set src and alt content injected by JS -->
+                <img class="as-img injected-content-lightBox hidden" tabindex="10" src="" alt="" id="" tabindex="0" type="jpg">
               </div>
-              <!-- Set video in <a> instead of <div> ? -->
               <div class="flex-center as-video hidden">
-                <!-- Set src and alt content by JS -->
-                <video class="as-video injected-content-lightBox hidden" src="" alt="" id="" tabindex="0"
+                <!-- Set src and alt content injected by JS -->
+                <video class="as-video injected-content-lightBox hidden" tabindex="10" src="" alt="" id="" tabindex="0"
                   type="video/mp4" controls>
               </div>
               <figcaption class="position-title-media-lightBox">
-                <!-- Set h2 content by JS -->
+                <!-- Set h2 content injected by JS -->
                 <h2 class="injected-content-lightBox"></h2>
               </figcaption>
             </div>
             <div class="positionning-cross close-crossBgd" aria-label="Croix: Fermer la galerie">
-              <i class="close-lightbox close-crossBgd"></i>
+              <i class="close-lightbox close-crossBgd" tabindex="11" tabindex="0" title="Fermer" onkeydown="return event.keyCode !== 13 || closeLightBox()"></i>
             </div>
-            <button class="next" aria-label="Média suivant: Appuyer sur entrée"><span
+            <button class="next" tabindex="8" title="Suivant" aria-label="Média suivant: Appuyer sur entrée"><span
                 class="fas fa-angle-right"></span></button>
-            <!-- Code will be injected by JS -->
           </figure>
         </div>
       </div>
-    </div>
+    </dialog>
     <footer role="contentinfo">
       <!-- Code will be injected by JS -->
     </footer>
 
-    <!-- Function called by the onclick in DOM injected by JS -->
+    <!-- Accessory script : Function called by the onclick in DOM injected by JS -->
     <script src="./scripts/utils/addLike.js"></script>
+    <!-- Main script ( modular script ) -->
     <script type="module" src="./scripts/pages/photographer-page.js"></script>
-    <!-- <script type="module" src="./scripts/utils/lightBox.js"></script> -->
-    <!-- <script src="./scripts/pages/index.js"></script> -->
-    <!-- <script type="module" src="./scripts/utils/contactForm.js"></script> -->
 
   </body>
 

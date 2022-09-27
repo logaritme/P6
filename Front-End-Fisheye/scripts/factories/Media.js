@@ -1,5 +1,3 @@
-import { focusPhotosStackNum } from '../pages/photographer-page.js';
-
 // MediaFactory Model
 
 export class MediaFactory {
@@ -48,7 +46,7 @@ export class MediaFactory {
           <a id="${this._id}" class="media-links" tabindex="0" src="${photography}" aria-label="${this._title}" alt="${this._title}">
             <figure>
             <div id="${this._id}" src="${photography}" alt="${this._title}" class="dimensions-photos-grapher-page">
-              <img class="img-video-photos-stack" src="${photography}" alt="${this._title}"></img>
+              <img class="img-video-photos-stack" src="${photography}" title="Double-clic pour ouvrir la lightbox" alt="${this._title}"></img>
             </div>
             <figcaption class="position-fig-grapher-page">
               <h2 class="h2-photos-stack">${this._title}
@@ -56,7 +54,7 @@ export class MediaFactory {
               <div class="center-likes-heart" id="likesHearts-${this._id}">
                 <span class="likes" id="likes-${this._id}">${this._likes}</span>
                 <span class="acc-invisible">likes</span>
-                <i class="fas fa-heart" aria-role="img" alt="Coeur pour liker" aria-label="Coeur pour liker" onclick="addLike(${this._id})" ></i>
+                <i class="fas fa-heart" tabindex="0" aria-role="img" title="Cliquez ici pour liker" alt="Coeur pour liker" aria-label="Appuyez sur entrée pour liker" onkeydown="return event.keyCode !== 13 || addLike(${this._id})" onclick="addLike(${this._id})" ></i>
               </div>
             </figcaption>
             </figure>
@@ -68,7 +66,7 @@ export class MediaFactory {
           <a id="${this._id}" class="media-links" tabindex="0" src="${videography}" aria-label="${this._title}" alt="${this._title}">
             <figure>
             <div id="${this._id}" src="${videography}" alt="${this._title}" class="dimensions-photos-grapher-page">
-              <video class="img-video-photos-stack" src="${videography}" alt="${this._title}"
+              <video class="img-video-photos-stack" src="${videography}" title="Double-clic pour ouvrir la lightbox" alt="${this._title}"
                   type="video/mp4" controls>
               </video>
             </div>
@@ -78,7 +76,7 @@ export class MediaFactory {
               <div class="center-likes-heart" id="likesHearts-${this._id}">
                 <span class="likes" id="likes-${this._id}">${this._likes}</span>
                 <span class="acc-invisible">likes</span>
-                <i class="fas fa-heart" aria-role="img" alt="Coeur pour liker" aria-label="Coeur pour liker" onclick="addLike(${this._id})" ></i>
+                <i class="fas fa-heart" tabindex="0" aria-role="img" title="Cliquez ici pour liker" alt="Coeur pour liker" aria-label="Appuyez sur entrée pour liker" onkeydown="return event.keyCode !== 13 || addLike(${this._id})" onclick="addLike(${this._id})" ></i>
               </div>
             </figcaption>
             </figure>

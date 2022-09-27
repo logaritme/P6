@@ -70,6 +70,7 @@ function wholeContactForm() {
     setFormH2NamePhotographer();
     modalContent.classList.remove('hidden');
     modalContent.classList.add('show');
+    document.querySelector('#contact_modal').setAttribute('open', 'true');
     document.getElementById('firstName').focus();
   }
 
@@ -79,6 +80,7 @@ function wholeContactForm() {
     const modalContentBis = document.querySelector('.form-contact');
     modalContentBis.classList.add('hidden');
     modalContent.classList.remove('show');
+    document.querySelector('#contact_modal').setAttribute('open', 'false');
   }
 
   // Closes the form subscribe modal on valid filled form
@@ -148,9 +150,11 @@ function wholeContactForm() {
     if (areAllBooleansValid()) {
       modalContent.classList.add('hidden');
       modalContent.classList.remove('show');
+      document.querySelector('#contact_modal').setAttribute('open', 'false');
     } else {
       modalContent.classList.remove('hidden');
       modalContent.classList.add('show');
+      document.querySelector('#contact_modal').setAttribute('open', 'true');
     }
   }
 
@@ -323,6 +327,7 @@ function wholeContactForm() {
         // Invisibility of modal form
         modalContentBis.classList.add('hidden');
         modalContent.classList.remove('show');
+        document.querySelector('#contact_modal').setAttribute('open', 'false');
         break;
     }
   });
@@ -386,22 +391,25 @@ function wholeContactForm() {
       // Invisibility of modal form
       modalContentBis.classList.add('hidden');
       modalContent.classList.remove('show');
+      document.querySelector('#contact_modal').setAttribute('open', 'false');
     }
   });
 */
 
   let currentTab = 1;
-
+  // Accessibility inside the contact modal
   document.addEventListener('keydown', (evt) => {
     const modalContentBis = document.querySelector('.form-contact');
     const baseH2 = document.querySelector('.modal-form header h2');
     switch (evt.key) {
+      //  Accessibility: Trap the focus inside the contact modal
       case 'Tab':
         if (document.querySelector(`[tabindex="7"]:focus`)) {
           evt.preventDefault();
           document.querySelector(`[tabindex="1"]`).focus();
         }
         break;
+      // Trap the focus inside the contact modal
       case 'Shift' && 'Tab':
         evt.preventDefault();
         if (document.querySelector(`[tabindex="1"]:focus`)) {
@@ -433,6 +441,7 @@ function wholeContactForm() {
         // Invisibility of modal form
         modalContentBis.classList.add('hidden');
         modalContent.classList.remove('show');
+        document.querySelector('#contact_modal').setAttribute('open', 'false');
         break;
     }
   });
