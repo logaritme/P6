@@ -105,7 +105,7 @@ function displayData(photographers, medias) {
   TemplatePhotographer.setInsertPriceCardDOM();
 
   // Accessibility: Setting the focus on the button
-  // document.getElementById('contactButtonOpen').focus();
+  document.getElementById('contactButtonOpen').focus();
   wholeContactForm();
 
   // Retrieves only the medias's photographer who has the id displayed in the url

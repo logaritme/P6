@@ -28,29 +28,20 @@ a {
   margin: 0 90px 0 65px;
 }
 
-a:focus {
+/* To work with (Erase it at the end of the project) object-fit: */
+a:focus, video:focus, 
+img:focus, button:focus, 
+h1:focus, h2:focus, 
+h3:focus, h4:focus, 
+div:focus, label:focus, 
+dialog:focus, i:focus {
   box-shadow: 10px 10px 10px 10px rebeccapurple;
   border: 5px solid seagreen;
 }
 
 input:focus {
-  box-shadow: 10px 10px 10px 10px rebeccapurple;
-  border: 5px solid seagreen;
+  border: 3px solid seagreen;
 }
-
-button:focus {
-  box-shadow: 10px 10px 10px 10px rebeccapurple;
-  border: 5px solid seagreen;
-}
-
-video:focus, img:focus, 
-h1:focus, h2:focus, 
-h3:focus, h4:focus, 
-div:focus, label:focus, dialog:focus {
-  box-shadow: 10px 10px 10px 10px rebeccapurple;
-  border: 5px solid seagreen;
-}
-
 
 body {
   font-family: 'DM Sans', sans-serif;

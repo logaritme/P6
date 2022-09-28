@@ -17,7 +17,8 @@
   <body class="body-photographer-html" style="background-color: grey;">
     <!-- BANNER -->
     <header class="first-header" role="banner">
-      <a href="./index.html" tabindex="0" title="Cliquez pour revenir à la page d'acceuil" aria-label="Logo Fisheye - Tapez entrée pour revenir à la homepage">
+      <a href="./index.html" tabindex="0" title="Cliquez pour revenir à la page d'acceuil"
+        aria-label="Logo Fisheye - Tapez entrée pour revenir à la homepage">
         <img src="../Front-End-Fisheye/assets/images/logo.png" class="logo-photographer"
           alt="Logo Fisheye représentant le texte Fisheye avec un appareil photo à la place du premier e"
           tabindex="-1" />
@@ -37,8 +38,9 @@
           <header>
             <h2 id="formTitle" class="positionning-h2" tabindex="7"></h2>
             <!-- Here name of photographer will be injected by JS -->
-            <i class="close-modal-form" role="img" title="Fermer" alt="Croix: pour fermer le formulaire de contact appuyer sur entrée"
-              tabindex="6" aria-label="Fermer le formulaire de contact"></i>
+            <i class="close-modal-form" role="img" title="Fermer"
+              alt="Croix: pour fermer le formulaire de contact appuyer sur entrée" tabindex="6"
+              aria-label="Fermer le formulaire de contact"></i>
           </header>
           <!-- FORM TO FILL -->
           <form method="get" action="photographer.html" id="contactForm" name="contact"
@@ -46,21 +48,23 @@
             <!-- FORM : FIELDS -->
             <div class="formData firstName field">
               <label for="firstName" tabindex="-1">Prénom</label>
-              <input class="text-control" type="text" id="firstName" name="firstName" tabindex="1" />
+              <input class="text-control" type="text" id="firstName" name="firstName" autocomplete="given-name"
+                tabindex="1" />
               <div id="messageErrorFName" tabindex="-1"
                 aria-label="Message d'erreur: Le prénom doit faire entre 2 et 33 caractères et ne doit contenir ni caractères spéciaux ni chiffres.">
               </div>
             </div>
             <div class="formData lastName field">
               <label for="lastName" tabindex="-1">Nom</label>
-              <input class="text-control" type="text" id="lastName" name="lastName" tabindex="2" />
+              <input class="text-control" type="text" id="lastName" name="lastName" autocomplete="family-name"
+                tabindex="2" />
               <div id="messageErrorLName" tabindex="-1"
                 aria-label="Message d'erreur: Le nom doit faire entre 2 et 33 caractères et ne doit contenir ni caractères spéciaux ni chiffres.">
               </div>
             </div>
             <div class="formData email field">
               <label for="email" tabindex="-1">Email</label>
-              <input class="text-control" type="text" id="email" name="email" tabindex="3" />
+              <input class="text-control" type="text" id="email" name="email" autocomplete="email" tabindex="3" />
               <div id="messageErrorEmail" tabindex="-1" aria-label="Email: Ce champ doit être valide au format email.">
               </div>
             </div>
@@ -72,7 +76,6 @@
               </div>
             </div>
             <!-- BUTTON SUBMIT TO CLICK -->
-            <!-- Onsubmit with a listener to submit datas and close (if valid) or not close the modal (if invalid) -->
             <input class="submit-button btn-close button" id="firstModalBtnSubmit" type="submit" value="Envoyer"
               tabindex="5" />
             <div id="output_box"></div>
@@ -126,12 +129,13 @@
       <div class="content-lightBox">
         <div class="lightBox-modal">
           <figure class="to-append-media flex-lightBox">
-            <button class="previous" tabindex="9" title="Précédent" aria-label="Média précédent: Appuyer sur entrée"><span
-                class="fas fa-angle-left"></span></button>
+            <button class="previous" tabindex="9" title="Précédent"
+              aria-label="Média précédent: Appuyer sur entrée"><span class="fas fa-angle-left"></span></button>
             <div class="media-name-column">
               <div class="flex-center as-img hidden">
                 <!-- Set src and alt content injected by JS -->
-                <img class="as-img injected-content-lightBox hidden" tabindex="10" src="" alt="" id="" tabindex="0" type="jpg">
+                <img class="as-img injected-content-lightBox hidden" tabindex="10" src="" alt="" id="" tabindex="0"
+                  type="jpg">
               </div>
               <div class="flex-center as-video hidden">
                 <!-- Set src and alt content injected by JS -->
@@ -144,7 +148,8 @@
               </figcaption>
             </div>
             <div class="positionning-cross close-crossBgd" aria-label="Croix: Fermer la galerie">
-              <i class="close-lightbox close-crossBgd" tabindex="11" tabindex="0" title="Fermer" onkeydown="return event.keyCode !== 13 || closeLightBox()"></i>
+              <i class="close-lightbox close-crossBgd" tabindex="11" tabindex="0" title="Fermer"
+                onkeydown="return event.keyCode !== 13 || closeLightBox()"></i>
             </div>
             <button class="next" tabindex="8" title="Suivant" aria-label="Média suivant: Appuyer sur entrée"><span
                 class="fas fa-angle-right"></span></button>

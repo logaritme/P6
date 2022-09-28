@@ -131,7 +131,7 @@ form input {
 }
 
 /* HEADER BAND */
-/* /////////// */
+/* ----------- */
 
 /* Img Portrait */
 
@@ -196,6 +196,7 @@ div section article .text-color {
 }
 
 /* MEDIAS STACK (generated via setPhotosCardDOM) */
+/* ------------ */
 a {
   color: unset;
   text-decoration: none;
@@ -215,12 +216,13 @@ a {
   /* 100% or 451px for final result */
   /* width: 451px; */
   /* width: 100%; */
-  /* Temporary 30% to work with */
+  /* Temporary 30% to work with  */
   width: 10%;
   object-fit: cover;
   object-position: 50% 17%;
 }
 
+/* Position of figcaption */
 .position-fig-grapher-page {
   width: 350px;
   height: 31px;
@@ -296,8 +298,8 @@ a figcaption .likes {
   color: black;
 }
 
-/* FORM MODAL */
-/* ////////// */
+/* CONTACT FORM MODAL */
+/* ------------------ */
 
 .form-contact.show {
   display: block;
@@ -377,7 +379,7 @@ a figcaption .likes {
 }
 
 /* DROP-DOWN / SORT SELECT */
-/* /////////////////////// */
+/* ----------------------- */
 
 .drop-down-container {
   width: 1240px;
@@ -483,7 +485,7 @@ a figcaption .likes {
 }
 
 /* LIGHTBOX MODAL */
-/*////////////////*/
+/* -------------- */
 
 .lightBox-modal {
   width: 1000px;
@@ -511,7 +513,6 @@ a figcaption .likes {
   justify-content: space-between;
   border-radius: 5px;
   background-color: #db8876;
-  /* background-color: #db8876; For final content*/
 }
 
 .content-lightBox {
@@ -585,6 +586,7 @@ a figcaption .likes {
   justify-content: center;
   padding: 0.75rem 0;
 }
+
 /* Medias in light-box */
 .content-lightBox figure div div img,
 .content-lightBox figure div div video {
@@ -601,17 +603,24 @@ a figcaption .likes {
   align-items: center;
   justify-content: center;
   margin-top: auto;
-  box-shadow: 2px 0 #c4c4c4; 
+  box-shadow: 2px 0 #c4c4c4;
 }
 
-.content-lightBox figure div div img {
-  width: 50%;
+.content-lightBox div figure div {
+  height: 500px;
+  margin: auto;
 }
-.content-lightBox figure div div video {
+.content-lightBox div figure div img {
+  width: 500px;
+  height: 100%;
+  object-fit: cover;
+}
+.content-lightBox div figure div video {
   width: 90%;
+  height: 100%;
 }
 
-/* THE CLOSES-LIGHTBOXE */
+/* The closes-lightbox */
 
 .positionning-cross {
   position: absolute;
