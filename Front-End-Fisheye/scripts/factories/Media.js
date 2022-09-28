@@ -35,8 +35,8 @@ export class MediaFactory {
       return false;
     }
 
-    const photography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${this._image}`;
-    const videography = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${this._video}`;
+    const photography = `../Front-End-Fisheye/assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${this._image}`;
+    const videography = `../Front-End-Fisheye/assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${this._video}`;
     const photosPlace = document.querySelector('.photos-displaying');
     const section = document.createElement('section');
 

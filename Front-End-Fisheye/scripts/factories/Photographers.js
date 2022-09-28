@@ -14,7 +14,7 @@ export class PhotographersFactory {
   }
   // Function template display the cards for index.html
   setUserCardDOM() {
-    const picture = `./assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
+    const picture = `../Front-End-Fisheye/assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
     const photographersSectionPlace = document.querySelector('.photographer-section');
     const article = document.createElement('article');
     article.innerHTML = `

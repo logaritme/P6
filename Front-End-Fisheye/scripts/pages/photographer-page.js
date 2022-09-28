@@ -550,7 +550,7 @@ function nextPrevDisplayMedia() {
   const photoVideoH2 = modalLightBox.querySelector('.content-lightBox div figure figcaption h2');
   if (imageCurrentMediaInLightBox !== undefined) {
     // Image of mediaLink clicked -> modal lightBox
-    photoShown.src = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${imageCurrentMediaInLightBox}`;
+    photoShown.src = `../Front-End-Fisheye/assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${imageCurrentMediaInLightBox}`;
     photoShown.alt = titleCurrentMediaInLightBox;
     photoShown.id = newIdMediaShownInLightBox;
     // Invisibility of video
@@ -565,7 +565,7 @@ function nextPrevDisplayMedia() {
     imgInLightBox.classList.add('show');
   } else if (videoCurrentMediaInLightBox !== undefined) {
     // Video of mediaLink clicked -> modal lightBox
-    videoShown.src = `./assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${videoCurrentMediaInLightBox}`;
+    videoShown.src = `../Front-End-Fisheye/assets/fish-eye_photos/Sample%20Photos/${nameOfPhotographer}/${videoCurrentMediaInLightBox}`;
     videoShown.alt = titleCurrentMediaInLightBox;
     videoShown.id = newIdMediaShownInLightBox;
     // Invisibility of image

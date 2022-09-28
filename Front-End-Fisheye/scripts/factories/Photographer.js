@@ -13,7 +13,7 @@ export class PhotographerFactory {
 
   // Function template display header for photographer.html
   setPhotographerPageHeaderDOM() {
-    const picture = `./assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
+    const picture = `../Front-End-Fisheye/assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
     const photographersHeaderPlace = document.querySelector('.photographer-header');
     const div = document.createElement('div');
     div.innerHTML = `
