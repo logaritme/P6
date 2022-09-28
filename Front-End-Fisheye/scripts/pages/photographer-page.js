@@ -10,15 +10,7 @@ import { wholeContactForm } from '../utils/contactForm.js';
 ////////////
 // FETCHS //
 
-/*
-async function getAllTheJSONDatas() {
-  // Stocking the datas in "data" just when they arrive from the fetch
-  const data = await fetch('./data/photographers.json').then((response) => response.json());
-  return JSON.parse(JSON.stringify(data));
-}
-const fullJSONContent = getAllTheJSONDatas();
-*/
-
+// Retrieves and transforms photographer's data from the JSON
 async function getPhotographers() {
   const data = await fetch('./data/photographers.json')
     .then((response) => response.json())
@@ -216,57 +208,29 @@ function canModifyOrderMediasFiltereds() {
   }
 }
 
-// Opens/Closes the dropdown and reverse the chevron ( Dynamic DOM )
-
-// Accessibility: Enter&Escape to toggle and reverse chevron
-// ( A transformer en switch les deux commençant par selectFullBox. )
-
-selectFullBox.addEventListener('keyup', (evt) => {
-  if (evt.key === 'Enter') {
-    evt.preventDefault();
-    optionsContainer.classList.toggle('active');
-    iconeSort.classList.toggle('reverse-chevron');
-    selected.classList.remove('border-radius');
-    twoOptions.setAttribute('aria-expanded', 'true');
-    selectFullBox.setAttribute('aria-expanded', 'true');
-    selectFullBox.focus();
-  }
-});
-selectFullBox.addEventListener('keyup', (evt) => {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
-    optionsContainer.classList.remove('active');
-    iconeSort.classList.remove('reverse-chevron');
-    selected.classList.add('border-radius');
-    twoOptions.setAttribute('aria-expanded', 'false');
-    labelPopularite.setAttribute('aria-expanded', 'false');
-    selectFullBox.focus();
-  }
-});
-
-/* Nouveau switch à tester
-selectFullBox.addEventListener('keyup', (evt) => {
+// Accessibility: Switch using a Enter&Escape
+// -> to toggle/add/remove some CSS custom
+// -> to expand/minimize the dropdown ( + attributes )
+selectFullBox.addEventListener('keydown', (evt) => {
   switch (evt.key) {
     case 'Enter':
       evt.preventDefault();
-      optionsContainer.classList('active');
+      optionsContainer.classList.toggle('active');
       iconeSort.classList.toggle('reverse-chevron');
       selected.classList.toggle('border-radius');
       twoOptions.setAttribute('aria-expanded', 'true');
       selectFullBox.setAttribute('aria-expanded', 'true');
-    break;
+      break;
     case 'Escape':
       evt.preventDefault();
       optionsContainer.classList.remove('active');
       iconeSort.classList.remove('reverse-chevron');
-      selected.classList.remove('border-radius');
+      selected.classList.add('border-radius');
       twoOptions.setAttribute('aria-expanded', 'false');
       labelPopularite.setAttribute('aria-expanded', 'false');
-      selectFullBox.focus();
       break;
   }
-})
-*/
+});
 
 // Another way to open/close dropDown by click on the chevron
 chevronContainer.addEventListener('click', (evt) => {
@@ -350,7 +314,6 @@ labelPopularite.addEventListener('click', (evt) => {
   optionsContainer.classList.toggle('active');
   iconeSort.classList.toggle('reverse-chevron');
   selected.classList.toggle('border-radius');
-  console.log('Hi!');
   selectFullBox.focus();
 });
 
@@ -365,8 +328,7 @@ labelPopularite.addEventListener('click', (elementClicked) => {
     sortedAZ(medias);
   } else console.error('Text inserted: Error');
   canModifyOrderMediasFiltereds();
-  openLightBox(elementClicked);
-  console.log('Index after injection:', theIndex);
+  openLightBoxSoft(elementClicked);
   selectFullBox.focus();
 });
 
@@ -382,7 +344,7 @@ optionsList.forEach((obj) => {
       sortedAZ(medias);
     } else console.error('Text inserted: Error');
     canModifyOrderMediasFiltereds();
-    openLightBox(elementClicked);
+    openLightBoxSoft(elementClicked);
     selectFullBox.focus();
   });
 });
@@ -398,7 +360,7 @@ optionTitreAccess.addEventListener('keyup', function (evt) {
       sortedAZ(medias);
     } else console.error('Text inserted: Error');
     canModifyOrderMediasFiltereds();
-    openLightBox(evt);
+    openLightBoxSoft(elementClicked);
     selectFullBox.focus();
   }
 });
@@ -413,7 +375,7 @@ optionDateAccess.addEventListener('keyup', function (evt) {
       sortedAZ(medias);
     } else console.error('Text inserted: Error');
     canModifyOrderMediasFiltereds();
-    openLightBox(evt);
+    openLightBoxSoft(elementClicked);
     selectFullBox.focus();
   }
 });
@@ -428,15 +390,20 @@ optionDateAccess.addEventListener('keyup', function (evt) {
 
 // Opens & Closes
 const modalLightBox = document.querySelector('#LightBox_modal');
+
 // MediaLinks to click on a picture...
 const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
 const closeModalLightBox = document.querySelector('.close-lightbox');
+
 // Retrieves: The div containing parent of img/video of lightbox + Parent of img/video + The img/video itself;
 const injectedLightBoxCont = document.querySelector('.injected-content-lightBox');
 const parentimgInLightBox = document.querySelector('.flex-center.as-img');
 const parentvideoInLightBox = document.querySelector('.flex-center.as-video');
 const imgInLightBox = document.querySelector('.as-img.injected-content-lightBox');
 const videoInLightBox = document.querySelector('.as-video.injected-content-lightBox');
+
+// Retrieves the insert in the footer to hide it
+const insertWidget = document.querySelector('footer');
 
 // Updates the index to see the previous media
 function previous() {
@@ -595,6 +562,54 @@ function nextPrevDisplayMedia() {
 
 // MAIN FUNCTION played by a click
 //    Declares openLightBox:
+function openLightBoxSoft(elementClicked) {
+  // Declares 4 functions
+  function setMediasIdInLightBox() {
+    // console.log(mediasFilteredsInside);
+    // We refine to retrieve only the ids in the array
+    const medCopyMediasFiltereds = Object.assign([{}], mediasFiltereds);
+    let mediasIdInLightBox = [];
+    for (const medCopyMediasFiltered in medCopyMediasFiltereds) {
+      mediasIdInLightBox.push(medCopyMediasFiltereds[medCopyMediasFiltered].id);
+    }
+    // console.log(mediasIdInLightBox);
+    return mediasIdInLightBox;
+  }
+
+  function setCurrentIndexInLightBox(elementClicked) {
+    // Defines theIndexBis( id is casted to Number)
+    const medCopyMediasFiltereds = Object.assign([{}], mediasFiltereds);
+    if (elementClicked.path !== undefined) {
+      theIndex = setMediasIdInLightBox(medCopyMediasFiltereds).findIndex(
+        (elt) => elt === Number(elementClicked.path[1].id)
+      );
+    } else {
+      theIndex = setMediasIdInLightBox(medCopyMediasFiltereds).findIndex((elt) => elt === Number(elementClicked.id));
+      console.log(theIndex);
+    }
+    return theIndex;
+  }
+
+  function setTheIndexBis(elementClicked) {
+    const medCopyMediasFiltereds = Object.assign([{}], mediasFiltereds);
+
+    if (elementClicked.path !== undefined) {
+      theIndexBis = setMediasIdInLightBox(medCopyMediasFiltereds).findIndex(
+        (elt) => elt === Number(elementClicked.path[1].id)
+      );
+    } else {
+      theIndexBis = setMediasIdInLightBox(medCopyMediasFiltereds).findIndex((elt) => elt === Number(elementClicked.id));
+      console.log(theIndexBis);
+    }
+    return theIndexBis;
+  }
+
+  // 4 functions executed here
+  mediasIdInLightBox = setMediasIdInLightBox();
+  theIndex = setCurrentIndexInLightBox(elementClicked);
+  theIndexBis = setTheIndexBis(elementClicked);
+}
+
 function openLightBox(elementClicked) {
   // Declares 4 functions
   function setMediasIdInLightBox() {
@@ -625,6 +640,9 @@ function openLightBox(elementClicked) {
 
   // Doesn't contain any return only displaying
   function displayTheFirstMediaInLightBox(elementClicked) {
+    // Hide the insert/widget likes
+    insertWidget.style.zIndex = '-1';
+
     // Actions to display the first media into the lightBox
     const modalLightBox = document.querySelector('#LightBox_modal');
     const parentimgInLightBox = document.querySelector('.flex-center.as-img');
@@ -724,6 +742,8 @@ function openLightBox(elementClicked) {
 
 // Closes the lightBox called by (2) ways: click & enter on element cross
 function closeLightBox() {
+  // Show the insert/widget likes
+  insertWidget.style.zIndex = '1';
   // Reset theIndex and theIndexBis
   theIndex = null;
   theIndexBis;
@@ -787,6 +807,8 @@ document.addEventListener('keydown', (evt) => {
       break;
     // Closes modal form using Escape key
     case 'Escape':
+      // Show the insert/widget likes
+      insertWidget.style.zIndex = '1';
       // Reset the variables and close the lightBox
       theIndex = null;
       theIndexBis;

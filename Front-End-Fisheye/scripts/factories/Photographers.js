@@ -1,5 +1,4 @@
 
-
 // Photographer factory for index.html
 
 export class PhotographersFactory {
@@ -22,9 +21,9 @@ export class PhotographersFactory {
       <img src="${picture}" alt="Photo de ${this._name}"></img>
       <h2 aria-label="${this._name}">${this._name}</h2>
     </a>
-    <h3 tabindex="0" aria-label="Ville: ${this._city}">${this._city}</h3>
-    <h4 tabindex="0" aria-label="Slogan: ${this._tagline}">${this._tagline}</h4>
-    <price tabindex="0" aria-label="Prix: ${this._price}\ €">${this._price}\ €</price>
+    <h3 tabindex="0" title="Ville" aria-label="Ville: ${this._city}">${this._city}</h3>
+    <h4 tabindex="0" title="Slogan" aria-label="Slogan: ${this._tagline}">${this._tagline}</h4>
+    <price tabindex="0" title="Prix" aria-label="Prix: ${this._price}\ €">${this._price}\ €</price>
     `;
     photographersSectionPlace.appendChild(article);
   }

@@ -19,14 +19,14 @@ export class PhotographerFactory {
     div.innerHTML = `
     <section>
       <article>
-        <h1 aria-label="${this._name}">${this._name}</h1>
-        <p aria-label="${this._city + ', ' + this._country}">${this._city + ', ' + this._country}</p>
-        <p class="text-color" aria-label="${this._tagline}">${this._tagline}</p>
+        <h1 tabindex="0" aria-label="${this._name}">${this._name}</h1>
+        <p tabindex="0" aria-label="${this._city + ', ' + this._country}">${this._city + ', ' + this._country}</p>
+        <p tabindex="0" class="text-color" aria-label="${this._tagline}">${this._tagline}</p>
       </article>
-      <button id="contactButtonOpen" class="contact-button" tabindex="0"  aria-label="Contacter le ou la photographe ${
+      <button id="contactButtonOpen" class="contact-button" tabindex="0" aria-label="Contacter le ou la photographe ${
         this._name
       }">Contactez-moi<span class="acc-invisible">Taper entrée pour ouvrir le formulaire de contact</span></button>
-      <img src="${picture}" title="Photo de ${this._name}" alt="Photo de ${this._name}"></img>
+      <img tabindex="0" src="${picture}" title="Photo de ${this._name}" alt="Photo de ${this._name}"></img>
     </section>
     `;
     photographersHeaderPlace.appendChild(div);

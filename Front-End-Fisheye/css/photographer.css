@@ -512,7 +512,6 @@ a figcaption .likes {
   flex-direction: column;
   justify-content: space-between;
   border-radius: 5px;
-  background-color: #db8876;
 }
 
 .content-lightBox {
@@ -522,8 +521,6 @@ a figcaption .likes {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(145, 144, 144, 0.75);
-  backdrop-filter: blur(1px);
 }
 
 .content-lightBox.hidden {
@@ -607,6 +604,8 @@ a figcaption .likes {
 }
 
 .content-lightBox div figure div {
+  right: 340px;
+  top: 50px;
   height: 500px;
   margin: auto;
 }

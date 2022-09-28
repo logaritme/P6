@@ -14,6 +14,14 @@ h6 {
 a {
   color: transparent;
 }
+a:focus {
+  box-shadow: 5px 5px 5px 5px rebeccapurple;
+  border: 3px solid seagreen;
+  outline: 0;
+}
+i:focus {
+  outline: 1px dotted;
+}
 
 #noneFocusPhot:focus {
   box-shadow: none;
@@ -26,21 +34,6 @@ a {
   flex-direction: column;
   align-items: center;
   margin: 0 90px 0 65px;
-}
-
-/* To work with (Erase it at the end of the project) object-fit: */
-a:focus, video:focus, 
-img:focus, button:focus, 
-h1:focus, h2:focus, 
-h3:focus, h4:focus, 
-div:focus, label:focus, 
-dialog:focus, i:focus {
-  box-shadow: 10px 10px 10px 10px rebeccapurple;
-  border: 5px solid seagreen;
-}
-
-input:focus {
-  border: 3px solid seagreen;
 }
 
 body {
