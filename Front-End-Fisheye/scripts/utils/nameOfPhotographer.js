@@ -1,5 +1,4 @@
-
-// Function to get the right name of the photographer
+// Gets the right name of the photographer
 function nameOfPhotographer() {
   const nameOfPhotographer =
     this._photographerId === 243
