@@ -1,3 +1,5 @@
+// Manages photographer.html page
+
 /////////////////
 // ALL IMPORTS //
 // Import: factories
@@ -459,7 +461,7 @@ function next() {
   }
 }
 
-// nextPrevDisplayMedia retrieves the good array of medias to get a newIdMediaShownInLightBox
+// nextPrevDisplayMedia retrieves the right array of medias to get a newIdMediaShownInLightBox
 function nextPrevDisplayMedia() {
   let mediasFiltModified;
 
@@ -560,10 +562,10 @@ function nextPrevDisplayMedia() {
   modalLightBox.classList.add('show');
 }
 
-// MAIN FUNCTION played by a click
-//    Declares openLightBox:
+// TWO MAIN FUNCTIONS played by a click ( or enter for accessibility)
+// FIRST : Declares openLightBoxSoft:
 function openLightBoxSoft(elementClicked) {
-  // Declares 4 functions
+  // Declares 3 functions
   function setMediasIdInLightBox() {
     // console.log(mediasFilteredsInside);
     // We refine to retrieve only the ids in the array
@@ -604,12 +606,13 @@ function openLightBoxSoft(elementClicked) {
     return theIndexBis;
   }
 
-  // 4 functions executed here
+  // 3 functions executed here
   mediasIdInLightBox = setMediasIdInLightBox();
   theIndex = setCurrentIndexInLightBox(elementClicked);
   theIndexBis = setTheIndexBis(elementClicked);
 }
 
+//SECOND : Declares openLightBox:
 function openLightBox(elementClicked) {
   // Declares 4 functions
   function setMediasIdInLightBox() {
@@ -792,7 +795,7 @@ nextBtn.addEventListener('click', () => {
 });
 
 // Accessibility
-// Switchs on the 3 keysup ( the user can type on the keyboard )
+// Switchs on 4 keydown ( the user can type on the keyboard )
 document.addEventListener('keydown', (evt) => {
   switch (evt.key) {
     case 'ArrowLeft':

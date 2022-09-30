@@ -1,23 +1,27 @@
 /* CAUTION : This file is exported to style.css */
 
+/* Don't show the focus on the first div*/
 #noneFocusPhot:focus {
   box-shadow: none;
   border: none;
   outline: none;
 }
 
+/* Keep content centered on big screen */
 .div-center-whole-page {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Flex system context */
 .body-photographer-html {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Flex system context */
 .first-header {
   display: flex;
   justify-content: flex-start;
@@ -33,6 +37,7 @@
   margin: 0 100px;
 }
 
+/* Modals buttons */
 .contact-button,
 .submit-button {
   font-size: 20px;
@@ -51,7 +56,7 @@
 }
 
 /* MODAL & FORM */
-/* //////////// */
+/* ------------ */
 
 /* Modal */
 
@@ -126,6 +131,7 @@ form input {
   border-radius: 5px;
 }
 
+/* Fix height for the message user in form */
 #messageUser {
   height: 170px;
 }
@@ -195,28 +201,26 @@ div section article .text-color {
   display: flex;
 }
 
-/* MEDIAS STACK (generated via setPhotosCardDOM) */
+/* MEDIAS STACK - (generated via setPhotosCardDOM) */
 /* ------------ */
+
 a {
   color: unset;
   text-decoration: none;
   cursor: pointer;
 }
 
+/* Pre- Img&Video size&settings */
 .dimensions-photos-grapher-page {
   display: flex;
   width: 351px;
   height: 300px;
-  /* width: 100%; */
   overflow: hidden;
   border-radius: 5px;
 }
 
+/* Img&Video size&settings */
 .img-video-photos-stack {
-  /* 100% or 451px for final result */
-  /* width: 451px; */
-  /* width: 100%; */
-  /* Temporary 30% to work with  */
   width: 10%;
   object-fit: cover;
   object-position: 50% 17%;
@@ -236,6 +240,7 @@ a {
   font-size: 20px;
 }
 
+/* Titles of media settings */
 .h2-photos-stack {
   width: 292px;
   white-space: nowrap;
@@ -495,7 +500,7 @@ a figcaption .likes {
   justify-content: center;
 }
 
-/* Picture & Displaying */
+/* Medias & Displaying */
 .position-content-lightBox-modal {
   width: 100%;
   margin: auto;
@@ -587,8 +592,6 @@ a figcaption .likes {
 /* Medias in light-box */
 .content-lightBox figure div div img,
 .content-lightBox figure div div video {
-  /* width: 1050px;
-  height: 900px; */
   background-color: #c4c4c4;
   border-radius: 5px;
   position: relative;
@@ -603,12 +606,20 @@ a figcaption .likes {
   box-shadow: 2px 0 #c4c4c4;
 }
 
-.content-lightBox div figure div {
+.as-img {
   right: 340px;
   top: 50px;
   height: 500px;
   margin: auto;
 }
+
+.as-img {
+  right: 340px;
+  top: 50px;
+  height: none;
+  margin: auto;
+}
+
 .content-lightBox div figure div img {
   width: 500px;
   height: 100%;
@@ -654,7 +665,6 @@ a figcaption .likes {
   height: 33px;
   width: 5px;
   background-color: #901c1c;
-  /* color: #901c1c; */
 }
 .close-lightbox::before {
   transform: rotate(45deg);
@@ -689,25 +699,22 @@ a figcaption .likes {
   font-size: 48px;
 }
 
-/* MEDIAS DISPLAYED ( on the specific photographer's page ) */
-
+/* MEDIAS DISPLAYED - ( on the specific photographer's page ) */
+/* ---------------- */
 .body-photographer-html :nth-child(5) section a img {
   width: 100%;
-  /* object-position: center; */
 }
 .body-photographer-html :nth-child(5) section a video {
   width: 100%;
-  /* object-position: center; */
 }
 
 /* INSERT */
-
+/* ------ */
 footer {
   display: flex;
   flex-flow: row nowrap;
   position: fixed;
   right: 11.3%;
-  /* left: 1128px; Test to do*/
   bottom: 0;
   color: black;
   background-color: #db8876;
@@ -747,6 +754,7 @@ footer div div .fas.fa-heart {
 }
 
 /* ACCESSIBILITY INVISIBLE */
+/* ----------------------- */
 .acc-invisible {
   width: 0;
   height: 0;

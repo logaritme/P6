@@ -1,4 +1,3 @@
-
 // Photographer factory for index.html
 
 export class PhotographersFactory {
@@ -6,12 +5,12 @@ export class PhotographersFactory {
     this._name = thePhotographers.name;
     this._id = thePhotographers.id;
     this._city = thePhotographers.city;
-    this._country = thePhotographers.country; 
+    this._country = thePhotographers.country;
     this._tagline = thePhotographers.tagline;
     this._price = thePhotographers.price;
     this._portrait = thePhotographers.portrait;
   }
-  // Function template display the cards for index.html
+  // Template-cards for index.html
   setUserCardDOM() {
     const picture = `../Front-End-Fisheye/assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
     const photographersSectionPlace = document.querySelector('.photographer-section');

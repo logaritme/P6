@@ -14,14 +14,53 @@ h6 {
 a {
   color: transparent;
 }
+
+/* Make the focus a little bit visible to show the accessibility
+   but not visible for normal use with the mouse */
 a:focus {
   box-shadow: 5px 5px 5px 5px rebeccapurple;
   border: 3px solid seagreen;
   outline: 0;
 }
+a:hover {
+  box-shadow: none;
+  border: none;
+  outline: 0;
+}
+.option:focus {
+  box-shadow: 5px 5px 5px 5px rebeccapurple;
+  border: 3px solid seagreen;
+  outline: 0;
+}
+.option:hover {
+  box-shadow: none;
+  border: none;
+  outline: 0;
+}
 i:focus {
   outline: 1px dotted;
 }
+i:hover {
+  box-shadow: none;
+  border: none;
+  outline: 0;
+}
+button:hover {
+  box-shadow: none;
+  border: none;
+  outline: 0;
+}
+.submit-button:hover {
+  box-shadow: none;
+  border: none;
+  outline: 0;
+}
+img:hover {
+  box-shadow: none;
+  border: none;
+  outline: 0;
+}
+/* END: Focus visible */
 
 #noneFocusPhot:focus {
   box-shadow: none;

@@ -1,9 +1,7 @@
-
 // MediaFactory Model
 
 export class MediaFactory {
   constructor(medias) {
-    // this._name = photographers.name;
     this._id = medias.id;
     this._photographerId = medias.photographerId;
     this._title = medias.title;
@@ -14,7 +12,7 @@ export class MediaFactory {
     this._price = medias.price;
   }
 
-  // Template-photos for the photographer-page.html
+  // Template-medias for photographer-page.html
   setPhotosCardDOM() {
     const nameOfPhotographer =
       this._photographerId === 243
@@ -86,11 +84,12 @@ export class MediaFactory {
       photosPlace.appendChild(section);
     }
   }
-  // Display the widget "Total of Likes" in the insert at the bottom-right of the page
+  // Display "Total of Likes" in the insert
+  // at the bottom-right of the photographer-page.html
   getInsertLikesCardDOM() {
     const insertLikesPlace = document.querySelector('footer');
     const divFooter = document.createElement('div');
-    divFooter.innerHTML = `<div role="widget">
+    divFooter.innerHTML = `<div tabindex="0" title="Nombre total des likes" aria-label="Nombre total des likes" role="widget">
     <span id="totalLikes"></span>
     <i class="fas fa-heart"></i>
     </div>`;

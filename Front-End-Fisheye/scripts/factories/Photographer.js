@@ -11,7 +11,7 @@ export class PhotographerFactory {
     this._portrait = thePhotographers.portrait;
   }
 
-  // Function template display header for photographer.html
+  // Template-header for photographer.html
   setPhotographerPageHeaderDOM() {
     const picture = `../Front-End-Fisheye/assets/fish-eye_photos/Sample%20Photos/Photographers%20ID%20Photos/${this._portrait}`;
     const photographersHeaderPlace = document.querySelector('.photographer-header');
@@ -31,12 +31,12 @@ export class PhotographerFactory {
     `;
     photographersHeaderPlace.appendChild(div);
   }
-  // Function template display price for photographer.html
+  // Template-price for photographer.html
   setInsertPriceCardDOM() {
     const insertPricePlace = document.querySelector('footer');
     const divFooter = document.createElement('div');
     divFooter.innerHTML = `
-    <div aria-label="Tarif journalier">
+    <div tabindex="0" title="Tarif journalier" aria-label="Tarif journalier">
       <span aria-label="${this._price}">${this._price}</span>
       <i aria-label="euro">\ €</i>
       <span>/ jour</span>

@@ -1,3 +1,6 @@
+
+// Manages index.html page
+
 import { PhotographersFactory } from '../factories/Photographers.js';
 
 document.querySelector('img[class="logo"]').focus();
@@ -19,8 +22,8 @@ async function displayData(photographers) {
 }
 
 async function init() {
-  // Will store the datas in photographers
-  // just when they are retrieved from the fetch contained in the function getPhotographers
+  // Will store the datas in photographers just when 
+  // they are retrieved from the fetch contained in the function getPhotographers
   const photographers = await getPhotographers();
   displayData(photographers);
 }
