@@ -16,7 +16,7 @@ export class PhotographersFactory {
     const photographersSectionPlace = document.querySelector('.photographer-section');
     const article = document.createElement('article');
     article.innerHTML = `
-    <a id="${this._id}" href="./photographer.html?id=${this._id}" title="Accéder à la page de ${this._name}" tabindex="0" aria-label="${this._name}">
+    <a id="${this._id}" href="../Front-End-Fisheye/photographer.html?id=${this._id}" title="Accéder à la page de ${this._name}" tabindex="0" aria-label="${this._name}">
       <img src="${picture}" alt="Photo de ${this._name}"></img>
       <h2 aria-label="${this._name}">${this._name}</h2>
     </a>

@@ -14,7 +14,7 @@ import { wholeContactForm } from '../utils/contactForm.js';
 
 // Retrieves and transforms photographer's data from the JSON
 async function getPhotographers() {
-  const data = await fetch('./data/photographers.json')
+  const data = await fetch('../Front-End-Fisheye/data/photographers.json')
     .then((response) => response.json())
     .catch((err) => console.log(err, ': Temporary failed to fetch data'));
   return JSON.parse(JSON.stringify(data.photographers));
