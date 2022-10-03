@@ -306,6 +306,7 @@ a figcaption .likes {
 /* CONTACT FORM MODAL */
 /* ------------------ */
 
+
 .form-contact.show {
   display: block;
   position: fixed;
@@ -316,6 +317,7 @@ a figcaption .likes {
   width: 100%;
   overflow: auto;
   background-color: #e5e5e5;
+  z-index: 10;
 }
 
 .form-contact.hidden {
@@ -517,6 +519,8 @@ a figcaption .likes {
   flex-direction: column;
   justify-content: space-between;
   border-radius: 5px;
+
+  z-index: 10;
 }
 
 .content-lightBox {
@@ -719,6 +723,7 @@ footer {
   color: black;
   background-color: #db8876;
   border-radius: 6px 6px 0 0;
+  z-index: 9;
 }
 
 footer div {

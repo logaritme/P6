@@ -35,6 +35,8 @@ function wholeContactForm() {
   ////////////////////////
   // FUNCTIONS DECLARED //
 
+  // To set the name into
+
   // Below code given by the source project
   // Opens modal form on "Contactez-moi"
   function displayModal() {
@@ -108,7 +110,6 @@ function wholeContactForm() {
   // Close modal form by button
   function closeModal(evt) {
     evt.preventDefault();
-    baseH2.innerHTML = ``;
 
     const firstNameInput = document.getElementById('firstName');
     const lastNameInput = document.getElementById('lastName');
@@ -147,14 +148,15 @@ function wholeContactForm() {
     }
 
     allErrorsChecked();
-    if (areAllBooleansValid()) {
-      modalContent.classList.add('hidden');
-      modalContent.classList.remove('show');
-      document.querySelector('#contact_modal').setAttribute('open', 'false');
-    } else {
+    if (areAllBooleansValid() !== true) {
       modalContent.classList.remove('hidden');
       modalContent.classList.add('show');
       document.querySelector('#contact_modal').setAttribute('open', 'true');
+    } else {
+      baseH2.innerHTML = ``;
+      modalContent.classList.add('hidden');
+      modalContent.classList.remove('show');
+      document.querySelector('#contact_modal').setAttribute('open', 'false');
     }
   }
 
@@ -225,7 +227,6 @@ function wholeContactForm() {
       errorDisplay('firstName', '', true);
       firstName = value;
       isFirstNameValid = true;
-      // console.info('PRÉNOM:', value);
       areAllBooleansValid();
     }
   };
@@ -249,8 +250,6 @@ function wholeContactForm() {
       errorDisplay('lastName', '', true);
       lastName = value;
       isLastNameValid = true;
-      // console.info('NOM:', value);
-
       areAllBooleansValid();
     }
   };
@@ -291,7 +290,6 @@ function wholeContactForm() {
       errorDisplay('messageUser', '', true);
       messageUser = value;
       isMessageUserValid = true;
-      // console.info('MESSAGE:', value);
       areAllBooleansValid();
     }
   };
@@ -361,16 +359,16 @@ function wholeContactForm() {
     input.addEventListener('change', (element) => {
       switch (element.target.id) {
         case 'firstName':
-          console.info('PRENOM', element.target.value);
+          console.info('PRENOM:', element.target.value);
           break;
         case 'lastName':
-          console.info('NOM', element.target.value);
+          console.info('NOM:', element.target.value);
           break;
         case 'email':
-          console.info('EMAIL', element.target.value);
+          console.info('EMAIL:', element.target.value);
           break;
         case 'messageUser':
-          console.info('MESSAGE', element.target.value);
+          console.info('MESSAGE:', element.target.value);
           break;
         default:
           return 'error';

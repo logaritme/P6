@@ -152,7 +152,7 @@ function sortedLike(medias) {
   });
   mediasIdInLightBox = [];
 }
-
+// alert
 function sortedAZ(medias) {
   mediasSortedTitle = mediasFiltereds;
   mediasSortedTitle.sort((a, b) => a.title.localeCompare(b.title, 'fr', { ignorePunctuation: true }));
@@ -404,9 +404,6 @@ const parentvideoInLightBox = document.querySelector('.flex-center.as-video');
 const imgInLightBox = document.querySelector('.as-img.injected-content-lightBox');
 const videoInLightBox = document.querySelector('.as-video.injected-content-lightBox');
 
-// Retrieves the insert in the footer to hide it
-const insertWidget = document.querySelector('footer');
-
 // Updates the index to see the previous media
 function previous() {
   if (theIndex !== null) {
@@ -643,9 +640,6 @@ function openLightBox(elementClicked) {
 
   // Doesn't contain any return only displaying
   function displayTheFirstMediaInLightBox(elementClicked) {
-    // Hide the insert/widget likes
-    insertWidget.style.zIndex = '-1';
-
     // Actions to display the first media into the lightBox
     const modalLightBox = document.querySelector('#LightBox_modal');
     const parentimgInLightBox = document.querySelector('.flex-center.as-img');
@@ -745,8 +739,6 @@ function openLightBox(elementClicked) {
 
 // Closes the lightBox called by (2) ways: click & enter on element cross
 function closeLightBox() {
-  // Show the insert/widget likes
-  insertWidget.style.zIndex = '1';
   // Reset theIndex and theIndexBis
   theIndex = null;
   theIndexBis;
@@ -810,8 +802,6 @@ document.addEventListener('keydown', (evt) => {
       break;
     // Closes modal form using Escape key
     case 'Escape':
-      // Show the insert/widget likes
-      insertWidget.style.zIndex = '1';
       // Reset the variables and close the lightBox
       theIndex = null;
       theIndexBis;
