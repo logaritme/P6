@@ -870,6 +870,11 @@ document.addEventListener('keydown', (event) => {
 
 // Closes modal lightBox on cross "X"
 closeModalLightBox.addEventListener('click', () => closeLightBox());
+closeModalLightBox.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    closeLightBox();
+  }
+});
 
 ///// END: LISTENERS /////
 //////////////////////////

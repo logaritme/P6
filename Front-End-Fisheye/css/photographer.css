@@ -306,7 +306,6 @@ a figcaption .likes {
 /* CONTACT FORM MODAL */
 /* ------------------ */
 
-
 .form-contact.show {
   display: block;
   position: fixed;
@@ -620,7 +619,6 @@ a figcaption .likes {
 .as-img {
   right: 340px;
   top: 50px;
-  height: none;
   margin: auto;
 }
 
