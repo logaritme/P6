@@ -45,7 +45,7 @@ export class MediaFactory {
           <a id="${this._id}" class="media-links" tabindex="0" src="${photography}" aria-label="${this._title}" alt="${this._title}">
             <figure>
             <div id="${this._id}" src="${photography}" alt="${this._title}" class="dimensions-photos-grapher-page">
-              <img class="img-video-photos-stack" src="${photography}" title="Double-clic pour ouvrir la lightbox" alt="${this._title}"></img>
+              <img class="img-video-photos-stack" src="${photography}" title="Cliquez pour ouvrir la lightbox" alt="${this._title}"></img>
             </div>
             <figcaption class="position-fig-grapher-page">
               <h2 class="h2-photos-stack">${this._title}
@@ -65,7 +65,7 @@ export class MediaFactory {
           <a id="${this._id}" class="media-links" tabindex="0" src="${videography}" aria-label="${this._title}" alt="${this._title}">
             <figure>
             <div id="${this._id}" src="${videography}" alt="${this._title}" class="dimensions-photos-grapher-page">
-              <video class="img-video-photos-stack" src="${videography}" title="Double-clic pour ouvrir la lightbox" alt="${this._title}"
+              <video class="img-video-photos-stack" src="${videography}" title="Cliquez pour ouvrir la lightbox" alt="${this._title}"
                   type="video/mp4" controls>
               </video>
             </div>

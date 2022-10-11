@@ -152,7 +152,7 @@ function sortedLike(medias) {
   });
   mediasIdInLightBox = [];
 }
-// alert
+
 function sortedAZ(medias) {
   mediasSortedTitle = mediasFiltereds;
   mediasSortedTitle.sort((a, b) => a.title.localeCompare(b.title, 'fr', { ignorePunctuation: true }));
@@ -393,7 +393,7 @@ optionDateAccess.addEventListener('keyup', function (evt) {
 // Opens & Closes
 const modalLightBox = document.querySelector('#LightBox_modal');
 
-// MediaLinks to click on a picture...
+// MediaLinks to click on a picture...and open the lightbox ( click + keyboard )
 const mediaLinks = document.querySelectorAll('.dimensions-photos-grapher-page');
 const closeModalLightBox = document.querySelector('.close-lightbox');
 
@@ -762,13 +762,15 @@ function closeLightBox() {
 ///// LISTENERS //////
 
 // Listener opens function openLightBox()
-window.addEventListener('click', () => {
-  document.querySelectorAll('.media-links').forEach((openMediaLink) => {
-    openMediaLink.addEventListener('click', (elementClicked) => {
+
+document.addEventListener('click', () => {
+  const mediaLinksClick = document.querySelectorAll('.media-links');
+  for (const eltClicked of mediaLinksClick) {
+    if (document.activeElement === eltClicked) {
       canModifyOrderMediasFiltereds();
-      openLightBox(elementClicked);
-    });
-  });
+      openLightBox(eltClicked);
+    }
+  }
 });
 
 // Listeners for Prev & Next & KeysUp Accessibility
@@ -818,17 +820,17 @@ document.addEventListener('keydown', (evt) => {
       // Add here "dialog".setAttribute( 'open', 'false');
       break;
     // Why not be more selectful than document for example div.photo-displaying for 'Enter???
-    // Pourquoi j'ai mis le Enter là, dans ce listener ??? -> Car il enregistre les keyup on document
+    // Enter in this listener to check keysup on the document
     case 'Enter':
-      const mediaLinkAccess = document.querySelectorAll('.media-links'); // Use .dimensions-photos-grapher-page if doesn't work
+      // Or use .dimensions-photos-grapher-page
+      const mediaLinksAccess = document.querySelectorAll('.media-links');
       const keyOnLabelPop = document.getElementById('option-popularite');
       const keyOnLabelDate = document.getElementById('option-date');
       const keyOnLabelTitre = document.getElementById('option-titre');
       // Do it also for .label-date, .label-titre
-      for (const eltEntered of mediaLinkAccess) {
+      for (const eltEntered of mediaLinksAccess) {
         if (document.activeElement === eltEntered) {
-          // console.log('One elt of mediaLinkAccess is focused');
-          // console.log('Yes !! Enter is functionning on Medias !!');
+          canModifyOrderMediasFiltereds();
           openLightBox(eltEntered);
         }
       }
