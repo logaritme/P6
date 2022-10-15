@@ -17,7 +17,7 @@ export class PhotographersFactory {
     const article = document.createElement('article');
     article.innerHTML = `
     <a id="${this._id}" href="../Front-End-Fisheye/photographer.html?id=${this._id}" title="Accéder à la page de ${this._name}" tabindex="0" aria-label="${this._name}">
-      <img src="${picture}" alt="Photo de ${this._name}"></img>
+      <img src="${picture}" alt="Photo de ${this._name}" loading="lazy"></img>
       <h2 aria-label="${this._name}">${this._name}</h2>
     </a>
     <h3 tabindex="0" title="Ville" aria-label="Ville: ${this._city}">${this._city}</h3>
